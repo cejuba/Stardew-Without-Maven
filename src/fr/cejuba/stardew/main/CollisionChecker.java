@@ -2,6 +2,8 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 
+import javax.xml.stream.events.EndElement;
+
 public class CollisionChecker {
 
     GamePanel gamePanel;
@@ -129,5 +131,99 @@ public class CollisionChecker {
             }
         }
         return index;
+
+    }
+
+    // If the player hit a Monster/NPC
+    public int checkEntity(Entity entity, Entity[] target){
+        int index = 999;
+
+        for(int i = 0; i < target.length; i++){
+            if(target[i] != null){
+                // Get entity's solidArea position
+                entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
+                entity.solidArea.setY(entity.worldY + entity.solidArea.getY());
+
+                // Get the object's solidArea position
+                target[i].solidArea.setX(target[i].worldX + target[i].solidArea.getX());
+                target[i].solidArea.setY(target[i].worldY + target[i].solidArea.getY());
+
+                switch (entity.direction){
+                    case "up" :
+                        entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
+                        if (entity.solidArea.getBoundsInParent().intersects(target[i].solidArea.getBoundsInParent())) {
+                            entity.collisionActivated = true;
+                            index = i;
+                        }
+                        break;
+                    case "down" :
+                        entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
+                        if (entity.solidArea.getBoundsInParent().intersects(target[i].solidArea.getBoundsInParent())) {
+                            entity.collisionActivated = true;
+                            index = i;
+                        }
+                        break;
+                    case "left" :
+                        entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
+                        if (entity.solidArea.getBoundsInParent().intersects(target[i].solidArea.getBoundsInParent())) {
+                            entity.collisionActivated = true;
+                            index = i;
+                        }
+                        break;
+                    case "right" :
+                        entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
+                        if (entity.solidArea.getBoundsInParent().intersects(target[i].solidArea.getBoundsInParent())) {
+                            entity.collisionActivated = true;
+                            index = i;
+                        }
+                        break;
+                }
+                entity.solidArea.setX(entity.solidAreaDefaultX);
+                entity.solidArea.setY(entity.solidAreaDefaultY);
+                target[i].solidArea.setX(target[i].solidAreaDefaultX);
+                target[i].solidArea.setY(target[i].solidAreaDefaultY);
+            }
+        }
+        return index;
+    }
+
+    public void checkPlayer(Entity entity){
+        entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
+        entity.solidArea.setY(entity.worldY + entity.solidArea.getY());
+
+        // Get the object's solidArea position
+        gamePanel.player.solidArea.setX(gamePanel.player.worldX + gamePanel.player.solidArea.getX());
+        gamePanel.player.solidArea.setY(gamePanel.player.worldY + gamePanel.player.solidArea.getY());
+
+        switch (entity.direction){
+            case "up" :
+                entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
+                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
+                    entity.collisionActivated = true;
+                }
+                break;
+            case "down" :
+                entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
+                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
+                    entity.collisionActivated = true;
+                }
+                break;
+            case "left" :
+                entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
+                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
+                    entity.collisionActivated = true;
+                }
+                break;
+            case "right" :
+                entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
+                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
+                    entity.collisionActivated = true;
+                }
+                break;
+        }
+        entity.solidArea.setX(entity.solidAreaDefaultX);
+        entity.solidArea.setY(entity.solidAreaDefaultY);
+        gamePanel.player.solidArea.setX(gamePanel.player.solidAreaDefaultX);
+        gamePanel.player.solidArea.setY(gamePanel.player.solidAreaDefaultY);
     }
 }

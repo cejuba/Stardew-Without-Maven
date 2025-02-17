@@ -1,5 +1,6 @@
 package fr.cejuba.stardew.main;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
 import fr.cejuba.stardew.object.SuperObject;
 import fr.cejuba.stardew.tile.TileManager;
@@ -24,25 +25,37 @@ public class GamePanel extends Canvas implements Runnable {
     public final int maxWorldRow = 50;
 
 
+
+
     int FPS = 60;
 
 
-    Thread gameThread;
+    // System config
 
+    Thread gameThread;
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyHandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
-    public Player player = new Player(this, keyHandler);
-    public SuperObject[] superObject = new SuperObject[10]; // If we want to increase the number of object we can do it here, but careful about performances;
 
     public UI ui = new UI(this);
 
+    // Entity and Object
+
+    public Player player = new Player(this, keyHandler);
+    public SuperObject[] superObject = new SuperObject[10]; // If we want to increase the number of object we can do it here, but careful about performances;
+    public Entity[] npc =  new Entity[10];
 
 
-    public GamePanel(KeyHandler keyHandler) {
+    // GameStates
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+    public final int dialogueState = 3;
+
+    public GamePanel() {
         // System.out.println("GamePanel constructed - KeyHandler: " + keyHandler);
         this.setWidth(screenWidth);
         this.setHeight(screenHeight);
@@ -51,9 +64,13 @@ public class GamePanel extends Canvas implements Runnable {
         player.setKeyHandler(keyHandler);
     }
 
+
     public void setupGame(){
         assetSetter.setObject();
+        assetSetter.setNPC();
         playMusic(0);
+        stopMusic(); // Commenter pour mettre la musique
+        gameState = playState;
     }
 
     // Useless for now but can be in future
@@ -94,7 +111,20 @@ public class GamePanel extends Canvas implements Runnable {
 
     public void update() {
 
-        player.update();
+        if (gameState == playState){
+            // Player
+            player.update();
+
+            // NPC
+            for(Entity entity : npc){
+                if(entity != null){
+                    entity.update();
+                }
+            }
+        }
+        if (gameState == pauseState){
+            // Nothing for now
+        }
 
     }
 
@@ -108,13 +138,23 @@ public class GamePanel extends Canvas implements Runnable {
             drawStartTime = System.nanoTime();
         }
 
+        // Tile
         tileManager.draw(graphicsContext);
 
+        // Object
         for (SuperObject object : superObject) {
             if (object != null) {
                 object.draw(graphicsContext, this);
             }
         }
+
+        // NPC
+        for(Entity entity : npc){
+            if(entity != null){
+                entity.draw(graphicsContext);
+            }
+        }
+
         // Player
         player.draw(graphicsContext);
 

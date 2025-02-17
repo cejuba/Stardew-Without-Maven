@@ -12,16 +12,15 @@ import java.util.Objects;
 
 public class Player extends Entity {
 
-    GamePanel gamePanel;
     KeyHandler keyHandler;
 
     public final int screenX;
     public final int screenY;
 
-    public int hasKey = 0;
-
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-        this.gamePanel = gamePanel;
+
+        super(gamePanel); // Call the constructor of the parent class
+
         this.keyHandler = keyHandler;
 
         screenX = gamePanel.screenWidth / 2 - (gamePanel.tileSize / 2);
@@ -50,38 +49,20 @@ public class Player extends Entity {
         try {
             System.out.println("Loading player images...");
 
-            up0 = setup("Back_0");
-            up1 = setup("Back_1");
-            down0 = setup("Face_0");
-            down1 = setup("Face_1");
-            right0 = setup("Right_0");
-            right1 = setup("Right_1");
-            left0 = setup("Right_0");
-            left1 = setup("Right_0");
+            up0 = setup("/player/Back_0");
+            up1 = setup("/player/Back_1");
+            down0 = setup("/player/Face_0");
+            down1 = setup("/player/Face_1");
+            right0 = setup("/player/Right_0");
+            right1 = setup("/player/Right_1");
+            left0 = setup("/player/Right_0");
+            left1 = setup("/player/Right_0");
 
             System.out.println("Player images loaded successfully");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public Image setup(String imageName) {
-        UtilityTool utilityTool = new UtilityTool();
-        Image scaledImage = null;
-        try {
-            InputStream is = getClass().getResourceAsStream("/fr/cejuba/stardew/player/" + imageName + ".png");
-            System.out.println("Loading image: /fr/cejuba/stardew/player/" + imageName + ".png");
-            if (is == null) {
-                System.out.println("Resource not found: " + imageName);
-                throw new RuntimeException("Resource not found: " + imageName);
-            }
-            Image originalImage = new Image(is);
-            scaledImage = utilityTool.scaleImage(originalImage, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
     }
 
     public void update() {
@@ -101,6 +82,9 @@ public class Player extends Entity {
 
             int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
             pickUpObject(objectIndex);
+
+            int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
+            interactNPC(npcIndex);
 
             if (!collisionActivated) {
                 switch (direction) {
@@ -133,37 +117,13 @@ public class Player extends Entity {
 
     public void pickUpObject(int index) {
         if (index != 999) {
-            String objectName = gamePanel.superObject[index].name;
+            // TBD
+        }
+    }
 
-            switch (objectName) {
-                case "Key":
-                    gamePanel.playSoundEffect(1);
-                    hasKey++;
-                    gamePanel.superObject[index] = null;
-                    gamePanel.ui.showMessage("You got a key!");
-                    break;
-                case "Door":
-                    if (hasKey > 0) {
-                        gamePanel.playSoundEffect(3);
-                        gamePanel.superObject[index] = null;
-                        hasKey--;
-                        gamePanel.ui.showMessage("You opened the door!");
-                    } else {
-                        gamePanel.ui.showMessage("You need a key!");
-                    }
-                    break;
-                case "Boots":
-                    gamePanel.playSoundEffect(2);
-                    speed += 2;
-                    gamePanel.ui.showMessage("You can now run faster!");
-                    gamePanel.superObject[index] = null;
-                    break;
-                case "Chest":
-                    gamePanel.ui.gameFinished = true;
-                    gamePanel.stopMusic();
-                    gamePanel.playSoundEffect(4);
-                    break;
-            }
+    public void interactNPC(int index) {
+        if (index != 999) {
+            System.out.println("Interacting with NPC");
         }
     }
 
