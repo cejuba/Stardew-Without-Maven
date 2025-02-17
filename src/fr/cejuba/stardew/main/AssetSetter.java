@@ -1,10 +1,6 @@
 package fr.cejuba.stardew.main;
 
-import fr.cejuba.stardew.entity.npc.OldMan;
-import fr.cejuba.stardew.object.Boots;
-import fr.cejuba.stardew.object.Chest;
-import fr.cejuba.stardew.object.Door;
-import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.entity.OldMan;
 
 public class AssetSetter {
 

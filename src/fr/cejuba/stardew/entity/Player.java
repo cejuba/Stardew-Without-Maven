@@ -123,7 +123,11 @@ public class Player extends Entity {
 
     public void interactNPC(int index) {
         if (index != 999) {
-            System.out.println("Interacting with NPC");
+            if(gamePanel.keyHandler.enterPressed){
+                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.npc[index].speak();
+            }
+            gamePanel.keyHandler.enterPressed = false;
         }
     }
 

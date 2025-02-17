@@ -1,6 +1,5 @@
-package fr.cejuba.stardew.entity.npc;
+package fr.cejuba.stardew.entity;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 
 import java.util.Random;
@@ -15,6 +14,7 @@ public class OldMan extends Entity {
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -35,6 +35,13 @@ public class OldMan extends Entity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDialogue(){
+
+        dialogues[0] = "Hello there!";
+        dialogues[1] = "I don't know what to do...I don't know what \n to do...I don't know what to do...I don't know what to do...I don't know what to do...";
+
     }
 
     public void setAction(){
@@ -59,5 +66,9 @@ public class OldMan extends Entity {
 
             actionLockCounter = 0;
         }
+    }
+
+    public void speak(){
+        super.speak();
     }
 }

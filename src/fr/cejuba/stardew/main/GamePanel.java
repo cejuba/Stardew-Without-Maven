@@ -34,7 +34,7 @@ public class GamePanel extends Canvas implements Runnable {
 
     Thread gameThread;
     TileManager tileManager = new TileManager(this);
-    KeyHandler keyHandler = new KeyHandler(this);
+    public KeyHandler keyHandler = new KeyHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -123,6 +123,10 @@ public class GamePanel extends Canvas implements Runnable {
             }
         }
         if (gameState == pauseState){
+            // Nothing for now
+        }
+
+        if (gameState == dialogueState){
             // Nothing for now
         }
 
