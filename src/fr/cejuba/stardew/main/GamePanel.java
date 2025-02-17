@@ -51,6 +51,7 @@ public class GamePanel extends Canvas implements Runnable {
 
     // GameStates
     public int gameState;
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -70,7 +71,7 @@ public class GamePanel extends Canvas implements Runnable {
         assetSetter.setNPC();
         playMusic(0);
         stopMusic(); // Commenter pour mettre la musique
-        gameState = playState;
+        gameState = titleState;
     }
 
     // Useless for now but can be in future
@@ -142,28 +143,35 @@ public class GamePanel extends Canvas implements Runnable {
             drawStartTime = System.nanoTime();
         }
 
-        // Tile
-        tileManager.draw(graphicsContext);
+        // Title Screen
 
-        // Object
-        for (SuperObject object : superObject) {
-            if (object != null) {
-                object.draw(graphicsContext, this);
-            }
+        if(gameState==titleState){
+            ui.draw(graphicsContext);
         }
+        else {
+            // Tile
+            tileManager.draw(graphicsContext);
 
-        // NPC
-        for(Entity entity : npc){
-            if(entity != null){
-                entity.draw(graphicsContext);
+            // Object
+            for (SuperObject object : superObject) {
+                if (object != null) {
+                    object.draw(graphicsContext, this);
+                }
             }
+
+            // NPC
+            for(Entity entity : npc){
+                if(entity != null){
+                    entity.draw(graphicsContext);
+                }
+            }
+
+            // Player
+            player.draw(graphicsContext);
+
+            // UI
+            ui.draw(graphicsContext);
         }
-
-        // Player
-        player.draw(graphicsContext);
-
-        // UI
-        ui.draw(graphicsContext);
 
         // Debug
         if(keyHandler.checkDrawTime){

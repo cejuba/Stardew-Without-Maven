@@ -2,7 +2,12 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 
-import javax.xml.stream.events.EndElement;
+// TBD - If the npc come to the player, the player will talk to him even if the player hasn't pressed the enter button
+// TBD - If the npc come to the player, the player will talk to him even if the player hasn't pressed the enter button
+// TBD - If the npc come to the player, the player will talk to him even if the player hasn't pressed the enter button
+// TBD - If the npc come to the player, the player will talk to him even if the player hasn't pressed the enter button
+// TBD - If the npc come to the player, the player will talk to him even if the player hasn't pressed the enter button
+
 
 public class CollisionChecker {
 

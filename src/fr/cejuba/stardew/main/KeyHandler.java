@@ -17,8 +17,66 @@ public class KeyHandler {
     public void addKeyHandlers(Scene scene) {
         scene.setOnKeyPressed(event -> {
 
-            // Play State
-            if(gamePanel.gameState == gamePanel.playState){
+            if(gamePanel.gameState == gamePanel.titleState) {
+                if (gamePanel.ui.titleScreenState == 0) {
+                    switch (event.getCode()) {
+                        case Z, UP -> {
+                            gamePanel.ui.commandNumber--;
+                            if (gamePanel.ui.commandNumber < 0) {
+                                gamePanel.ui.commandNumber = 2;
+                            }
+                        }
+                        case S, DOWN -> {
+                            gamePanel.ui.commandNumber++;
+                            if (gamePanel.ui.commandNumber > 2) {
+                                gamePanel.ui.commandNumber = 0;
+                            }
+                        }
+                        case ENTER -> {
+                            switch (gamePanel.ui.commandNumber) {
+                                case 0 -> gamePanel.ui.titleScreenState = 1;
+                                case 1 -> gamePanel.gameState = gamePanel.playState;//TBD
+                                case 2 -> System.exit(0);
+                            }
+                        }
+                    }
+                } else if (gamePanel.ui.titleScreenState == 1) {
+                    switch (event.getCode()) {
+                        case Z, UP -> {
+                            gamePanel.ui.commandNumber--;
+                            if (gamePanel.ui.commandNumber < 0) {
+                                gamePanel.ui.commandNumber = 3;
+                            }
+                        }
+                        case S, DOWN -> {
+                            gamePanel.ui.commandNumber++;
+                            if (gamePanel.ui.commandNumber > 3) {
+                                gamePanel.ui.commandNumber = 0;
+                            }
+                        }
+                        case ENTER -> {
+                            switch (gamePanel.ui.commandNumber) {
+                                case 0 -> {
+                                    System.out.println("Need to do fighter stuff");
+                                    gamePanel.gameState = gamePanel.playState;
+                                }
+                                case 1 -> {
+                                    System.out.println("Need to do thief stuff");
+                                    gamePanel.gameState = gamePanel.playState;
+                                }
+                                case 2 -> {
+                                    System.out.println("Need to do sorcerer stuff");
+                                    gamePanel.gameState = gamePanel.playState;
+                                }
+                                case 3 -> gamePanel.ui.titleScreenState = 0;
+                            }
+                        }
+                    }
+                }
+                // Play State
+
+            }
+            if (gamePanel.gameState == gamePanel.playState) {
                 System.out.println("Key Pressed" + event.getCode());
                 switch (event.getCode()) {
                     case Z, UP -> upPressed = true;
@@ -32,7 +90,7 @@ public class KeyHandler {
             }
 
             // Pause State
-            else if(gamePanel.gameState == gamePanel.pauseState) {
+            else if (gamePanel.gameState == gamePanel.pauseState) {
                 switch (event.getCode()) {
                     case P -> gamePanel.gameState = gamePanel.playState;
 
@@ -40,11 +98,12 @@ public class KeyHandler {
             }
             // Dialogue State
 
-            else if(gamePanel.gameState == gamePanel.dialogueState){
+            else if (gamePanel.gameState == gamePanel.dialogueState) {
                 switch (event.getCode()) {
                     case ENTER -> gamePanel.gameState = gamePanel.playState;
                 }
             }
+
         });
 
         scene.setOnKeyReleased(event -> {

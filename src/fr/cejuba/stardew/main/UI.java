@@ -11,12 +11,14 @@ public class UI {
 
     GamePanel gamePanel;
     GraphicsContext graphicsContext;
-    Font arial_40, arial_30, arial_80B, arial_32F;
+    Font arial_40, arial_30, arial_80B, arial_32F, arial_96B;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNumber = 0;
+    public int titleScreenState = 0;
 
 
     double playTime;
@@ -25,10 +27,12 @@ public class UI {
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
+        // TBD - Special font
         arial_40 = Font.font("Arial", 40);
         arial_30 = Font.font("Arial", 30);
         arial_80B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 80);
         arial_32F = Font.font("Arial", javafx.scene.text.FontWeight.NORMAL, 32);
+        arial_96B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 96);
     }
 
     public void showMessage(String text) {
@@ -42,6 +46,9 @@ public class UI {
         graphicsContext.setFont(arial_40);
         graphicsContext.setFill(Color.WHITE);
 
+        if(gamePanel.gameState == gamePanel.titleState){
+            drawTitleScreen();
+        }
         if(gamePanel.gameState == gamePanel.playState){
             // TBD
         }
@@ -51,6 +58,119 @@ public class UI {
         if(gamePanel.gameState == gamePanel.dialogueState){
             drawDialogueScreen();
         }
+    }
+
+    private void drawTitleScreen() {
+        if (titleScreenState == 0){
+            graphicsContext.setFill(Color.rgb(0,0 ,0 ));
+            graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+            // Title Name
+            graphicsContext.setFont(arial_96B);
+            String text = "STARDEW VALLEY";
+            int x = getXCenteredText(text, graphicsContext);
+            int y = gamePanel.tileSize*3;
+
+            // Shadow
+            graphicsContext.setFill(Color.GRAY);
+            graphicsContext.fillText(text, x+5, y+5);
+
+            // Main Color
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+
+            // Presentation Image
+            x = gamePanel.screenWidth/2 - gamePanel.tileSize;
+            y += gamePanel.tileSize*2;
+            graphicsContext.drawImage(gamePanel.player.down0, x, y, gamePanel.tileSize*2, gamePanel.tileSize*2);
+
+            graphicsContext.setFont(arial_40);
+
+            text = "New Game";
+            x = getXCenteredText(text, graphicsContext);
+            y += gamePanel.tileSize*4;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if (commandNumber == 0){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "Load Game";
+            x = getXCenteredText(text, graphicsContext);
+            y += gamePanel.tileSize;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if (commandNumber == 1){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "Quit";
+            x = getXCenteredText(text, graphicsContext);
+            y += gamePanel.tileSize;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if (commandNumber == 2){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+        }
+        else if(titleScreenState == 1){
+
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.setFont(Font.font("Arial", 42));
+            String text = "Select your class!";
+            int x = getXCenteredText(text, graphicsContext);
+            int y = gamePanel.tileSize*2;
+            graphicsContext.fillText(text, x, y);
+
+            text = "Fighter";
+            x = getXCenteredText(text, graphicsContext);
+            y += gamePanel.tileSize*2;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if(commandNumber == 0){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "Thief";
+            y += gamePanel.tileSize*2;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if(commandNumber == 1){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+            text = "Sorcerer";
+            y += gamePanel.tileSize*2;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if(commandNumber == 2){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "Back";
+            x = getXCenteredText(text, graphicsContext);
+            y += gamePanel.tileSize*3;
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y);
+            if(commandNumber == 3){
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillText(text, x, y);
+                graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+            }
+
+        }
+
     }
 
     public void drawPauseScreen() {
@@ -94,8 +214,8 @@ public class UI {
 
     public int getXCenteredText(String text, GraphicsContext graphicsContext) {
         Text tempText = new Text(text);
-        tempText.setFont(arial_40);
-        double width = tempText.getBoundsInLocal().getWidth();
+        tempText.setFont(graphicsContext.getFont());
+        double width = tempText.getLayoutBounds().getWidth();
         return (int)(((double) gamePanel.screenWidth/2) - (width/2));
     }
 
