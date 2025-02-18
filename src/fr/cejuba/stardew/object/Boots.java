@@ -10,11 +10,13 @@ public class Boots extends SuperObject{
     GamePanel gamePanel;
 
     public Boots(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+
         name = "Boots";
         try {
             ClassLoader classLoader = getClass().getClassLoader();
 
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/objects/boots.png")));
+            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/boots.png")));
             utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
 
         } catch (Exception e) {

@@ -10,11 +10,13 @@ public class Chest extends SuperObject {
     GamePanel gamePanel;
 
     public Chest(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+
         name = "Chest";
         try {
             ClassLoader classLoader = getClass().getClassLoader();
 
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/objects/chest.png")));
+            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/chest.png")));
             utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
 
         } catch (Exception e) {

@@ -1,6 +1,9 @@
 package fr.cejuba.stardew.main;
 
+import fr.cejuba.stardew.object.Heart;
+import fr.cejuba.stardew.object.SuperObject;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,6 +23,8 @@ public class UI {
     public int commandNumber = 0;
     public int titleScreenState = 0;
 
+    Image heart_full, heart_half, heart_blank;
+
 
     double playTime;
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -33,6 +38,11 @@ public class UI {
         arial_80B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 80);
         arial_32F = Font.font("Arial", javafx.scene.text.FontWeight.NORMAL, 32);
         arial_96B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 96);
+
+        SuperObject heart = new Heart(gamePanel);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
 
     public void showMessage(String text) {
@@ -50,13 +60,47 @@ public class UI {
             drawTitleScreen();
         }
         if(gamePanel.gameState == gamePanel.playState){
-            // TBD
+            drawPlayerLife();
         }
         if(gamePanel.gameState == gamePanel.pauseState){
+            drawPlayerLife();
             drawPauseScreen();
         }
         if(gamePanel.gameState == gamePanel.dialogueState){
+            drawPlayerLife();
             drawDialogueScreen();
+        }
+    }
+
+    public void drawPlayerLife(){
+
+        gamePanel.player.life = 3;
+
+        int x = gamePanel.tileSize/2;
+        int y = gamePanel.tileSize/2;
+        int i = 0;
+
+        // Draw blank hearts (Background)
+        while (i < gamePanel.player.maxLife/2){
+            graphicsContext.drawImage(heart_blank, x, y);
+            i++;
+            x += gamePanel.tileSize;
+        }
+
+        // Reset
+        x = gamePanel.tileSize/2;
+        y = gamePanel.tileSize/2;
+        i = 0;
+
+        // Draw current life
+        while (i < gamePanel.player.life){
+            graphicsContext.drawImage(heart_half, x, y);
+            i++;
+            if(i<gamePanel.player.life){
+                graphicsContext.drawImage(heart_full, x, y);
+            }
+            i++;
+            x += gamePanel.tileSize;
         }
     }
 

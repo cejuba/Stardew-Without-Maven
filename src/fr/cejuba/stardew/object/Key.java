@@ -10,11 +10,12 @@ public class Key extends SuperObject {
     GamePanel gamePanel;
 
     public Key(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         name = "Key";
         try {
             ClassLoader classLoader = getClass().getClassLoader();
 
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/objects/key.png")));
+            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/key.png")));
             utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
         } catch (Exception e) {
             throw new RuntimeException(e);

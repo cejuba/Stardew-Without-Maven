@@ -10,11 +10,13 @@ public class Door extends SuperObject {
     GamePanel gamePanel;
 
     public Door(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+
         name = "Door";
         try {
             ClassLoader classLoader = getClass().getClassLoader();
 
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/objects/door.png")));
+            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/door.png")));
             utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
 
         } catch (Exception e) {
