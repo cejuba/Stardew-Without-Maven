@@ -2,13 +2,9 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
-import fr.cejuba.stardew.main.UtilityTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
-
-import java.io.InputStream;
-import java.util.Objects;
 
 public class Player extends Entity {
 
@@ -45,7 +41,7 @@ public class Player extends Entity {
         direction = "up";
 
         maxLife = 6;
-        life = maxLife;
+        life = 3;
     }
 
     public void getPlayerImage() {
@@ -83,11 +79,19 @@ public class Player extends Entity {
             collisionActivated = false;
             gamePanel.collisionChecker.checkTile(this);
 
+            // Object Collision
             int objectIndex = gamePanel.collisionChecker.checkObject(this, true);
             pickUpObject(objectIndex);
 
+            // NPC Collision
             int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
+
+            // Event checker
+            gamePanel.eventHandler.checkEvent();
+
+            gamePanel.keyHandler.enterPressed = false;
+
 
             if (!collisionActivated) {
                 switch (direction) {
@@ -130,7 +134,6 @@ public class Player extends Entity {
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
             }
-            gamePanel.keyHandler.enterPressed = false;
         }
     }
 

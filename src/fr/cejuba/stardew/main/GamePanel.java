@@ -35,6 +35,7 @@ public class GamePanel extends Canvas implements Runnable {
     Thread gameThread;
     TileManager tileManager = new TileManager(this);
     public KeyHandler keyHandler = new KeyHandler(this);
+    public EventHandler eventHandler = new EventHandler(this);
     Sound music = new Sound();
     Sound soundEffect = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
