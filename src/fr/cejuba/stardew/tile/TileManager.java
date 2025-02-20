@@ -84,7 +84,7 @@ public class TileManager {
             tiles[index] = new Tile();
             InputStream is = getClass().getResourceAsStream("/fr/cejuba/stardew/tile/" + imageName + ".png");
             if (is == null) {
-                System.out.println("Resource not found: /fr/cejuba/stardew/tiles/" + imageName + ".png");
+                System.out.println("Resource not found: /fr/cejuba/stardew/tile/" + imageName + ".png");
                 throw new RuntimeException("Resource not found: " + imageName);
             }
             tiles[index].image = new Image(is);
