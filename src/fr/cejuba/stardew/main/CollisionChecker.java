@@ -73,21 +73,21 @@ public class CollisionChecker {
 
         int index = 999;
 
-        for(int i = 0; i < gamePanel.superObject.length; i++){
-            if(gamePanel.superObject[i] != null){
+        for(int i = 0; i < gamePanel.objects.length; i++){
+            if(gamePanel.objects[i] != null){
                 // Get entity's solidArea position
                 entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
                 entity.solidArea.setY(entity.worldY + entity.solidArea.getY());
 
                 // Get the object's solidArea position
-                gamePanel.superObject[i].solidArea.setX(gamePanel.superObject[i].worldX + gamePanel.superObject[i].solidArea.getX());
-                gamePanel.superObject[i].solidArea.setY(gamePanel.superObject[i].worldY + gamePanel.superObject[i].solidArea.getY());
+                gamePanel.objects[i].solidArea.setX(gamePanel.objects[i].worldX + gamePanel.objects[i].solidArea.getX());
+                gamePanel.objects[i].solidArea.setY(gamePanel.objects[i].worldY + gamePanel.objects[i].solidArea.getY());
 
                 switch (entity.direction){
                     case "up" :
                         entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.superObject[i].solidArea.getBoundsInParent())) {
-                            if(gamePanel.superObject[i].collision){
+                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.objects[i].solidArea.getBoundsInParent())) {
+                            if(gamePanel.objects[i].collision){
                                 entity.collisionActivated = true;
                             }
                             if (player){
@@ -97,8 +97,8 @@ public class CollisionChecker {
                         break;
                     case "down" :
                         entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.superObject[i].solidArea.getBoundsInParent())) {
-                            if(gamePanel.superObject[i].collision){
+                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.objects[i].solidArea.getBoundsInParent())) {
+                            if(gamePanel.objects[i].collision){
                                 entity.collisionActivated = true;
                             }
                             if (player){
@@ -108,8 +108,8 @@ public class CollisionChecker {
                         break;
                     case "left" :
                         entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.superObject[i].solidArea.getBoundsInParent())) {
-                            if(gamePanel.superObject[i].collision){
+                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.objects[i].solidArea.getBoundsInParent())) {
+                            if(gamePanel.objects[i].collision){
                                 entity.collisionActivated = true;
                             }
                             if (player){
@@ -119,8 +119,8 @@ public class CollisionChecker {
                         break;
                     case "right" :
                         entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.superObject[i].solidArea.getBoundsInParent())) {
-                            if(gamePanel.superObject[i].collision){
+                        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.objects[i].solidArea.getBoundsInParent())) {
+                            if(gamePanel.objects[i].collision){
                                 entity.collisionActivated = true;
                             }
                             if (player){
@@ -131,8 +131,8 @@ public class CollisionChecker {
                 }
                 entity.solidArea.setX(entity.solidAreaDefaultX);
                 entity.solidArea.setY(entity.solidAreaDefaultY);
-                gamePanel.superObject[i].solidArea.setX(gamePanel.superObject[i].solidAreaDefaultX);
-                gamePanel.superObject[i].solidArea.setY(gamePanel.superObject[i].solidAreaDefaultY);
+                gamePanel.objects[i].solidArea.setX(gamePanel.objects[i].solidAreaDefaultX);
+                gamePanel.objects[i].solidArea.setY(gamePanel.objects[i].solidAreaDefaultY);
             }
         }
         return index;

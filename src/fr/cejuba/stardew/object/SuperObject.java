@@ -1,4 +1,6 @@
+/*
 package fr.cejuba.stardew.object;
+
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.UtilityTool;
@@ -8,9 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 public class SuperObject {
 
-    public Image image, image2, image3;
-    public String name;
-    public boolean collision;
+    GamePanel gamePanel;
     public int worldX, worldY;
     public Rectangle solidArea = new Rectangle(0,0, 48,48); // No scale with tilesize : be careful
     public int solidAreaDefaultX = 0;
@@ -29,3 +29,5 @@ public class SuperObject {
         }
     }
 }
+
+ */

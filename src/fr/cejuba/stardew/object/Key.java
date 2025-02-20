@@ -1,26 +1,17 @@
 package fr.cejuba.stardew.object;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
-import javafx.scene.image.Image;
 
-import java.util.Objects;
-
-public class Key extends SuperObject {
-
+public class Key extends Entity {
     GamePanel gamePanel;
 
     public Key(GamePanel gamePanel) {
+        super(gamePanel);
+
         this.gamePanel = gamePanel;
         name = "Key";
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/key.png")));
-            utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        collision = true;
+        down1 = setup("/object/key");
     }
 
 }

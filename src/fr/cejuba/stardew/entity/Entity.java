@@ -15,7 +15,7 @@ public class Entity {
     public int speed;
 
     public Image up0, up1, down0, down1, left0, left1, right0, right1;
-    public String direction;
+    public String direction = "down";
 
     public int spriteCounter = 0;
     public int spriteNumber = 1;
@@ -27,6 +27,10 @@ public class Entity {
     public int actionLockCounter = 0;
     public String[] dialogues = new String[20];
     int dialogueIndex = 0;
+
+    public Image image, image2, image3;
+    public String name;
+    public boolean collision = false;
 
     // Character Status
     public int maxLife;
@@ -148,8 +152,8 @@ public class Entity {
         UtilityTool utilityTool = new UtilityTool();
         Image scaledImage = null;
         try {
-            InputStream is = getClass().getResourceAsStream("/fr/cejuba/stardew" + imageName + ".png");
-            System.out.println("Loading image: /fr/cejuba/stardew" + imageName + ".png");
+            InputStream is = getClass().getResourceAsStream("/fr/cejuba/stardew/" + imageName + ".png");
+            System.out.println("Loading image: /fr/cejuba/stardew/" + imageName + ".png");
             if (is == null) {
                 System.out.println("Resource not found: " + imageName);
                 throw new RuntimeException("Resource not found: " + imageName);

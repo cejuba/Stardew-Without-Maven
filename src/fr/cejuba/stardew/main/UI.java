@@ -1,7 +1,7 @@
 package fr.cejuba.stardew.main;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.object.Heart;
-import fr.cejuba.stardew.object.SuperObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -39,7 +39,7 @@ public class UI {
         arial_32F = Font.font("Arial", javafx.scene.text.FontWeight.NORMAL, 32);
         arial_96B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 96);
 
-        SuperObject heart = new Heart(gamePanel);
+        Entity heart = new Heart(gamePanel);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;

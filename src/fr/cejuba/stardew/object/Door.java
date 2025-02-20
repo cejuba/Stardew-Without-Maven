@@ -1,28 +1,25 @@
 package fr.cejuba.stardew.object;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
-import javafx.scene.image.Image;
 
-import java.util.Objects;
-
-public class Door extends SuperObject {
+public class Door extends Entity {
 
     GamePanel gamePanel;
 
     public Door(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
 
         name = "Door";
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/door.png")));
-            utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        down1 = setup("object/door");
         collision = true;
+
+        solidArea.setX(0);
+        solidArea.setY(16);
+        solidArea.setWidth(48);
+        solidArea.setHeight(32);
+        solidAreaDefaultX = (int) solidArea.getX();
+        solidAreaDefaultY = (int) solidArea.getY();
     }
 
 }

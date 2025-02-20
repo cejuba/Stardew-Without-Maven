@@ -1,26 +1,17 @@
 package fr.cejuba.stardew.object;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
-import javafx.scene.image.Image;
 
-import java.util.Objects;
 
-public class Boots extends SuperObject{
+public class Boots extends Entity {
 
     GamePanel gamePanel;
 
     public Boots(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
 
         name = "Boots";
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-
-            image = new Image(Objects.requireNonNull(classLoader.getResourceAsStream("fr/cejuba/stardew/object/boots.png")));
-            utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        down1 = setup("/object/boots.png");
     }
 }

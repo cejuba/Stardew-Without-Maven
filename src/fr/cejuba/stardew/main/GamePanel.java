@@ -2,11 +2,14 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
-import fr.cejuba.stardew.object.SuperObject;
 import fr.cejuba.stardew.tile.TileManager;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends Canvas implements Runnable {
 
@@ -46,9 +49,9 @@ public class GamePanel extends Canvas implements Runnable {
     // Entity and Object
 
     public Player player = new Player(this, keyHandler);
-    public SuperObject[] superObject = new SuperObject[10]; // If we want to increase the number of object we can do it here, but careful about performances;
+    public Entity[] objects = new Entity[10]; // If we want to increase the number of object we can do it here, but careful about performances;
     public Entity[] npc =  new Entity[10];
-
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     // GameStates
     public int gameState;
@@ -153,22 +156,40 @@ public class GamePanel extends Canvas implements Runnable {
             // Tile
             tileManager.draw(graphicsContext);
 
-            // Object
-            for (SuperObject object : superObject) {
-                if (object != null) {
-                    object.draw(graphicsContext, this);
+            // Add entities to the list
+            entityList.add(player);
+            for (int i = 0; i < npc.length; i++) {
+                if(npc[i] != null){
+                    entityList.add(npc[i]);
                 }
             }
 
-            // NPC
-            for(Entity entity : npc){
-                if(entity != null){
-                    entity.draw(graphicsContext);
+            for(int i = 0; i < objects.length; i++){
+                if(objects[i] != null){
+                    entityList.add(objects[i]);
                 }
             }
 
-            // Player
-            player.draw(graphicsContext);
+            // Sort
+            Collections.sort(entityList, new Comparator<Entity>() {
+
+                @Override
+                public int compare(Entity entity1, Entity entity2) {
+                    int result = Integer.compare(entity1.worldY, entity2.worldY);
+                    return result;
+                }
+            });
+
+            // Draw entities
+            for(int i = 0; i < entityList.size(); i++){
+                entityList.get(i).draw(graphicsContext);
+            }
+
+            // Empty entity list
+            for(int i = 0; i < entityList.size(); i++){
+                entityList.remove(i);
+            }
+
 
             // UI
             ui.draw(graphicsContext);
