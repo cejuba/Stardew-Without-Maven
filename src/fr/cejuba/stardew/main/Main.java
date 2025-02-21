@@ -21,7 +21,7 @@ public class Main extends Application {
         gamePanel.keyHandler.addKeyHandlers(scene);
         root.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
-        primaryStage.setTitle("Stardew 2D");
+        primaryStage.setTitle("Stardew Without Maven");
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.setScene(scene);
@@ -29,7 +29,7 @@ public class Main extends Application {
 
 
         gamePanel.setupGame();
-        gamePanel.startGameThread();
+        // gamePanel.startGameThread(); // TOSHOW
 
     }
 

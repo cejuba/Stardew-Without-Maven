@@ -48,14 +48,14 @@ public class Player extends Entity {
         try {
             System.out.println("Loading player images...");
 
-            up0 = setup("/player/Back_0");
-            up1 = setup("/player/Back_1");
-            down0 = setup("/player/Face_0");
-            down1 = setup("/player/Face_1");
-            right0 = setup("/player/Right_0");
-            right1 = setup("/player/Right_1");
-            left0 = setup("/player/Right_0");
-            left1 = setup("/player/Right_0");
+            up0 = setup("player/Back_0");
+            up1 = setup("player/Back_1");
+            down0 = setup("player/Face_0");
+            down1 = setup("player/Face_1");
+            right0 = setup("player/Right_0");
+            right1 = setup("player/Right_1");
+            left0 = setup("player/Right_0");
+            left1 = setup("player/Right_0");
 
             System.out.println("Player images loaded successfully");
 

@@ -27,10 +27,7 @@ public class GamePanel extends Canvas implements Runnable {
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
 
-
-
-
-    int FPS = 60;
+    int FPS = 10;
 
 
     // System config
@@ -84,11 +81,12 @@ public class GamePanel extends Canvas implements Runnable {
         System.out.println("Setting KeyHandler instance in GamePanel: " + keyHandler);
         this.keyHandler = keyHandler;
     }*/
-
+/*
     public void startGameThread() {
-        gameThread = new Thread(this);
-        gameThread.start();
+      gameThread = new Thread(this);
+      gameThread.start();
     }
+*/
 
     @Override
     public void run() {
@@ -98,7 +96,14 @@ public class GamePanel extends Canvas implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
 
-        while (gameThread.isAlive()) {
+        for(int i=0; i<1000; i++) {
+            update();
+            System.out.println("Boucle passée" + gameThread.toString()); // TOSHOW
+            draw();
+        }
+
+        /*
+        while (gameThread.isAlive() ) {
 
             currentTime = System.nanoTime();
 
@@ -112,6 +117,7 @@ public class GamePanel extends Canvas implements Runnable {
                 delta--;
             }
         }
+         */
     }
 
     public void update() {
@@ -148,7 +154,6 @@ public class GamePanel extends Canvas implements Runnable {
         }
 
         // Title Screen
-
         if(gameState==titleState){
             ui.draw(graphicsContext);
         }
