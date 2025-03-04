@@ -15,6 +15,9 @@ public class Sound {
         soundURL[2] = getClass().getResource("/fr/cejuba/stardew/sounds/powerup.wav");
         soundURL[3] = getClass().getResource("/fr/cejuba/stardew/sounds/unlock.wav");
         soundURL[4] = getClass().getResource("/fr/cejuba/stardew/sounds/fanfare.wav");
+        soundURL[5] = getClass().getResource("/fr/cejuba/stardew/sounds/hitmonster.wav");
+        soundURL[6] = getClass().getResource("/fr/cejuba/stardew/sounds/receivedamage.wav");
+        soundURL[7] = getClass().getResource("/fr/cejuba/stardew/sounds/swingweapon.wav"); // TODO : Not created yet
     }
 
     public void setFile(int i) {

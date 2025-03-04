@@ -200,11 +200,12 @@ public class Player extends Entity {
     public void interactNPC(int index) {
         if(gamePanel.keyHandler.enterPressed){
             if (index != 999) {
-                    gamePanel.gameState = gamePanel.dialogueState;
-                    gamePanel.npc[index].speak();
+                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.npc[index].speak();
             }
             else {
-                    attacking = true;
+                gamePanel.playSoundEffect(7);
+                attacking = true;
             }
         }
     }
@@ -212,6 +213,7 @@ public class Player extends Entity {
     public void contactMonster(int index) {
         if (index != 999) {
             if(!invincible){
+                gamePanel.playSoundEffect(6);
                 life -= 1;
                 invincible = true;
             }
@@ -222,6 +224,7 @@ public class Player extends Entity {
         if (index != 999) {
             System.out.println("Monster hit");
             if(!gamePanel.monster[index].invincible){
+                gamePanel.playSoundEffect(5);
                 gamePanel.monster[index].life -= 1;
                 gamePanel.monster[index].invincible = true;
 

@@ -77,6 +77,7 @@ public class Entity {
 
         if (this.type == 2 && contactPlayer) {
             if(!gamePanel.player.invincible){
+                gamePanel.playSoundEffect(6);
                 gamePanel.player.life--;
                 gamePanel.player.invincible = true;
             }
