@@ -29,11 +29,14 @@ public class Entity {
     public boolean collision = false;
     public boolean invincible = false;
     boolean attacking = false;
+    public boolean alive = true;
+    public boolean dying = false;
 
     // Counter
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
     public int spriteCounter = 0;
+    int dyingCounter = 0;
 
     // Attributes
     public int type; // 0 = Player, 1 = NPC, 2 = Monster
@@ -124,9 +127,37 @@ public class Entity {
             if(invincible){
                 graphicsContext.setGlobalAlpha(0.1);
             }
+            if(dying){
+                dyingAnimation(graphicsContext);
+            }
             graphicsContext.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
             graphicsContext.setGlobalAlpha(1);
         }
+    }
+
+
+    public void dyingAnimation(GraphicsContext graphicsContext) {
+        dyingCounter++;
+
+        int i = 5;
+        int totalPhases = 8;
+
+        // Determine the phase (1-based index)
+        int phase = (dyingCounter - 1) / i + 1;
+
+        // Toggle alpha based on the phase being odd/even
+        if (phase <= totalPhases) {
+        changeAlpha(graphicsContext, (phase % 2 == 1) ? 0 : 1);
+        }
+        else {
+            // End of animation
+            dying = false;
+            alive = false;
+        }
+    }
+
+    public void changeAlpha(GraphicsContext graphicsContext, float alphaValue) {
+        graphicsContext.setGlobalAlpha(alphaValue);
     }
 
     public Image setup(String imageName, int width, int height) {

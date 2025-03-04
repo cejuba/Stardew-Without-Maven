@@ -4,11 +4,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-
-import java.awt.*;
 
 public class Player extends Entity {
 
@@ -230,7 +226,7 @@ public class Player extends Entity {
                 gamePanel.monster[index].invincible = true;
 
                 if(gamePanel.monster[index].life == 0){
-                    gamePanel.monster[index] = null;
+                    gamePanel.monster[index].dying = true;
                 }
             }
         }
