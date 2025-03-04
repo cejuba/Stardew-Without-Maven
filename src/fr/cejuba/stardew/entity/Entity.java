@@ -4,6 +4,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.UtilityTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.InputStream;
@@ -31,12 +32,14 @@ public class Entity {
     boolean attacking = false;
     public boolean alive = true;
     public boolean dying = false;
+    boolean hpBarOn = false;
 
     // Counter
     public int actionLockCounter = 0;
     public int invincibleCounter = 0;
     public int spriteCounter = 0;
     int dyingCounter = 0;
+    int hpBarCounter = 0;
 
     // Attributes
     public int type; // 0 = Player, 1 = NPC, 2 = Monster
@@ -125,14 +128,35 @@ public class Entity {
                 case "right" -> image = (spriteNumber == 0) ? right0 : right1;
             }
 
+            // Monster HP bar
+            if(type == 2 && hpBarOn){
+
+                double oneScale = (double)gamePanel.tileSize / maxLife;
+                double hpBarValue = oneScale * life;
+
+                graphicsContext.setFill(Color.BLACK);
+                graphicsContext.fillRect(screenX-1, screenY - 16, gamePanel.tileSize+2, 12);
+                graphicsContext.setFill(Color.RED);
+                graphicsContext.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
+
+                hpBarCounter++;
+
+                if(hpBarCounter > 600){
+                    hpBarOn = false;
+                    hpBarCounter = 0;
+                }
+            }
+
             if(invincible){
-                graphicsContext.setGlobalAlpha(0.1);
+                hpBarOn = true;
+                hpBarCounter = 0;
+                changeAlpha(graphicsContext, 0.1F);
             }
             if(dying){
                 dyingAnimation(graphicsContext);
             }
             graphicsContext.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
-            graphicsContext.setGlobalAlpha(1);
+            changeAlpha(graphicsContext, 1);
         }
     }
 
