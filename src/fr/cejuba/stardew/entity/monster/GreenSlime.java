@@ -60,4 +60,12 @@ public class GreenSlime extends Entity {
             actionLockCounter = 0;
         }
     }
+
+    public void damageReaction() {
+
+        // When the monster is hit it run away
+        actionLockCounter = 0;
+        direction = gamePanel.player.direction;
+
+    }
 }
