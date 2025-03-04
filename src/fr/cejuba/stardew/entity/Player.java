@@ -12,6 +12,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    public boolean attackCanceled = false;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel); // Call the constructor of the parent class
@@ -132,6 +133,13 @@ public class Player extends Entity {
                 }
             }
 
+            if(keyHandler.enterPressed && !attackCanceled){
+                gamePanel.playSoundEffect(7);
+                attacking = true;
+                spriteCounter = 0;
+            }
+
+            attackCanceled = false;
             gamePanel.keyHandler.enterPressed = false;
 
             spriteCounter++;
@@ -200,12 +208,9 @@ public class Player extends Entity {
     public void interactNPC(int index) {
         if(gamePanel.keyHandler.enterPressed){
             if (index != 999) {
+                attackCanceled = true;
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
-            }
-            else {
-                gamePanel.playSoundEffect(7);
-                attacking = true;
             }
         }
     }

@@ -74,6 +74,7 @@ public class EventHandler {
 
     public void damagePit(int col, int row, int gameState) {
         gamePanel.gameState = gameState;
+        gamePanel.playSoundEffect(6);
         gamePanel.ui.currentDialogue = "You fall into a pit";
         gamePanel.player.life -= 1;
         canTouchEvent = false;
@@ -82,6 +83,8 @@ public class EventHandler {
     public void healingPool(int col, int row, int gameState) {
         if (gamePanel.keyHandler.enterPressed) {
             gamePanel.gameState = gameState;
+            gamePanel.player.attackCanceled = true;
+            gamePanel.playSoundEffect(2);
             gamePanel.ui.currentDialogue = "You heal";
             gamePanel.player.life += 1;
         }
