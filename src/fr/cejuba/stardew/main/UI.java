@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -24,6 +25,8 @@ public class UI {
     public String currentDialogue = "";
     public int commandNumber = 0;
     public int titleScreenState = 0;
+    public int slotColumn = 0;
+    public int slotRow = 0;
 
     Image heart_full, heart_half, heart_blank;
 
@@ -73,6 +76,7 @@ public class UI {
         }
         if(gamePanel.gameState == gamePanel.characterState){
             drawCharacterScreen();
+            drawInventory();
         }
     }
 
@@ -362,6 +366,33 @@ public class UI {
 
     }
 
+    public void drawInventory(){
+
+        // Frame
+        final int frameWidth = gamePanel.tileSize * 6;
+        final int frameHeight = gamePanel.tileSize * 5;
+        final int frameX = gamePanel.screenWidth - frameWidth - gamePanel.tileSize ;
+        final int frameY = gamePanel.tileSize;
+        drawSubWindows(frameX, frameY, frameWidth, frameHeight);
+
+        // Slots
+        final int slotXStart = frameX + 20;
+        final int slotYStart = frameY + 20;
+        int slotX = slotXStart;
+        int slotY = slotYStart;
+
+        // Cursor
+        int cursorX = slotXStart + (slotColumn * gamePanel.tileSize);
+        int cursorY = slotYStart + (slotRow * gamePanel.tileSize);
+        int cursorWidth = gamePanel.tileSize;
+        int cursorHeight = gamePanel.tileSize;
+
+        // Draw cursor
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setLineWidth(3);
+        graphicsContext.strokeRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+
+    }
     public void drawSubWindows(int x, int y, int width, int height) {
         graphicsContext.setFill(Color.rgb(0, 0, 0, 0.8));
         graphicsContext.fillRoundRect(x, y, width, height, 35, 35);
