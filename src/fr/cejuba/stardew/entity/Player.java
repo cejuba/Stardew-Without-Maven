@@ -245,7 +245,6 @@ public class Player extends Entity {
                     damage = 0;
                 }
                 life -= damage;
-
                 invincible = true;
             }
         }
@@ -263,11 +262,14 @@ public class Player extends Entity {
                 }
 
                 gamePanel.monster[index].life -= damage;
+                gamePanel.ui.addMessage(damage + " damage to " + gamePanel.monster[index].name + ".");
+
                 gamePanel.monster[index].invincible = true;
                 gamePanel.monster[index].damageReaction();
 
                 if(gamePanel.monster[index].life == 0){
                     gamePanel.monster[index].dying = true;
+                    gamePanel.ui.addMessage("You defeated " + gamePanel.monster[index].name + "!");
                 }
             }
         }

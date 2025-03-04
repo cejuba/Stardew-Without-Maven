@@ -8,8 +8,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import java.net.FileNameMap;
+
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class UI {
 
@@ -17,8 +18,8 @@ public class UI {
     GraphicsContext graphicsContext;
     Font arial_40, arial_30, arial_80B, arial_32F, arial_96B;
     public boolean messageOn = false;
-    public String message = "";
-    int messageCounter = 0;
+    ArrayList<String> message = new ArrayList<>();
+    ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNumber = 0;
@@ -44,9 +45,9 @@ public class UI {
         heart_blank = heart.image3;
     }
 
-    public void showMessage(String text) {
-        message = text;
-        messageOn = true;
+    public void addMessage(String text) {
+        message.add(text);
+        messageCounter.add(0);
     }
 
     public void draw(GraphicsContext graphicsContext){
@@ -60,6 +61,7 @@ public class UI {
         }
         if(gamePanel.gameState == gamePanel.playState){
             drawPlayerLife();
+            drawMessage();
         }
         if(gamePanel.gameState == gamePanel.pauseState){
             drawPlayerLife();
@@ -72,6 +74,32 @@ public class UI {
         if(gamePanel.gameState == gamePanel.characterState){
             drawCharacterScreen();
         }
+    }
+
+    public void drawMessage(){
+        int messageX = gamePanel.tileSize;
+        int messageY = gamePanel.tileSize * 4;
+        graphicsContext.setFont(new Font("Arial", 32F));
+
+        for(int i = 0; i < message.size(); i++){
+            if(message.get(i) != null){
+
+                graphicsContext.setFill(Color.BLACK);
+                graphicsContext.fillText(message.get(i), messageX + 2, messageY + 2);
+                graphicsContext.setFill(Color.WHITE);
+                graphicsContext.fillText(message.get(i), messageX, messageY);
+
+                int counter = messageCounter.get(i) + 1;
+                messageCounter.set(i, counter);
+                messageY += 50;
+
+                if(messageCounter.get(i) > 180){
+                    message.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+
     }
 
     public void drawPlayerLife() {
