@@ -7,9 +7,9 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class GamePanel extends Canvas {
@@ -136,59 +136,78 @@ public class GamePanel extends Canvas {
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.fillRect(0, 0, getWidth(), getHeight());
 
-        tileManager.draw(graphicsContext);
+        long drawStartTime = 0;
 
-        entityList.add(player);
-
-        for (Entity item : npc) {
-            if (item != null) {
-                entityList.add(item);
-            }
+        if(keyHandler.showDebugText){
+            drawStartTime = System.nanoTime();
         }
-
-        for (Entity object : objects) {
-            if (object != null) {
-                entityList.add(object);
-            }
+        if(gameState==titleState){
+            ui.draw(graphicsContext);
         }
+        else{
+            tileManager.draw(graphicsContext);
 
-        for (Entity value : monster) {
-            if (value != null) {
-                entityList.add(value);
-            }
-        }
+            entityList.add(player);
 
-        entityList.sort(new Comparator<Entity>() {
-            @Override
-            public int compare(Entity e1, Entity e2) {
-                return Integer.compare(e1.worldY, e2.worldY);
+            for (Entity item : npc) {
+                if (item != null) {
+                    entityList.add(item);
+                }
             }
 
-        });
+            for (Entity object : objects) {
+                if (object != null) {
+                    entityList.add(object);
+                }
+            }
 
-        for (Entity entity : entityList) {
-            entity.draw(graphicsContext);
+            for (Entity value : monster) {
+                if (value != null) {
+                    entityList.add(value);
+                }
+            }
+
+            entityList.sort(new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    return Integer.compare(e1.worldY, e2.worldY);
+                }
+
+            });
+
+            for (Entity entity : entityList) {
+                entity.draw(graphicsContext);
+            }
+            entityList.clear();
+
+            ui.draw(graphicsContext);
         }
-        entityList.clear();
-
         // TODO: Gestion d'affichage l'un au dessus de l'autre
-/*
-        // Draw objects
-        for (Entity object : objects) {
-            if (object != null) {
-                object.draw(graphicsContext);
-            }
-        }
 
-        // Draw NPCs
-        for (Entity npcEntity : npc) {
-            if (npcEntity != null) {
-                npcEntity.draw(graphicsContext);
-            }
+        if(keyHandler.showDebugText){
+
+            // Became Obsolete because of the new draw method in a separate thread TODO: Change the debug text to the new draw method
+            long drawEndTime = System.nanoTime();
+            long drawTime = drawEndTime - drawStartTime;
+
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.setFont(new Font("Arial", 20));
+            int x = 10;
+            int y = 400;
+            int lineHeight = 20;
+
+            graphicsContext.fillText("WorldX: " + player.worldX, x, y);
+            y += lineHeight;
+            graphicsContext.fillText("WorldY: " + player.worldY, x, y);
+            y += lineHeight;
+            graphicsContext.fillText("Column: " + Math.round((player.worldX + player.solidArea.getX())/tileSize), x, y);
+            y += lineHeight;
+            graphicsContext.fillText("Row: " + Math.round((player.worldY + player.solidArea.getY())/tileSize), x, y);
+            y += lineHeight;
+            graphicsContext.fillText("Draw Time: " + drawTime / 1_000_000 + "ms", x, y);
+            //System.out.println("Draw Time: " + drawTime / 1_000_000 + "ms");
+
         }
-*/
-        player.draw(graphicsContext);
-        ui.draw(graphicsContext);
     }
 
     public void playMusic(int i) {

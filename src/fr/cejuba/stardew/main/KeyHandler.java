@@ -9,7 +9,7 @@ public class KeyHandler {
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 
     // Debug
-    boolean checkDrawTime = false;
+    boolean showDebugText = false;
 
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -106,7 +106,7 @@ public class KeyHandler {
             case S, DOWN -> downPressed = true;
             case Q, LEFT -> leftPressed = true;
             case D, RIGHT -> rightPressed = true;
-            case T -> checkDrawTime = !checkDrawTime;
+            case T -> showDebugText = !showDebugText;
             case P -> gamePanel.gameState = gamePanel.pauseState;
             case C -> gamePanel.gameState = gamePanel.characterState;
             case ENTER -> enterPressed = true;
