@@ -2,11 +2,14 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
+import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.shield.WoodenShield;
 import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -15,6 +18,8 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel); // Call the constructor of the parent class
@@ -34,6 +39,7 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setKeyHandler(KeyHandler keyHandler) {
@@ -59,6 +65,14 @@ public class Player extends Entity {
         currentShield = new WoodenShield(gamePanel);
         attack = getAttack();
         defense = getDefense();
+    }
+
+    public void setItems() {
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new Key(gamePanel));
+        inventory.add(new Key(gamePanel));
+
     }
 
     public int getAttack() {

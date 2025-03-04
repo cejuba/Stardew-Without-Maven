@@ -380,10 +380,21 @@ public class UI {
         final int slotYStart = frameY + 20;
         int slotX = slotXStart;
         int slotY = slotYStart;
+        int slotSize = gamePanel.tileSize+3;
+
+        // Draw Player's inventory
+        for(int i = 0; i < gamePanel.player.inventory.size(); i++){
+            if(i % 5 == 0 && i != 0){
+                slotX = slotXStart;
+                slotY += slotSize;
+            }
+            graphicsContext.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY);
+            slotX += slotSize;
+        }
 
         // Cursor
-        int cursorX = slotXStart + (slotColumn * gamePanel.tileSize);
-        int cursorY = slotYStart + (slotRow * gamePanel.tileSize);
+        int cursorX = slotXStart + (slotColumn * slotSize);
+        int cursorY = slotYStart + (slotRow * slotSize);
         int cursorWidth = gamePanel.tileSize;
         int cursorHeight = gamePanel.tileSize;
 
