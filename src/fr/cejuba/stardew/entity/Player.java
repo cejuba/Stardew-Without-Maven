@@ -109,8 +109,6 @@ public class Player extends Entity {
         }
     }
 
-
-
     public void update() {
 
         if(attacking){
@@ -220,6 +218,7 @@ public class Player extends Entity {
             attacking = false;
         }
     }
+
     public void pickUpObject(int index) {
         if (index != 999) {
             // TBD
@@ -240,7 +239,13 @@ public class Player extends Entity {
         if (index != 999) {
             if(!invincible){
                 gamePanel.playSoundEffect(6);
-                life -= 1;
+
+                int damage = gamePanel.monster[index].attack - defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+                life -= damage;
+
                 invincible = true;
             }
         }
@@ -251,7 +256,13 @@ public class Player extends Entity {
             System.out.println("Monster hit");
             if(!gamePanel.monster[index].invincible){
                 gamePanel.playSoundEffect(5);
-                gamePanel.monster[index].life -= 1;
+
+                int damage = attack - gamePanel.monster[index].defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+
+                gamePanel.monster[index].life -= damage;
                 gamePanel.monster[index].invincible = true;
                 gamePanel.monster[index].damageReaction();
 
