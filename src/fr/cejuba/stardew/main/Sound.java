@@ -18,6 +18,7 @@ public class Sound {
         soundURL[5] = getClass().getResource("/fr/cejuba/stardew/sounds/hitmonster.wav");
         soundURL[6] = getClass().getResource("/fr/cejuba/stardew/sounds/receivedamage.wav");
         soundURL[7] = getClass().getResource("/fr/cejuba/stardew/sounds/swingweapon.wav"); // TODO : Not created yet
+        soundURL[8] = getClass().getResource("/fr/cejuba/stardew/sounds/levelup.wav");
     }
 
     public void setFile(int i) {

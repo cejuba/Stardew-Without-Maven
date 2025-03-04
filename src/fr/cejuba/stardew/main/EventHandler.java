@@ -87,6 +87,7 @@ public class EventHandler {
             gamePanel.playSoundEffect(2);
             gamePanel.ui.currentDialogue = "You heal";
             gamePanel.player.life += 1;
+            gamePanel.assetSetter.setMonster();
         }
     }
 }

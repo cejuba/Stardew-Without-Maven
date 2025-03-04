@@ -270,11 +270,32 @@ public class Player extends Entity {
                 if(gamePanel.monster[index].life == 0){
                     gamePanel.monster[index].dying = true;
                     gamePanel.ui.addMessage("You defeated " + gamePanel.monster[index].name + "!");
+                    gamePanel.ui.addMessage("Experience + " + gamePanel.monster[index].name);
+                    experience += gamePanel.monster[index].experience;
+                    checkLevelUp();
                 }
             }
         }
     }
 
+    public void checkLevelUp() {
+        if (experience >= nextLevelExperience) {
+            level++;
+            experience -= nextLevelExperience;
+            nextLevelExperience *= 2;
+            maxLife += 2;
+            life = maxLife;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gamePanel.playSoundEffect(8);
+            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.ui.currentDialogue = "You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1";
+
+        }
+    }
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
         int tempScreenX = screenX;
