@@ -9,8 +9,8 @@ public class Heart extends Entity {
         super(gamePanel);
 
         name = "Heart";
-        image = setup("object/heart_full");
-        image2 = setup("object/heart_half");
-        image3 = setup("object/heart_blank");
+        image = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);
+        image2 = setup("object/heart_half", gamePanel.tileSize, gamePanel.tileSize);
+        image3 = setup("object/heart_blank", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

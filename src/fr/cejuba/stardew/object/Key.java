@@ -8,6 +8,6 @@ public class Key extends Entity {
     public Key(GamePanel gamePanel) {
         super(gamePanel);
         name = "Key";
-        down1 = setup("/object/key");
+        down1 = setup("/object/key", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

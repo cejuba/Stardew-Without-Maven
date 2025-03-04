@@ -11,34 +11,34 @@ import java.io.InputStream;
 public class Entity {
     GamePanel gamePanel;
 
-    public int worldX, worldY;
-    public int speed;
-
+    // Images
     public Image up0, up1, down0, down1, left0, left1, right0, right1;
-    public String direction = "down";
-
-    public int spriteCounter = 0;
-    public int spriteNumber = 1;
-
+    public Image attackUp0, attackUp1, attackDown0, attackDown1, attackLeft0, attackLeft1, attackRight0, attackRight1;
+    public Image image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 48 ,48);
+    public Rectangle attackArea = new Rectangle(0, 0, 0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionActivated = false;
-
-    public int actionLockCounter = 0;
-
-    public boolean invincible = false;
-    public int invincibleCounter = 0;
-
     public String[] dialogues = new String[20];
+
+    // States
+    public int worldX, worldY;
+    public String direction = "down";
+    public int spriteNumber = 1;
     int dialogueIndex = 0;
-
-    public Image image, image2, image3;
-    public String name;
     public boolean collision = false;
+    public boolean invincible = false;
+    boolean attacking = false;
 
+    // Counter
+    public int actionLockCounter = 0;
+    public int invincibleCounter = 0;
+    public int spriteCounter = 0;
+
+    // Attributes
     public int type; // 0 = Player, 1 = NPC, 2 = Monster
-
-    // Character Status
+    public String name;
+    public int speed;
     public int maxLife;
     public int life;
 
@@ -83,7 +83,7 @@ public class Entity {
             switch (direction) {
                 case "up" -> worldY -= speed;
                 case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
+                case "left'" -> worldX -= speed;
                 case "right" -> worldX += speed;
             }
         }
@@ -92,6 +92,15 @@ public class Entity {
         if (spriteCounter > 10) {
             spriteNumber = (spriteNumber == 0) ? 1 : 0;
             spriteCounter = 0;
+        }
+
+        // Invincibility
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 40) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
         }
     }
 
@@ -111,11 +120,16 @@ public class Entity {
                 case "left" -> image = (spriteNumber == 0) ? left0 : left1;
                 case "right" -> image = (spriteNumber == 0) ? right0 : right1;
             }
+
+            if(invincible){
+                graphicsContext.setGlobalAlpha(0.1);
+            }
             graphicsContext.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
+            graphicsContext.setGlobalAlpha(1);
         }
     }
 
-    public Image setup(String imageName) {
+    public Image setup(String imageName, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         Image scaledImage = null;
         try {
@@ -124,7 +138,7 @@ public class Entity {
                 throw new RuntimeException("Resource not found: " + imageName);
             }
             Image originalImage = new Image(is);
-            scaledImage = utilityTool.scaleImage(originalImage, gamePanel.tileSize, gamePanel.tileSize);
+            scaledImage = utilityTool.scaleImage(originalImage, width, height);
         } catch (Exception e) {
             e.printStackTrace();
         }

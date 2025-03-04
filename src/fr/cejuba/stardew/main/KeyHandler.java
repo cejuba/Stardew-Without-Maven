@@ -75,7 +75,7 @@ public class KeyHandler {
                 }
             }
 
-            if (gamePanel.gameState == gamePanel.playState) {
+            else if (gamePanel.gameState == gamePanel.playState) {
                 System.out.println("Key Pressed" + event.getCode());
                 switch (event.getCode()) {
                     case Z, UP -> upPressed = true;

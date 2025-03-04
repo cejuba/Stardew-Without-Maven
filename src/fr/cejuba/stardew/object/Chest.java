@@ -8,6 +8,6 @@ public class Chest extends Entity {
     public Chest(GamePanel gamePanel) {
         super(gamePanel);
         name = "Chest";
-        image = setup("/object/chest");
+        image = setup("/object/chest", gamePanel.tileSize, gamePanel.tileSize);
     }
 }

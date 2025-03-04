@@ -29,8 +29,12 @@ public class Player extends Entity {
         solidAreaDefaultX = (int) solidArea.getX();
         solidAreaDefaultY = (int) solidArea.getY();
 
+        attackArea.setWidth(36);
+        attackArea.setHeight(36);
+
         setDefaultValues();
         getPlayerImage();
+        getPlayerAttackImage();
     }
 
     public void setKeyHandler(KeyHandler keyHandler) {
@@ -49,16 +53,16 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-            System.out.println("Loading player images...");
+            System.out.println("Loading player images");
 
-            up0 = setup("player/Back_0");
-            up1 = setup("player/Back_1");
-            down0 = setup("player/Face_0");
-            down1 = setup("player/Face_1");
-            right0 = setup("player/Right_0");
-            right1 = setup("player/Right_1");
-            left0 = setup("player/Right_0");
-            left1 = setup("player/Right_0");
+            up0 = setup("player/walking/Back_0", gamePanel.tileSize, gamePanel.tileSize);
+            up1 = setup("player/walking/Back_1", gamePanel.tileSize, gamePanel.tileSize);
+            down0 = setup("player/walking/Face_0", gamePanel.tileSize, gamePanel.tileSize);
+            down1 = setup("player/walking/Face_1", gamePanel.tileSize, gamePanel.tileSize);
+            right0 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
+            right1 = setup("player/walking/Right_1", gamePanel.tileSize, gamePanel.tileSize);
+            left0 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
+            left1 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
 
             System.out.println("Player images loaded successfully");
 
@@ -67,8 +71,34 @@ public class Player extends Entity {
         }
     }
 
+    public void getPlayerAttackImage() {
+        try {
+            System.out.println("Loading player attack images");
+
+            attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
+            attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
+            attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
+            attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
+            attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
+            attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
+            attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
+            attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
+
+            System.out.println("Player attack images loaded successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void update() {
-        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
+
+        if(attacking){
+            attacking();
+        }
+        else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
             if (keyHandler.upPressed) {
                 direction = "up";
             } else if (keyHandler.downPressed) {
@@ -125,6 +155,46 @@ public class Player extends Entity {
         }
     }
 
+    public void attacking(){
+        spriteCounter++;
+        if (spriteCounter<=5){
+            spriteNumber = 1;
+        }
+        if (5 < spriteCounter && spriteCounter <= 25){
+            spriteNumber = 2;
+
+            // Saving the current position of the player
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = (int) solidArea.getWidth();
+            int solidAreaHeight = (int) solidArea.getHeight();
+
+            // Adjusting the attack area
+            switch(direction){
+                case "up" -> worldY -= (int) attackArea.getHeight();
+                case "down" -> worldY += (int) attackArea.getHeight();
+                case "left" -> worldX -= (int) attackArea.getWidth();
+                case "right" -> worldX += (int) attackArea.getWidth();
+            }
+
+            solidArea.setWidth(attackArea.getWidth());
+            solidArea.setHeight(attackArea.getHeight());
+
+            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            damageMonster(monsterIndex);
+
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.setWidth(solidAreaWidth);
+            solidArea.setHeight(solidAreaHeight);
+
+        }
+        if (spriteCounter > 25){
+            spriteNumber = 1;
+            spriteCounter = 0;
+            attacking = false;
+        }
+    }
     public void pickUpObject(int index) {
         if (index != 999) {
             // TBD
@@ -132,10 +202,13 @@ public class Player extends Entity {
     }
 
     public void interactNPC(int index) {
-        if (index != 999) {
-            if (gamePanel.keyHandler.enterPressed) {
-                gamePanel.gameState = gamePanel.dialogueState;
-                gamePanel.npc[index].speak();
+        if(gamePanel.keyHandler.enterPressed){
+            if (index != 999) {
+                    gamePanel.gameState = gamePanel.dialogueState;
+                    gamePanel.npc[index].speak();
+            }
+            else {
+                    attacking = true;
             }
         }
     }
@@ -149,13 +222,60 @@ public class Player extends Entity {
         }
     }
 
+    public void damageMonster(int index) {
+        if (index != 999) {
+            System.out.println("Monster hit");
+            if(!gamePanel.monster[index].invincible){
+                gamePanel.monster[index].life -= 1;
+                gamePanel.monster[index].invincible = true;
+
+                if(gamePanel.monster[index].life == 0){
+                    gamePanel.monster[index] = null;
+                }
+            }
+        }
+    }
+
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
+
         switch (direction) {
-            case "up" -> image = (spriteNumber == 0) ? up0 : up1;
-            case "down" -> image = (spriteNumber == 0) ? down0 : down1;
-            case "left" -> image = (spriteNumber == 0) ? left0 : left1;
-            case "right" -> image = (spriteNumber == 0) ? right0 : right1;
+            case "up" :
+                if(!attacking){
+                    image = (spriteNumber == 0) ? up0 : up1;
+                }
+                else{
+                    tempScreenY -= gamePanel.tileSize;
+                    image = (spriteNumber == 0) ? attackUp0 : attackUp1;
+                }
+                break;
+            case "down" :
+                if(!attacking){
+                    image = (spriteNumber == 0) ? down0 : down1;
+                }
+                else{
+                    image = (spriteNumber == 0) ? attackDown0 : attackDown1;
+                }
+                break;
+            case "left" :
+                if(!attacking){
+                    image = (spriteNumber == 0) ? left0 : left1;
+                }
+                else{
+                    tempScreenX -= gamePanel.tileSize;
+                    image = (spriteNumber == 0) ? attackLeft0 : attackLeft1;
+                }
+                break;
+            case "right" :
+                if(!attacking){
+                    image = (spriteNumber == 0) ? right0 : right1;
+                }
+                else{
+                    image = (spriteNumber == 0) ? attackRight0 : attackRight1;
+                }
+                break;
         }
 
         if(invincible){
@@ -163,7 +283,7 @@ public class Player extends Entity {
         }
 
         if (image != null) {
-            graphicsContext.drawImage(image, screenX, screenY);
+            graphicsContext.drawImage(image, tempScreenX, tempScreenY);
         }
 
         graphicsContext.setGlobalAlpha(1.0);
