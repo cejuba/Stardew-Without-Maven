@@ -134,39 +134,36 @@ public class GamePanel extends Canvas {
 
         entityList.add(player);
 
-        for(int i=0; i < npc.length; i++){
-            if(npc[i] != null){
-                entityList.add(npc[i]);
+        for (Entity item : npc) {
+            if (item != null) {
+                entityList.add(item);
             }
         }
 
-        for (int i = 0; i < objects.length; i++){
-            if(objects[i] != null){
-                entityList.add(objects[i]);
+        for (Entity object : objects) {
+            if (object != null) {
+                entityList.add(object);
             }
         }
 
-        for (int i = 0; i < monster.length; i++){
-            if(monster[i] != null){
-                entityList.add(monster[i]);
+        for (Entity value : monster) {
+            if (value != null) {
+                entityList.add(value);
             }
         }
 
-        Collections.sort(entityList, new Comparator<Entity>() {
+        entityList.sort(new Comparator<Entity>() {
             @Override
             public int compare(Entity e1, Entity e2) {
-                int result = Integer.compare(e1.worldY, e2.worldY);
-                return result;
+                return Integer.compare(e1.worldY, e2.worldY);
             }
 
         });
 
-        for(int i=0; i < entityList.size(); i++){
-            entityList.get(i).draw(graphicsContext);
+        for (Entity entity : entityList) {
+            entity.draw(graphicsContext);
         }
-        for(int i=0; i < entityList.size(); i++){
-            entityList.remove(i);
-        }
+        entityList.clear();
 
         // TODO: Gestion d'affichage l'un au dessus de l'autre
 /*
