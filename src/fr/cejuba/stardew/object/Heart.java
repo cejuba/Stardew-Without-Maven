@@ -5,8 +5,6 @@ import fr.cejuba.stardew.main.GamePanel;
 
 public class Heart extends Entity {
 
-    GamePanel gamePanel;
-
     public Heart(GamePanel gamePanel) {
         super(gamePanel);
 
@@ -14,6 +12,5 @@ public class Heart extends Entity {
         image = setup("object/heart_full");
         image2 = setup("object/heart_half");
         image3 = setup("object/heart_blank");
-
     }
 }

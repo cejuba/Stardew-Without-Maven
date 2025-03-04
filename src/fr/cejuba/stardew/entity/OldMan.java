@@ -4,7 +4,6 @@ import fr.cejuba.stardew.main.GamePanel;
 
 import java.util.Random;
 
-
 public class OldMan extends Entity {
 
     public OldMan(GamePanel gamePanel) {
@@ -37,30 +36,24 @@ public class OldMan extends Entity {
         }
     }
 
-    public void setDialogue(){
-
+    public void setDialogue() {
         dialogues[0] = "Hello there!";
         dialogues[1] = "I don't know what to do...I don't know what \n to do...I don't know what to do...I don't know what to do...I don't know what to do...";
-
     }
 
-    public void setAction(){
-
+    public void setAction() {
         actionLockCounter++;
         if (actionLockCounter == 100) {
             Random random = new Random();
-            int i = random.nextInt(100)+1; // Pick a number from 1 to 100
+            int i = random.nextInt(100) + 1; // Pick a number from 1 to 100
 
             if (i <= 25) {
                 direction = "up";
-            }
-            if (i > 25 && i <= 50) {
+            } else if (i <= 50) {
                 direction = "down";
-            }
-            if (i > 50 && i <= 75) {
+            } else if (i <= 75) {
                 direction = "left";
-            }
-            if (i > 75) {
+            } else {
                 direction = "right";
             }
 
@@ -68,7 +61,8 @@ public class OldMan extends Entity {
         }
     }
 
-    public void speak(){
+    @Override
+    public void speak() {
         super.speak();
     }
 }

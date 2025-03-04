@@ -20,24 +20,22 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-
-        // Check if the player character is more than 1 tile away from the last event
         int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
         int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
-        if(distance > gamePanel.tileSize){
+        if (distance > gamePanel.tileSize) {
             canTouchEvent = true;
         }
 
-        if(canTouchEvent) {
+        if (canTouchEvent) {
             if (hit(23, 12, "up")) {
-                healingPool(23,12,gamePanel.dialogueState);
+                healingPool(23, 12, gamePanel.dialogueState);
             }
             if (hit(27, 16, "right")) {
-                damagePit(27,16,gamePanel.dialogueState);
+                damagePit(27, 16, gamePanel.dialogueState);
             }
             if (hit(23, 19, "any")) {
-                damagePit(23,19,gamePanel.dialogueState);
+                damagePit(23, 19, gamePanel.dialogueState);
             }
         }
     }
@@ -78,7 +76,6 @@ public class EventHandler {
         gamePanel.gameState = gameState;
         gamePanel.ui.currentDialogue = "You fall into a pit";
         gamePanel.player.life -= 1;
-        // eventRectangle[col][row].eventDone = true;
         canTouchEvent = false;
     }
 

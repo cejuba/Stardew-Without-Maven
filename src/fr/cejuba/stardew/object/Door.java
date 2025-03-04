@@ -5,8 +5,6 @@ import fr.cejuba.stardew.main.GamePanel;
 
 public class Door extends Entity {
 
-    GamePanel gamePanel;
-
     public Door(GamePanel gamePanel) {
         super(gamePanel);
 
@@ -21,5 +19,4 @@ public class Door extends Entity {
         solidAreaDefaultX = (int) solidArea.getX();
         solidAreaDefaultY = (int) solidArea.getY();
     }
-
 }

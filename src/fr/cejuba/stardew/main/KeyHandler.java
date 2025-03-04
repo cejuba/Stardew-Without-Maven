@@ -35,7 +35,7 @@ public class KeyHandler {
                         case ENTER -> {
                             switch (gamePanel.ui.commandNumber) {
                                 case 0 -> gamePanel.ui.titleScreenState = 1;
-                                case 1 -> gamePanel.gameState = gamePanel.playState;//TBD
+                                case 1 -> gamePanel.gameState = gamePanel.playState; //TBD
                                 case 2 -> System.exit(0);
                             }
                         }
@@ -73,9 +73,8 @@ public class KeyHandler {
                         }
                     }
                 }
-                // Play State
-
             }
+
             if (gamePanel.gameState == gamePanel.playState) {
                 System.out.println("Key Pressed" + event.getCode());
                 switch (event.getCode()) {
@@ -87,23 +86,15 @@ public class KeyHandler {
                     case P -> gamePanel.gameState = gamePanel.pauseState;
                     case ENTER -> enterPressed = true;
                 }
-            }
-
-            // Pause State
-            else if (gamePanel.gameState == gamePanel.pauseState) {
+            } else if (gamePanel.gameState == gamePanel.pauseState) {
                 switch (event.getCode()) {
                     case P -> gamePanel.gameState = gamePanel.playState;
-
                 }
-            }
-            // Dialogue State
-
-            else if (gamePanel.gameState == gamePanel.dialogueState) {
+            } else if (gamePanel.gameState == gamePanel.dialogueState) {
                 switch (event.getCode()) {
                     case ENTER -> gamePanel.gameState = gamePanel.playState;
                 }
             }
-
         });
 
         scene.setOnKeyReleased(event -> {

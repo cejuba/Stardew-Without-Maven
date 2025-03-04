@@ -2,6 +2,7 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.object.Heart;
+import javafx.concurrent.Task;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -24,7 +25,6 @@ public class UI {
     public int titleScreenState = 0;
 
     Image heart_full, heart_half, heart_blank;
-
 
     double playTime;
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -72,36 +72,44 @@ public class UI {
         }
     }
 
-    public void drawPlayerLife(){
+    public void drawPlayerLife() {
 
-        // gamePanel.player.life = 3;
+        Task<Void> drawTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                int x = gamePanel.tileSize/2;
+                int y = gamePanel.tileSize/2;
+                int i = 0;
 
-        int x = gamePanel.tileSize/2;
-        int y = gamePanel.tileSize/2;
-        int i = 0;
+                // Draw blank hearts (Background)
+                while (i < gamePanel.player.maxLife/2){
+                    graphicsContext.drawImage(heart_blank, x, y);
+                    i++;
+                    x += gamePanel.tileSize;
+                }
 
-        // Draw blank hearts (Background)
-        while (i < gamePanel.player.maxLife/2){
-            graphicsContext.drawImage(heart_blank, x, y);
-            i++;
-            x += gamePanel.tileSize;
-        }
+                // Reset
+                x = gamePanel.tileSize/2;
+                y = gamePanel.tileSize/2;
+                i = 0;
 
-        // Reset
-        x = gamePanel.tileSize/2;
-        y = gamePanel.tileSize/2;
-        i = 0;
-
-        // Draw current life
-        while (i < gamePanel.player.life){
-            graphicsContext.drawImage(heart_half, x, y);
-            i++;
-            if(i<gamePanel.player.life){
-                graphicsContext.drawImage(heart_full, x, y);
+                // Draw current life
+                while (i < gamePanel.player.life){
+                    graphicsContext.drawImage(heart_half, x, y);
+                    i++;
+                    if(i<gamePanel.player.life){
+                        graphicsContext.drawImage(heart_full, x, y);
+                    }
+                    i++;
+                    x += gamePanel.tileSize;
+                }
+                return null;
             }
-            i++;
-            x += gamePanel.tileSize;
-        }
+        };
+
+        Thread drawThread = new Thread(drawTask);
+        drawThread.setDaemon(true);
+        drawThread.start();
     }
 
     private void drawTitleScreen() {
@@ -212,7 +220,6 @@ public class UI {
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
             }
-
         }
 
     }
@@ -247,7 +254,6 @@ public class UI {
     }
 
     public void drawSubWindows(int x, int y, int width, int height){
-
         graphicsContext.setFill(Color.rgb(0,0,0, 0.8));
         graphicsContext.fillRoundRect(x, y, width, height, 35, 35);
 
@@ -256,7 +262,7 @@ public class UI {
         graphicsContext.strokeRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
 
-    public int getXCenteredText(String text, GraphicsContext graphicsContext) {
+    public int getXCenteredText(String text, GraphicsContext graphicsContext){
         Text tempText = new Text(text);
         tempText.setFont(graphicsContext.getFont());
         double width = tempText.getLayoutBounds().getWidth();

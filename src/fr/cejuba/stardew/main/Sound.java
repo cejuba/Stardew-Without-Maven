@@ -33,8 +33,9 @@ public class Sound {
         if (mediaPlayer != null) {
             mediaPlayer.play();
             System.out.println("MediaPlayer played");
+        } else {
+            System.out.println("MediaPlayer not initialized");
         }
-        else { System.out.println("MediaPlayer not initialized"); }
     }
 
     public void loopSound() {

@@ -37,7 +37,6 @@ public class TileManager {
             setup(8, "grass00", false);
             setup(9, "grass00", false);
 
-
             setup(10, "grass00", false);
             setup(11, "grass01", false);
             setup(12, "water00", true);
@@ -70,7 +69,6 @@ public class TileManager {
             setup(39, "earth", false);
             setup(40, "wall", true);
             setup(41, "tree", true);
-
 
         } catch (Exception e) {
             System.out.println("Error loading tile image: " + e.getMessage());

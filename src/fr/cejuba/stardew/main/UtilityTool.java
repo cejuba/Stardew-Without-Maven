@@ -5,7 +5,6 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
-
 public class UtilityTool {
 
     public WritableImage scaleImage(Image inputImage, int targetWidth, int targetHeight) {

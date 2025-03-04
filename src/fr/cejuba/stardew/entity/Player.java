@@ -14,7 +14,6 @@ public class Player extends Entity {
     public final int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-
         super(gamePanel); // Call the constructor of the parent class
 
         this.keyHandler = keyHandler;
@@ -23,8 +22,8 @@ public class Player extends Entity {
         screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
 
         solidArea = new Rectangle(8, 16, 32, 32);
-        double solidAreaDefaultX = solidArea.getX();
-        double solidAreaDefaultY = solidArea.getY();
+        solidAreaDefaultX = (int) solidArea.getX();
+        solidAreaDefaultY = (int) solidArea.getY();
 
         setDefaultValues();
         getPlayerImage();
@@ -92,31 +91,18 @@ public class Player extends Entity {
 
             gamePanel.keyHandler.enterPressed = false;
 
-
             if (!collisionActivated) {
                 switch (direction) {
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
                 }
             }
 
             spriteCounter++;
             if (spriteCounter > 10) {
-                if (spriteNumber == 0) {
-                    spriteNumber = 1;
-                } else if (spriteNumber == 1) {
-                    spriteNumber = 0;
-                }
+                spriteNumber = (spriteNumber == 0) ? 1 : 0;
                 spriteCounter = 0;
             }
         }
@@ -130,7 +116,7 @@ public class Player extends Entity {
 
     public void interactNPC(int index) {
         if (index != 999) {
-            if(gamePanel.keyHandler.enterPressed){
+            if (gamePanel.keyHandler.enterPressed) {
                 gamePanel.gameState = gamePanel.dialogueState;
                 gamePanel.npc[index].speak();
             }
@@ -140,36 +126,10 @@ public class Player extends Entity {
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
         switch (direction) {
-            case "up":
-                if (spriteNumber == 0) {
-                    image = up0;
-                } else if (spriteNumber == 1) {
-                    image = up1;
-                }
-                break;
-            case "down":
-                if (spriteNumber == 0) {
-                    image = down0;
-                } else if (spriteNumber == 1) {
-                    image = down1;
-                }
-                break;
-            case "left":
-                if (spriteNumber == 0) {
-                    image = left0;
-                }
-                if (spriteNumber == 1) {
-                    image = left1;
-                }
-                break;
-            case "right":
-                if (spriteNumber == 0) {
-                    image = right0;
-                }
-                if (spriteNumber == 1) {
-                    image = right1;
-                }
-                break;
+            case "up" -> image = (spriteNumber == 0) ? up0 : up1;
+            case "down" -> image = (spriteNumber == 0) ? down0 : down1;
+            case "left" -> image = (spriteNumber == 0) ? left0 : left1;
+            case "right" -> image = (spriteNumber == 0) ? right0 : right1;
         }
         if (image != null) {
             graphicsContext.drawImage(image, screenX, screenY);

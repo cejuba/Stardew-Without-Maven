@@ -36,35 +36,27 @@ public class Entity {
     public int maxLife;
     public int life;
 
-    public Entity(GamePanel gamePanel){
+    public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-
     }
 
     public void setAction() {}
     public void speak() {
-        if(dialogues[dialogueIndex] == null){
+        if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
         }
         gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
 
-        switch (gamePanel.player.direction){
-            case"up" :
-                direction = "down";
-                break;
-            case"down" :
-                direction = "up";
-                break;
-            case"left" :
-                direction = "right";
-                break;
-            case"right" :
-                direction = "left";
-                break;
+        switch (gamePanel.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
         }
     }
-    public void update(){
+
+    public void update() {
         setAction();
 
         collisionActivated = false;
@@ -72,77 +64,37 @@ public class Entity {
         gamePanel.collisionChecker.checkObject(this, false);
         gamePanel.collisionChecker.checkPlayer(this);
 
-
         if (!collisionActivated) {
             switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "left" -> worldX -= speed;
+                case "right" -> worldX += speed;
             }
         }
 
         spriteCounter++;
         if (spriteCounter > 10) {
-            if (spriteNumber == 0) {
-                spriteNumber = 1;
-            } else if (spriteNumber == 1) {
-                spriteNumber = 0;
-            }
+            spriteNumber = (spriteNumber == 0) ? 1 : 0;
             spriteCounter = 0;
         }
     }
-
 
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
         int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
         int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
-        if (    worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
-                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX  &&
+        if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
+                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY ) {
+                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
             switch (direction) {
-                case "up":
-                    if (spriteNumber == 0) {
-                        image = up0;
-                    } else if (spriteNumber == 1) {
-                        image = up1;
-                    }
-                    break;
-                case "down":
-                    if (spriteNumber == 0) {
-                        image = down0;
-                    } else if (spriteNumber == 1) {
-                        image = down1;
-                    }
-                    break;
-                case "left":
-                    if (spriteNumber == 0) {
-                        image = left0;
-                    }
-                    if (spriteNumber == 1) {
-                        image = left1;
-                    }
-                    break;
-                case "right":
-                    if (spriteNumber == 0) {
-                        image = right0;
-                    }
-                    if (spriteNumber == 1) {
-                        image = right1;
-                    }
-                    break;
+                case "up" -> image = (spriteNumber == 0) ? up0 : up1;
+                case "down" -> image = (spriteNumber == 0) ? down0 : down1;
+                case "left" -> image = (spriteNumber == 0) ? left0 : left1;
+                case "right" -> image = (spriteNumber == 0) ? right0 : right1;
             }
             graphicsContext.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
         }
@@ -153,9 +105,7 @@ public class Entity {
         Image scaledImage = null;
         try {
             InputStream is = getClass().getResourceAsStream("/fr/cejuba/stardew/" + imageName + ".png");
-            System.out.println("Loading image: /fr/cejuba/stardew/" + imageName + ".png");
             if (is == null) {
-                System.out.println("Resource not found: " + imageName);
                 throw new RuntimeException("Resource not found: " + imageName);
             }
             Image originalImage = new Image(is);
