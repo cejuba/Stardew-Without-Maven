@@ -74,49 +74,26 @@ public class CollisionChecker {
                 switch (entity.direction) {
                     case "up":
                         entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(object.solidArea.getBoundsInParent())) {
-                            if (object.collision) {
-                                entity.collisionActivated = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
                         break;
                     case "down":
                         entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(object.solidArea.getBoundsInParent())) {
-                            if (object.collision) {
-                                entity.collisionActivated = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
                         break;
                     case "left":
                         entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(object.solidArea.getBoundsInParent())) {
-                            if (object.collision) {
-                                entity.collisionActivated = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
                         break;
                     case "right":
                         entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(object.solidArea.getBoundsInParent())) {
-                            if (object.collision) {
-                                entity.collisionActivated = true;
-                            }
-                            if (player) {
-                                index = i;
-                            }
-                        }
                         break;
                 }
+                if (entity.solidArea.getBoundsInParent().intersects(object.solidArea.getBoundsInParent())) {
+                    if (object.collision) {
+                        entity.collisionActivated = true;
+                    }
+                    if (player) {
+                        index = i;
+                    }
+                }
+
                 entity.solidArea.setX(entity.solidAreaDefaultX);
                 entity.solidArea.setY(entity.solidAreaDefaultY);
                 object.solidArea.setX(object.solidAreaDefaultX);
@@ -143,32 +120,22 @@ public class CollisionChecker {
                 switch (entity.direction) {
                     case "up":
                         entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(targetEntity.solidArea.getBoundsInParent())) {
-                            entity.collisionActivated = true;
-                            index = i;
-                        }
                         break;
                     case "down":
                         entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(targetEntity.solidArea.getBoundsInParent())) {
-                            entity.collisionActivated = true;
-                            index = i;
-                        }
                         break;
                     case "left":
                         entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(targetEntity.solidArea.getBoundsInParent())) {
-                            entity.collisionActivated = true;
-                            index = i;
-                        }
                         break;
                     case "right":
                         entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
-                        if (entity.solidArea.getBoundsInParent().intersects(targetEntity.solidArea.getBoundsInParent())) {
-                            entity.collisionActivated = true;
-                            index = i;
-                        }
                         break;
+                }
+                if (entity.solidArea.getBoundsInParent().intersects(targetEntity.solidArea.getBoundsInParent())) {
+                    if(target[i] != entity){
+                        entity.collisionActivated = true;
+                        index = i;
+                    }
                 }
                 entity.solidArea.setX(entity.solidAreaDefaultX);
                 entity.solidArea.setY(entity.solidAreaDefaultY);
@@ -179,7 +146,10 @@ public class CollisionChecker {
         return index;
     }
 
-    public void checkPlayer(Entity entity){
+    public boolean checkPlayer(Entity entity){
+
+        boolean contactPlayer = false;
+
         entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
         entity.solidArea.setY(entity.worldY + entity.solidArea.getY());
 
@@ -190,32 +160,28 @@ public class CollisionChecker {
         switch (entity.direction){
             case "up" :
                 entity.solidArea.setY(entity.solidArea.getY() - entity.speed);
-                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
-                    entity.collisionActivated = true;
-                }
                 break;
             case "down" :
                 entity.solidArea.setY(entity.solidArea.getY() + entity.speed);
-                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
-                    entity.collisionActivated = true;
-                }
                 break;
             case "left" :
                 entity.solidArea.setX(entity.solidArea.getX() - entity.speed);
-                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
-                    entity.collisionActivated = true;
-                }
                 break;
             case "right" :
                 entity.solidArea.setX(entity.solidArea.getX() + entity.speed);
-                if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
-                    entity.collisionActivated = true;
-                }
                 break;
         }
+
+        if (entity.solidArea.getBoundsInParent().intersects(gamePanel.player.solidArea.getBoundsInParent())) {
+            entity.collisionActivated = true;
+            contactPlayer = true;
+        }
+
         entity.solidArea.setX(entity.solidAreaDefaultX);
         entity.solidArea.setY(entity.solidAreaDefaultY);
         gamePanel.player.solidArea.setX(gamePanel.player.solidAreaDefaultX);
         gamePanel.player.solidArea.setY(gamePanel.player.solidAreaDefaultY);
+
+        return contactPlayer;
     }
 }

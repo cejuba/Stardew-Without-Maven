@@ -10,6 +10,7 @@ public class GreenSlime extends Entity {
     public GreenSlime(GamePanel gamePanel){
         super(gamePanel);
 
+        type = 2;
         name = "Green Slime";
         speed = 1;
         maxLife = 4;

@@ -4,7 +4,11 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+
+import java.awt.*;
 
 public class Player extends Entity {
 
@@ -86,6 +90,10 @@ public class Player extends Entity {
             int npcIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
 
+            // Monster Collision
+            int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
+            contactMonster(monsterIndex);
+
             // Event checker
             gamePanel.eventHandler.checkEvent();
 
@@ -106,6 +114,15 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
         }
+
+        // Invincibility
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 60) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
     public void pickUpObject(int index) {
@@ -123,6 +140,15 @@ public class Player extends Entity {
         }
     }
 
+    public void contactMonster(int index) {
+        if (index != 999) {
+            if(!invincible){
+                life -= 1;
+                invincible = true;
+            }
+        }
+    }
+
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
         switch (direction) {
@@ -131,8 +157,21 @@ public class Player extends Entity {
             case "left" -> image = (spriteNumber == 0) ? left0 : left1;
             case "right" -> image = (spriteNumber == 0) ? right0 : right1;
         }
+
+        if(invincible){
+            graphicsContext.setGlobalAlpha(0.2);
+        }
+
         if (image != null) {
             graphicsContext.drawImage(image, screenX, screenY);
         }
+
+        graphicsContext.setGlobalAlpha(1.0);
+
+        /* Draw player's invicibility : maybe can do with KeyHandler
+        graphicsContext.setFont(new Font("Arial", 26));
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Invincible:" + invincibleCounter, 10, 400);
+         */
     }
 }

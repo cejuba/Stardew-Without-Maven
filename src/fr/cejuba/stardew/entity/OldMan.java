@@ -9,6 +9,7 @@ public class OldMan extends Entity {
     public OldMan(GamePanel gamePanel) {
         super(gamePanel);
 
+        type = 1;
         direction = "down";
         speed = 1;
 
