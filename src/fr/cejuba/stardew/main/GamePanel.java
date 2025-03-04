@@ -41,6 +41,7 @@ public class GamePanel extends Canvas {
     public Player player = new Player(this, keyHandler);
     public Entity[] objects = new Entity[10];
     public Entity[] npc = new Entity[10];
+    public Entity monster[] = new Entity[20];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     public int gameState;
@@ -57,12 +58,13 @@ public class GamePanel extends Canvas {
         player.setKeyHandler(keyHandler);
 
         // Initialize objects and NPCs
-        assetSetter.setObject();
-        assetSetter.setNPC();
     }
 
     public void setupGame() {
         startGameLoop();
+        assetSetter.setObject();
+        assetSetter.setNPC();
+        assetSetter.setMonster();
         // playMusic(0);
     }
 
@@ -115,6 +117,11 @@ public class GamePanel extends Canvas {
                 npcEntity.update();
             }
         }
+        for(int i = 0; i < monster.length; i++){
+            if(monster[i] != null){
+                monster[i].update();
+            }
+        }
     }
 
     public void draw() {
@@ -136,6 +143,12 @@ public class GamePanel extends Canvas {
         for (int i = 0; i < objects.length; i++){
             if(objects[i] != null){
                 entityList.add(objects[i]);
+            }
+        }
+
+        for (int i = 0; i < monster.length; i++){
+            if(monster[i] != null){
+                entityList.add(monster[i]);
             }
         }
 
