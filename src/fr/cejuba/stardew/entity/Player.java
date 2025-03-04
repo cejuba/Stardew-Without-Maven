@@ -2,6 +2,8 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
+import fr.cejuba.stardew.object.shield.WoodenShield;
+import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -44,8 +46,27 @@ public class Player extends Entity {
         speed = 4;
         direction = "up";
 
+        // Player status
+        level = 1;
         maxLife = 6;
-        life = 3;
+        life = maxLife;
+        strength = 1;
+        dexterity = 1;
+        experience = 0;
+        nextLevelExperience = 5;
+        gold = 0;
+        currentWeapon = new Sword(gamePanel);
+        currentShield = new WoodenShield(gamePanel);
+        attack = getAttack();
+        defense = getDefense();
+    }
+
+    public int getAttack() {
+        return strength * currentWeapon.attackValue;
+    }
+
+    public int getDefense() {
+        return dexterity * currentShield.defenseValue;
     }
 
     public void getPlayerImage() {

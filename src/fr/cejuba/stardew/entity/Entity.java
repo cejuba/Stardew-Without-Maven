@@ -47,6 +47,20 @@ public class Entity {
     public int speed;
     public int maxLife;
     public int life;
+    public int level;
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int experience;
+    public int nextLevelExperience;
+    public int gold;
+    public Entity currentWeapon;
+    public Entity currentShield;
+
+    // Item attributes
+    public int attackValue;
+    public int defenseValue;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
