@@ -107,6 +107,7 @@ public class KeyHandler {
             case Q, LEFT -> leftPressed = true;
             case D, RIGHT -> rightPressed = true;
             case T -> showDebugText = !showDebugText;
+            case R -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt");
             case P -> gamePanel.gameState = gamePanel.pauseState;
             case C -> gamePanel.gameState = gamePanel.characterState;
             case ENTER -> enterPressed = true;
