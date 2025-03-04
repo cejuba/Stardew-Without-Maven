@@ -97,6 +97,9 @@ public class UI {
     }
 
     private void drawTitleScreen() {
+        graphicsContext.setFill(Color.rgb(0, 0, 0));
+        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
         if (titleScreenState == 0) {
             graphicsContext.setFill(Color.rgb(0, 0, 0));
             graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
