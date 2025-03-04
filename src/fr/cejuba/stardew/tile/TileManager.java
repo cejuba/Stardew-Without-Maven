@@ -131,7 +131,6 @@ public class TileManager {
         while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
             int tileNumber = mapTileNumber[worldCol][worldRow];
 
-            // Check if the tileNumber is valid
             if (tileNumber >= tiles.length || tiles[tileNumber] == null) {
                 System.out.println("Invalid tile number or uninitialized tile: " + tileNumber);
                 worldCol++;

@@ -10,6 +10,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         GamePanel gamePanel = new GamePanel();
+        gamePanel.setWidth(gamePanel.screenWidth);
+        gamePanel.setHeight(gamePanel.screenHeight);
 
         StackPane root = new StackPane();
         root.getChildren().add(gamePanel);

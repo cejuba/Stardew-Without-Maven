@@ -2,7 +2,6 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.object.Heart;
-import javafx.concurrent.Task;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -32,7 +31,6 @@ public class UI {
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
-        // TBD - Special font
         arial_40 = Font.font("Arial", 40);
         arial_30 = Font.font("Arial", 30);
         arial_80B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 80);
@@ -73,77 +71,59 @@ public class UI {
     }
 
     public void drawPlayerLife() {
+        int x = gamePanel.tileSize / 2;
+        int y = gamePanel.tileSize / 2;
+        int i = 0;
 
-        Task<Void> drawTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                int x = gamePanel.tileSize/2;
-                int y = gamePanel.tileSize/2;
-                int i = 0;
+        while (i < gamePanel.player.maxLife / 2) {
+            graphicsContext.drawImage(heart_blank, x, y);
+            i++;
+            x += gamePanel.tileSize;
+        }
 
-                // Draw blank hearts (Background)
-                while (i < gamePanel.player.maxLife/2){
-                    graphicsContext.drawImage(heart_blank, x, y);
-                    i++;
-                    x += gamePanel.tileSize;
-                }
+        x = gamePanel.tileSize / 2;
+        y = gamePanel.tileSize / 2;
+        i = 0;
 
-                // Reset
-                x = gamePanel.tileSize/2;
-                y = gamePanel.tileSize/2;
-                i = 0;
-
-                // Draw current life
-                while (i < gamePanel.player.life){
-                    graphicsContext.drawImage(heart_half, x, y);
-                    i++;
-                    if(i<gamePanel.player.life){
-                        graphicsContext.drawImage(heart_full, x, y);
-                    }
-                    i++;
-                    x += gamePanel.tileSize;
-                }
-                return null;
+        while (i < gamePanel.player.life) {
+            graphicsContext.drawImage(heart_half, x, y);
+            i++;
+            if (i < gamePanel.player.life) {
+                graphicsContext.drawImage(heart_full, x, y);
             }
-        };
-
-        Thread drawThread = new Thread(drawTask);
-        drawThread.setDaemon(true);
-        drawThread.start();
+            i++;
+            x += gamePanel.tileSize;
+        }
     }
 
     private void drawTitleScreen() {
-        if (titleScreenState == 0){
-            graphicsContext.setFill(Color.rgb(0,0 ,0 ));
+        if (titleScreenState == 0) {
+            graphicsContext.setFill(Color.rgb(0, 0, 0));
             graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
-            // Title Name
             graphicsContext.setFont(arial_96B);
             String text = "STARDEW VALLEY";
             int x = getXCenteredText(text, graphicsContext);
-            int y = gamePanel.tileSize*3;
+            int y = gamePanel.tileSize * 3;
 
-            // Shadow
             graphicsContext.setFill(Color.GRAY);
-            graphicsContext.fillText(text, x+5, y+5);
+            graphicsContext.fillText(text, x + 5, y + 5);
 
-            // Main Color
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
 
-            // Presentation Image
-            x = gamePanel.screenWidth/2 - gamePanel.tileSize;
-            y += gamePanel.tileSize*2;
-            graphicsContext.drawImage(gamePanel.player.down0, x, y, gamePanel.tileSize*2, gamePanel.tileSize*2);
+            x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
+            y += gamePanel.tileSize * 2;
+            graphicsContext.drawImage(gamePanel.player.down0, x, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2);
 
             graphicsContext.setFont(arial_40);
 
             text = "New Game";
             x = getXCenteredText(text, graphicsContext);
-            y += gamePanel.tileSize*4;
+            y += gamePanel.tileSize * 4;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if (commandNumber == 0){
+            if (commandNumber == 0) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
@@ -154,7 +134,7 @@ public class UI {
             y += gamePanel.tileSize;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if (commandNumber == 1){
+            if (commandNumber == 1) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
@@ -165,46 +145,45 @@ public class UI {
             y += gamePanel.tileSize;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if (commandNumber == 2){
+            if (commandNumber == 2) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
             }
-        }
-        else if(titleScreenState == 1){
+        } else if (titleScreenState == 1) {
 
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.setFont(Font.font("Arial", 42));
             String text = "Select your class!";
             int x = getXCenteredText(text, graphicsContext);
-            int y = gamePanel.tileSize*2;
+            int y = gamePanel.tileSize * 2;
             graphicsContext.fillText(text, x, y);
 
             text = "Fighter";
             x = getXCenteredText(text, graphicsContext);
-            y += gamePanel.tileSize*2;
+            y += gamePanel.tileSize * 2;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if(commandNumber == 0){
+            if (commandNumber == 0) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
             }
 
             text = "Thief";
-            y += gamePanel.tileSize*2;
+            y += gamePanel.tileSize * 2;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if(commandNumber == 1){
+            if (commandNumber == 1) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
             }
             text = "Sorcerer";
-            y += gamePanel.tileSize*2;
+            y += gamePanel.tileSize * 2;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if(commandNumber == 2){
+            if (commandNumber == 2) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
@@ -212,16 +191,15 @@ public class UI {
 
             text = "Back";
             x = getXCenteredText(text, graphicsContext);
-            y += gamePanel.tileSize*3;
+            y += gamePanel.tileSize * 3;
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
-            if(commandNumber == 3){
+            if (commandNumber == 3) {
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillText(text, x, y);
                 graphicsContext.fillText(">", x - gamePanel.tileSize, y);
             }
         }
-
     }
 
     public void drawPauseScreen() {
@@ -235,11 +213,11 @@ public class UI {
         graphicsContext.fillText(text, x, y);
     }
 
-    public void drawDialogueScreen(){
-        int x = gamePanel.tileSize*2;
-        int y = gamePanel.tileSize/2;
-        int width = gamePanel.screenWidth - (gamePanel.tileSize*4);
-        int height = gamePanel.tileSize*4;
+    public void drawDialogueScreen() {
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize / 2;
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int height = gamePanel.tileSize * 4;
         drawSubWindows(x, y, width, height);
 
         graphicsContext.setFont(arial_32F);
@@ -247,14 +225,14 @@ public class UI {
         x += gamePanel.tileSize;
         y += gamePanel.tileSize;
 
-        for(String line : currentDialogue.split("\n")){
+        for (String line : currentDialogue.split("\n")) {
             graphicsContext.fillText(line, x, y);
             y += 40;
         }
     }
 
-    public void drawSubWindows(int x, int y, int width, int height){
-        graphicsContext.setFill(Color.rgb(0,0,0, 0.8));
+    public void drawSubWindows(int x, int y, int width, int height) {
+        graphicsContext.setFill(Color.rgb(0, 0, 0, 0.8));
         graphicsContext.fillRoundRect(x, y, width, height, 35, 35);
 
         graphicsContext.setStroke(Color.rgb(255,255,255));

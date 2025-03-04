@@ -29,7 +29,7 @@ public class GamePanel extends Canvas {
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
 
-    int FPS = 60000;
+    int FPS = 60;
 
     // System config
 
@@ -60,14 +60,12 @@ public class GamePanel extends Canvas {
     private AnimationTimer animationTimer;
 
     public GamePanel() {
-        // Initialize variables, setup game, etc.
         this.setFocusTraversable(true);
         this.requestFocus();
         player.setKeyHandler(keyHandler);
     }
 
     public void setupGame(){
-        // Setup game logic
         startGameLoop();
     }
 
@@ -94,7 +92,7 @@ public class GamePanel extends Canvas {
                     lastTime = currentTime;
 
                     if (delta >= 1) {
-                        update();
+                        javafx.application.Platform.runLater(() -> update());
                         delta--;
                     }
                 }
@@ -107,25 +105,24 @@ public class GamePanel extends Canvas {
         gameLogicThread.start();
     }
 
+
     public void update() {
         if (gameState == playState) {
             player.update();
-            // Update NPCs and other entities...
         }
     }
 
-    public void draw() {
+    public void draw(){
         GraphicsContext graphicsContext = this.getGraphicsContext2D();
         graphicsContext.clearRect(0, 0, getWidth(), getHeight());
+        graphicsContext.setFill(Color.BLACK);
 
-        // Draw game elements...
         tileManager.draw(graphicsContext);
         player.draw(graphicsContext);
-        // Draw NPCs and other entities...
         ui.draw(graphicsContext);
     }
 
-        public void playMusic(int i){
+    public void playMusic(int i){
         music.setFile(i);
         music.playSound();
         music.loopSound();
@@ -135,7 +132,7 @@ public class GamePanel extends Canvas {
         music.stopSound();
     }
 
-    public void playSoundEffect(int i){ // SoundEnvironnement
+    public void playSoundEffect(int i){
         soundEffect.setFile(i);
         soundEffect.playSound();
     }
