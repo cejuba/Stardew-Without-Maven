@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.net.FileNameMap;
 import java.text.DecimalFormat;
 
 public class UI {
@@ -67,6 +68,9 @@ public class UI {
         if(gamePanel.gameState == gamePanel.dialogueState){
             drawPlayerLife();
             drawDialogueScreen();
+        }
+        if(gamePanel.gameState == gamePanel.characterState){
+            drawCharacterScreen();
         }
     }
 
@@ -234,6 +238,102 @@ public class UI {
         }
     }
 
+    public void drawCharacterScreen(){
+        final int frameX = gamePanel.tileSize;
+        final int frameY = gamePanel.tileSize;
+        final int frameWidth = gamePanel.tileSize * 5;
+        final int frameHeight = gamePanel.tileSize * 10;
+        drawSubWindows(frameX, frameY, frameWidth, frameHeight);
+
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setFont(new Font("Arial", 32));
+
+        int textX = frameX + 20;
+        int textY = frameY + gamePanel.tileSize;
+        final int lineHeight = 32; // Need to be the same as the font size
+
+        // Names
+        graphicsContext.fillText("Level", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Life", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Strength", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Dexterity", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Attack", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Defense", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Experience", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Next Level", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Gold", textX, textY);
+        textY += lineHeight + 20;
+        graphicsContext.fillText("Weapon", textX, textY);
+        textY += lineHeight + 15;
+        graphicsContext.fillText("Shield", textX, textY);
+
+        // Reset
+        textY = frameY + gamePanel.tileSize;
+
+        // Values
+        int tailX = frameX + frameWidth - 30;
+        String value = String.valueOf(gamePanel.player.level);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.life + "/" + gamePanel.player.maxLife);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.strength);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.dexterity);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.attack);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.defense);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.experience);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.nextLevelExperience);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.gold);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+
+        textY += lineHeight;
+        graphicsContext.drawImage(gamePanel.player.currentWeapon.down1, tailX - gamePanel.tileSize, textY-14);
+
+        textY += gamePanel.tileSize;
+        graphicsContext.drawImage(gamePanel.player.currentShield.down1, tailX - gamePanel.tileSize, textY-14);
+
+
+    }
+
     public void drawSubWindows(int x, int y, int width, int height) {
         graphicsContext.setFill(Color.rgb(0, 0, 0, 0.8));
         graphicsContext.fillRoundRect(x, y, width, height, 35, 35);
@@ -248,6 +348,13 @@ public class UI {
         tempText.setFont(graphicsContext.getFont());
         double width = tempText.getLayoutBounds().getWidth();
         return (int)(((double) gamePanel.screenWidth/2) - (width/2));
+    }
+
+    public int getXAlignedToRightText(String text, int tailX){
+        Text tempText = new Text(text);
+        tempText.setFont(graphicsContext.getFont());
+        double width = tempText.getLayoutBounds().getWidth();
+        return (int)(((double) tailX - width));
     }
 
 }
