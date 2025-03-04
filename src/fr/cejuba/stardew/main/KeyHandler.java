@@ -129,7 +129,30 @@ public class KeyHandler {
     private void characterState(KeyEvent event) {
         switch (event.getCode()) {
             case C -> gamePanel.gameState = gamePanel.playState;
+            case Z, UP -> {
+                if(gamePanel.ui.slotRow !=0) {
+                    gamePanel.ui.slotRow--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case S, DOWN -> {
+                if(gamePanel.ui.slotRow != 3) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.slotRow++;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case Q, LEFT -> {
+                if(gamePanel.ui.slotColumn !=0) {
+                    gamePanel.ui.slotColumn--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case D, RIGHT -> {
+                if (gamePanel.ui.slotColumn != 4) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.slotColumn++;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
         }
     }
-
 }
