@@ -32,11 +32,4 @@ public class Fireball extends Projectile {
         right1 = setup("projectile/fireball_right_2", gamePanel.tileSize, gamePanel.tileSize);
 
     }
-    public void set() {
-
-    }
-
-    public void update(){
-
-    }
 }

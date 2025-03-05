@@ -3,6 +3,7 @@ package fr.cejuba.stardew.entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.WoodenShield;
 import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
@@ -63,6 +64,7 @@ public class Player extends Entity {
         gold = 0;
         currentWeapon = new Sword(gamePanel);
         currentShield = new WoodenShield(gamePanel);
+        projectile = new Fireball(gamePanel);
         attack = getAttack();
         defense = getDefense();
     }
@@ -193,6 +195,12 @@ public class Player extends Entity {
             }
         }
 
+
+        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive){
+            projectile.set(worldX, worldY, direction, true, this);
+            gamePanel.projectileList.add(projectile);
+            gamePanel.playSoundEffect(10);
+        }
         // Invincibility
         if (invincible) {
             invincibleCounter++;

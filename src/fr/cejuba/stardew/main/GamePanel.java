@@ -2,6 +2,7 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
+import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.tile.TileManager;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
@@ -42,7 +43,7 @@ public class GamePanel extends Canvas {
     public Entity[] objects = new Entity[10];
     public Entity[] npc = new Entity[10];
     public Entity monster[] = new Entity[20];
-    ArrayList<Entity> projectileList = new ArrayList<>();
+    public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     public int gameState;
@@ -129,6 +130,16 @@ public class GamePanel extends Canvas {
                 }
             }
         }
+        for(int i = 0; i < projectileList.size(); i++){
+            if(projectileList.get(i) != null){
+                if(projectileList.get(i).alive){
+                    projectileList.get(i).update();
+                }
+                if (!projectileList.get(i).alive) {
+                    projectileList.remove(i);
+                }
+            }
+        }
     }
 
     public void draw() {
@@ -163,6 +174,12 @@ public class GamePanel extends Canvas {
             }
 
             for (Entity value : monster) {
+                if (value != null) {
+                    entityList.add(value);
+                }
+            }
+
+            for (Entity value : projectileList) {
                 if (value != null) {
                     entityList.add(value);
                 }
