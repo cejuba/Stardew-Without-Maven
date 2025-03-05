@@ -106,15 +106,26 @@ public class Player extends Entity {
     public void getPlayerAttackImage() {
         try {
             System.out.println("Loading player attack images");
-
-            attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
-            attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
-            attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
-            attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
-            attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
-            attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
-            attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
-            attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
+            if(currentWeapon.type == type_sword){
+                attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
+            }
+            if(currentWeapon.type == type_axe){
+                attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackDown1 = setup("player/attacking/boy_axe_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
+                attackRight0 = setup("player/attacking/boy_axe_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackRight1 = setup("player/attacking/boy_axe_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackLeft0 = setup("player/attacking/boy_axe_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
+                attackLeft1 = setup("player/attacking/boy_axe_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
+            }
 
             System.out.println("Player attack images loaded successfully");
 
@@ -332,6 +343,7 @@ public class Player extends Entity {
             if(selectedItem.type == type_sword || selectedItem.type == type_axe){
                 currentWeapon = selectedItem;
                 attack = getAttack();
+                getPlayerAttackImage();
             }
             if(selectedItem.type == type_shield){
                 currentShield = selectedItem;
