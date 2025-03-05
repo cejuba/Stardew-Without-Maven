@@ -318,6 +318,8 @@ public class UI {
         textY += lineHeight;
         graphicsContext.fillText("Life", textX, textY);
         textY += lineHeight;
+        graphicsContext.fillText("Mana", textX, textY);
+        textY += lineHeight;
         graphicsContext.fillText("Strength", textX, textY);
         textY += lineHeight;
         graphicsContext.fillText("Dexterity", textX, textY);
@@ -331,7 +333,7 @@ public class UI {
         graphicsContext.fillText("Next Level", textX, textY);
         textY += lineHeight;
         graphicsContext.fillText("Gold", textX, textY);
-        textY += lineHeight + 20;
+        textY += lineHeight + 10;
         graphicsContext.fillText("Weapon", textX, textY);
         textY += lineHeight + 15;
         graphicsContext.fillText("Shield", textX, textY);
@@ -347,6 +349,11 @@ public class UI {
 
         textY += lineHeight;
         value = String.valueOf(gamePanel.player.life + "/" + gamePanel.player.maxLife);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.mana + "/" + gamePanel.player.maxMana);
         textX = getXAlignedToRightText(value, tailX);
         graphicsContext.fillText(value, textX, textY);
 
@@ -387,10 +394,10 @@ public class UI {
 
 
         textY += lineHeight;
-        graphicsContext.drawImage(gamePanel.player.currentWeapon.down1, tailX - gamePanel.tileSize, textY-14);
+        graphicsContext.drawImage(gamePanel.player.currentWeapon.down1, tailX - gamePanel.tileSize, textY-24);
 
         textY += gamePanel.tileSize;
-        graphicsContext.drawImage(gamePanel.player.currentShield.down1, tailX - gamePanel.tileSize, textY-14);
+        graphicsContext.drawImage(gamePanel.player.currentShield.down1, tailX - gamePanel.tileSize, textY-24);
 
 
     }
