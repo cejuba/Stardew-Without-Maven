@@ -276,7 +276,6 @@ public class Player extends Entity {
         if (index != 999) {
             if(!invincible){
                 gamePanel.playSoundEffect(6);
-
                 int damage = gamePanel.monster[index].attack - defense;
                 if(damage < 0){
                     damage = 0;
