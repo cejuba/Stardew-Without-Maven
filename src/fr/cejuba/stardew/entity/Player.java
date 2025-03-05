@@ -237,7 +237,7 @@ public class Player extends Entity {
             solidArea.setHeight(attackArea.getHeight());
 
             int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -294,7 +294,7 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int index) {
+    public void damageMonster(int index, int attack) {
         if (index != 999) {
             System.out.println("Monster hit");
             if(!gamePanel.monster[index].invincible){
