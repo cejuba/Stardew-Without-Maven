@@ -46,6 +46,8 @@ public class Entity {
     public int speed;
     public int maxLife;
     public int life;
+    public int maxMana;
+    public int mana;
     public int level;
     public int strength;
     public int dexterity;
@@ -56,11 +58,13 @@ public class Entity {
     public int gold;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Projectile projectile;
 
     // Item attributes
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int useCost;
 
     // Type
     public int type; // 0 = Player, 1 = NPC, 2 = Monster TODO : Do it in a cleaner way

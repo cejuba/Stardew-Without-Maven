@@ -42,6 +42,7 @@ public class GamePanel extends Canvas {
     public Entity[] objects = new Entity[10];
     public Entity[] npc = new Entity[10];
     public Entity monster[] = new Entity[20];
+    ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     public int gameState;

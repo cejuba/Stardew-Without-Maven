@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 public class KeyHandler {
 
     GamePanel gamePanel;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
 
     // Debug
     boolean showDebugText = false;
@@ -38,6 +38,7 @@ public class KeyHandler {
                 case S, DOWN -> downPressed = false;
                 case Q, LEFT -> leftPressed = false;
                 case D, RIGHT -> rightPressed = false;
+                case F -> shotKeyPressed = false;
             }
         });
     }
@@ -106,6 +107,7 @@ public class KeyHandler {
             case S, DOWN -> downPressed = true;
             case Q, LEFT -> leftPressed = true;
             case D, RIGHT -> rightPressed = true;
+            case F -> shotKeyPressed = true;
             case T -> showDebugText = !showDebugText;
             case R -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt");
             case P -> gamePanel.gameState = gamePanel.pauseState;
