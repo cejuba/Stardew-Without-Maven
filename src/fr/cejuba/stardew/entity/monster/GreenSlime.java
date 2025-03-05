@@ -13,7 +13,7 @@ public class GreenSlime extends Entity {
 
         this.gamePanel = gamePanel;
 
-        type = 2;
+        type = type_monster;
         name = "Green Slime";
         speed = 1;
         maxLife = 4;

@@ -8,6 +8,7 @@ public class Sword extends Entity {
     public Sword(GamePanel gamePanel) {
         super(gamePanel);
 
+        type = type_sword;
         name = "Sword";
         down1 = setup("/object/sword", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 1;

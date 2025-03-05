@@ -153,6 +153,7 @@ public class KeyHandler {
                     gamePanel.playSoundEffect(9);
                 }
             }
+            case ENTER -> gamePanel.player.selectItem();
         }
     }
 }

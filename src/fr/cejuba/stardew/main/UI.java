@@ -384,12 +384,16 @@ public class UI {
 
         // Draw Player's inventory
         for(int i = 0; i < gamePanel.player.inventory.size(); i++){
-            if(i % 5 == 0 && i != 0){
-                slotX = slotXStart;
-                slotY += slotSize;
+            if(gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(i) == gamePanel.player.currentShield){
+                graphicsContext.setFill(Color.GOLD);
+                graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
             graphicsContext.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY);
             slotX += slotSize;
+            if(i % 5 == 4){
+                slotX = slotXStart;
+                slotY += slotSize;
+            }
         }
 
         // Cursor

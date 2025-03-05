@@ -32,10 +32,10 @@ public class Player extends Entity {
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = (int) solidArea.getX();
         solidAreaDefaultY = (int) solidArea.getY();
-
+/*
         attackArea.setWidth(36);
         attackArea.setHeight(36);
-
+ */
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -71,11 +71,11 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Key(gamePanel));
-        inventory.add(new Key(gamePanel));
 
     }
 
     public int getAttack() {
+        attackArea = currentWeapon.attackArea;
         return strength * currentWeapon.attackValue;
     }
 
@@ -320,6 +320,26 @@ public class Player extends Entity {
             gamePanel.gameState = gamePanel.dialogueState;
             gamePanel.ui.currentDialogue = "You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1";
 
+        }
+    }
+
+    public void selectItem(){
+        int itemIndex = gamePanel.ui.getItemIndexInInventory();
+
+        if(itemIndex < inventory.size()){
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if(selectedItem.type == type_sword || selectedItem.type == type_axe){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+            }
+            if(selectedItem.type == type_shield){
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if(selectedItem.type == type_consumable){
+                // TODO:
+            }
         }
     }
     public void draw(GraphicsContext graphicsContext) {

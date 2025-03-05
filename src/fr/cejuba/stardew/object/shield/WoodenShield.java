@@ -7,6 +7,7 @@ public class WoodenShield extends Entity {
     public WoodenShield(GamePanel gamePanel) {
         super(gamePanel);
 
+        type = type_shield;
         name = "Wooden Shield";
         down1 = setup("/object/shield_wood", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 1;
