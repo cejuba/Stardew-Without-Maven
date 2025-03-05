@@ -206,7 +206,6 @@ public class Entity {
         }
         else {
             // End of animation
-            dying = false;
             alive = false;
         }
     }
