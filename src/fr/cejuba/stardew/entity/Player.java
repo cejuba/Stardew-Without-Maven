@@ -196,9 +196,10 @@ public class Player extends Entity {
         }
 
 
-        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive){
+        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30){
             projectile.set(worldX, worldY, direction, true, this);
             gamePanel.projectileList.add(projectile);
+            shotAvalaibleCounter = 0;
             gamePanel.playSoundEffect(10);
         }
         // Invincibility
@@ -208,6 +209,9 @@ public class Player extends Entity {
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(shotAvalaibleCounter < 30){
+            shotAvalaibleCounter++;
         }
     }
 
