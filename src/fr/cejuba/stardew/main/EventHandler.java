@@ -85,8 +85,9 @@ public class EventHandler {
             gamePanel.gameState = gameState;
             gamePanel.player.attackCanceled = true;
             gamePanel.playSoundEffect(2);
-            gamePanel.ui.currentDialogue = "You heal";
-            gamePanel.player.life += 1;
+            gamePanel.ui.currentDialogue = "You heal and regenerate mana";
+            gamePanel.player.life = gamePanel.player.maxLife;
+            gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();
         }
     }

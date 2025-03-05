@@ -55,4 +55,11 @@ public class Projectile extends Entity {
             spriteCounter = 0;
         }
     }
+    public boolean haveRessource(Entity user){
+        return false;
+    }
+
+    public void substractRessource(Entity user){
+        user.mana -= useCost;
+    }
 }

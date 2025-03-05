@@ -198,8 +198,11 @@ public class Player extends Entity {
         }
 
 
-        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30){
+        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30 && projectile.haveRessource(this)){
             projectile.set(worldX, worldY, direction, true, this);
+
+            projectile.substractRessource(this);
+
             gamePanel.projectileList.add(projectile);
             shotAvalaibleCounter = 0;
             gamePanel.playSoundEffect(10);
