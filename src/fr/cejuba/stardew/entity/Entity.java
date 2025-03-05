@@ -124,7 +124,7 @@ public class Entity {
             switch (direction) {
                 case "up" -> worldY -= speed;
                 case "down" -> worldY += speed;
-                case "left'" -> worldX -= speed;
+                case "left" -> worldX -= speed;
                 case "right" -> worldX += speed;
             }
         }
