@@ -408,7 +408,6 @@ public class UI {
         final int descriptionFrameHeight = gamePanel.tileSize * 3;
         final int descriptionFrameX = gamePanel.screenWidth - descriptionFrameWidth - gamePanel.tileSize;
         final int descriptionFrameY = frameHeight + gamePanel.tileSize;
-        drawSubWindows(descriptionFrameX, descriptionFrameY, descriptionFrameWidth, descriptionFrameHeight);
 
         // Description
         int textX = descriptionFrameX + 20;
@@ -418,6 +417,8 @@ public class UI {
         int itemIndex = getItemIndexInInventory();
 
         if(itemIndex< gamePanel.player.inventory.size()){
+            drawSubWindows(descriptionFrameX, descriptionFrameY, descriptionFrameWidth, descriptionFrameHeight);
+
             for(String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")){
                 graphicsContext.setFill(Color.WHITE);
                 graphicsContext.fillText(line, textX, textY);
