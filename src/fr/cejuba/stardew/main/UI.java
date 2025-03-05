@@ -1,7 +1,8 @@
 package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
-import fr.cejuba.stardew.object.Heart;
+import fr.cejuba.stardew.object.stats.Heart;
+import fr.cejuba.stardew.object.stats.ManaCrystal;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -9,7 +10,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
-import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class UI {
     public int slotColumn = 0;
     public int slotRow = 0;
 
-    Image heart_full, heart_half, heart_blank;
+    Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
 
     double playTime;
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -46,6 +46,9 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
+        Entity crystal = new ManaCrystal(gamePanel);
+        crystal_full = crystal.image;
+        crystal_blank = crystal.image2;
     }
 
     public void addMessage(String text) {
@@ -64,14 +67,17 @@ public class UI {
         }
         if(gamePanel.gameState == gamePanel.playState){
             drawPlayerLife();
+            drawPlayerMana();
             drawMessage();
         }
         if(gamePanel.gameState == gamePanel.pauseState){
             drawPlayerLife();
+            drawPlayerMana();
             drawPauseScreen();
         }
         if(gamePanel.gameState == gamePanel.dialogueState){
             drawPlayerLife();
+            drawPlayerMana();
             drawDialogueScreen();
         }
         if(gamePanel.gameState == gamePanel.characterState){
@@ -131,6 +137,29 @@ public class UI {
             x += gamePanel.tileSize;
         }
     }
+
+    public void drawPlayerMana() {
+        int x = gamePanel.tileSize / 2;
+        int y = gamePanel.tileSize * 2;
+        int i = 0;
+
+        while (i < gamePanel.player.maxMana) {
+            graphicsContext.drawImage(crystal_blank, x, y);
+            i++;
+            x += 35;
+        }
+
+        x = gamePanel.tileSize / 2;
+        y = gamePanel.tileSize * 2;
+        i = 0;
+
+        while (i < gamePanel.player.mana) {
+            graphicsContext.drawImage(crystal_full, x, y);
+            i++;
+            x += 35;
+        }
+    }
+
 
     private void drawTitleScreen() {
         graphicsContext.setFill(Color.rgb(0, 0, 0));
