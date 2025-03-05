@@ -116,19 +116,19 @@ public class KeyHandler {
 
     private void pauseState(KeyEvent event) {
         switch (event.getCode()) {
-            case P -> gamePanel.gameState = gamePanel.playState;
+            case ESCAPE, P -> gamePanel.gameState = gamePanel.playState;
         }
     }
 
     private void dialogueState(KeyEvent event) {
         switch (event.getCode()) {
-            case ENTER -> gamePanel.gameState = gamePanel.playState;
+            case ESCAPE, ENTER -> gamePanel.gameState = gamePanel.playState;
         }
     }
 
     private void characterState(KeyEvent event) {
         switch (event.getCode()) {
-            case C -> gamePanel.gameState = gamePanel.playState;
+            case ESCAPE, C -> gamePanel.gameState = gamePanel.playState;
             case Z, UP -> {
                 if(gamePanel.ui.slotRow !=0) {
                     gamePanel.ui.slotRow--;
