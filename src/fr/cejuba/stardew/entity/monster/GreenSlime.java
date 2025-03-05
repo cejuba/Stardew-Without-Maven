@@ -2,6 +2,7 @@ package fr.cejuba.stardew.entity.monster;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.object.projectile.Rock;
 
 import java.util.Random;
 
@@ -21,6 +22,7 @@ public class GreenSlime extends Entity {
         attack = 5;
         defense = 0;
         experience = 2;
+        projectile = new Rock(gamePanel);
 
         solidArea.setX(3);
         solidArea.setY(18);
@@ -61,6 +63,13 @@ public class GreenSlime extends Entity {
             }
 
             actionLockCounter = 0;
+        }
+        // Shot randomly a rock
+        int i = new Random().nextInt(100) + 1;
+        if (i > 99 && !projectile.alive && shotAvalaibleCounter == 30){
+            projectile.set(worldX, worldY, direction, true, this);
+            gamePanel.projectileList.add(projectile);
+            shotAvalaibleCounter = 0;
         }
     }
 

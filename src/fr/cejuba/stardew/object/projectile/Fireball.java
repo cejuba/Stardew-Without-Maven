@@ -30,6 +30,5 @@ public class Fireball extends Projectile {
         left1 = setup("projectile/fireball_left_2", gamePanel.tileSize, gamePanel.tileSize);
         right0 = setup("projectile/fireball_right_1", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("projectile/fireball_right_2", gamePanel.tileSize, gamePanel.tileSize);
-
     }
 }
