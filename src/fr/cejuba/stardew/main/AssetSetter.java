@@ -3,6 +3,7 @@ package fr.cejuba.stardew.main;
 import fr.cejuba.stardew.entity.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenSlime;
 import fr.cejuba.stardew.object.Door;
+import fr.cejuba.stardew.object.Key;
 
 public class AssetSetter {
 
@@ -13,9 +14,18 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gamePanel.objects[0] = new Door(gamePanel);
-        gamePanel.objects[0].worldX = gamePanel.tileSize * 21;
-        gamePanel.objects[0].worldY = gamePanel.tileSize * 22;
+        int i = 0;
+        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 25;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 23;
+        i++;
+        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 21;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 19;
+        i++;
+        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 26;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 21;
     }
 
     public void setNPC() {

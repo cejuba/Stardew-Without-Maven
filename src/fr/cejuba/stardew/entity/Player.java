@@ -235,7 +235,19 @@ public class Player extends Entity {
 
     public void pickUpObject(int index) {
         if (index != 999) {
-            // TBD
+
+            String text;
+
+            if(inventory.size() != maxInventorySize){
+                inventory.add(gamePanel.objects[index]);
+                gamePanel.playSoundEffect(1);
+                text = "Got a " + gamePanel.objects[index].name + "!";
+            }
+            else {
+                text = "You cannot carry any more items.";
+            }
+            gamePanel.ui.addMessage(text);
+            gamePanel.objects[index] = null;
         }
     }
 
