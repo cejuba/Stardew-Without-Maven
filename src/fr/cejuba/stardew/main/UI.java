@@ -403,7 +403,33 @@ public class UI {
         graphicsContext.setLineWidth(3);
         graphicsContext.strokeRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
+        // Description Frame
+        final int descriptionFrameWidth = gamePanel.tileSize * 6;
+        final int descriptionFrameHeight = gamePanel.tileSize * 3;
+        final int descriptionFrameX = gamePanel.screenWidth - descriptionFrameWidth - gamePanel.tileSize;
+        final int descriptionFrameY = frameHeight + gamePanel.tileSize;
+        drawSubWindows(descriptionFrameX, descriptionFrameY, descriptionFrameWidth, descriptionFrameHeight);
+
+        // Description
+        int textX = descriptionFrameX + 20;
+        int textY = descriptionFrameY + gamePanel.tileSize;
+        graphicsContext.setFont(new Font("Arial", 28F));
+
+        int itemIndex = getItemIndexInInventory();
+
+        if(itemIndex< gamePanel.player.inventory.size()){
+            for(String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")){
+                graphicsContext.setFill(Color.WHITE);
+                graphicsContext.fillText(line, textX, textY);
+                textY += 32;
+            }
+        }
     }
+
+    public int getItemIndexInInventory(){
+        return slotColumn + slotRow * 5;
+    }
+
     public void drawSubWindows(int x, int y, int width, int height) {
         graphicsContext.setFill(Color.rgb(0, 0, 0, 0.8));
         graphicsContext.fillRoundRect(x, y, width, height, 35, 35);
