@@ -4,6 +4,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
+import fr.cejuba.stardew.object.projectile.Rock;
 import fr.cejuba.stardew.object.shield.WoodenShield;
 import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
@@ -59,6 +60,7 @@ public class Player extends Entity {
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
+        ammo = 10;
         strength = 1;
         dexterity = 1;
         experience = 0;
@@ -67,6 +69,7 @@ public class Player extends Entity {
         currentWeapon = new Sword(gamePanel);
         currentShield = new WoodenShield(gamePanel);
         projectile = new Fireball(gamePanel);
+        // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
         attack = getAttack();
         defense = getDefense();
     }

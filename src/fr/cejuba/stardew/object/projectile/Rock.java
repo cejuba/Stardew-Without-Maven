@@ -1,5 +1,6 @@
 package fr.cejuba.stardew.object.projectile;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.main.GamePanel;
 
@@ -30,5 +31,13 @@ public class Rock extends Projectile {
         left1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         right0 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public boolean haveRessource(Entity user){
+        return user.ammo >= useCost; // TODO : change ammo to mana to have a spell
+    }
+
+    public void substractRessource(Entity user){
+        user.ammo -= useCost; // TODO : change ammo to mana to have a spell
     }
 }
