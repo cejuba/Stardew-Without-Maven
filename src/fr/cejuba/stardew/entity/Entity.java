@@ -215,6 +215,8 @@ public class Entity {
         graphicsContext.setGlobalAlpha(alphaValue);
     }
 
+    public void use(Entity entity) {}
+
     public Image setup(String imageName, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         Image scaledImage = null;

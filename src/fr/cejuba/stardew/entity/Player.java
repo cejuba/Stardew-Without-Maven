@@ -350,7 +350,9 @@ public class Player extends Entity {
                 defense = getDefense();
             }
             if(selectedItem.type == type_consumable){
-                // TODO:
+                System.out.println("Potion used");
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
             }
         }
     }

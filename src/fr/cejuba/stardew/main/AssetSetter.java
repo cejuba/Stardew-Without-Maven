@@ -4,6 +4,7 @@ import fr.cejuba.stardew.entity.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenSlime;
 import fr.cejuba.stardew.object.Door;
 import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
 import fr.cejuba.stardew.object.weapon.Axe;
 
@@ -34,9 +35,12 @@ public class AssetSetter {
         gamePanel.objects[i].worldY = gamePanel.tileSize * 21;
         i++;
         gamePanel.objects[i] = new BlueShield(gamePanel);
-        gamePanel.objects[i].worldX = gamePanel.tileSize * 35
-        ;
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 35;
         gamePanel.objects[i].worldY = gamePanel.tileSize * 21;
+        i++;
+        gamePanel.objects[i] = new RedPotion(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 22;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 27;
     }
 
     public void setNPC() {
