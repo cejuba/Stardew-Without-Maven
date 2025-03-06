@@ -6,7 +6,6 @@ import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.WoodenShield;
 import fr.cejuba.stardew.object.weapon.Axe;
-import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -209,7 +208,7 @@ public class Player extends Entity {
         if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30 && projectile.haveRessource(this)){
             projectile.set(worldX, worldY, direction, true, this);
 
-            projectile.substractRessource(this);
+            projectile.subtractRessource(this);
 
             gamePanel.projectileList.add(projectile);
             shotAvalaibleCounter = 0;

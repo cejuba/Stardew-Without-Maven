@@ -3,6 +3,7 @@ package fr.cejuba.stardew.object.projectile;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.main.GamePanel;
+import javafx.scene.paint.Color;
 
 public class Rock extends Projectile {
     GamePanel gamePanel;
@@ -37,7 +38,24 @@ public class Rock extends Projectile {
         return user.ammo >= useCost; // TODO : change ammo to mana to have a spell
     }
 
-    public void substractRessource(Entity user){
+    public void subtractRessource(Entity user){
         user.ammo -= useCost; // TODO : change ammo to mana to have a spell
     }
+
+    public Color getParticleColor() {
+        return Color.rgb(40,50,0);
+    }
+
+    public int getParticleSize() {
+        return 10z;
+    }
+
+    public int getParticleSpeed() {
+        return 1;
+    }
+
+    public int getParticleMaxLife() {
+        return 20;
+    }
+
 }
