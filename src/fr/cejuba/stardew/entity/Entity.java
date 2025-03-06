@@ -231,6 +231,19 @@ public class Entity {
 
     public void use(Entity entity) {}
 
+    public void checkDrop(){}
+
+    public void dropItem(Entity droppedItem){
+        for(int i = 0; i < gamePanel.objects.length; i++){
+            if(gamePanel.objects[i] == null){
+                gamePanel.objects[i] = droppedItem;
+                gamePanel.objects[i].worldX = worldX;
+                gamePanel.objects[i].worldY = worldY;
+                break;
+            }
+        }
+    }
+
     public Image setup(String imageName, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         Image scaledImage = null;

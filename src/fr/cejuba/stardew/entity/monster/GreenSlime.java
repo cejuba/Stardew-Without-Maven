@@ -2,7 +2,10 @@ package fr.cejuba.stardew.entity.monster;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.object.BronzeCoin;
 import fr.cejuba.stardew.object.projectile.Rock;
+import fr.cejuba.stardew.object.stats.Heart;
+import fr.cejuba.stardew.object.stats.ManaCrystal;
 
 import java.util.Random;
 
@@ -74,10 +77,21 @@ public class GreenSlime extends Entity {
     }
 
     public void damageReaction() {
-
         // When the monster is hit it run away
         actionLockCounter = 0;
         direction = gamePanel.player.direction;
+    }
 
+    public void checkDrop(){
+        int i = new Random().nextInt(100) + 1;
+        if(i < 50){
+            dropItem(new BronzeCoin(gamePanel));
+        }
+        else if(i < 75){
+            dropItem(new Heart(gamePanel));
+        }
+        else{
+            dropItem(new ManaCrystal(gamePanel));
+        }
     }
 }

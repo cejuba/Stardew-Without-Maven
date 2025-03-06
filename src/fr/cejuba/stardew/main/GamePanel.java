@@ -40,9 +40,9 @@ public class GamePanel extends Canvas {
     public UI ui = new UI(this);
 
     public Player player = new Player(this, keyHandler);
-    public Entity[] objects = new Entity[10];
+    public Entity[] objects = new Entity[20];
     public Entity[] npc = new Entity[10];
-    public Entity monster[] = new Entity[20];
+    public Entity[] monster = new Entity[20];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -52,8 +52,6 @@ public class GamePanel extends Canvas {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
-
-    private AnimationTimer animationTimer;
 
     public GamePanel() {
         this.setFocusTraversable(true);
@@ -72,21 +70,36 @@ public class GamePanel extends Canvas {
     }
 
     private void startGameLoop() {
-        animationTimer = new AnimationTimer() {
-            private double drawInterval = 1_000_000_000/FPS;
+        /*
+                if (counter <= 1) {
+
+                    lastTime = now;
+                    return;
+                }
+
+                long elapsedTime = now - lastTime;
+                if (elapsedTime >= 1_000_000_000 / FPS) {
+                    if (gameState == playState) {
+                        update();
+                    }
+                    draw();
+                    lastTime = now;
+                }
+                */
+        AnimationTimer animationTimer = new AnimationTimer() {
+            private final double drawInterval = (double) 1_000_000_000 / FPS;
             private double delta = 0;
             private long lastTime = System.nanoTime();
-            private long currentTime;
 
             @Override
             public void handle(long now) {
 
-                currentTime = System.nanoTime();
+                long currentTime = System.nanoTime();
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
 
-                if(delta >=1){
-                    if(gameState==playState){
+                if (delta >= 1) {
+                    if (gameState == playState) {
                         update();
                     }
                     draw();
@@ -126,6 +139,7 @@ public class GamePanel extends Canvas {
                     monster[i].update();
                 }
                 if (!monster[i].alive) {
+                    monster[i].checkDrop();
                     monster[i] = null;
                 }
             }
