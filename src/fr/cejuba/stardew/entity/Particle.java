@@ -21,14 +21,17 @@ public class Particle extends Entity {
         this.yd = yd;
 
         life = maxLife;
-        worldX = generator.worldX;
-        worldY = generator.worldY;
+        int offset = (gamePanel.tileSize / 2) - (size / 2);
+        worldX = generator.worldX + offset;
+        worldY = generator.worldY + offset;
     }
     public void update() {
-        if (life > 0) {
-            life--;
-            worldX += xd * speed;
-            worldY += yd * speed;
+        life--;
+        worldX += xd * speed;
+        worldY += yd * speed;
+
+        if (life <= 0) {
+            alive = false;
         }
     }
 
