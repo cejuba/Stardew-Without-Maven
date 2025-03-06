@@ -28,7 +28,7 @@ public class Particle extends Entity {
     public void update() {
         life--;
 
-        if (life < maxLife/3) {
+        if (life < maxLife/3) { // TODO : patch because gravity isn't applied to particles
             yd++;
         }
         worldX += xd * speed;

@@ -47,7 +47,7 @@ public class Rock extends Projectile {
     }
 
     public int getParticleSize() {
-        return 10z;
+        return 10;
     }
 
     public int getParticleSpeed() {

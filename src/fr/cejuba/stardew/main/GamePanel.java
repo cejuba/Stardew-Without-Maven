@@ -7,8 +7,10 @@ import fr.cejuba.stardew.tile.interactive.InteractiveTile;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,14 +20,25 @@ public class GamePanel extends Canvas {
     final int originalTileSize = 16;
     final int scale = 3;
 
+    // Screen settings
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 32;
-    public final int maxScreenRow = 16;
-    public final int screenWidth = maxScreenCol * tileSize;
-    public final int screenHeight = maxScreenRow * tileSize;
+    public final int maxScreenCol = 27;
+    public final int maxScreenRow = 15;
+    public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
+    public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
+    // Fullscreen settings
+    int screenWidth2 = screenWidth;
+    int screenHeight2 = screenHeight;
+
+    WritableImage tempScreen;
+    GraphicsContext graphicsContext;
+    private Stage stage;
+
+    // World settings
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
+
 
     int FPS = 60;
 
@@ -55,7 +68,8 @@ public class GamePanel extends Canvas {
     public final int dialogueState = 3;
     public final int characterState = 4;
 
-    public GamePanel() {
+    public GamePanel(Stage stage) {
+        this.stage = stage;
         this.setFocusTraversable(true);
         this.requestFocus();
         player.setKeyHandler(keyHandler);
@@ -70,8 +84,18 @@ public class GamePanel extends Canvas {
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
         // playMusic(0);
+
+        tempScreen = new WritableImage(screenWidth, screenHeight);
+        graphicsContext = this.getGraphicsContext2D();
+        setFullScreen();
     }
 
+    public void setFullScreen(){
+        stage.setFullScreen(true);
+
+        screenWidth2 = (int) stage.getWidth();
+        screenHeight2 = (int) stage.getHeight();
+    }
     private void startGameLoop() {
         /*
                 if (counter <= 1) {
@@ -105,7 +129,8 @@ public class GamePanel extends Canvas {
                     if (gameState == playState) {
                         update();
                     }
-                    draw();
+                    drawTempScreen();
+                    drawFinalScreen();
                     delta--;
                 }
             }
@@ -155,12 +180,7 @@ public class GamePanel extends Canvas {
         }
     }
 
-    public void draw() {
-        GraphicsContext graphicsContext = this.getGraphicsContext2D();
-        graphicsContext.clearRect(0, 0, getWidth(), getHeight());
-        graphicsContext.setFill(Color.BLACK);
-        graphicsContext.fillRect(0, 0, getWidth(), getHeight());
-
+    public void drawTempScreen(){
         long drawStartTime = 0;
 
         if(keyHandler.showDebugText){
@@ -223,7 +243,7 @@ public class GamePanel extends Canvas {
         }
         // TODO: Gestion d'affichage l'un au dessus de l'autre
 
-        if(keyHandler.showDebugText){
+        if(keyHandler.showDebugText) {
 
             // Became Obsolete because of the new draw method in a separate thread TODO: Change the debug text to the new draw method
             long drawEndTime = System.nanoTime();
@@ -239,16 +259,19 @@ public class GamePanel extends Canvas {
             y += lineHeight;
             graphicsContext.fillText("WorldY: " + player.worldY, x, y);
             y += lineHeight;
-            graphicsContext.fillText("Column: " + Math.round((player.worldX + player.solidArea.getX())/tileSize), x, y);
+            graphicsContext.fillText("Column: " + Math.round((player.worldX + player.solidArea.getX()) / tileSize), x, y);
             y += lineHeight;
-            graphicsContext.fillText("Row: " + Math.round((player.worldY + player.solidArea.getY())/tileSize), x, y);
+            graphicsContext.fillText("Row: " + Math.round((player.worldY + player.solidArea.getY()) / tileSize), x, y);
             y += lineHeight;
             graphicsContext.fillText("Draw Time: " + drawTime / 1_000_000 + "ms", x, y);
             //System.out.println("Draw Time: " + drawTime / 1_000_000 + "ms");
-
         }
     }
 
+    public void drawFinalScreen(){
+        GraphicsContext graphicsContext = this.getGraphicsContext2D();
+        graphicsContext.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2);
+    }
     public void playMusic(int i) {
         music.setFile(i);
         music.playSound();
