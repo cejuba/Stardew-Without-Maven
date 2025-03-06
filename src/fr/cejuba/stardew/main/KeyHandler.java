@@ -87,7 +87,6 @@ public class KeyHandler {
                         case 0 -> {
                             System.out.println("Need to do fighter stuff");
                             gamePanel.gameState = gamePanel.playState;
-                            gamePanel.playMusic(0);
                         }
                         case 1 -> {
                             System.out.println("Need to do thief stuff");
@@ -165,8 +164,9 @@ public class KeyHandler {
 
     private void optionState(KeyEvent event) {
         int maxCommandNumber = 0;
-        if (gamePanel.ui.subState == 0) {
-            maxCommandNumber = 5;
+        switch(gamePanel.ui.subState){
+            case 0 -> maxCommandNumber = 5;
+            case 3 -> maxCommandNumber = 1;
         }
         switch (event.getCode()) {
 

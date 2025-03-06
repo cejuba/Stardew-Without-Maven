@@ -485,6 +485,8 @@ public class UI {
         switch(subState){
             case 0 -> options_top(frameX, frameY);
             case 1 -> options_fullScreenNotification(frameX, frameY);
+            case 2 -> options_control(frameX, frameY);
+            case 3 -> options_endGameConfirmation(frameX, frameY);
         }
 
         gamePanel.keyHandler.enterPressed = false;
@@ -541,6 +543,10 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 3){
             graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 2;
+                commandNumber = 0;
+            }
         }
 
         // End Game
@@ -550,6 +556,10 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 4){
             graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 3;
+                commandNumber = 0;
+            }
         }
 
         // Back
@@ -559,6 +569,10 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 5){
             graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                gamePanel.gameState = gamePanel.playState;
+                commandNumber = 0;
+            }
         }
 
         // Full Screen Check Box
@@ -603,8 +617,104 @@ public class UI {
             graphicsContext.fillText(">", textX - 25, textY);
             if(gamePanel.keyHandler.enterPressed){
                 subState = 0;
+                commandNumber = 3;
             }
         }
+    }
+
+    public void options_control(int frameX, int frameY) {
+        int textX, textY;
+
+        // Title
+        String text = "Control";
+        textX = getXCenteredText(text, graphicsContext);
+        textY = frameY + gamePanel.tileSize;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+
+        textX = frameX + gamePanel.tileSize;
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Move", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Confirm/Attack", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Shoot/Cast", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Character Screen", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Pause", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Options", textX, textY);
+
+        textX = frameX + gamePanel.tileSize * 7;
+        textY = frameY + gamePanel.tileSize * 2;
+        graphicsContext.fillText("Arrow Keys/ZQSD", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Enter", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("F", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("C", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("P", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("ESCAPE", textX, textY);
+
+        // Back
+
+        textX = frameX + gamePanel.tileSize;
+        textY = frameY + gamePanel.tileSize * 9;
+        graphicsContext.fillText("Back", textX, textY);
+        if(commandNumber == 0){
+            graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 0;
+                commandNumber = 3;
+            }
+        }
+    }
+
+    public void options_endGameConfirmation(int frameX, int frameY){
+        int textX = frameX + gamePanel.tileSize;
+        int textY = frameY + gamePanel.tileSize * 3;
+
+        currentDialogue = "Quit the game and \nreturn to title screen?";
+
+        for(String line : currentDialogue.split("\n")){
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(line, textX, textY);
+            textY += 32;
+        }
+
+        // Yes
+        String text = "Yes";
+        textX = getXCenteredText(text, graphicsContext);
+        textY += gamePanel.tileSize * 3;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 0){
+            graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 0;
+                gamePanel.ui.titleScreenState = 0;
+                gamePanel.gameState = gamePanel.titleState;
+            }
+        }
+
+        // No
+        text = "No";
+        textX = getXCenteredText(text, graphicsContext);
+        textY += gamePanel.tileSize * 3;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 1){
+            graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 0;
+                commandNumber = 4;
+            }
+        }
+
     }
 
     public int getItemIndexInInventory(){

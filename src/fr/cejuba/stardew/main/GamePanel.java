@@ -85,7 +85,7 @@ public class GamePanel extends Canvas {
         assetSetter.setNPC();
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
-        // playMusic(0);
+        playMusic(0);
 
         tempScreen = new WritableImage(screenWidth, screenHeight);
         graphicsContext = this.getGraphicsContext2D();
