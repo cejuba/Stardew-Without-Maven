@@ -198,7 +198,7 @@ public class Entity {
             if(dying){
                 dyingAnimation(graphicsContext);
             }
-            graphicsContext.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
+            graphicsContext.drawImage(image, screenX, screenY);
             changeAlpha(graphicsContext, 1);
         }
     }
