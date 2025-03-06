@@ -7,6 +7,8 @@ import fr.cejuba.stardew.object.Door;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
+import fr.cejuba.stardew.object.stats.Heart;
+import fr.cejuba.stardew.object.stats.ManaCrystal;
 import fr.cejuba.stardew.object.weapon.Axe;
 
 public class AssetSetter {
@@ -42,6 +44,14 @@ public class AssetSetter {
         gamePanel.objects[i] = new RedPotion(gamePanel);
         gamePanel.objects[i].worldX = gamePanel.tileSize * 22;
         gamePanel.objects[i].worldY = gamePanel.tileSize * 27;
+        i++;
+        gamePanel.objects[i] = new Heart(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 22;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 29;
+        i++;
+        gamePanel.objects[i] = new ManaCrystal(gamePanel);
+        gamePanel.objects[i].worldX = gamePanel.tileSize * 22;
+        gamePanel.objects[i].worldY = gamePanel.tileSize * 31;
     }
 
     public void setNPC() {
