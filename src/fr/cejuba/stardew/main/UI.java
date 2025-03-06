@@ -27,6 +27,7 @@ public class UI {
     public int titleScreenState = 0;
     public int slotColumn = 0;
     public int slotRow = 0;
+    int subState = 0;
 
     Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
 
@@ -83,6 +84,9 @@ public class UI {
         if(gamePanel.gameState == gamePanel.characterState){
             drawCharacterScreen();
             drawInventory();
+        }
+        if(gamePanel.gameState == gamePanel.optionState){
+            drawOptionScreen();
         }
     }
 
@@ -159,7 +163,6 @@ public class UI {
             x += 35;
         }
     }
-
 
     private void drawTitleScreen() {
         graphicsContext.setFill(Color.rgb(0, 0, 0));
@@ -467,6 +470,117 @@ public class UI {
         }
     }
 
+    public void drawOptionScreen(){
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.setFont(new Font("Arial", 32F));
+
+        // Sub Window
+
+        int frameWidth = gamePanel.screenWidth / 2;
+        int frameHeight = gamePanel.screenHeight - gamePanel.tileSize * 2;
+        int frameX =  frameWidth - (gamePanel.screenWidth - frameWidth) / 2;
+        int frameY = gamePanel.tileSize;
+        drawSubWindows(frameX, frameY, frameWidth, frameHeight);
+
+        switch(subState){
+            case 0 -> options_top(frameX, frameY);
+        }
+    }
+
+    public void options_top(int frameX, int frameY){
+
+        int textX;
+        int textY;
+
+        // Title
+        String text = "Options";
+        textX = getXCenteredText(text, graphicsContext);
+        textY = frameY + gamePanel.tileSize;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+
+        // Full Screen On/Off
+        textX = frameX + gamePanel.tileSize;
+        textY += gamePanel.tileSize * 2;
+        text = "Full Screen";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 0){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // Music
+        textY += gamePanel.tileSize;
+        text = "Music";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 1){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // SoundEnvironment
+        textY += gamePanel.tileSize;
+        text = "Sound Environment";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 2){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // Control
+        textY += gamePanel.tileSize;
+        text = "Control";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 3){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // End Game
+        textY += gamePanel.tileSize;
+        text = "End Game";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 4){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // Back
+        textY += gamePanel.tileSize * 2;
+        text = "Back";
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, textX, textY);
+        if(commandNumber == 5){
+            graphicsContext.setFill(Color.RED);
+            graphicsContext.fillText(text, textX, textY);
+            graphicsContext.fillText(">", textX - 25, textY);
+        }
+
+        // Full Screen Check Box
+        textX = frameX + gamePanel.tileSize * 10;
+        textY = (int) (frameY + gamePanel.tileSize * 2.5);
+        graphicsContext.setLineWidth(3);
+        graphicsContext.strokeRect(textX, textY, 24, 24);
+
+        // Music Volume
+        textY += gamePanel.tileSize;
+        graphicsContext.strokeRect(textX, textY, 120, 24);
+
+        // Sound Environment Volume
+        textY += gamePanel.tileSize;
+        graphicsContext.strokeRect(textX, textY, 120, 24);
+
+    }
     public int getItemIndexInInventory(){
         return slotColumn + slotRow * 5;
     }

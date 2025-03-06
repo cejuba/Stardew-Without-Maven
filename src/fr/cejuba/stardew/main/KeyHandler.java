@@ -28,6 +28,8 @@ public class KeyHandler {
                 dialogueState(event);
             } else if (gamePanel.gameState == gamePanel.characterState) {
                 characterState(event);
+            } else if (gamePanel.gameState == gamePanel.optionState) {
+                optionState(event);
             }
         });
 
@@ -112,6 +114,7 @@ public class KeyHandler {
             case R -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt");
             case P -> gamePanel.gameState = gamePanel.pauseState;
             case C -> gamePanel.gameState = gamePanel.characterState;
+            case ESCAPE -> gamePanel.gameState = gamePanel.optionState;
             case ENTER -> enterPressed = true;
         }
     }
@@ -156,6 +159,34 @@ public class KeyHandler {
                 }
             }
             case ENTER -> gamePanel.player.selectItem();
+        }
+    }
+
+    private void optionState(KeyEvent event) {
+        int maxCommandNumber = 0;
+        if (gamePanel.ui.subState == 0) {
+            maxCommandNumber = 5;
+        }
+        switch (event.getCode()) {
+
+
+            case ESCAPE -> gamePanel.gameState = gamePanel.playState;
+            case ENTER -> enterPressed = true;
+            case Z, UP -> {
+                gamePanel.ui.commandNumber--;
+                gamePanel.playSoundEffect(9);
+                if (gamePanel.ui.commandNumber < 0) {
+                    gamePanel.ui.commandNumber = maxCommandNumber;
+                }
+            }
+            case S, DOWN -> {
+                gamePanel.ui.commandNumber++;
+                gamePanel.playSoundEffect(9);
+                if (gamePanel.ui.commandNumber > maxCommandNumber) {
+                    gamePanel.ui.commandNumber = 0;
+                }
+            }
+
         }
     }
 }
