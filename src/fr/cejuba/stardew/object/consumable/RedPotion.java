@@ -5,11 +5,11 @@ import fr.cejuba.stardew.main.GamePanel;
 
 public class RedPotion extends Entity {
     GamePanel gamePanel;
-    int value = 5;
 
     public RedPotion(GamePanel gamePanel) {
         super(gamePanel);
 
+        value = 5;
         this.gamePanel = gamePanel;
 
         type = type_consumable;

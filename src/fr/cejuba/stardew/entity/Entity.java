@@ -63,6 +63,7 @@ public class Entity {
     public Projectile projectile;
 
     // Item attributes
+    public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
@@ -77,6 +78,7 @@ public class Entity {
     public final int type_axe = 4;
     public final int type_shield = 5;
     public final int type_consumable = 6;
+    public final int type_pickUpOnly = 7;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

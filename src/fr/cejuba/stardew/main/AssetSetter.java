@@ -2,6 +2,7 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenSlime;
+import fr.cejuba.stardew.object.BronzeCoin;
 import fr.cejuba.stardew.object.Door;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
@@ -18,15 +19,15 @@ public class AssetSetter {
 
     public void setObject() {
         int i = 0;
-        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i] = new BronzeCoin(gamePanel);
         gamePanel.objects[i].worldX = gamePanel.tileSize * 25;
         gamePanel.objects[i].worldY = gamePanel.tileSize * 23;
         i++;
-        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i] = new BronzeCoin(gamePanel);
         gamePanel.objects[i].worldX = gamePanel.tileSize * 21;
         gamePanel.objects[i].worldY = gamePanel.tileSize * 19;
         i++;
-        gamePanel.objects[i] = new Key(gamePanel);
+        gamePanel.objects[i] = new BronzeCoin(gamePanel);
         gamePanel.objects[i].worldX = gamePanel.tileSize * 26;
         gamePanel.objects[i].worldY = gamePanel.tileSize * 21;
         i++;
