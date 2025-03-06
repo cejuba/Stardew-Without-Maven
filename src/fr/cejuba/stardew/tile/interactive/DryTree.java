@@ -26,6 +26,6 @@ public class DryTree extends InteractiveTile {
     }
 
     public InteractiveTile getDestroyedForm(){
-        return new Trunk(gamePanel, worldX/gamePanel.tileSize, worldY/gamePanel.tileSize);
+        return new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
     }
 }
