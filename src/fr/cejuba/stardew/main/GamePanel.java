@@ -33,6 +33,7 @@ public class GamePanel extends Canvas {
 
     WritableImage tempScreen;
     GraphicsContext graphicsContext;
+    public boolean fullScreenOn = false;
     private Stage stage;
 
     // World settings
@@ -96,6 +97,7 @@ public class GamePanel extends Canvas {
 
         screenWidth2 = (int) stage.getWidth();
         screenHeight2 = (int) stage.getHeight();
+
     }
     private void startGameLoop() {
         /*

@@ -484,7 +484,10 @@ public class UI {
 
         switch(subState){
             case 0 -> options_top(frameX, frameY);
+            case 1 -> options_fullScreenNotification(frameX, frameY);
         }
+
+        gamePanel.keyHandler.enterPressed = false;
     }
 
     public void options_top(int frameX, int frameY){
@@ -506,9 +509,11 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 0){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
+                subState = 1;
+            }
         }
 
         // Music
@@ -517,8 +522,6 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 1){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
@@ -528,8 +531,6 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 2){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
@@ -539,8 +540,6 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 3){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
@@ -550,8 +549,6 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 4){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
@@ -561,8 +558,6 @@ public class UI {
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 5){
-            graphicsContext.setFill(Color.RED);
-            graphicsContext.fillText(text, textX, textY);
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
@@ -571,16 +566,47 @@ public class UI {
         textY = (int) (frameY + gamePanel.tileSize * 2.5);
         graphicsContext.setLineWidth(3);
         graphicsContext.strokeRect(textX, textY, 24, 24);
+        if(gamePanel.fullScreenOn){
+            graphicsContext.fillRect(textX, textY, 24, 24);
+        }
 
         // Music Volume
         textY += gamePanel.tileSize;
         graphicsContext.strokeRect(textX, textY, 120, 24);
+        int volumeWidth = 24 * gamePanel.music.volumeScale;
+        graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
         // Sound Environment Volume
         textY += gamePanel.tileSize;
         graphicsContext.strokeRect(textX, textY, 120, 24);
+        volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
+        graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
     }
+    private void options_fullScreenNotification(int frameX, int frameY) {
+        int textX = frameX + gamePanel.tileSize;
+        int textY = frameY + gamePanel.tileSize * 2;
+
+        currentDialogue = "The change will take effect after \n restarting the game.";
+        for (String line : currentDialogue.split("\n")){
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(line, textX, textY);
+            textY += 32;
+        }
+
+        // Back
+
+        textY += gamePanel.tileSize * 2;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Back", textX, textY);
+        if(commandNumber == 0){
+            graphicsContext.fillText(">", textX - 25, textY);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 0;
+            }
+        }
+    }
+
     public int getItemIndexInInventory(){
         return slotColumn + slotRow * 5;
     }

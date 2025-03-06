@@ -87,6 +87,7 @@ public class KeyHandler {
                         case 0 -> {
                             System.out.println("Need to do fighter stuff");
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playMusic(0);
                         }
                         case 1 -> {
                             System.out.println("Need to do thief stuff");
@@ -184,6 +185,33 @@ public class KeyHandler {
                 gamePanel.playSoundEffect(9);
                 if (gamePanel.ui.commandNumber > maxCommandNumber) {
                     gamePanel.ui.commandNumber = 0;
+                }
+            }
+            case Q, LEFT -> {
+                if (gamePanel.ui.subState == 0) {
+                    if(gamePanel.ui.commandNumber == 1 && gamePanel.music.volumeScale > 0) {
+                        gamePanel.music.volumeScale--;
+                        gamePanel.music.checkVolume();
+                        gamePanel.playSoundEffect(9);
+                    }
+                    if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale > 0) {
+                        gamePanel.soundEffect.volumeScale--;
+                        gamePanel.playSoundEffect(9);
+                    }
+                }
+
+            }
+            case D, RIGHT -> {
+                if (gamePanel.ui.subState == 0) {
+                    if(gamePanel.ui.commandNumber == 1 && gamePanel.music.volumeScale < 5) {
+                        gamePanel.music.volumeScale++;
+                        gamePanel.music.checkVolume();
+                        gamePanel.playSoundEffect(9);
+                    }
+                    if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale < 5) {
+                        gamePanel.soundEffect.volumeScale++;
+                        gamePanel.playSoundEffect(9);
+                    }
                 }
             }
 
