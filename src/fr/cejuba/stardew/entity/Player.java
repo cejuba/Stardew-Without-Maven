@@ -5,6 +5,7 @@ import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.WoodenShield;
+import fr.cejuba.stardew.object.weapon.Axe;
 import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -65,7 +66,7 @@ public class Player extends Entity {
         experience = 0;
         nextLevelExperience = 5;
         gold = 0;
-        currentWeapon = new Sword(gamePanel);
+        currentWeapon = new Axe(gamePanel);
         currentShield = new WoodenShield(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
