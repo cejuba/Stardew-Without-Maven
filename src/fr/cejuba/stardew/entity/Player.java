@@ -358,7 +358,8 @@ public class Player extends Entity {
     public void damageInteractiveTile(int i){
 
         if(i != 999 && gamePanel.interactiveTile[i].destructible && gamePanel.interactiveTile[i].isCorrectItem(this)){
-            gamePanel.interactiveTile[i] = null;
+            gamePanel.interactiveTile[i].playSoundEnvironment();
+            gamePanel.interactiveTile[i] = gamePanel.interactiveTile[i].getDestroyedForm();
         }
     }
 

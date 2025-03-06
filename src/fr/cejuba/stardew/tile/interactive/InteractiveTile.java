@@ -7,7 +7,7 @@ public class InteractiveTile extends Entity {
     GamePanel gamePanel;
     public boolean destructible = false;
 
-    public InteractiveTile(GamePanel gamePanel) {
+    public InteractiveTile(GamePanel gamePanel, int column, int row) {
         super(gamePanel);
         this.gamePanel = gamePanel;
     }
@@ -15,7 +15,14 @@ public class InteractiveTile extends Entity {
     public boolean isCorrectItem(Entity entity) {
         return false;
     }
-    public void update(){
 
+    public void playSoundEnvironment(){
+    }
+
+    public InteractiveTile getDestroyedForm(){
+        return null;
+    }
+
+    public void update(){
     }
 }
