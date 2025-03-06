@@ -246,6 +246,33 @@ public class Entity {
         }
     }
 
+    public Color getParticleColor() {
+        return null;
+    }
+
+    public int getParticleSize() {
+        return 0;
+    }
+
+    public int getParticleSpeed() {
+        return 0;
+    }
+
+    public int getParticleMaxLife() {
+        return 0;
+    }
+
+    public void generateParticle(Entity generator, Entity target) {
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        Particle particle1 = new Particle(gamePanel, generator, color, size, speed, maxLife, -1, -1);
+        gamePanel.particleList.add(particle1);
+
+    }
+
     public Image setup(String imageName, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         Image scaledImage = null;

@@ -45,6 +45,7 @@ public class GamePanel extends Canvas {
     public Entity[] monster = new Entity[20];
     public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
+    public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
     public int gameState;
@@ -130,19 +131,26 @@ public class GamePanel extends Canvas {
                 }
             }
         }
-        for(int i = 0; i < projectileList.size(); i++){
-            if(projectileList.get(i) != null){
-                if(projectileList.get(i).alive){
-                    projectileList.get(i).update();
-                }
-                if (!projectileList.get(i).alive) {
-                    projectileList.remove(i);
-                }
-            }
-        }
+        checkAliveUpdate(projectileList);
+
+        checkAliveUpdate(particleList);
+
         for (InteractiveTile tile : interactiveTile) {
             if (tile != null) {
                 tile.update();
+            }
+        }
+    }
+
+    private void checkAliveUpdate(ArrayList<Entity> particleList) {
+        for(int i = 0; i < particleList.size(); i++){
+            if(particleList.get(i) != null){
+                if(particleList.get(i).alive){
+                    particleList.get(i).update();
+                }
+                if (!particleList.get(i).alive) {
+                    particleList.remove(i);
+                }
             }
         }
     }
@@ -189,6 +197,12 @@ public class GamePanel extends Canvas {
             for (Entity projectileList : projectileList) {
                 if (projectileList != null) {
                     entityList.add(projectileList);
+                }
+            }
+
+            for (Entity particleList : particleList) {
+                if (particleList != null) {
+                    entityList.add(particleList);
                 }
             }
 
