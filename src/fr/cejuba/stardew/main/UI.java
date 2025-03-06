@@ -525,9 +525,9 @@ public class UI {
             graphicsContext.fillText(">", textX - 25, textY);
         }
 
-        // SoundEnvironment
+        // Sound Effect
         textY += gamePanel.tileSize;
-        text = "Sound Environment";
+        text = "Sound Effect";
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 2){
@@ -576,7 +576,7 @@ public class UI {
         int volumeWidth = 24 * gamePanel.music.volumeScale;
         graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
-        // Sound Environment Volume
+        // Sound Effect Volume
         textY += gamePanel.tileSize;
         graphicsContext.strokeRect(textX, textY, 120, 24);
         volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
