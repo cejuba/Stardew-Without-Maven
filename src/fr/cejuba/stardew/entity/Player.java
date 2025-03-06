@@ -337,7 +337,7 @@ public class Player extends Entity {
                 gamePanel.monster[index].invincible = true;
                 gamePanel.monster[index].damageReaction();
 
-                if(gamePanel.monster[index].life == 0){
+                if(gamePanel.monster[index].life <= 0){
                     gamePanel.monster[index].dying = true;
                     gamePanel.ui.addMessage("You defeated " + gamePanel.monster[index].name + "!");
                     gamePanel.ui.addMessage("Experience + " + gamePanel.monster[index].name);
