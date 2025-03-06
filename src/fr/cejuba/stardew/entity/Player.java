@@ -357,7 +357,7 @@ public class Player extends Entity {
 
     public void damageInteractiveTile(int i){
 
-        if(i != 999 && gamePanel.interactiveTile[i].destructible){
+        if(i != 999 && gamePanel.interactiveTile[i].destructible && gamePanel.interactiveTile[i].isCorrectItem(this)){
             gamePanel.interactiveTile[i] = null;
         }
     }

@@ -12,6 +12,9 @@ public class InteractiveTile extends Entity {
         this.gamePanel = gamePanel;
     }
 
+    public boolean isCorrectItem(Entity entity) {
+        return false;
+    }
     public void update(){
 
     }
