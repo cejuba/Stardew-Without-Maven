@@ -4,7 +4,6 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
-import fr.cejuba.stardew.object.projectile.Rock;
 import fr.cejuba.stardew.object.shield.WoodenShield;
 import fr.cejuba.stardew.object.weapon.Sword;
 import javafx.scene.canvas.GraphicsContext;
@@ -274,24 +273,24 @@ public class Player extends Entity {
         if (index != 999) {
 
             // PickUpOnly Objects
-            if(gamePanel.objects[index].type == type_pickUpOnly){
-                gamePanel.objects[index].use(this);
-                gamePanel.objects[index] = null;
+            if(gamePanel.object[index].type == type_pickUpOnly){
+                gamePanel.object[index].use(this);
+                gamePanel.object[index] = null;
             }
             // Inventory
             else{
                 String text;
 
                 if(inventory.size() != maxInventorySize){
-                    inventory.add(gamePanel.objects[index]);
+                    inventory.add(gamePanel.object[index]);
                     gamePanel.playSoundEffect(1);
-                    text = "Got a " + gamePanel.objects[index].name + "!";
+                    text = "Got a " + gamePanel.object[index].name + "!";
                 }
                 else {
                     text = "You cannot carry any more items.";
                 }
                 gamePanel.ui.addMessage(text);
-                gamePanel.objects[index] = null;
+                gamePanel.object[index] = null;
             }
         }
     }

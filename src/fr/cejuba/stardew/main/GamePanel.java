@@ -2,8 +2,8 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
-import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.tile.TileManager;
+import fr.cejuba.stardew.tile.interactive.InteractiveTile;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -40,9 +40,10 @@ public class GamePanel extends Canvas {
     public UI ui = new UI(this);
 
     public Player player = new Player(this, keyHandler);
-    public Entity[] objects = new Entity[20];
+    public Entity[] object = new Entity[20];
     public Entity[] npc = new Entity[10];
     public Entity[] monster = new Entity[20];
+    public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -66,6 +67,7 @@ public class GamePanel extends Canvas {
         assetSetter.setObject();
         assetSetter.setNPC();
         assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
         // playMusic(0);
     }
 
@@ -105,22 +107,6 @@ public class GamePanel extends Canvas {
                     draw();
                     delta--;
                 }
-                /*
-                if (counter <= 1) {
-
-                    lastTime = now;
-                    return;
-                }
-
-                long elapsedTime = now - lastTime;
-                if (elapsedTime >= 1_000_000_000 / FPS) {
-                    if (gameState == playState) {
-                        update();
-                    }
-                    draw();
-                    lastTime = now;
-                }
-                */
             }
         };
         animationTimer.start();
@@ -154,6 +140,11 @@ public class GamePanel extends Canvas {
                 }
             }
         }
+        for (InteractiveTile tile : interactiveTile) {
+            if (tile != null) {
+                tile.update();
+            }
+        }
     }
 
     public void draw() {
@@ -173,29 +164,31 @@ public class GamePanel extends Canvas {
         else{
             tileManager.draw(graphicsContext);
 
-            entityList.add(player);
+            for(Entity interactiveTile : interactiveTile){
+                if(interactiveTile != null){
+                    interactiveTile.draw(graphicsContext);
+                }
+            }
 
+            entityList.add(player);
             for (Entity item : npc) {
                 if (item != null) {
                     entityList.add(item);
                 }
             }
-
-            for (Entity object : objects) {
+            for (Entity object : object) {
                 if (object != null) {
                     entityList.add(object);
                 }
             }
-
-            for (Entity value : monster) {
-                if (value != null) {
-                    entityList.add(value);
+            for (Entity monster : monster) {
+                if (monster != null) {
+                    entityList.add(monster);
                 }
             }
-
-            for (Entity value : projectileList) {
-                if (value != null) {
-                    entityList.add(value);
+            for (Entity projectileList : projectileList) {
+                if (projectileList != null) {
+                    entityList.add(projectileList);
                 }
             }
 

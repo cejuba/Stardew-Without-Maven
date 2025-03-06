@@ -62,8 +62,8 @@ public class CollisionChecker {
     public int checkObject(Entity entity, boolean player) {
         int index = 999;
 
-        for (int i = 0; i < gamePanel.objects.length; i++) {
-            Entity object = gamePanel.objects[i];
+        for (int i = 0; i < gamePanel.object.length; i++) {
+            Entity object = gamePanel.object[i];
             if (object != null) {
                 entity.solidArea.setX(entity.worldX + entity.solidArea.getX());
                 entity.solidArea.setY(entity.worldY + entity.solidArea.getY());

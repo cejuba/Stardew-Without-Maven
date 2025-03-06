@@ -234,11 +234,11 @@ public class Entity {
     public void checkDrop(){}
 
     public void dropItem(Entity droppedItem){
-        for(int i = 0; i < gamePanel.objects.length; i++){
-            if(gamePanel.objects[i] == null){
-                gamePanel.objects[i] = droppedItem;
-                gamePanel.objects[i].worldX = worldX;
-                gamePanel.objects[i].worldY = worldY;
+        for(int i = 0; i < gamePanel.object.length; i++){
+            if(gamePanel.object[i] == null){
+                gamePanel.object[i] = droppedItem;
+                gamePanel.object[i].worldX = worldX;
+                gamePanel.object[i].worldY = worldY;
                 break;
             }
         }
