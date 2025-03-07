@@ -2,6 +2,7 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
+import fr.cejuba.stardew.object.Boots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.WoodenShield;
@@ -51,7 +52,6 @@ public class Player extends Entity {
         setDefaultPosition();
 
         // Player status
-        speed = 4;
         level = 1;
         maxLife = 6;
         maxMana = 4;
@@ -59,15 +59,18 @@ public class Player extends Entity {
         ammo = 10;
         strength = 1;
         dexterity = 1;
+        agility = 2;
         experience = 0;
         nextLevelExperience = 5;
         gold = 500;
         currentWeapon = new Axe(gamePanel);
         currentShield = new WoodenShield(gamePanel);
+        currentBoots = new Boots(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
         attack = getAttack();
         defense = getDefense();
+        speed = getSpeed();
     }
 
     public void setDefaultPosition() {
@@ -87,6 +90,7 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
+        inventory.add(currentBoots);
         inventory.add(new Key(gamePanel));
     }
 
@@ -97,6 +101,10 @@ public class Player extends Entity {
 
     public int getDefense() {
         return dexterity * currentShield.defenseValue;
+    }
+
+    public int getSpeed(){
+        return agility * currentBoots.speedValue;
     }
 
     public void getPlayerImage() {
@@ -419,6 +427,10 @@ public class Player extends Entity {
             if(selectedItem.type == type_shield){
                 currentShield = selectedItem;
                 defense = getDefense();
+            }
+            if(selectedItem.type == type_boots){
+                currentBoots = selectedItem;
+                speed = getSpeed();
             }
             if(selectedItem.type == type_consumable){
                 System.out.println("Potion used");

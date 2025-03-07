@@ -7,8 +7,10 @@ public class Boots extends Entity {
 
     public Boots(GamePanel gamePanel) {
         super(gamePanel);
+        type = type_boots;
         name = "Boots";
         down1 = setup("/object/boots", gamePanel.tileSize, gamePanel.tileSize);
+        speedValue = 2;
 
         description = "[" + name + "]\n" + "It's a pair of boots.";
 

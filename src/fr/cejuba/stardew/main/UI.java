@@ -314,7 +314,7 @@ public class UI {
         final int frameX = gamePanel.tileSize;
         final int frameY = gamePanel.tileSize;
         final int frameWidth = gamePanel.tileSize * 5;
-        final int frameHeight = gamePanel.tileSize * 10;
+        final int frameHeight = gamePanel.tileSize * 12;
         drawSubWindows(frameX, frameY, frameWidth, frameHeight);
 
         graphicsContext.setFill(Color.WHITE);
@@ -335,9 +335,13 @@ public class UI {
         textY += lineHeight;
         graphicsContext.fillText("Dexterity", textX, textY);
         textY += lineHeight;
+        graphicsContext.fillText("Agility", textX, textY);
+        textY += lineHeight;
         graphicsContext.fillText("Attack", textX, textY);
         textY += lineHeight;
         graphicsContext.fillText("Defense", textX, textY);
+        textY += lineHeight;
+        graphicsContext.fillText("Speed", textX, textY);
         textY += lineHeight;
         graphicsContext.fillText("Experience", textX, textY);
         textY += lineHeight;
@@ -348,6 +352,8 @@ public class UI {
         graphicsContext.fillText("Weapon", textX, textY);
         textY += lineHeight + 15;
         graphicsContext.fillText("Shield", textX, textY);
+        textY += lineHeight + 15;
+        graphicsContext.fillText("Boots", textX, textY);
 
         // Reset
         textY = frameY + gamePanel.tileSize;
@@ -379,12 +385,22 @@ public class UI {
         graphicsContext.fillText(value, textX, textY);
 
         textY += lineHeight;
+        value = String.valueOf(gamePanel.player.agility);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
         value = String.valueOf(gamePanel.player.attack);
         textX = getXAlignedToRightText(value, tailX);
         graphicsContext.fillText(value, textX, textY);
 
         textY += lineHeight;
         value = String.valueOf(gamePanel.player.defense);
+        textX = getXAlignedToRightText(value, tailX);
+        graphicsContext.fillText(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gamePanel.player.speed);
         textX = getXAlignedToRightText(value, tailX);
         graphicsContext.fillText(value, textX, textY);
 
@@ -410,7 +426,8 @@ public class UI {
         textY += gamePanel.tileSize;
         graphicsContext.drawImage(gamePanel.player.currentShield.down1, tailX - gamePanel.tileSize, textY-24);
 
-
+        textY += gamePanel.tileSize;
+        graphicsContext.drawImage(gamePanel.player.currentBoots.down1, tailX - gamePanel.tileSize, textY-24);
     }
 
     public void drawGameOverScreen(){
@@ -489,7 +506,7 @@ public class UI {
 
         // Draw Player's inventory
         for(int i = 0; i < entity.inventory.size(); i++){
-            if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield){
+            if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i) == entity.currentBoots){
                 graphicsContext.setFill(Color.GOLD);
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
@@ -954,7 +971,7 @@ public class UI {
 
             // Sell an item
             if(gamePanel.keyHandler.enterPressed){
-                if(gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield){
+                if(gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentBoots){
                     commandNumber = 0;
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
