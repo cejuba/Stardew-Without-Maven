@@ -1,5 +1,9 @@
 package fr.cejuba.stardew.main;
 
+
+// TODO : Check if player retry(); : is the items deleted or not (possible bug bcs can appear multiple times)
+// TODO : Bug when a slime is not killed and the player restart the game, the slime is still with it's previous life
+
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
 import fr.cejuba.stardew.tile.TileManager;
@@ -83,10 +87,7 @@ public class GamePanel extends Canvas {
 
     public void setupGame() {
         startGameLoop();
-        assetSetter.setObject();
-        assetSetter.setNPC();
-        assetSetter.setMonster();
-        assetSetter.setInteractiveTile();
+        basicAssetSetup();
         playMusic(0);
 
         tempScreen = new WritableImage(screenWidth, screenHeight);
@@ -96,6 +97,25 @@ public class GamePanel extends Canvas {
         }
     }
 
+    public void basicAssetSetup(){
+        assetSetter.setObject();
+        assetSetter.setNPC();
+        assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
+    }
+
+    public void retry(){
+        player.setDefaultPosition();
+        player.restoreLifeAndMana();
+        basicAssetSetup();
+    }
+
+    public void restart(){
+        player.setDefaultValues(); // It also resets the player's position + life/mana
+        player.setItems();
+
+    }
+
     public void setFullScreen(){
         stage.setFullScreen(true);
 
@@ -103,6 +123,7 @@ public class GamePanel extends Canvas {
         screenHeight2 = (int) stage.getHeight();
 
     }
+
     private void startGameLoop() {
         /*
                 if (counter <= 1) {
@@ -279,6 +300,7 @@ public class GamePanel extends Canvas {
         GraphicsContext graphicsContext = this.getGraphicsContext2D();
         graphicsContext.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2);
     }
+
     public void playMusic(int i) {
         music.setFile(i);
         music.playSound();

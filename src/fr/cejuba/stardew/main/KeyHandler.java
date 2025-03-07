@@ -238,10 +238,15 @@ public class KeyHandler {
             }
             case ENTER -> {
                 switch (gamePanel.ui.commandNumber) {
-                    case 0 -> gamePanel.gameState = gamePanel.playState;
+                    case 0 -> {
+                        gamePanel.gameState = gamePanel.playState;
+                        gamePanel.retry();
+                    }
                     case 1 -> {
                         gamePanel.gameState = gamePanel.titleState;
                         gamePanel.ui.titleScreenState = 0;
+                        gamePanel.ui.commandNumber = 0;
+                        gamePanel.restart();
                     }
                 }
             }

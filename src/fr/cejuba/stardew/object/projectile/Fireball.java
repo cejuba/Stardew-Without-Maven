@@ -38,7 +38,6 @@ public class Fireball extends Projectile {
         return user.mana >= useCost;
     }
 
-
     public Color getParticleColor() {
         return Color.rgb(240, 50, 0);
     }

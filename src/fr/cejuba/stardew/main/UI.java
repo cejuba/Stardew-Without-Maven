@@ -446,6 +446,7 @@ public class UI {
             graphicsContext.fillText(">", x - gamePanel.tileSize, y);
         }
     }
+
     public void drawInventory(){
 
         // Frame

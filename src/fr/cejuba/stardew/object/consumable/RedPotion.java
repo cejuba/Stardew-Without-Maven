@@ -17,6 +17,7 @@ public class RedPotion extends Entity {
         down1 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your life by " + value + ".";
     }
+
     public void use(Entity entity) {
         System.out.println("Potion used2");
         gamePanel.gameState = gamePanel.dialogueState;

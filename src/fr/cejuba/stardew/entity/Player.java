@@ -48,17 +48,15 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gamePanel.tileSize * 23;
-        worldY = gamePanel.tileSize * 21;
-        speed = 4;
-        direction = "up";
+
+        setDefaultPosition();
 
         // Player status
+        speed = 4;
         level = 1;
         maxLife = 6;
-        life = maxLife;
         maxMana = 4;
-        mana = maxMana;
+        restoreLifeAndMana();
         ammo = 10;
         strength = 1;
         dexterity = 1;
@@ -73,11 +71,24 @@ public class Player extends Entity {
         defense = getDefense();
     }
 
+    public void setDefaultPosition() {
+        worldX = gamePanel.tileSize * 23;
+        worldY = gamePanel.tileSize * 21;
+        direction = "down";
+
+    }
+
+    public void restoreLifeAndMana(){
+        life = maxLife;
+        mana = maxMana;
+        invincible = false;
+    }
+
     public void setItems() {
+        inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Key(gamePanel));
-
     }
 
     public int getAttack() {
@@ -233,6 +244,7 @@ public class Player extends Entity {
         }
         if(life <= 0){
             gamePanel.gameState = gamePanel.gameOverState;
+            gamePanel.playSoundEffect(12);
         }
     }
 
@@ -414,6 +426,7 @@ public class Player extends Entity {
             }
         }
     }
+
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
         int tempScreenX = screenX;

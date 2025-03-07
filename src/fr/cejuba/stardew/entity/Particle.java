@@ -25,6 +25,7 @@ public class Particle extends Entity {
         worldX = generator.worldX + offset;
         worldY = generator.worldY + offset;
     }
+
     public void update() {
         life--;
 
