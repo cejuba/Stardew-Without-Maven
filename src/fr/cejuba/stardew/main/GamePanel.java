@@ -29,7 +29,7 @@ public class GamePanel extends Canvas {
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
     public final int maxMap = 10;
-    public int currentMap = 0;
+    public int currentMap = 1;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
@@ -78,6 +78,7 @@ public class GamePanel extends Canvas {
     public final int optionState = 5;
     public final int gameOverState = 6;
     public final int transitionState = 7;
+    public final int tradeState = 8;
 
     public GamePanel(Stage stage) {
         this.stage = stage;

@@ -1,5 +1,7 @@
 package fr.cejuba.stardew.main;
 
+import fr.cejuba.stardew.entity.Entity;
+
 public class EventHandler {
     GamePanel gamePanel;
     EventRectangle[][][] eventRectangle;
@@ -49,6 +51,8 @@ public class EventHandler {
                 teleport(1,12,13);
             } else if (hit(1,12,13, "any")){
                 teleport(0,30,12);
+            } else if (hit(1,12,9,"up")){
+                speak(gamePanel.npc[1][0]); // speak to merchant
             }
         }
     }
@@ -112,6 +116,14 @@ public class EventHandler {
             gamePanel.player.life = gamePanel.player.maxLife;
             gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();
+        }
+    }
+
+    public void speak(Entity entity){
+        if(gamePanel.keyHandler.enterPressed){
+            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.player.attackCanceled = true;
+            entity.speak();
         }
     }
 }

@@ -29,6 +29,7 @@ public class UI {
     public int slotRow = 0;
     int subState = 0;
     double counter = 0;
+    public Entity npc;
 
     Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
 
@@ -87,6 +88,8 @@ public class UI {
             drawGameOverScreen();
         } else if(gamePanel.gameState == gamePanel.transitionState){
             drawTransition();
+        } else if(gamePanel.gameState == gamePanel.tradeState){
+            drawTradeScreen();
         }
     }
 
@@ -531,6 +534,31 @@ public class UI {
         gamePanel.keyHandler.enterPressed = false;
     }
 
+    public void drawTransition(){
+        counter += 0.02;
+        graphicsContext.setFill(Color.rgb(0,0,0,counter));
+        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        if(counter >= 0.9){
+            counter = 0;
+            gamePanel.gameState = gamePanel.playState;
+            gamePanel.currentMap = gamePanel.eventHandler.tempMap;
+            gamePanel.player.worldX = gamePanel.eventHandler.tempCol * gamePanel.tileSize;
+            gamePanel.player.worldY = gamePanel.eventHandler.tempRow * gamePanel.tileSize;
+            gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
+            gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+        }
+    }
+
+    public void drawTradeScreen(){
+        switch(subState){
+            case 0 -> trade_select();
+            case 1 -> trade_buy();
+            case 2 -> trade_sell();
+        }
+        gamePanel.keyHandler.enterPressed = false;
+    }
+
     public void options_top(int frameX, int frameY){
 
         int textX;
@@ -759,20 +787,55 @@ public class UI {
 
     }
 
-    public void drawTransition(){
-        counter += 0.02;
-        graphicsContext.setFill(Color.rgb(0,0,0,counter));
-        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+    public void trade_select(){
+        drawDialogueScreen();
 
-        if(counter >= 0.9){
-            counter = 0;
-            gamePanel.gameState = gamePanel.playState;
-            gamePanel.currentMap = gamePanel.eventHandler.tempMap;
-            gamePanel.player.worldX = gamePanel.eventHandler.tempCol * gamePanel.tileSize;
-            gamePanel.player.worldY = gamePanel.eventHandler.tempRow * gamePanel.tileSize;
-            gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
-            gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+        // Draw Options
+        int width = (int) (gamePanel.tileSize * 3.5);
+        int height = (int) (gamePanel.tileSize * 3.5);
+        int x = gamePanel.screenWidth - width - gamePanel.tileSize;
+        int y = gamePanel.tileSize * 4;
+        drawSubWindows(x, y, width, height);
+
+        // Draw Text
+        x += gamePanel.tileSize;
+        y += gamePanel.tileSize;
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Buy", x, y);
+        if(commandNumber == 0){
+            graphicsContext.fillText(">", x - 24, y);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 1;
+            }
         }
+        y += gamePanel.tileSize;
+        graphicsContext.fillText("Sell", x, y);
+        if(commandNumber == 1){
+            graphicsContext.fillText(">", x - 24, y);
+            if(gamePanel.keyHandler.enterPressed){
+                subState = 2;
+            }
+        }
+        y += gamePanel.tileSize;
+        graphicsContext.fillText("Leave", x, y);
+        if(commandNumber == 2){
+            graphicsContext.fillText(">", x - 24, y);
+            if(gamePanel.keyHandler.enterPressed){
+                commandNumber = 0;
+                gamePanel.gameState = gamePanel.dialogueState;
+                currentDialogue = "Come again !";
+            }
+        }
+
+
+    }
+
+    public void trade_buy(){
+
+    }
+
+    public void trade_sell(){
+
     }
 
     public int getItemIndexInInventory(){

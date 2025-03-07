@@ -57,14 +57,16 @@ public class AssetSetter {
 
     public void setNPC() {
         int mapNumber = 0;
-        gamePanel.npc[mapNumber][0] = new OldMan(gamePanel);
-        gamePanel.npc[mapNumber][0].worldX = gamePanel.tileSize * 21;
-        gamePanel.npc[mapNumber][0].worldY = gamePanel.tileSize * 21;
+        int i = 0;
+        gamePanel.npc[mapNumber][i] = new OldMan(gamePanel);
+        gamePanel.npc[mapNumber][i].worldX = gamePanel.tileSize * 21;
+        gamePanel.npc[mapNumber][i].worldY = gamePanel.tileSize * 21;
 
         mapNumber = 1;
-        gamePanel.npc[mapNumber][1] = new Merchant(gamePanel);
-        gamePanel.npc[mapNumber][1].worldX = gamePanel.tileSize * 12;
-        gamePanel.npc[mapNumber][1].worldY = gamePanel.tileSize * 7;
+        i = 0;
+        gamePanel.npc[mapNumber][i] = new Merchant(gamePanel);
+        gamePanel.npc[mapNumber][i].worldX = gamePanel.tileSize * 12;
+        gamePanel.npc[mapNumber][i].worldY = gamePanel.tileSize * 7;
     }
 
     public void setMonster() {

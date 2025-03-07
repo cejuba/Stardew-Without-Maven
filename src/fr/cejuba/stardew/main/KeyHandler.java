@@ -1,6 +1,7 @@
 package fr.cejuba.stardew.main;
 
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class KeyHandler {
@@ -32,6 +33,8 @@ public class KeyHandler {
                 optionState(event);
             } else if (gamePanel.gameState == gamePanel.gameOverState) {
                 gameOverState(event);
+            } else if (gamePanel.gameState == gamePanel.tradeState) {
+                tradeState(event);
             }
         });
 
@@ -257,6 +260,38 @@ public class KeyHandler {
                         gamePanel.ui.titleScreenState = 0;
                         gamePanel.ui.commandNumber = 0;
                         gamePanel.restart();
+                    }
+                }
+            }
+        }
+    }
+
+    private void tradeState(KeyEvent event) {
+
+        if(event.getCode() == KeyCode.ENTER) {
+            enterPressed = true;
+        }
+        if(event.getCode() == KeyCode.ESCAPE) {
+            gamePanel.gameState = gamePanel.playState;
+            gamePanel.ui.npc = null;
+        }
+
+        switch(gamePanel.ui.subState){
+            case 0 -> {
+                switch (event.getCode()) {
+                    case Z, UP -> {
+                        gamePanel.ui.commandNumber--;
+                        gamePanel.playSoundEffect(9);
+                        if (gamePanel.ui.commandNumber < 0) {
+                            gamePanel.ui.commandNumber = 2;
+                        }
+                    }
+                    case S, DOWN -> {
+                        gamePanel.ui.commandNumber++;
+                        gamePanel.playSoundEffect(9);
+                        if (gamePanel.ui.commandNumber > 2) {
+                            gamePanel.ui.commandNumber = 0;
+                        }
                     }
                 }
             }

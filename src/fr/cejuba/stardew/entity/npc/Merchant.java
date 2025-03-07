@@ -62,4 +62,10 @@ public class Merchant extends Entity {
         inventory.add(new BlueShield(gamePanel));
     }
 
+    @Override
+    public void speak(){
+        super.speak();
+        gamePanel.gameState = gamePanel.tradeState;
+        gamePanel.ui.npc = this;
+    }
 }
