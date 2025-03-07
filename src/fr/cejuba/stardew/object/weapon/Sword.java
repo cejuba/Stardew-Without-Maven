@@ -17,5 +17,6 @@ public class Sword extends Entity {
         attackArea.setHeight(36);
 
         description = "[" + name + "]\n" + "An old sword.";
+        price = 50;
     }
 }

@@ -14,5 +14,8 @@ public class BlueShield extends Entity {
 
         description = "[" + name + "]\n" + "What a strange\nshield .";
 
+        price = 250;
+
+
     }
 }

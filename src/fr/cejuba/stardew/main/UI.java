@@ -886,6 +886,12 @@ public class UI {
             height = gamePanel.tileSize;
             drawSubWindows(x, y, width, height);
             graphicsContext.drawImage(gold, x+10, y+8, 32, 32);
+
+            int price = npc.inventory.get(itemIndex).price;
+            String text = "" + price;
+            x = getXAlignedToRightText(text, gamePanel.tileSize * 8-20);
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y + 32);
         }
 
 

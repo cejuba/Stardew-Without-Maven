@@ -16,5 +16,7 @@ public class Axe extends Entity {
         attackArea.setHeight(30);
 
         description = "[" + name + "]\nCan cut some trees.";
+
+        price = 75;
     }
 }

@@ -13,6 +13,7 @@ public class WoodenShield extends Entity {
         defenseValue = 1;
 
         description = "[" + name + "]\n" + "Made by wood.";
+        price = 35;
 
     }
 }

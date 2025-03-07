@@ -8,6 +8,10 @@ public class Boots extends Entity {
     public Boots(GamePanel gamePanel) {
         super(gamePanel);
         name = "Boots";
-        down1 = setup("/object/boots.png", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/object/boots", gamePanel.tileSize, gamePanel.tileSize);
+
+        description = "[" + name + "]\n" + "It's a pair of boots.";
+
+        price = 100;
     }
 }
