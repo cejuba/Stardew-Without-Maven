@@ -12,7 +12,7 @@ public class BlueShield extends Entity {
         down1 = setup("/object/shield_blue", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 2;
 
-        description = "[" + name + "]\n" + "What a strange\n shield .";
+        description = "[" + name + "]\n" + "What a strange\nshield .";
 
     }
 }

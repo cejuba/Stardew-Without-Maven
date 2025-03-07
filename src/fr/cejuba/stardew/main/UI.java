@@ -1,6 +1,7 @@
 package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
+import fr.cejuba.stardew.object.BronzeCoin;
 import fr.cejuba.stardew.object.stats.Heart;
 import fr.cejuba.stardew.object.stats.ManaCrystal;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,13 +26,15 @@ public class UI {
     public String currentDialogue = "";
     public int commandNumber = 0;
     public int titleScreenState = 0;
-    public int slotColumn = 0;
-    public int slotRow = 0;
+    public int playerSlotColumn = 0;
+    public int playerSlotRow = 0;
+    public int npcSlotColumn = 0;
+    public int npcSlotRow = 0;
     int subState = 0;
     double counter = 0;
     public Entity npc;
 
-    Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
+    Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank, gold;
 
     double playTime;
     DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -52,6 +55,8 @@ public class UI {
         Entity crystal = new ManaCrystal(gamePanel);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
+        Entity bronzeCoin = new BronzeCoin(gamePanel);
+        gold = bronzeCoin.down1;
     }
 
     public void addMessage(String text) {
@@ -81,7 +86,7 @@ public class UI {
             drawDialogueScreen();
         } else if(gamePanel.gameState == gamePanel.characterState){
             drawCharacterScreen();
-            drawInventory();
+            drawInventory(gamePanel.player, true);
         } else if(gamePanel.gameState == gamePanel.optionState){
             drawOptionScreen();
         } else if(gamePanel.gameState == gamePanel.gameOverState){
@@ -447,13 +452,32 @@ public class UI {
         }
     }
 
-    public void drawInventory(){
+    public void drawInventory(Entity entity, boolean cursorShown){
+
+        int frameX = 0;
+        int frameY = 0;
+        int frameWidth = 0;
+        int frameHeight = 0;
+        int slotColumn = 0;
+        int slotRow = 0;
+        if(entity == gamePanel.player){
+            frameWidth = gamePanel.tileSize * 6;
+            frameHeight = gamePanel.tileSize * 5;
+            frameX = gamePanel.screenWidth - frameWidth - gamePanel.tileSize ;
+            frameY = gamePanel.tileSize;
+            slotColumn = playerSlotColumn;
+            slotRow = playerSlotRow;
+        }
+        else{
+            frameWidth = gamePanel.tileSize * 6;
+            frameHeight = gamePanel.tileSize * 5;
+            frameX = gamePanel.tileSize * 2;
+            frameY = gamePanel.tileSize;
+            slotColumn = npcSlotColumn;
+            slotRow = npcSlotRow;
+        }
 
         // Frame
-        final int frameWidth = gamePanel.tileSize * 6;
-        final int frameHeight = gamePanel.tileSize * 5;
-        final int frameX = gamePanel.screenWidth - frameWidth - gamePanel.tileSize ;
-        final int frameY = gamePanel.tileSize;
         drawSubWindows(frameX, frameY, frameWidth, frameHeight);
 
         // Slots
@@ -464,12 +488,12 @@ public class UI {
         int slotSize = gamePanel.tileSize+3;
 
         // Draw Player's inventory
-        for(int i = 0; i < gamePanel.player.inventory.size(); i++){
-            if(gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(i) == gamePanel.player.currentShield){
+        for(int i = 0; i < entity.inventory.size(); i++){
+            if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield){
                 graphicsContext.setFill(Color.GOLD);
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
-            graphicsContext.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY);
+            graphicsContext.drawImage(entity.inventory.get(i).down1, slotX, slotY);
             slotX += slotSize;
             if(i % 5 == 4){
                 slotX = slotXStart;
@@ -478,36 +502,38 @@ public class UI {
         }
 
         // Cursor
-        int cursorX = slotXStart + (slotColumn * slotSize);
-        int cursorY = slotYStart + (slotRow * slotSize);
-        int cursorWidth = gamePanel.tileSize;
-        int cursorHeight = gamePanel.tileSize;
+        if(cursorShown){
+            int cursorX = slotXStart + (slotColumn * slotSize);
+            int cursorY = slotYStart + (slotRow * slotSize);
+            int cursorWidth = gamePanel.tileSize;
+            int cursorHeight = gamePanel.tileSize;
 
-        // Draw cursor
-        graphicsContext.setFill(Color.WHITE);
-        graphicsContext.setLineWidth(3);
-        graphicsContext.strokeRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+            // Draw cursor
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.setLineWidth(3);
+            graphicsContext.strokeRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
-        // Description Frame
-        final int descriptionFrameWidth = gamePanel.tileSize * 6;
-        final int descriptionFrameHeight = gamePanel.tileSize * 3;
-        final int descriptionFrameX = gamePanel.screenWidth - descriptionFrameWidth - gamePanel.tileSize;
-        final int descriptionFrameY = frameHeight + gamePanel.tileSize;
+            // Description Frame
+            final int descriptionFrameWidth = gamePanel.tileSize * 6;
+            final int descriptionFrameHeight = gamePanel.tileSize * 3;
+            final int descriptionFrameX = frameX;
+            final int descriptionFrameY = frameHeight + gamePanel.tileSize;
 
-        // Description
-        int textX = descriptionFrameX + 20;
-        int textY = descriptionFrameY + gamePanel.tileSize;
-        graphicsContext.setFont(new Font("Arial", 28F));
+            // Description
+            int textX = descriptionFrameX + 20;
+            int textY = descriptionFrameY + gamePanel.tileSize;
+            graphicsContext.setFont(new Font("Arial", 28F));
 
-        int itemIndex = getItemIndexInInventory();
+            int itemIndex = getItemIndexInInventory(slotColumn, slotRow);
 
-        if(itemIndex< gamePanel.player.inventory.size()){
-            drawSubWindows(descriptionFrameX, descriptionFrameY, descriptionFrameWidth, descriptionFrameHeight);
+            if(itemIndex< entity.inventory.size()){
+                drawSubWindows(descriptionFrameX, descriptionFrameY, descriptionFrameWidth, descriptionFrameHeight);
 
-            for(String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")){
-                graphicsContext.setFill(Color.WHITE);
-                graphicsContext.fillText(line, textX, textY);
-                textY += 32;
+                for(String line : entity.inventory.get(itemIndex).description.split("\n")){
+                    graphicsContext.setFill(Color.WHITE);
+                    graphicsContext.fillText(line, textX, textY);
+                    textY += 32;
+                }
             }
         }
     }
@@ -831,6 +857,37 @@ public class UI {
     }
 
     public void trade_buy(){
+        // Draw Player Inventory
+        drawInventory(gamePanel.player, false);
+        // Draw NPC Inventory
+        drawInventory(npc, true);
+
+        // Draw Hint Window
+        int width = gamePanel.tileSize * 6;
+        int height = gamePanel.tileSize * 2;
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize * 9;
+        drawSubWindows(x, y, width, height);
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("[ESC] Back", x + 24, y + 60);
+
+        // Draw Coin Window
+        x = gamePanel.screenWidth - width - gamePanel.tileSize;
+        drawSubWindows(x, y, width, height);
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Your Gold : " + gamePanel.player.gold, x + 24, y + 60);
+
+        // Draw Price Window
+        int itemIndex = getItemIndexInInventory(npcSlotColumn, npcSlotRow);
+        if(itemIndex < npc.inventory.size()){
+            x = (int) (gamePanel.tileSize * 5.5);
+            y = (int) (gamePanel.tileSize * 5.5);
+            width = (int) (gamePanel.tileSize * 2.5);
+            height = gamePanel.tileSize;
+            drawSubWindows(x, y, width, height);
+            graphicsContext.drawImage(gold, x+10, y+8, 32, 32);
+        }
+
 
     }
 
@@ -838,8 +895,8 @@ public class UI {
 
     }
 
-    public int getItemIndexInInventory(){
-        return slotColumn + slotRow * 5;
+    public int getItemIndexInInventory(int slotColum, int slotRow){
+        return slotColum + slotRow * 5;
     }
 
     public void drawSubWindows(int x, int y, int width, int height) {

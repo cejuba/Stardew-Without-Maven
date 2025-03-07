@@ -147,32 +147,9 @@ public class KeyHandler {
     private void characterState(KeyEvent event) {
         switch (event.getCode()) {
             case ESCAPE, C -> gamePanel.gameState = gamePanel.playState;
-            case Z, UP -> {
-                if(gamePanel.ui.slotRow !=0) {
-                    gamePanel.ui.slotRow--;
-                    gamePanel.playSoundEffect(9);
-                }
-            }
-            case S, DOWN -> {
-                if(gamePanel.ui.slotRow != 3) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.slotRow++;
-                    gamePanel.playSoundEffect(9);
-                }
-            }
-            case Q, LEFT -> {
-                if(gamePanel.ui.slotColumn !=0) {
-                    gamePanel.ui.slotColumn--;
-                    gamePanel.playSoundEffect(9);
-                }
-            }
-            case D, RIGHT -> {
-                if (gamePanel.ui.slotColumn != 4) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.slotColumn++;
-                    gamePanel.playSoundEffect(9);
-                }
-            }
             case ENTER -> gamePanel.player.selectItem();
         }
+        playerInventory(event.getCode());
     }
 
     private void optionState(KeyEvent event) {
@@ -271,10 +248,6 @@ public class KeyHandler {
         if(event.getCode() == KeyCode.ENTER) {
             enterPressed = true;
         }
-        if(event.getCode() == KeyCode.ESCAPE) {
-            gamePanel.gameState = gamePanel.playState;
-            gamePanel.ui.npc = null;
-        }
 
         switch(gamePanel.ui.subState){
             case 0 -> {
@@ -293,6 +266,74 @@ public class KeyHandler {
                             gamePanel.ui.commandNumber = 0;
                         }
                     }
+                    case ESCAPE -> {
+                        gamePanel.gameState = gamePanel.playState;
+                        gamePanel.ui.npc = null;
+                     }
+                }
+            }
+            case 1 -> {
+                npcInventory(event.getCode());
+                if(event.getCode() == KeyCode.ESCAPE){
+                    gamePanel.ui.subState = 0;
+                }
+            }
+        }
+    }
+
+    private void playerInventory(KeyCode code){
+        switch(code){
+            case Z, UP -> {
+                if(gamePanel.ui.playerSlotRow !=0) {
+                    gamePanel.ui.playerSlotRow--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case S, DOWN -> {
+                if(gamePanel.ui.playerSlotRow != 3) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.playerSlotRow++;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case Q, LEFT -> {
+                if(gamePanel.ui.playerSlotColumn !=0) {
+                    gamePanel.ui.playerSlotColumn--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case D, RIGHT -> {
+                if (gamePanel.ui.playerSlotColumn != 4) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.playerSlotColumn++;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+        }
+    }
+
+    private void npcInventory(KeyCode code){
+        switch(code){
+            case Z, UP -> {
+                if(gamePanel.ui.npcSlotRow !=0) {
+                    gamePanel.ui.npcSlotRow--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case S, DOWN -> {
+                if(gamePanel.ui.npcSlotRow != 3) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.npcSlotRow++;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case Q, LEFT -> {
+                if(gamePanel.ui.npcSlotColumn !=0) {
+                    gamePanel.ui.npcSlotColumn--;
+                    gamePanel.playSoundEffect(9);
+                }
+            }
+            case D, RIGHT -> {
+                if (gamePanel.ui.npcSlotColumn != 4) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.npcSlotColumn++;
+                    gamePanel.playSoundEffect(9);
                 }
             }
         }

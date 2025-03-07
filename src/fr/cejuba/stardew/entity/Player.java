@@ -406,7 +406,7 @@ public class Player extends Entity {
     }
 
     public void selectItem(){
-        int itemIndex = gamePanel.ui.getItemIndexInInventory();
+        int itemIndex = gamePanel.ui.getItemIndexInInventory(gamePanel.ui.playerSlotColumn, gamePanel.ui.playerSlotRow);
 
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);
