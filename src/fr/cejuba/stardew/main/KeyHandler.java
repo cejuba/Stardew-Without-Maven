@@ -30,6 +30,8 @@ public class KeyHandler {
                 characterState(event);
             } else if (gamePanel.gameState == gamePanel.optionState) {
                 optionState(event);
+            } else if (gamePanel.gameState == gamePanel.gameOverState) {
+                gameOverState(event);
             }
         });
 
@@ -215,6 +217,34 @@ public class KeyHandler {
                 }
             }
 
+        }
+    }
+
+    private void gameOverState(KeyEvent event) {
+        switch (event.getCode()) {
+            case Z, UP -> {
+                gamePanel.ui.commandNumber--;
+                if(gamePanel.ui.commandNumber < 0) {
+                    gamePanel.ui.commandNumber = 1;
+                }
+                gamePanel.playSoundEffect(9);
+            }
+            case S, DOWN -> {
+                gamePanel.ui.commandNumber++;
+                if(gamePanel.ui.commandNumber > 1) {
+                    gamePanel.ui.commandNumber = 0;
+                }
+                gamePanel.playSoundEffect(9);
+            }
+            case ENTER -> {
+                switch (gamePanel.ui.commandNumber) {
+                    case 0 -> gamePanel.gameState = gamePanel.playState;
+                    case 1 -> {
+                        gamePanel.gameState = gamePanel.titleState;
+                        gamePanel.ui.titleScreenState = 0;
+                    }
+                }
+            }
         }
     }
 }

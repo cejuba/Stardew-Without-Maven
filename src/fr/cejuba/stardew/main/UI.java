@@ -88,6 +88,9 @@ public class UI {
         if(gamePanel.gameState == gamePanel.optionState){
             drawOptionScreen();
         }
+        if(gamePanel.gameState == gamePanel.gameOverState){
+            drawGameOverScreen();
+        }
     }
 
     public void drawMessage(){
@@ -405,6 +408,44 @@ public class UI {
 
     }
 
+    public void drawGameOverScreen(){
+        graphicsContext.setFill(new Color(0,0,0,0.4));
+        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        int x, y;
+        String text;
+        graphicsContext.setFont(arial_80B);
+        text = "GAME OVER";
+
+        // Shadow
+        graphicsContext.setFill(Color.BLACK);
+        x = getXCenteredText(text, graphicsContext);
+        y = gamePanel.tileSize*4;
+        graphicsContext.fillText(text, x, y);
+
+        // Main
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText(text, x-4, y-4);
+
+        // Retry
+        graphicsContext.setFont(arial_40);
+        text = "Retry";
+        x = getXCenteredText(text, graphicsContext);
+        y = gamePanel.screenHeight - gamePanel.tileSize*4;
+        graphicsContext.fillText(text, x, y);
+        if(commandNumber == 0){
+            graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+        }
+
+        // Back to Title
+        text = "Back to Title";
+        x = getXCenteredText(text, graphicsContext);
+        y += gamePanel.tileSize*2;
+        graphicsContext.fillText(text, x, y);
+        if(commandNumber == 1){
+            graphicsContext.fillText(">", x - gamePanel.tileSize, y);
+        }
+    }
     public void drawInventory(){
 
         // Frame
@@ -598,6 +639,7 @@ public class UI {
 
         gamePanel.config.saveConfig();
     }
+
     private void options_fullScreenNotification(int frameX, int frameY) {
         int textX = frameX + gamePanel.tileSize;
         int textY = frameY + gamePanel.tileSize * 2;
