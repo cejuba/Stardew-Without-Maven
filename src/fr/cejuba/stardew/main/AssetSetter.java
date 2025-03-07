@@ -2,7 +2,7 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.npc.Merchant;
 import fr.cejuba.stardew.entity.npc.OldMan;
-import fr.cejuba.stardew.entity.monster.GreenSlime;
+import fr.cejuba.stardew.entity.monster.GreenJunimo;
 import fr.cejuba.stardew.object.BronzeCoin;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
@@ -73,23 +73,23 @@ public class AssetSetter {
         int mapNumber = 0;
 
         int i = 0;
-        gamePanel.monster[mapNumber][i] = new GreenSlime(gamePanel);
+        gamePanel.monster[mapNumber][i] = new GreenJunimo(gamePanel);
         gamePanel.monster[mapNumber][i].worldX = gamePanel.tileSize * 33;
         gamePanel.monster[mapNumber][i].worldY = gamePanel.tileSize * 36;
         i++;
-        gamePanel.monster[mapNumber][i] = new GreenSlime(gamePanel);
+        gamePanel.monster[mapNumber][i] = new GreenJunimo(gamePanel);
         gamePanel.monster[mapNumber][i].worldX = gamePanel.tileSize * 23;
         gamePanel.monster[mapNumber][i].worldY = gamePanel.tileSize * 37;
         i++;
-        gamePanel.monster[mapNumber][i] = new GreenSlime(gamePanel);
+        gamePanel.monster[mapNumber][i] = new GreenJunimo(gamePanel);
         gamePanel.monster[mapNumber][i].worldX = gamePanel.tileSize * 24;
         gamePanel.monster[mapNumber][i].worldY = gamePanel.tileSize * 37;
         i++;
-        gamePanel.monster[mapNumber][i] = new GreenSlime(gamePanel);
+        gamePanel.monster[mapNumber][i] = new GreenJunimo(gamePanel);
         gamePanel.monster[mapNumber][i].worldX = gamePanel.tileSize * 34;
         gamePanel.monster[mapNumber][i].worldY = gamePanel.tileSize * 42;
         i++;
-        gamePanel.monster[mapNumber][i] = new GreenSlime(gamePanel);
+        gamePanel.monster[mapNumber][i] = new GreenJunimo(gamePanel);
         gamePanel.monster[mapNumber][i].worldX = gamePanel.tileSize * 38;
         gamePanel.monster[mapNumber][i].worldY = gamePanel.tileSize * 42;
     }

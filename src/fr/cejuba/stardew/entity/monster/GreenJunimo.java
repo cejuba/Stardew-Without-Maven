@@ -9,16 +9,16 @@ import fr.cejuba.stardew.object.stats.ManaCrystal;
 
 import java.util.Random;
 
-public class GreenSlime extends Entity {
+public class GreenJunimo extends Entity {
 
     GamePanel gamePanel;
-    public GreenSlime(GamePanel gamePanel){
+    public GreenJunimo(GamePanel gamePanel){
         super(gamePanel);
 
         this.gamePanel = gamePanel;
 
         type = type_monster;
-        name = "Green Slime";
+        name = "Green Junimo";
         speed = 1;
         maxLife = 4;
         life = maxLife;
@@ -39,14 +39,14 @@ public class GreenSlime extends Entity {
 
     public void getImage(){
 
-        up0 = setup("/monster/greenslime_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("/monster/greenslime_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        down0 = setup("/monster/greenslime_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/monster/greenslime_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        left0 = setup("/monster/greenslime_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/monster/greenslime_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        right0 = setup("/monster/greenslime_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/monster/greenslime_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        up0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        down0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        left0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        right0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setAction() {

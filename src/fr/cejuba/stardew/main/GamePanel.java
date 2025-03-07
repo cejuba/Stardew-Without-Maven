@@ -2,7 +2,7 @@ package fr.cejuba.stardew.main;
 
 
 // TODO : Check if player retry(); : is the items deleted or not (possible bug bcs can appear multiple times)
-// TODO : Bug when a slime is not killed and the player restart the game, the slime is still with it's previous life
+// TODO : Bug when a junimo is not killed and the player restart the game, the junimo is still with it's previous life
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
@@ -29,7 +29,7 @@ public class GamePanel extends Canvas {
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
     public final int maxMap = 10;
-    public int currentMap = 1;
+    public int currentMap = 0;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
