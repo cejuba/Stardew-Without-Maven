@@ -244,6 +244,7 @@ public class Player extends Entity {
         }
         if(life <= 0){
             gamePanel.gameState = gamePanel.gameOverState;
+            gamePanel.ui.commandNumber = -1; // Prevent retry by accident when smashing ENTER key
             gamePanel.playSoundEffect(12);
         }
     }
