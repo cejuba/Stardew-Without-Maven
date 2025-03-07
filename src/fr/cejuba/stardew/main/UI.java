@@ -892,12 +892,82 @@ public class UI {
             x = getXAlignedToRightText(text, gamePanel.tileSize * 8-20);
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y + 32);
+
+            // Buy an item
+            if(gamePanel.keyHandler.enterPressed){
+                if(npc.inventory.get(itemIndex).price > gamePanel.player.gold){
+                    // TODO : Patch gold --;
+                    subState = 0;
+                    gamePanel.gameState = gamePanel.dialogueState;
+                    currentDialogue = "You need more coin to buy that!";
+                    drawDialogueScreen();
+                }
+                if(gamePanel.player.inventory.size() >= gamePanel.player.maxInventorySize){
+                    subState = 0;
+                    gamePanel.gameState = gamePanel.dialogueState;
+                    currentDialogue = "Your inventory is full!";
+                    drawDialogueScreen();
+                }
+                else{
+                    gamePanel.player.gold -= npc.inventory.get(itemIndex).price;
+                    gamePanel.player.inventory.add(npc.inventory.get(itemIndex));
+                }
+            }
         }
-
-
     }
 
     public void trade_sell(){
+        drawInventory(gamePanel.player, true);
+
+        int x, y, width, height;
+
+        // Draw Hint Window
+        width = gamePanel.tileSize * 6;
+        height = gamePanel.tileSize * 2;
+        x = gamePanel.tileSize * 2;
+        y = gamePanel.tileSize * 9;
+        drawSubWindows(x, y, width, height);
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("[ESC] Back", x + 24, y + 60);
+
+        // Draw Coin Window
+        x = gamePanel.screenWidth - width - gamePanel.tileSize;
+        drawSubWindows(x, y, width, height);
+        graphicsContext.setFill(Color.WHITE);
+        graphicsContext.fillText("Your Gold : " + gamePanel.player.gold, x + 24, y + 60);
+
+        // Draw Price Window
+        int itemIndex = getItemIndexInInventory(playerSlotColumn, playerSlotRow);
+        if(itemIndex < gamePanel.player.inventory.size()){
+            y = (int) (gamePanel.tileSize * 5.5);
+            width = (int) (gamePanel.tileSize * 2.5);
+            height = gamePanel.tileSize;
+            x = gamePanel.screenWidth - width - gamePanel.tileSize;
+            drawSubWindows(x, y, width, height);
+            graphicsContext.drawImage(gold, x+10, y+8, 32, 32);
+
+            int price = (int) Math.round(gamePanel.player.inventory.get(itemIndex).price * 0.8);
+            String text = "" + price;
+            x = getXAlignedToRightText(text, x + width - 20);
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.fillText(text, x, y + 32);
+
+            // Sell an item
+            if(gamePanel.keyHandler.enterPressed){
+                if(gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield){
+                    commandNumber = 0;
+                    subState = 0;
+                    gamePanel.gameState = gamePanel.dialogueState;
+                    currentDialogue = "You can't sell equipped items!";
+                    drawDialogueScreen();
+                }
+                else{
+                    gamePanel.player.gold += price;
+                    gamePanel.player.inventory.remove(itemIndex);
+                }
+            }
+        }
+
 
     }
 

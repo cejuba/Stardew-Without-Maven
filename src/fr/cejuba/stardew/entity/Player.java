@@ -61,7 +61,7 @@ public class Player extends Entity {
         dexterity = 1;
         experience = 0;
         nextLevelExperience = 5;
-        gold = 0;
+        gold = 500;
         currentWeapon = new Axe(gamePanel);
         currentShield = new WoodenShield(gamePanel);
         projectile = new Fireball(gamePanel);

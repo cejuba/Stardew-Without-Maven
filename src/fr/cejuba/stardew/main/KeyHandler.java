@@ -278,6 +278,12 @@ public class KeyHandler {
                     gamePanel.ui.subState = 0;
                 }
             }
+            case 2 -> {
+                playerInventory(event.getCode());
+                if(event.getCode() == KeyCode.ESCAPE){
+                    gamePanel.ui.subState = 0;
+                }
+            }
         }
     }
 
