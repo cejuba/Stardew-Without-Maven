@@ -88,7 +88,6 @@ public class GamePanel extends Canvas {
     public void setupGame() {
         startGameLoop();
         basicAssetSetup();
-        playMusic(0);
 
         tempScreen = new WritableImage(screenWidth, screenHeight);
         graphicsContext = this.getGraphicsContext2D();

@@ -742,6 +742,7 @@ public class UI {
                 subState = 0;
                 gamePanel.ui.titleScreenState = 0;
                 gamePanel.gameState = gamePanel.titleState;
+                gamePanel.stopMusic();
             }
         }
 

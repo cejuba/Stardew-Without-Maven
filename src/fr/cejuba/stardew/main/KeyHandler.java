@@ -89,14 +89,17 @@ public class KeyHandler {
                         case 0 -> {
                             System.out.println("Need to do fighter stuff");
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playMusic(0);
                         }
                         case 1 -> {
                             System.out.println("Need to do thief stuff");
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playMusic(0);
                         }
                         case 2 -> {
                             System.out.println("Need to do sorcerer stuff");
                             gamePanel.gameState = gamePanel.playState;
+                            gamePanel.playMusic(0);
                         }
                         case 3 -> gamePanel.ui.titleScreenState = 0;
                     }
@@ -241,9 +244,11 @@ public class KeyHandler {
                     case 0 -> {
                         gamePanel.gameState = gamePanel.playState;
                         gamePanel.retry();
+                        gamePanel.playMusic(0);
                     }
                     case 1 -> {
                         gamePanel.gameState = gamePanel.titleState;
+                        gamePanel.stopMusic();
                         gamePanel.ui.titleScreenState = 0;
                         gamePanel.ui.commandNumber = 0;
                         gamePanel.restart();
