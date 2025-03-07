@@ -1,4 +1,4 @@
-package fr.cejuba.stardew;
+package fr.cejuba.stardew.zzzexample;
 
 import javafx.application.Application;
 import javafx.concurrent.Task;

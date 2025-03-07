@@ -12,13 +12,13 @@ public class Trunk extends InteractiveTile {
 
         down1 = setup("tile/interactive/trunk", gamePanel.tileSize, gamePanel.tileSize);
 
-        this.worldX = column;
-        this.worldY = row;
+        this.worldX = column * gamePanel.tileSize;
+        this.worldY = row * gamePanel.tileSize;
 
         solidArea.setX(0);
         solidArea.setY(0);
-        solidArea.setWidth(gamePanel.tileSize);
-        solidArea.setHeight(gamePanel.tileSize);
+        solidArea.setWidth(0);
+        solidArea.setHeight(0);
         solidAreaDefaultX = (int) solidArea.getX();
         solidAreaDefaultY = (int) solidArea.getY();
     }

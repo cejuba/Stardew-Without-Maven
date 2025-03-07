@@ -26,6 +26,7 @@ public class Projectile extends Entity {
             int monsterIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.monster);
             if(monsterIndex != 999){
                 gamePanel.player.damageMonster(monsterIndex, attack);
+                generateParticle(user.projectile, gamePanel.monster[monsterIndex]);
                 alive = false;
             }
         }
@@ -33,6 +34,7 @@ public class Projectile extends Entity {
             boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
             if(!gamePanel.player.invincible && contactPlayer){
                 damagePlayer(attack);
+                generateParticle(user.projectile, gamePanel.player);
                 alive = false;
             }
         }
@@ -59,7 +61,7 @@ public class Projectile extends Entity {
         return false;
     }
 
-    public void substractRessource(Entity user){
+    public void subtractRessource(Entity user){
         user.mana -= useCost;
     }
 }

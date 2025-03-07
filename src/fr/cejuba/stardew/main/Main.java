@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = new GamePanel(primaryStage);
         gamePanel.setWidth(gamePanel.screenWidth);
         gamePanel.setHeight(gamePanel.screenHeight);
 

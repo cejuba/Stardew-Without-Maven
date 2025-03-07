@@ -5,7 +5,7 @@ import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.WoodenShield;
-import fr.cejuba.stardew.object.weapon.Sword;
+import fr.cejuba.stardew.object.weapon.Axe;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -65,7 +65,7 @@ public class Player extends Entity {
         experience = 0;
         nextLevelExperience = 5;
         gold = 0;
-        currentWeapon = new Sword(gamePanel);
+        currentWeapon = new Axe(gamePanel);
         currentShield = new WoodenShield(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
@@ -208,7 +208,7 @@ public class Player extends Entity {
         if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30 && projectile.haveRessource(this)){
             projectile.set(worldX, worldY, direction, true, this);
 
-            projectile.substractRessource(this);
+            projectile.subtractRessource(this);
 
             gamePanel.projectileList.add(projectile);
             shotAvalaibleCounter = 0;
@@ -357,9 +357,16 @@ public class Player extends Entity {
 
     public void damageInteractiveTile(int i){
 
-        if(i != 999 && gamePanel.interactiveTile[i].destructible && gamePanel.interactiveTile[i].isCorrectItem(this)){
+        if(i != 999 && gamePanel.interactiveTile[i].destructible && gamePanel.interactiveTile[i].isCorrectItem(this) && !gamePanel.interactiveTile[i].invincible){
             gamePanel.interactiveTile[i].playSoundEnvironment();
-            gamePanel.interactiveTile[i] = gamePanel.interactiveTile[i].getDestroyedForm();
+            gamePanel.interactiveTile[i].life --;
+            gamePanel.interactiveTile[i].invincible = true;
+
+            generateParticle(gamePanel.interactiveTile[i], gamePanel.interactiveTile[i]);
+
+            if(gamePanel.interactiveTile[i].life <= 0){
+                gamePanel.interactiveTile[i] = gamePanel.interactiveTile[i].getDestroyedForm();
+            }
         }
     }
 

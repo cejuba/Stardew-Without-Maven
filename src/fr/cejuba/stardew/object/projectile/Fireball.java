@@ -3,6 +3,7 @@ package fr.cejuba.stardew.object.projectile;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.main.GamePanel;
+import javafx.scene.paint.Color;
 
 public class Fireball extends Projectile {
 
@@ -37,7 +38,20 @@ public class Fireball extends Projectile {
         return user.mana >= useCost;
     }
 
-    public void substractRessource(Entity user){
-        user.mana -= useCost;
+
+    public Color getParticleColor() {
+        return Color.rgb(240, 50, 0);
+    }
+
+    public int getParticleSize() {
+        return 10;
+    }
+
+    public int getParticleSpeed() {
+        return 1;
+    }
+
+    public int getParticleMaxLife() {
+        return 20;
     }
 }
