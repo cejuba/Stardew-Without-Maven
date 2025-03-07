@@ -77,6 +77,7 @@ public class GamePanel extends Canvas {
     public final int characterState = 4;
     public final int optionState = 5;
     public final int gameOverState = 6;
+    public final int transitionState = 7;
 
     public GamePanel(Stage stage) {
         this.stage = stage;

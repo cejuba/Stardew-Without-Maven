@@ -7,6 +7,8 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
 
+    int tempMap, tempCol, tempRow;
+
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         this.eventRectangle = new EventRectangle[gamePanel.maxMap][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
@@ -78,11 +80,19 @@ public class EventHandler {
     }
 
     public void teleport(int map, int col, int row) {
+
+        gamePanel.gameState = gamePanel.transitionState;
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+
+        /*
         gamePanel.currentMap = map;
         gamePanel.player.worldX = col * gamePanel.tileSize;
         gamePanel.player.worldY = row * gamePanel.tileSize;
         previousEventX = gamePanel.player.worldX;
         previousEventY = gamePanel.player.worldY;
+        */
         canTouchEvent = false;
         gamePanel.playSoundEffect(13);
     }

@@ -71,7 +71,7 @@ public class CollisionChecker {
 
                 object.solidArea.setX(object.worldX + object.solidArea.getX());
                 object.solidArea.setY(object.worldY + object.solidArea.getY());
-                
+
                 switch (entity.direction){
                     case "up" :
                         entity.solidArea.setY(entity.solidArea.getY() - entity.speed);

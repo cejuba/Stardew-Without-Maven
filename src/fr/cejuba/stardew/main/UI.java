@@ -28,6 +28,7 @@ public class UI {
     public int slotColumn = 0;
     public int slotRow = 0;
     int subState = 0;
+    double counter = 0;
 
     Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank;
 
@@ -65,31 +66,27 @@ public class UI {
 
         if(gamePanel.gameState == gamePanel.titleState){
             drawTitleScreen();
-        }
-        if(gamePanel.gameState == gamePanel.playState){
+        } else if(gamePanel.gameState == gamePanel.playState){
             drawPlayerLife();
             drawPlayerMana();
             drawMessage();
-        }
-        if(gamePanel.gameState == gamePanel.pauseState){
+        } else if(gamePanel.gameState == gamePanel.pauseState){
             drawPlayerLife();
             drawPlayerMana();
             drawPauseScreen();
-        }
-        if(gamePanel.gameState == gamePanel.dialogueState){
+        } else if(gamePanel.gameState == gamePanel.dialogueState){
             drawPlayerLife();
             drawPlayerMana();
             drawDialogueScreen();
-        }
-        if(gamePanel.gameState == gamePanel.characterState){
+        } else if(gamePanel.gameState == gamePanel.characterState){
             drawCharacterScreen();
             drawInventory();
-        }
-        if(gamePanel.gameState == gamePanel.optionState){
+        } else if(gamePanel.gameState == gamePanel.optionState){
             drawOptionScreen();
-        }
-        if(gamePanel.gameState == gamePanel.gameOverState){
+        } else if(gamePanel.gameState == gamePanel.gameOverState){
             drawGameOverScreen();
+        } else if(gamePanel.gameState == gamePanel.transitionState){
+            drawTransition();
         }
     }
 
@@ -760,6 +757,22 @@ public class UI {
             }
         }
 
+    }
+
+    public void drawTransition(){
+        counter += 0.02;
+        graphicsContext.setFill(Color.rgb(0,0,0,counter));
+        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        if(counter >= 0.9){
+            counter = 0;
+            gamePanel.gameState = gamePanel.playState;
+            gamePanel.currentMap = gamePanel.eventHandler.tempMap;
+            gamePanel.player.worldX = gamePanel.eventHandler.tempCol * gamePanel.tileSize;
+            gamePanel.player.worldY = gamePanel.eventHandler.tempRow * gamePanel.tileSize;
+            gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
+            gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+        }
     }
 
     public int getItemIndexInInventory(){
