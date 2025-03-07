@@ -596,6 +596,7 @@ public class UI {
         volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
         graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
+        gamePanel.config.saveConfig();
     }
     private void options_fullScreenNotification(int frameX, int frameY) {
         int textX = frameX + gamePanel.tileSize;

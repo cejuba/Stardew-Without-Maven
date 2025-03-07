@@ -50,6 +50,7 @@ public class GamePanel extends Canvas {
     Sound soundEffect = new Sound();
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
+    Config config = new Config(this);
 
     public UI ui = new UI(this);
 
@@ -89,7 +90,9 @@ public class GamePanel extends Canvas {
 
         tempScreen = new WritableImage(screenWidth, screenHeight);
         graphicsContext = this.getGraphicsContext2D();
-        setFullScreen();
+        if(fullScreenOn){
+            setFullScreen();
+        }
     }
 
     public void setFullScreen(){

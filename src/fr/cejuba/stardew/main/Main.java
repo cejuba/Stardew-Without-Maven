@@ -17,6 +17,11 @@ public class Main extends Application {
         root.getChildren().add(gamePanel);
         Scene scene = new Scene(root, gamePanel.getWidth(), gamePanel.getHeight());
 
+        gamePanel.config.loadConfig();
+        if(gamePanel.fullScreenOn){
+            primaryStage.setFullScreen(true);
+        }
+
         gamePanel.keyHandler.addKeyHandlers(scene);
         primaryStage.setTitle("Stardew Without Maven");
         primaryStage.setResizable(false);
