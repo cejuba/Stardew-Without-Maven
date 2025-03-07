@@ -913,13 +913,12 @@ public class UI {
             // Buy an item
             if(gamePanel.keyHandler.enterPressed){
                 if(npc.inventory.get(itemIndex).price > gamePanel.player.gold){
-                    // TODO : Patch gold --;
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
                     currentDialogue = "You need more coin to buy that!";
                     drawDialogueScreen();
                 }
-                if(gamePanel.player.inventory.size() >= gamePanel.player.maxInventorySize){
+                else if(gamePanel.player.inventory.size() >= gamePanel.player.maxInventorySize){
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
                     currentDialogue = "Your inventory is full!";
