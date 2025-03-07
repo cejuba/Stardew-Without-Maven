@@ -1,13 +1,16 @@
-package fr.cejuba.stardew.entity;
+package fr.cejuba.stardew.entity.npc;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 
 import java.util.Random;
 
 public class OldMan extends Entity {
 
+    GamePanel gamePanel;
     public OldMan(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
 
         type = 1;
         direction = "down";

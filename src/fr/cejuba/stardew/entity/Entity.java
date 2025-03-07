@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Entity {
     GamePanel gamePanel;
@@ -63,6 +64,8 @@ public class Entity {
     public Projectile projectile;
 
     // Item attributes
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
     public int value;
     public int attackValue;
     public int defenseValue;

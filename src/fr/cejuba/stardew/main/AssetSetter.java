@@ -1,6 +1,7 @@
 package fr.cejuba.stardew.main;
 
-import fr.cejuba.stardew.entity.OldMan;
+import fr.cejuba.stardew.entity.npc.Merchant;
+import fr.cejuba.stardew.entity.npc.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenSlime;
 import fr.cejuba.stardew.object.BronzeCoin;
 import fr.cejuba.stardew.object.consumable.RedPotion;
@@ -9,7 +10,6 @@ import fr.cejuba.stardew.object.stats.Heart;
 import fr.cejuba.stardew.object.stats.ManaCrystal;
 import fr.cejuba.stardew.object.weapon.Axe;
 import fr.cejuba.stardew.tile.interactive.DryTree;
-import fr.cejuba.stardew.tile.interactive.InteractiveTile;
 
 public class AssetSetter {
 
@@ -60,6 +60,11 @@ public class AssetSetter {
         gamePanel.npc[mapNumber][0] = new OldMan(gamePanel);
         gamePanel.npc[mapNumber][0].worldX = gamePanel.tileSize * 21;
         gamePanel.npc[mapNumber][0].worldY = gamePanel.tileSize * 21;
+
+        mapNumber = 1;
+        gamePanel.npc[mapNumber][1] = new Merchant(gamePanel);
+        gamePanel.npc[mapNumber][1].worldX = gamePanel.tileSize * 12;
+        gamePanel.npc[mapNumber][1].worldY = gamePanel.tileSize * 7;
     }
 
     public void setMonster() {
