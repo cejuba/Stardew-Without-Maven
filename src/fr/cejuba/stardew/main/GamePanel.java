@@ -28,6 +28,8 @@ public class GamePanel extends Canvas {
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
+    public final int maxMap = 10;
+    public int currentMap = 0;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
@@ -59,10 +61,10 @@ public class GamePanel extends Canvas {
     public UI ui = new UI(this);
 
     public Player player = new Player(this, keyHandler);
-    public Entity[] object = new Entity[20];
-    public Entity[] npc = new Entity[10];
-    public Entity[] monster = new Entity[20];
-    public InteractiveTile[] interactiveTile = new InteractiveTile[50];
+    public Entity[][] object = new Entity[maxMap][20];
+    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] monster = new Entity[maxMap][20];
+    public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -167,19 +169,19 @@ public class GamePanel extends Canvas {
 
     public void update() {
         player.update();
-        for (Entity npcEntity : npc) {
-            if (npcEntity != null) {
-                npcEntity.update();
+        for (int i = 0; i < npc[1].length; i++) { // [1] is because [0] is for the map
+            if (npc[currentMap][i] != null) {
+                npc[currentMap][i].update();
             }
         }
-        for(int i = 0; i < monster.length; i++){
-            if(monster[i] != null){
-                if(monster[i].alive && !monster[i].dying){
-                    monster[i].update();
+        for(int i = 0; i < monster[1].length; i++){ // [1] is because [0] is for the map
+            if(monster[currentMap][i] != null){
+                if(monster[currentMap][i].alive && !monster[currentMap][i].dying){
+                    monster[currentMap][i].update();
                 }
-                if (!monster[i].alive) {
-                    monster[i].checkDrop();
-                    monster[i] = null;
+                if (!monster[currentMap][i].alive) {
+                    monster[currentMap][i].checkDrop();
+                    monster[currentMap][i] = null;
                 }
             }
         }
@@ -187,21 +189,21 @@ public class GamePanel extends Canvas {
 
         checkAliveUpdate(particleList);
 
-        for (InteractiveTile tile : interactiveTile) {
-            if (tile != null) {
-                tile.update();
+        for (int i = 0; i < interactiveTile[1].length; i++) {
+            if (interactiveTile[currentMap][i] != null) {
+                interactiveTile[currentMap][i].update();
             }
         }
     }
 
-    private void checkAliveUpdate(ArrayList<Entity> particleList) {
-        for(int i = 0; i < particleList.size(); i++){
-            if(particleList.get(i) != null){
-                if(particleList.get(i).alive){
-                    particleList.get(i).update();
+    private void checkAliveUpdate(ArrayList<Entity> arrayList) {
+        for(int i = 0; i < arrayList.size(); i++){
+            if(arrayList.get(i) != null){
+                if(arrayList.get(i).alive){
+                    arrayList.get(i).update();
                 }
-                if (!particleList.get(i).alive) {
-                    particleList.remove(i);
+                if (!arrayList.get(i).alive) {
+                    arrayList.remove(i);
                 }
             }
         }
@@ -219,26 +221,27 @@ public class GamePanel extends Canvas {
         else{
             tileManager.draw(graphicsContext);
 
-            for(Entity interactiveTile : interactiveTile){
-                if(interactiveTile != null){
-                    interactiveTile.draw(graphicsContext);
+            for(int i = 0; i < interactiveTile[1].length; i++){
+                if(interactiveTile[currentMap][i] != null){
+                    interactiveTile[currentMap][i].draw(graphicsContext);
                 }
             }
 
             entityList.add(player);
-            for (Entity item : npc) {
-                if (item != null) {
-                    entityList.add(item);
+
+            for(int i = 0; i < npc[1].length; i++){
+                if(npc[currentMap][i] != null){
+                    npc[currentMap][i].draw(graphicsContext);
                 }
             }
-            for (Entity object : object) {
-                if (object != null) {
-                    entityList.add(object);
+            for(int i = 0; i < object[1].length; i++){
+                if(object[currentMap][i] != null){
+                    object[currentMap][i].draw(graphicsContext);
                 }
             }
-            for (Entity monster : monster) {
-                if (monster != null) {
-                    entityList.add(monster);
+            for(int i = 0; i < monster[1].length; i++){
+                if(monster[currentMap][i] != null){
+                    monster[currentMap][i].draw(graphicsContext);
                 }
             }
             for (Entity projectileList : projectileList) {

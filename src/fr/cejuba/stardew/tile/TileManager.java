@@ -13,15 +13,16 @@ import java.util.Objects;
 public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles;
-    public int[][] mapTileNumber;
+    public int[][][] mapTileNumber; // First dimension is for the layer/map, second is for the column, third is for the row
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tiles = new Tile[50]; // number of tiles present in the game
-        mapTileNumber = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        mapTileNumber = new int[gamePanel.maxMap][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
         getTileImage();
-        loadMap("fr/cejuba/stardew/maps/worldV2.txt");
+        loadMap("fr/cejuba/stardew/maps/worldV2.txt", 0);
+        loadMap("fr/cejuba/stardew/maps/interior01.txt", 1);
     }
 
     public void getTileImage() {
@@ -69,6 +70,9 @@ public class TileManager {
             setup(39, "earth", false);
             setup(40, "wall", true);
             setup(41, "tree", true);
+            setup(42, "hut", false);
+            setup(43, "floor01", false);
+            setup(44, "table01", true);
 
         } catch (Exception e) {
             System.out.println("Error loading tile image: " + e.getMessage());
@@ -95,7 +99,7 @@ public class TileManager {
         }
     }
 
-    public void loadMap(String filePath) {
+    public void loadMap(String filePath, int map) {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(filePath);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
@@ -108,7 +112,7 @@ public class TileManager {
                 while (col < gamePanel.maxWorldCol) {
                     String[] numbers = line.split(" ");
                     int number = Integer.parseInt(numbers[col]);
-                    mapTileNumber[col][row] = number;
+                    mapTileNumber[map][col][row] = number;
                     col++;
                 }
                 if (col == gamePanel.maxWorldCol) {
@@ -129,7 +133,7 @@ public class TileManager {
         int worldRow = 0;
 
         while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
-            int tileNumber = mapTileNumber[worldCol][worldRow];
+            int tileNumber = mapTileNumber[gamePanel.currentMap][worldCol][worldRow];
 
             if (tileNumber >= tiles.length || tiles[tileNumber] == null) {
                 System.out.println("Invalid tile number or uninitialized tile: " + tileNumber);

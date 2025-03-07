@@ -25,6 +25,7 @@ public class Sound {
         soundURL[10] = getClass().getResource("/fr/cejuba/stardew/sounds/burning.wav");
         soundURL[11] = getClass().getResource("/fr/cejuba/stardew/sounds/cuttree.wav");
         soundURL[12] = getClass().getResource("/fr/cejuba/stardew/sounds/gameover.wav");
+        soundURL[13] = getClass().getResource("/fr/cejuba/stardew/sounds/stairs.wav");
     }
 
     public void setFile(int i) {

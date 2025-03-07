@@ -116,7 +116,12 @@ public class KeyHandler {
             case D, RIGHT -> rightPressed = true;
             case F -> shotKeyPressed = true;
             case T -> showDebugText = !showDebugText;
-            case R -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt");
+            case R -> {
+                switch(gamePanel.currentMap){
+                    case 0 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt", 0);
+                    case 1 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/interior01.txt", 1);
+                }
+            }
             case P -> gamePanel.gameState = gamePanel.pauseState;
             case C -> gamePanel.gameState = gamePanel.characterState;
             case ESCAPE -> gamePanel.gameState = gamePanel.optionState;
