@@ -617,7 +617,7 @@ public class UI {
             graphicsContext.fillText(">", textX - 25, textY);
             if(gamePanel.keyHandler.enterPressed){
                 subState = 0;
-                commandNumber = 3;
+                commandNumber = 0;
             }
         }
     }
