@@ -368,6 +368,7 @@ public class Entity {
                 }
             }
 
+            // TODO : Comment in following the player
             // If the goal is reached, stop the search
             int nextCol = gamePanel.pathFinder.pathList.get(0).col;
             int nextRow = gamePanel.pathFinder.pathList.get(0).row;

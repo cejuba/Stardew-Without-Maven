@@ -1,3 +1,4 @@
+// TODO : Patch bug PNJ can't find the path
 package fr.cejuba.stardew.AI;
 
 import fr.cejuba.stardew.main.GamePanel;

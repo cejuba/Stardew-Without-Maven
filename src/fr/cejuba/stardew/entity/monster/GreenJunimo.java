@@ -49,30 +49,63 @@ public class GreenJunimo extends Entity {
         right2 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void setAction() {
-        actionLockCounter++;
-        if (actionLockCounter == 100) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; // Pick a number from 1 to 100
+    /*
+    public void update(){
+        super.update();
 
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
+        int xDistance = Math.abs(worldX - gamePanel.player.worldX);
+        int yDistance = Math.abs(worldY - gamePanel.player.worldY);
+        int tileDistance = (int) Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2)) / gamePanel.tileSize;
+
+        if(onPath && tileDistance < 5){
+            int i = new Random().nextInt(100) + 1;
+            if(i > 50){
+                onPath = true;
             }
-
-            actionLockCounter = 0;
         }
-        // Shot randomly a rock
-        int i = new Random().nextInt(100) + 1;
-        if (i > 99 && !projectile.alive && shotAvailableCounter == 30){
-            projectile.set(worldX, worldY, direction, true, this);
-            gamePanel.projectileList.add(projectile);
-            shotAvailableCounter = 0;
+        if(onPath && tileDistance > 20){
+            onPath = false;
+        }
+    }
+     */
+
+    public void setAction() {
+
+        if(onPath){
+            int goalCol = 12;
+            int goalRow = 9;
+
+            // int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.getX()) / gamePanel.tileSize;
+            // int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.getY()) / gamePanel.tileSize;
+
+            searchPath(goalCol, goalRow);
+
+            // Shot randomly a rock
+            int i = new Random().nextInt(200) + 1;
+            if (i > 197 && !projectile.alive && shotAvailableCounter == 30){
+                projectile.set(worldX, worldY, direction, true, this);
+                gamePanel.projectileList.add(projectile);
+                shotAvailableCounter = 0;
+            }
+        }
+        else {
+            actionLockCounter++;
+            if (actionLockCounter == 100) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; // Pick a number from 1 to 100
+
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i <= 50) {
+                    direction = "down";
+                } else if (i <= 75) {
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
+
+                actionLockCounter = 0;
+            }
         }
     }
 
@@ -80,6 +113,7 @@ public class GreenJunimo extends Entity {
         // When the monster is hit it run away
         actionLockCounter = 0;
         direction = gamePanel.player.direction;
+        // onPath = true : Comment the top line and uncomment this one if you want the monster to run on you
     }
 
     public void checkDrop(){

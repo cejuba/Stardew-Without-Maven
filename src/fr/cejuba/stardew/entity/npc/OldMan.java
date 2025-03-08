@@ -51,6 +51,9 @@ public class OldMan extends Entity {
             int goalCol = 12;
             int goalRow = 9;
 
+            // int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.getX()) / gamePanel.tileSize;
+            // int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.getY()) / gamePanel.tileSize;
+
             searchPath(goalCol, goalRow);
         }
         else {
