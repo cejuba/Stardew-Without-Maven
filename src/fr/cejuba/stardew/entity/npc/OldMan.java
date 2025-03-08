@@ -12,9 +12,9 @@ public class OldMan extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = 1;
+        type = type_npc;
         direction = "down";
-        speed = 1;
+        speed = 2;
 
         getImage();
         setDialogue();
@@ -46,27 +46,38 @@ public class OldMan extends Entity {
     }
 
     public void setAction() {
-        actionLockCounter++;
-        if (actionLockCounter == 100) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; // Pick a number from 1 to 100
 
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
+        if(onPath){
+            int goalCol = 12;
+            int goalRow = 9;
+
+            searchPath(goalCol, goalRow);
+        }
+        else {
+            actionLockCounter++;
+            if (actionLockCounter == 100) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; // Pick a number from 1 to 100
+
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i <= 50) {
+                    direction = "down";
+                } else if (i <= 75) {
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
+
+                actionLockCounter = 0;
             }
-
-            actionLockCounter = 0;
         }
     }
 
     @Override
     public void speak() {
         super.speak();
+
+        onPath = true;
     }
 }

@@ -4,6 +4,7 @@ package fr.cejuba.stardew.main;
 // TODO : Check if player retry(); : is the items deleted or not (possible bug bcs can appear multiple times)
 // TODO : Bug when a junimo is not killed and the player restart the game, the junimo is still with it's previous life
 
+import fr.cejuba.stardew.AI.PathFinder;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
 import fr.cejuba.stardew.tile.TileManager;
@@ -29,7 +30,7 @@ public class GamePanel extends Canvas {
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
     public final int maxMap = 10;
-    public int currentMap = 1;
+    public int currentMap = 0;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
@@ -49,6 +50,7 @@ public class GamePanel extends Canvas {
 
     int FPS = 60;
 
+    // System
     public TileManager tileManager = new TileManager(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     public EventHandler eventHandler = new EventHandler(this);
@@ -57,9 +59,10 @@ public class GamePanel extends Canvas {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     Config config = new Config(this);
-
     public UI ui = new UI(this);
+    public PathFinder pathFinder = new PathFinder(this);
 
+    // Entity and object
     public Player player = new Player(this, keyHandler);
     public Entity[][] object = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
@@ -69,6 +72,7 @@ public class GamePanel extends Canvas {
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
+    // States
     public int gameState;
     public final int titleState = 0;
     public final int playState = 1;

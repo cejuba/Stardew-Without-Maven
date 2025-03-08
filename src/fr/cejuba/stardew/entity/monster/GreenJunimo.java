@@ -69,10 +69,10 @@ public class GreenJunimo extends Entity {
         }
         // Shot randomly a rock
         int i = new Random().nextInt(100) + 1;
-        if (i > 99 && !projectile.alive && shotAvalaibleCounter == 30){
+        if (i > 99 && !projectile.alive && shotAvailableCounter == 30){
             projectile.set(worldX, worldY, direction, true, this);
             gamePanel.projectileList.add(projectile);
-            shotAvalaibleCounter = 0;
+            shotAvailableCounter = 0;
         }
     }
 

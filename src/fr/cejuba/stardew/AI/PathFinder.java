@@ -58,13 +58,13 @@ public class PathFinder {
         step = 0;
     }
 
-    public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int[] solidCol, int[] solidRow){
+    public void setNodes(int startCol, int startRow, int goalCol, int goalRow){
         resetNodes();
 
         startNode = node[startCol][startRow];
         currentNode = startNode;
         goalNode = node[goalCol][goalRow];
-        openList.add(goalNode);
+        openList.add(currentNode);
 
         int col = 0;
         int row = 0;
@@ -79,7 +79,7 @@ public class PathFinder {
             }
             // Check Interactive tiles
             for(int i = 0; i < gamePanel.interactiveTile[1].length; i++){
-                if(gamePanel.interactiveTile[gamePanel.currentMap][i].destructible && gamePanel.interactiveTile[gamePanel.currentMap][i] != null){
+                if(gamePanel.interactiveTile[gamePanel.currentMap][i] != null && gamePanel.interactiveTile[gamePanel.currentMap][i].destructible){
                     int interactiveTileCol = gamePanel.interactiveTile[gamePanel.currentMap][i].worldX/gamePanel.tileSize;
                     int interactiveTileRow = gamePanel.interactiveTile[gamePanel.currentMap][i].worldY/gamePanel.tileSize;
                     node[interactiveTileCol][interactiveTileRow].solid = true;
@@ -114,7 +114,7 @@ public class PathFinder {
     }
 
     public boolean search(){
-        while(!goalReached && step < 500){
+        while(!goalReached && step < 1000){
             int col = currentNode.col;
             int row = currentNode.row;
 
@@ -126,13 +126,13 @@ public class PathFinder {
             if(row - 1 >=0){
                 openNode(node[col][row - 1]);
             }
-            // Open the bottom node
-            if(row + 1 < gamePanel.maxWorldRow){
-                openNode(node[col][row + 1]);
-            }
             // Open the left node
             if(col - 1 >= 0){
                 openNode(node[col - 1][row]);
+            }
+            // Open the bottom node
+            if(row + 1 < gamePanel.maxWorldRow){
+                openNode(node[col][row + 1]);
             }
             // Open the right node
             if(col + 1 < gamePanel.maxWorldCol){
@@ -145,20 +145,20 @@ public class PathFinder {
 
             for(int i = 0; i < openList.size(); i++){
                 // Check if F cost is better
-                if(openList.get(i).fCost < currentNode.fCost){
+                if(openList.get(i).fCost < bestNodeFCost){
                     bestNodeIndex = i;
                     bestNodeFCost = openList.get(i).fCost;
                 }
                 // If equals, check G cost
-                else if(openList.get(i).fCost == currentNode.fCost){
-                    if(openList.get(i).gCost < currentNode.gCost){
+                else if(openList.get(i).fCost == bestNodeFCost){
+                    if(openList.get(i).gCost < openList.get(bestNodeIndex).gCost){
                         bestNodeIndex = i;
                     }
                 }
             }
 
             // If there's no node in openList, end the loop
-            if(openList.isEmpty()){
+            if(openList.size() == 0){
                 break;
             }
 
@@ -174,7 +174,7 @@ public class PathFinder {
     }
 
     public void openNode(Node node){
-        if(!node.solid && !node.checked && !node.open){
+        if(!node.open && !node.checked && !node.solid ){
             node.open = true;
             node.parent = currentNode;
             openList.add(node);

@@ -4,6 +4,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.UtilityTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles;
     public int[][][] mapTileNumber; // First dimension is for the layer/map, second is for the column, third is for the row
+    // boolean drawPath = true;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -162,5 +164,18 @@ public class TileManager {
                 worldRow++;
             }
         }
+        /*
+        if(drawPath){
+            graphicsContext.setFill(Color.rgb(255, 0, 0, 0.5));
+
+            for(int i = 0; i < gamePanel.pathFinder.pathList.size(); i++){
+                int worldX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
+                int worldY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
+                int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+                int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+
+                graphicsContext.fillRect(screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
+            }
+        }*/
     }
 }

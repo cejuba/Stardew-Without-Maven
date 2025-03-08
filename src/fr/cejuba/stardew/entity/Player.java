@@ -72,10 +72,10 @@ public class Player extends Entity {
     }
 
     public void setDefaultPosition() {
-        //worldX = gamePanel.tileSize * 23;
-        //worldY = gamePanel.tileSize * 21;
-        worldX = gamePanel.tileSize * 12;
-        worldY = gamePanel.tileSize * 11;
+        worldX = gamePanel.tileSize * 23;
+        worldY = gamePanel.tileSize * 21;
+        //worldX = gamePanel.tileSize * 12;
+        //worldY = gamePanel.tileSize * 11;
         direction = "down";
 
     }
@@ -223,13 +223,13 @@ public class Player extends Entity {
         }
 
 
-        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvalaibleCounter == 30 && projectile.haveRessource(this)){
+        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveRessource(this)){
             projectile.set(worldX, worldY, direction, true, this);
 
             projectile.subtractRessource(this);
 
             gamePanel.projectileList.add(projectile);
-            shotAvalaibleCounter = 0;
+            shotAvailableCounter = 0;
             gamePanel.playSoundEffect(10);
         }
         // Invincibility
@@ -240,8 +240,8 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
-        if(shotAvalaibleCounter < 30){
-            shotAvalaibleCounter++;
+        if(shotAvailableCounter < 30){
+            shotAvailableCounter++;
         }
         if(life > maxLife){
             life = maxLife;
