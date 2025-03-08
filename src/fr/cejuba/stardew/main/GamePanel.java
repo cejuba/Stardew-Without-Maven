@@ -49,7 +49,7 @@ public class GamePanel extends Canvas {
 
     int FPS = 60;
 
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     public KeyHandler keyHandler = new KeyHandler(this);
     public EventHandler eventHandler = new EventHandler(this);
     Sound music = new Sound();
