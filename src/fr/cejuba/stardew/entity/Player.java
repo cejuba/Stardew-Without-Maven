@@ -5,13 +5,11 @@ import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.Boots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
-import fr.cejuba.stardew.object.shield.WoodenShield;
+import fr.cejuba.stardew.object.shield.RustyShield;
 import fr.cejuba.stardew.object.weapon.Axe;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
-
-import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -64,7 +62,7 @@ public class Player extends Entity {
         nextLevelExperience = 5;
         gold = 500;
         currentWeapon = new Axe(gamePanel);
-        currentShield = new WoodenShield(gamePanel);
+        currentShield = new RustyShield(gamePanel);
         currentBoots = new Boots(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
@@ -74,8 +72,10 @@ public class Player extends Entity {
     }
 
     public void setDefaultPosition() {
-        worldX = gamePanel.tileSize * 23;
-        worldY = gamePanel.tileSize * 21;
+        //worldX = gamePanel.tileSize * 23;
+        //worldY = gamePanel.tileSize * 21;
+        worldX = gamePanel.tileSize * 12;
+        worldY = gamePanel.tileSize * 11;
         direction = "down";
 
     }
@@ -111,14 +111,14 @@ public class Player extends Entity {
         try {
             System.out.println("Loading player images");
 
-            up0 = setup("player/walking/Back_0", gamePanel.tileSize, gamePanel.tileSize);
-            up1 = setup("player/walking/Back_1", gamePanel.tileSize, gamePanel.tileSize);
-            down0 = setup("player/walking/Face_0", gamePanel.tileSize, gamePanel.tileSize);
-            down1 = setup("player/walking/Face_1", gamePanel.tileSize, gamePanel.tileSize);
-            right0 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
-            right1 = setup("player/walking/Right_1", gamePanel.tileSize, gamePanel.tileSize);
-            left0 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
-            left1 = setup("player/walking/Right_0", gamePanel.tileSize, gamePanel.tileSize);
+            up1 = setup("player/walking/player_up_1", gamePanel.tileSize, gamePanel.tileSize);
+            up2 = setup("player/walking/player_up_2", gamePanel.tileSize, gamePanel.tileSize);
+            down1 = setup("player/walking/player_down_1", gamePanel.tileSize, gamePanel.tileSize);
+            down2 = setup("player/walking/player_down_2", gamePanel.tileSize, gamePanel.tileSize);
+            right1 = setup("player/walking/player_right_1", gamePanel.tileSize, gamePanel.tileSize);
+            right2 = setup("player/walking/player_right_2", gamePanel.tileSize, gamePanel.tileSize);
+            left1 = setup("player/walking/player_right_1", gamePanel.tileSize, gamePanel.tileSize);
+            left2 = setup("player/walking/player_right_2", gamePanel.tileSize, gamePanel.tileSize);
 
             System.out.println("Player images loaded successfully");
 
@@ -448,7 +448,7 @@ public class Player extends Entity {
         switch (direction) {
             case "up" :
                 if(!attacking){
-                    image = (spriteNumber == 0) ? up0 : up1;
+                    image = (spriteNumber == 0) ? up1 : up2;
                 }
                 else{
                     tempScreenY -= gamePanel.tileSize;
@@ -457,7 +457,7 @@ public class Player extends Entity {
                 break;
             case "down" :
                 if(!attacking){
-                    image = (spriteNumber == 0) ? down0 : down1;
+                    image = (spriteNumber == 0) ? down1 : down2;
                 }
                 else{
                     image = (spriteNumber == 0) ? attackDown0 : attackDown1;
@@ -465,7 +465,7 @@ public class Player extends Entity {
                 break;
             case "left" :
                 if(!attacking){
-                    image = (spriteNumber == 0) ? left0 : left1;
+                    image = (spriteNumber == 0) ? left1 : left2;
                 }
                 else{
                     tempScreenX -= gamePanel.tileSize;
@@ -474,7 +474,7 @@ public class Player extends Entity {
                 break;
             case "right" :
                 if(!attacking){
-                    image = (spriteNumber == 0) ? right0 : right1;
+                    image = (spriteNumber == 0) ? right1 : right2;
                 }
                 else{
                     image = (spriteNumber == 0) ? attackRight0 : attackRight1;

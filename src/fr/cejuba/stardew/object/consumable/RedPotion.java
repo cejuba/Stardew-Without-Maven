@@ -14,7 +14,7 @@ public class RedPotion extends Entity {
 
         type = type_consumable;
         name = "RedPotion";
-        down1 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your life by " + value + ".";
         price = 25;
 

@@ -6,11 +6,9 @@ import fr.cejuba.stardew.object.Boots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
-import fr.cejuba.stardew.object.shield.WoodenShield;
+import fr.cejuba.stardew.object.shield.RustyShield;
 import fr.cejuba.stardew.object.weapon.Axe;
 import fr.cejuba.stardew.object.weapon.Sword;
-
-import java.util.Random;
 
 public class Merchant extends Entity {
 
@@ -32,14 +30,14 @@ public class Merchant extends Entity {
         try {
             System.out.println("Loading player images...");
 
-            up0 = setup("npc/merchant_down_1", gamePanel.tileSize, gamePanel.tileSize);
-            up1 = setup("npc/merchant_down_2", gamePanel.tileSize, gamePanel.tileSize);
-            down0 = setup("npc/merchant_down_1", gamePanel.tileSize, gamePanel.tileSize);
-            down1 = setup("npc/merchant_down_2", gamePanel.tileSize, gamePanel.tileSize);
-            right0 = setup("npc/merchant_down_1", gamePanel.tileSize, gamePanel.tileSize);
-            right1 = setup("npc/merchant_down_2", gamePanel.tileSize, gamePanel.tileSize);
-            left0 = setup("npc/merchant_down_1", gamePanel.tileSize, gamePanel.tileSize);
-            left1 = setup("npc/merchant_down_2", gamePanel.tileSize, gamePanel.tileSize);
+            up1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            up2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            down1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            down2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            right1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            right2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            left1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            left2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
 
             System.out.println("Player images loaded successfully");
 
@@ -59,7 +57,7 @@ public class Merchant extends Entity {
         inventory.add(new Key(gamePanel));
         inventory.add(new Sword(gamePanel));
         inventory.add(new Axe(gamePanel));
-        inventory.add(new WoodenShield(gamePanel));
+        inventory.add(new RustyShield(gamePanel));
         inventory.add(new BlueShield(gamePanel));
         inventory.add(new Boots(gamePanel));
     }

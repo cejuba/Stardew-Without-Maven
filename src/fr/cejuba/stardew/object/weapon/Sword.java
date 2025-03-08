@@ -10,7 +10,7 @@ public class Sword extends Entity {
 
         type = type_sword;
         name = "Sword";
-        down1 = setup("/object/sword", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/sword", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 1;
 
         attackArea.setWidth(36);

@@ -9,7 +9,7 @@ public class Axe extends Entity {
 
         type = type_axe;
         name = "Woodcutter's Axe";
-        down1 = setup("/object/axe", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
 
         attackArea.setWidth(30);

@@ -14,7 +14,7 @@ public class ManaCrystal extends Entity {
         type = type_pickUpOnly;
         name = "Mana Crystal";
         value = 1;
-        down1 = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);
         image = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);
         image2 = setup("object/manacrystal_blank", gamePanel.tileSize, gamePanel.tileSize);
     }

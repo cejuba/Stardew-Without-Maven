@@ -14,7 +14,7 @@ public class Entity {
     GamePanel gamePanel;
 
     // Images
-    public Image up0, up1, down0, down1, left0, left1, right0, right1;
+    public Image up1, up2, down1, down2, left1, left2, right1, right2;
     public Image attackUp0, attackUp1, attackDown0, attackDown1, attackLeft0, attackLeft1, attackRight0, attackRight1;
     public Image image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 48 ,48);
@@ -179,10 +179,10 @@ public class Entity {
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
 
             switch (direction) {
-                case "up" -> image = (spriteNumber == 0) ? up0 : up1;
-                case "down" -> image = (spriteNumber == 0) ? down0 : down1;
-                case "left" -> image = (spriteNumber == 0) ? left0 : left1;
-                case "right" -> image = (spriteNumber == 0) ? right0 : right1;
+                case "up" -> image = (spriteNumber == 0) ? up1 : up2;
+                case "down" -> image = (spriteNumber == 0) ? down1 : down2;
+                case "left" -> image = (spriteNumber == 0) ? left1 : left2;
+                case "right" -> image = (spriteNumber == 0) ? right1 : right2;
             }
 
             // Monster HP bar

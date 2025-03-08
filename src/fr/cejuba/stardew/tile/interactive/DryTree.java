@@ -11,7 +11,7 @@ public class DryTree extends InteractiveTile {
         super(gamePanel, column, row);
         this.gamePanel = gamePanel;
 
-        down1 = setup("tile/interactive/drytree", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("tile/interactive/drytree", gamePanel.tileSize, gamePanel.tileSize);
         destructible = true;
         life = 3;
 

@@ -24,14 +24,14 @@ public class Fireball extends Projectile {
     }
 
     public void getImage(){
-        up0 = setup("projectile/fireball_up_1", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("projectile/fireball_up_2", gamePanel.tileSize, gamePanel.tileSize);
-        down0 = setup("projectile/fireball_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("projectile/fireball_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        left0 = setup("projectile/fireball_left_1", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("projectile/fireball_left_2", gamePanel.tileSize, gamePanel.tileSize);
-        right0 = setup("projectile/fireball_right_1", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("projectile/fireball_right_2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("projectile/fireball_up_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("projectile/fireball_up_2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("projectile/fireball_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("projectile/fireball_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("projectile/fireball_left_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("projectile/fireball_left_2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("projectile/fireball_right_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("projectile/fireball_right_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public boolean haveRessource(Entity user){

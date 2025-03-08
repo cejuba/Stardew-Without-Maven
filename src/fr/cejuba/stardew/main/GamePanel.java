@@ -29,7 +29,7 @@ public class GamePanel extends Canvas {
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
     public final int maxMap = 10;
-    public int currentMap = 0;
+    public int currentMap = 1;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 

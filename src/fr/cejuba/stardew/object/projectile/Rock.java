@@ -24,14 +24,14 @@ public class Rock extends Projectile {
     }
 
     public void getImage() {
-        up0 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         up1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down0 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         down1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        left0 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         left1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        right0 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("projectile/rock_down_1", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public boolean haveRessource(Entity user){

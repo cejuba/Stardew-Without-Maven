@@ -44,7 +44,7 @@ public class InteractiveTile extends Entity {
            worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
            worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY ){
 
-            graphicsContext.drawImage(down1, screenX, screenY);
+            graphicsContext.drawImage(down2, screenX, screenY);
         }
     }
 }

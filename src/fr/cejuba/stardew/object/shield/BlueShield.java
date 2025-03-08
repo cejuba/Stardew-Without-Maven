@@ -9,7 +9,7 @@ public class BlueShield extends Entity {
 
         type = type_shield;
         name = "Blue Shield";
-        down1 = setup("/object/shield_blue", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/shield_blue", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 2;
 
         description = "[" + name + "]\n" + "What a strange\nshield .";

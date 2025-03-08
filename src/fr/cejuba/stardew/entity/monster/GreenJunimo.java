@@ -39,14 +39,14 @@ public class GreenJunimo extends Entity {
 
     public void getImage(){
 
-        up0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        down0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        left0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        right0 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/monster/junimo_down_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/monster/junimo_down_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setAction() {

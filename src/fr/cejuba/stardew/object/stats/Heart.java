@@ -13,7 +13,7 @@ public class Heart extends Entity {
         type = type_pickUpOnly;
         name = "Heart";
         value = 2;
-        down1 = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);
         image = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);
         image2 = setup("object/heart_half", gamePanel.tileSize, gamePanel.tileSize);
         image3 = setup("object/heart_blank", gamePanel.tileSize, gamePanel.tileSize);

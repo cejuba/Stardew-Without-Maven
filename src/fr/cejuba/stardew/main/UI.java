@@ -56,7 +56,7 @@ public class UI {
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
         Entity bronzeCoin = new BronzeCoin(gamePanel);
-        gold = bronzeCoin.down1;
+        gold = bronzeCoin.down2;
     }
 
     public void addMessage(String text) {
@@ -193,7 +193,7 @@ public class UI {
 
             x = gamePanel.screenWidth / 2 - gamePanel.tileSize;
             y += gamePanel.tileSize * 2;
-            graphicsContext.drawImage(gamePanel.player.down0, x, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2);
+            graphicsContext.drawImage(gamePanel.player.down1, x, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2);
 
             graphicsContext.setFont(arial_40);
 
@@ -421,13 +421,13 @@ public class UI {
 
 
         textY += lineHeight;
-        graphicsContext.drawImage(gamePanel.player.currentWeapon.down1, tailX - gamePanel.tileSize, textY-24);
+        graphicsContext.drawImage(gamePanel.player.currentWeapon.down2, tailX - gamePanel.tileSize, textY-24);
 
         textY += gamePanel.tileSize;
-        graphicsContext.drawImage(gamePanel.player.currentShield.down1, tailX - gamePanel.tileSize, textY-24);
+        graphicsContext.drawImage(gamePanel.player.currentShield.down2, tailX - gamePanel.tileSize, textY-24);
 
         textY += gamePanel.tileSize;
-        graphicsContext.drawImage(gamePanel.player.currentBoots.down1, tailX - gamePanel.tileSize, textY-24);
+        graphicsContext.drawImage(gamePanel.player.currentBoots.down2, tailX - gamePanel.tileSize, textY-24);
     }
 
     public void drawGameOverScreen(){
@@ -510,7 +510,7 @@ public class UI {
                 graphicsContext.setFill(Color.GOLD);
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
-            graphicsContext.drawImage(entity.inventory.get(i).down1, slotX, slotY);
+            graphicsContext.drawImage(entity.inventory.get(i).down2, slotX, slotY);
             slotX += slotSize;
             if(i % 5 == 4){
                 slotX = slotXStart;
