@@ -63,19 +63,19 @@ public class Lighting {
         Stop[] stops = new Stop[]{};
         if(gamePanel.player.currentLight == null){
             stops = new Stop[]{
-                    new Stop(0, Color.rgb(0, 0, 0, 0)),
-                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 0, 0.80)),
-                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 0, 0.95)),
-                    new Stop(1, Color.rgb(0, 0, 0, 0.98))
+                    new Stop(0, Color.rgb(0, 0, 10, 0.0)),
+                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 10, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 10, 0.95)),
+                    new Stop(1, Color.rgb(0, 0, 10, 0.98))
             };
         }
         else{
             circleRadius = gamePanel.player.currentLight.lightRadius;
             stops = new Stop[]{
-                    new Stop(0, Color.rgb(0, 0, 0, 0)),
-                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 0, 0.80)),
-                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 0, 0.95)),
-                    new Stop(1, Color.rgb(0, 0, 0, 0.98))
+                    new Stop(0, Color.rgb(0, 0, 10, 0)),
+                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 10, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 10, 0.95)),
+                    new Stop(1, Color.rgb(0, 0, 10, 0.98))
             };
         }
 
