@@ -95,6 +95,8 @@ public class UI {
             drawTransition();
         } else if(gamePanel.gameState == gamePanel.tradeState){
             drawTradeScreen();
+        } else if(gamePanel.gameState == gamePanel.sleepState){
+            drawSleepScreen();
         }
     }
 
@@ -622,6 +624,27 @@ public class UI {
             case 2 -> trade_sell();
         }
         gamePanel.keyHandler.enterPressed = false;
+    }
+
+    public void drawSleepScreen(){
+        counter++;
+
+        if(counter < 120){
+            gamePanel.environmentManager.lighting.filterAlpha += 0.01f;
+            if(gamePanel.environmentManager.lighting.filterAlpha >= 0.98f){
+                gamePanel.environmentManager.lighting.filterAlpha = 1f;
+            }
+        }
+        else{
+            gamePanel.environmentManager.lighting.filterAlpha -= 0.01f;
+            if(gamePanel.environmentManager.lighting.filterAlpha <= 0.02f){
+                gamePanel.environmentManager.lighting.filterAlpha = 0f;
+                counter = 0;
+                gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
+                gamePanel.gameState = gamePanel.playState;
+
+            }
+        }
     }
 
     public void options_top(int frameX, int frameY){

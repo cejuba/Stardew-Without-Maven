@@ -7,7 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class EnvironmentManager {
 
     GamePanel gamePanel;
-    Lighting lighting;
+    public Lighting lighting;
 
     public EnvironmentManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

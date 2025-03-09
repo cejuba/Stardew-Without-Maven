@@ -4,6 +4,7 @@ import fr.cejuba.stardew.entity.npc.Merchant;
 import fr.cejuba.stardew.entity.npc.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenJunimo;
 import fr.cejuba.stardew.object.Chest;
+import fr.cejuba.stardew.object.Tent;
 import fr.cejuba.stardew.object.money.BronzeCoin;
 import fr.cejuba.stardew.object.Door;
 import fr.cejuba.stardew.object.consumable.RedPotion;
@@ -35,6 +36,10 @@ public class AssetSetter {
         gamePanel.object[mapNumber][i] = new BronzeCoin(gamePanel);
         gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 26;
         gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 21;
+        i++;
+        gamePanel.object[mapNumber][i] = new Tent(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 19;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 20;
         i++;
         gamePanel.object[mapNumber][i] = new Axe(gamePanel);
         gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 33;
