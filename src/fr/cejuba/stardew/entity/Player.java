@@ -50,6 +50,7 @@ public class Player extends Entity {
         setDefaultPosition();
 
         // Player status
+
         level = 1;
         maxLife = 6;
         maxMana = 4;
@@ -68,7 +69,8 @@ public class Player extends Entity {
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
         attack = getAttack();
         defense = getDefense();
-        speed = getSpeed();
+        defaultSpeed = getSpeed();
+        speed = defaultSpeed;
     }
 
     public void setDefaultPosition() {
@@ -368,6 +370,8 @@ public class Player extends Entity {
             if(!gamePanel.monster[gamePanel.currentMap][index].invincible){
                 gamePanel.playSoundEffect(5);
 
+                knockBack(gamePanel.monster[gamePanel.currentMap][index]);
+
                 int damage = attack - gamePanel.monster[gamePanel.currentMap][index].defense;
                 if(damage < 0){
                     damage = 0;
@@ -388,6 +392,12 @@ public class Player extends Entity {
                 }
             }
         }
+    }
+
+    public void knockBack(Entity entity) {
+        entity.direction = direction;
+        entity.speed += 10;
+        entity.knockBack = true;
     }
 
     public void damageInteractiveTile(int i){

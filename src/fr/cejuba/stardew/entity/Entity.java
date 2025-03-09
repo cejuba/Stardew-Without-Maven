@@ -35,6 +35,7 @@ public class Entity {
     public boolean dying = false;
     boolean hpBarOn = false;
     public boolean onPath = false;
+    public boolean knockBack = false;
 
     // Counter
     public int actionLockCounter = 0;
@@ -43,9 +44,11 @@ public class Entity {
     public int shotAvailableCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
+    int knockBackCounter = 0;
 
     // Attributes
     public String name;
+    public int defaultSpeed;
     public int speed;
     public int maxLife;
     public int life;
@@ -128,15 +131,42 @@ public class Entity {
     }
 
     public void update() {
-        setAction();
-        checkCollision();
 
-        if (!collisionActivated) {
-            switch (direction) {
-                case "up" -> worldY -= speed;
-                case "down" -> worldY += speed;
-                case "left" -> worldX -= speed;
-                case "right" -> worldX += speed;
+        if(knockBack){
+            checkCollision();
+
+            if(collision){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+            else{
+                switch(gamePanel.player.direction){
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
+
+            knockBackCounter++;
+            if(knockBackCounter >= 10){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+        }
+        else{
+            setAction();
+            checkCollision();
+
+            if (!collisionActivated) {
+                switch (direction) {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
             }
         }
 

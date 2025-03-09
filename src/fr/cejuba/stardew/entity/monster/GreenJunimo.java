@@ -19,7 +19,8 @@ public class GreenJunimo extends Entity {
 
         type = type_monster;
         name = "Green Junimo";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 4;
         life = maxLife;
         attack = 5;
