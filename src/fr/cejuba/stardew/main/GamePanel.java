@@ -3,11 +3,15 @@ package fr.cejuba.stardew.main;
 
 // TODO : Check if player retry(); : is the items deleted or not (possible bug bcs can appear multiple times)
 // TODO : Bug when a junimo is not killed and the player restart the game, the junimo is still with it's previous life
+// TODO : Map are darker at night / impossible ?
+// TODO : Add control in the control pannel (M for Map and X for miniMap (and others if I forgot)
+
 
 import fr.cejuba.stardew.AI.PathFinder;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
 import fr.cejuba.stardew.environment.EnvironmentManager;
+import fr.cejuba.stardew.tile.Map;
 import fr.cejuba.stardew.tile.TileManager;
 import fr.cejuba.stardew.tile.interactive.InteractiveTile;
 import javafx.animation.AnimationTimer;
@@ -63,6 +67,7 @@ public class GamePanel extends Canvas {
     public UI ui = new UI(this);
     public PathFinder pathFinder = new PathFinder(this);
     EnvironmentManager environmentManager = new EnvironmentManager(this);
+    Map map = new Map(this);
 
     // Entity and object
     public Player player = new Player(this, keyHandler);
@@ -73,7 +78,7 @@ public class GamePanel extends Canvas {
     public Entity projectile[][] = new Entity[maxMap][20];
     // public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
-    ArrayList<Entity> entityList = new ArrayList<>();
+    public ArrayList<Entity> entityList = new ArrayList<>();
 
     // States
     public int gameState;
@@ -87,6 +92,7 @@ public class GamePanel extends Canvas {
     public final int transitionState = 7;
     public final int tradeState = 8;
     public final int sleepState = 9;
+    public final int mapState = 10;
 
     public GamePanel(Stage stage) {
         this.stage = stage;
@@ -231,14 +237,22 @@ public class GamePanel extends Canvas {
     }
 
     public void drawTempScreen(){
-        long drawStartTime = 0;
 
+        // Debug
+        long drawStartTime = 0;
         if(keyHandler.showDebugText){
             drawStartTime = System.nanoTime();
         }
+
+        // Title Screen
         if(gameState==titleState){
             ui.draw(graphicsContext);
         }
+        // Map Screen
+        else if(gameState==mapState){
+            map.drawFullMapScreen(graphicsContext);
+        }
+        // Others
         else{
             tileManager.draw(graphicsContext);
 
@@ -296,6 +310,8 @@ public class GamePanel extends Canvas {
             entityList.clear();
 
             environmentManager.draw(graphicsContext);
+
+            map.drawMiniMap(graphicsContext);
 
             ui.draw(graphicsContext);
         }

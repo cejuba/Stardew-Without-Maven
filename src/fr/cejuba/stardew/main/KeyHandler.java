@@ -35,6 +35,8 @@ public class KeyHandler {
                 gameOverState(event);
             } else if (gamePanel.gameState == gamePanel.tradeState) {
                 tradeState(event);
+            } else if (gamePanel.gameState == gamePanel.mapState) {
+                mapState(event);
             }
         });
 
@@ -125,6 +127,8 @@ public class KeyHandler {
                     case 1 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/interior01.txt", 1);
                 }
             }
+            case M -> gamePanel.gameState = gamePanel.mapState;
+            case X -> gamePanel.map.miniMapActivated = !gamePanel.map.miniMapActivated;
             case P -> gamePanel.gameState = gamePanel.pauseState;
             case C -> gamePanel.gameState = gamePanel.characterState;
             case ESCAPE -> gamePanel.gameState = gamePanel.optionState;
@@ -286,6 +290,12 @@ public class KeyHandler {
                     gamePanel.ui.subState = 0;
                 }
             }
+        }
+    }
+
+    private void mapState(KeyEvent event) {
+        switch (event.getCode()) {
+            case ESCAPE, M -> gamePanel.gameState = gamePanel.playState;
         }
     }
 
