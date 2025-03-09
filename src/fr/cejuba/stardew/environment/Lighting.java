@@ -1,42 +1,52 @@
 package fr.cejuba.stardew.environment;
 
+// TODO : If there's a bug check #45 video around 13:00
+
 import fr.cejuba.stardew.main.GamePanel;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-
-import java.awt.*;
 
 public class Lighting {
 
     GamePanel gamePanel;
     WritableImage darknessFilter;
-    int circleRadius;
 
-    public Lighting(GamePanel gamePanel, int circleRadius) {
+    public Lighting(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.circleRadius = circleRadius;
     }
 
+    public void setLightSource() {
+
+    }
     public void draw(GraphicsContext graphicsContext) {
+
+        int circleRadius = 100;
 
         int centerX = gamePanel.player.screenX + gamePanel.tileSize / 2;
         int centerY = gamePanel.player.screenY + gamePanel.tileSize / 2;
 
-        Stop[] stops = new Stop[]{
-                new Stop(0, Color.rgb(0, 0, 0, 0)),
-                new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 0, 0.80)),
-                new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 0, 0.95)),
-                new Stop(1, Color.rgb(0, 0, 0, 0.98))
-        };
+        Stop[] stops = new Stop[]{};
+        if(gamePanel.player.currentLight == null){
+            stops = new Stop[]{
+                    new Stop(0, Color.rgb(0, 0, 0, 0)),
+                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 0, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 0, 0.95)),
+                    new Stop(1, Color.rgb(0, 0, 0, 0.98))
+            };
+        }
+        else{
+            circleRadius = gamePanel.player.currentLight.lightRadius;
+            stops = new Stop[]{
+                    new Stop(0, Color.rgb(0, 0, 0, 0)),
+                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 0, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 0, 0.95)),
+                    new Stop(1, Color.rgb(0, 0, 0, 0.98))
+            };
+        }
 
         // Create a gradation paint settings for the light circle
         RadialGradient radialGradient = new RadialGradient(0, 0, centerX, centerY, gamePanel.screenWidth, false, CycleMethod.NO_CYCLE, stops);

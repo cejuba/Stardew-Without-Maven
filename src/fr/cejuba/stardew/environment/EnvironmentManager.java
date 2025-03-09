@@ -14,7 +14,7 @@ public class EnvironmentManager {
     }
 
     public void setup(){
-        lighting = new Lighting(gamePanel, 200);
+        lighting = new Lighting(gamePanel);
     }
 
     public void draw(GraphicsContext graphicsContext) {
