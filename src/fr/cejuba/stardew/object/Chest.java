@@ -18,7 +18,7 @@ public class Chest extends Entity {
         name = "Chest";
         image = setup("object/chest", gamePanel.tileSize, gamePanel.tileSize);
         image2 = setup("object/chest_opened", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = image;
+        down2 = image;
         collision = true;
 
         solidArea.setX(4);
@@ -42,7 +42,7 @@ public class Chest extends Entity {
                 stringBuilder.append("\nBut you cannot carry any more.");
             } else {
                 stringBuilder.append("\nYou obtained the " + loot.name + ".");
-                down1 = image2;
+                down2 = image2;
                 opened = true;
             }
             gamePanel.ui.currentDialogue = stringBuilder.toString();
