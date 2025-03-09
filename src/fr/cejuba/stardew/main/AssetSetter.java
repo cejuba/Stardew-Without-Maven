@@ -64,9 +64,21 @@ public class AssetSetter {
         gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 10;
         gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 12;
         i++;
-        gamePanel.object[mapNumber][i] = new Chest(gamePanel, new RedPotion(gamePanel));
+        gamePanel.object[mapNumber][i] = new Chest(gamePanel, new RedPotion(gamePanel)); // TODO : Not showing on the map but still exists
         gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 27;
         gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 16;
+        i++;
+        gamePanel.object[mapNumber][i] = new RedPotion(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 21;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 20;
+        i++;
+        gamePanel.object[mapNumber][i] = new RedPotion(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 20;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 20;
+        i++;
+        gamePanel.object[mapNumber][i] = new RedPotion(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 17;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 21;
     }
 
     public void setNPC() {

@@ -511,6 +511,26 @@ public class UI {
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
             graphicsContext.drawImage(entity.inventory.get(i).down2, slotX, slotY);
+
+            // Display amount
+            if(entity.inventory.get(i).amount > 1){ // If merchant's inventory display player items' amount add this condition : && entity == gamePanel.player
+                graphicsContext.setFont(arial_32F);
+                int amountX;
+                int amountY;
+
+                String s = "" + entity.inventory.get(i).amount;
+                amountX = getXAlignedToRightText(s, slotX + 44);
+                amountY = slotY + gamePanel.tileSize;
+
+                // Shadow
+                graphicsContext.setFill(Color.rgb(60,60,60));
+                graphicsContext.fillText(s, amountX, amountY);
+
+                // Number
+                graphicsContext.setFill(Color.WHITE);
+                graphicsContext.fillText(s, amountX-3, amountY-3);
+            }
+
             slotX += slotSize;
             if(i % 5 == 4){
                 slotX = slotXStart;
@@ -916,8 +936,18 @@ public class UI {
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
                     currentDialogue = "You need more coin to buy that!";
-                    drawDialogueScreen();
                 }
+                else {
+                    if(gamePanel.player.canObtainItem(npc.inventory.get(itemIndex))){
+                        gamePanel.player.gold -= npc.inventory.get(itemIndex).price;
+                    }
+                    else{
+                        subState = 0;
+                        gamePanel.gameState = gamePanel.dialogueState;
+                        currentDialogue = "Your inventory is full!";
+                    }
+                }
+                /*
                 else if(gamePanel.player.inventory.size() >= gamePanel.player.maxInventorySize){
                     subState = 0;
                     gamePanel.gameState = gamePanel.dialogueState;
@@ -928,6 +958,7 @@ public class UI {
                     gamePanel.player.gold -= npc.inventory.get(itemIndex).price;
                     gamePanel.player.inventory.add(npc.inventory.get(itemIndex));
                 }
+                 */
             }
         }
     }
@@ -978,8 +1009,12 @@ public class UI {
                     drawDialogueScreen();
                 }
                 else{
-                    gamePanel.player.gold += price;
-                    gamePanel.player.inventory.remove(itemIndex);
+                    if(gamePanel.player.inventory.get(itemIndex).amount > 1){
+                        gamePanel.player.inventory.get(itemIndex).amount--;
+                    }
+                    else{
+                        gamePanel.player.inventory.remove(itemIndex);
+                    }
                 }
             }
         }

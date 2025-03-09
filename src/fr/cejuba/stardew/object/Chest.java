@@ -38,11 +38,10 @@ public class Chest extends Entity {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("You found a " + loot.name + " in this chest.");
 
-            if(gamePanel.player.inventory.size() == gamePanel.player.maxInventorySize){
+            if(!gamePanel.player.canObtainItem(loot)){
                 stringBuilder.append("\nBut you cannot carry any more.");
             } else {
                 stringBuilder.append("\nYou obtained the " + loot.name + ".");
-                gamePanel.player.inventory.add(loot);
                 down1 = image2;
                 opened = true;
             }

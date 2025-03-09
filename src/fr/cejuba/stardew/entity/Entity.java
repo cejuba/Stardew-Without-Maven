@@ -35,7 +35,7 @@ public class Entity {
     public boolean dying = false;
     boolean hpBarOn = false;
     public boolean onPath = false;
-    public boolean knockBack = false;
+    public boolean knockBack = false; // TODO : Bug : knockBack is knock enemy in places where they shouldn't be (inside a tree, in the ocean, ...)
 
     // Counter
     public int actionLockCounter = 0;
@@ -80,6 +80,8 @@ public class Entity {
     public int useCost;
     public int price;
     public int knockBackPower = 0;
+    public boolean stackable = false;
+    public int amount = 1;
 
     // Type
     public int type; // 0 = Player, 1 = NPC, 2 = Monster TODO : Do it in a cleaner way

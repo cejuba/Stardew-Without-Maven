@@ -18,6 +18,7 @@ public class Key extends Entity {
         description = "[" + name + "]\n" + "It opens a door.";
 
         price = 100;
+        stackable = true;
     }
 
     public boolean use(Entity entity) {
