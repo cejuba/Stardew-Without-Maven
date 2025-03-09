@@ -4,6 +4,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.object.boots.Boots;
 import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.RustyShield;
 import fr.cejuba.stardew.object.weapon.Axe;
@@ -94,6 +95,22 @@ public class Player extends Entity {
         inventory.add(currentShield);
         inventory.add(currentBoots);
         inventory.add(new Key(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
+        inventory.add(new RedPotion(gamePanel));
     }
 
     public int getAttack() {

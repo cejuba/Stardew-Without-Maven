@@ -45,8 +45,6 @@ public class EventHandler {
         if (canTouchEvent) {
             if (hit(0,23, 12, "up")) {
                 healingPool();
-            } else if (hit(0, 27, 16, "right")) {
-                damagePit();
             } else if (hit(0,30,12, "any")){
                 teleport(1,12,13);
             } else if (hit(1,12,13, "any")){
