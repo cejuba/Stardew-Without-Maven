@@ -17,6 +17,10 @@ public class EnvironmentManager {
         lighting = new Lighting(gamePanel);
     }
 
+    public void update(){
+        lighting.update();
+    }
+
     public void draw(GraphicsContext graphicsContext) {
         lighting.draw(graphicsContext);
     }

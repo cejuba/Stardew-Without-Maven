@@ -179,6 +179,7 @@ public class GamePanel extends Canvas {
 
     public void update() {
         player.update();
+        environmentManager.update();
         for (int i = 0; i < npc[1].length; i++) { // [1] is because [0] is for the map
             if (npc[currentMap][i] != null) {
                 npc[currentMap][i].update();
