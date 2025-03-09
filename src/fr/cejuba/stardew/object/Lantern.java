@@ -10,7 +10,7 @@ public class Lantern extends Entity {
 
         type = type_light;
         name = "Lantern";
-        down1 = setup("object/lantern", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/lantern", gamePanel.tileSize, gamePanel.tileSize);
         description = "A lantern to light your way.";
         price = 200;
         lightRadius = 250;

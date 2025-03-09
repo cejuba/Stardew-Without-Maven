@@ -506,7 +506,9 @@ public class UI {
 
         // Draw Player's inventory
         for(int i = 0; i < entity.inventory.size(); i++){
-            if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i) == entity.currentBoots){
+
+            // Equip cursor
+            if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i) == entity.currentBoots || entity.inventory.get(i) == entity.currentLight){
                 graphicsContext.setFill(Color.GOLD);
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }

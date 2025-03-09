@@ -2,6 +2,7 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
+import fr.cejuba.stardew.object.Lantern;
 import fr.cejuba.stardew.object.boots.Boots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
@@ -19,6 +20,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public boolean lightUpdated = false;
 
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -94,6 +96,7 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(currentBoots);
+        inventory.add(new Lantern(gamePanel));
         inventory.add(new Key(gamePanel));
         inventory.add(new RedPotion(gamePanel));
     }
@@ -459,16 +462,21 @@ public class Player extends Entity {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage();
-            }
-            if(selectedItem.type == type_shield){
+            } else if(selectedItem.type == type_shield){
                 currentShield = selectedItem;
                 defense = getDefense();
-            }
-            if(selectedItem.type == type_boots){
+            } else if(selectedItem.type == type_boots){
                 currentBoots = selectedItem;
                 speed = getSpeed();
-            }
-            if(selectedItem.type == type_consumable){
+            } else if(selectedItem.type == type_light){
+                if(currentLight == selectedItem) {
+                    currentLight = null;
+                }
+                else{
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
+            } else if(selectedItem.type == type_consumable){
                 System.out.println(selectedItem.name + " used");
                 if(selectedItem.use(this)){
                     if(selectedItem.amount > 1){
