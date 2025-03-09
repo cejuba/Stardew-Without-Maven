@@ -84,7 +84,15 @@ public class GreenJunimo extends Entity {
             int i = new Random().nextInt(200) + 1;
             if (i > 197 && !projectile.alive && shotAvailableCounter == 30){
                 projectile.set(worldX, worldY, direction, true, this);
-                gamePanel.projectileList.add(projectile);
+                // gamePanel.projectileList.add(projectile);
+
+                // Check vacancy
+                for (int j = 0; j < gamePanel.projectile[1].length; j++) {
+                    if (gamePanel.projectile[gamePanel.currentMap][j] == null) {
+                        gamePanel.projectile[gamePanel.currentMap][j] = projectile;
+                        break;
+                    }
+                }
                 shotAvailableCounter = 0;
             }
         }
@@ -106,6 +114,21 @@ public class GreenJunimo extends Entity {
 
                 actionLockCounter = 0;
             }
+            int j = new Random().nextInt(200) + 1;
+            if (j > 100 && !projectile.alive && shotAvailableCounter == 30){
+                projectile.set(worldX, worldY, direction, true, this);
+                // gamePanel.projectileList.add(projectile);
+
+                // Check vacancy
+                for (int k = 0; k < gamePanel.projectile[1].length; k++) {
+                    if (gamePanel.projectile[gamePanel.currentMap][k] == null) {
+                        gamePanel.projectile[gamePanel.currentMap][k] = projectile;
+                        break;
+                    }
+                }
+                shotAvailableCounter = 0;
+            }
+
         }
     }
 

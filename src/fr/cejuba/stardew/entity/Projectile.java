@@ -62,7 +62,7 @@ public class Projectile extends Entity {
         return false;
     }
 
-    public void subtractRessource(Entity user){
+    public void subtractResource(Entity user){
         user.mana -= useCost;
     }
 }

@@ -8,7 +8,7 @@ import java.net.URL;
 public class Sound {
     private MediaPlayer mediaPlayer;
     private final URL[] soundURL = new URL[30];
-    int volumeScale = 3;
+    int volumeScale = 0;
     float volume;
 
     public Sound() {

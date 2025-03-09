@@ -38,7 +38,7 @@ public class Rock extends Projectile {
         return user.ammo >= useCost; // TODO : change ammo to mana to have a spell
     }
 
-    public void subtractRessource(Entity user){
+    public void subtractResource(Entity user){
         user.ammo -= useCost; // TODO : change ammo to mana to have a spell
     }
 

@@ -68,7 +68,8 @@ public class GamePanel extends Canvas {
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][50];
-    public ArrayList<Entity> projectileList = new ArrayList<>();
+    public Entity projectile[][] = new Entity[maxMap][20];
+    // public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -191,7 +192,16 @@ public class GamePanel extends Canvas {
                 }
             }
         }
-        checkAliveUpdate(projectileList);
+        for(int i = 0; i < projectile[1].length; i++){
+            if(projectile[currentMap][i] != null){
+                if(projectile[currentMap][i].alive){
+                    projectile[currentMap][i].update();
+                }
+                if (!projectile[currentMap][i].alive) {
+                    projectile[currentMap][i] = null;
+                }
+            }
+        }
 
         checkAliveUpdate(particleList);
 
@@ -229,7 +239,8 @@ public class GamePanel extends Canvas {
 
             for(int i = 0; i < interactiveTile[1].length; i++){
                 if(interactiveTile[currentMap][i] != null){
-                    interactiveTile[currentMap][i].draw(graphicsContext);
+                    // interactiveTile[currentMap][i].draw(graphicsContext);
+                    entityList.add(interactiveTile[currentMap][i]);
                 }
             }
 
@@ -237,22 +248,26 @@ public class GamePanel extends Canvas {
 
             for(int i = 0; i < npc[1].length; i++){
                 if(npc[currentMap][i] != null){
-                    npc[currentMap][i].draw(graphicsContext);
+                    // npc[currentMap][i].draw(graphicsContext);
+                    entityList.add(npc[currentMap][i]);
                 }
             }
             for(int i = 0; i < object[1].length; i++){
                 if(object[currentMap][i] != null){
-                    object[currentMap][i].draw(graphicsContext);
+                    // object[currentMap][i].draw(graphicsContext);
+                    entityList.add(object[currentMap][i]);
                 }
             }
             for(int i = 0; i < monster[1].length; i++){
                 if(monster[currentMap][i] != null){
-                    monster[currentMap][i].draw(graphicsContext);
+                    // monster[currentMap][i].draw(graphicsContext);
+                    entityList.add(monster[currentMap][i]);
                 }
             }
-            for (Entity projectileList : projectileList) {
-                if (projectileList != null) {
-                    entityList.add(projectileList);
+            for(int i = 0; i < projectile[1].length; i++){
+                if(projectile[currentMap][i] != null){
+                    // projectile[currentMap][i].draw(graphicsContext);
+                    entityList.add(projectile[currentMap][i]);
                 }
             }
 

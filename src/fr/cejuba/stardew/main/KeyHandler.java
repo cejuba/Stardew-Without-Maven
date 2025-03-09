@@ -186,6 +186,7 @@ public class KeyHandler {
                     }
                     if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale > 0) {
                         gamePanel.soundEffect.volumeScale--;
+                        gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
                 }
@@ -200,6 +201,7 @@ public class KeyHandler {
                     }
                     if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale < 5) {
                         gamePanel.soundEffect.volumeScale++;
+                        gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
                 }

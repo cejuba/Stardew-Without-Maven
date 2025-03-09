@@ -713,7 +713,7 @@ public class UI {
         int textX = frameX + gamePanel.tileSize;
         int textY = frameY + gamePanel.tileSize * 2;
 
-        currentDialogue = "The change will take effect after \n restarting the game.";
+        currentDialogue = "The change will take effect after \nrestarting the game.";
         for (String line : currentDialogue.split("\n")){
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(line, textX, textY);

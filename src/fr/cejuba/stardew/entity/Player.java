@@ -224,11 +224,19 @@ public class Player extends Entity {
 
 
         if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveRessource(this)){
+            // Set Default Coordinates
             projectile.set(worldX, worldY, direction, true, this);
 
-            projectile.subtractRessource(this);
+            // Subtract Resources
+            projectile.subtractResource(this);
 
-            gamePanel.projectileList.add(projectile);
+            // Check Vacancy
+            for(int i = 0; i < gamePanel.projectile[1].length; i++){
+                if(gamePanel.projectile[gamePanel.currentMap][i] == null){
+                    gamePanel.projectile[gamePanel.currentMap][i] = projectile;
+                    break;
+                }
+            }
             shotAvailableCounter = 0;
             gamePanel.playSoundEffect(10);
         }
@@ -287,6 +295,9 @@ public class Player extends Entity {
 
             int interactiveTileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTile);
             damageInteractiveTile(interactiveTileIndex);
+
+            int projectileIndex = gamePanel.collisionChecker.checkEntity(this, gamePanel.projectile);
+            damageProjectile(projectileIndex);
 
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -394,6 +405,13 @@ public class Player extends Entity {
         }
     }
 
+    public void damageProjectile(int i){
+        if(i != 999){
+            Entity projectile = gamePanel.projectile[gamePanel.currentMap][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
+        }
+    }
     public void checkLevelUp() {
         if (experience >= nextLevelExperience) {
             level++;
