@@ -7,6 +7,7 @@ package fr.cejuba.stardew.main;
 import fr.cejuba.stardew.AI.PathFinder;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.entity.Player;
+import fr.cejuba.stardew.environment.EnvironmentManager;
 import fr.cejuba.stardew.tile.TileManager;
 import fr.cejuba.stardew.tile.interactive.InteractiveTile;
 import javafx.animation.AnimationTimer;
@@ -61,6 +62,7 @@ public class GamePanel extends Canvas {
     Config config = new Config(this);
     public UI ui = new UI(this);
     public PathFinder pathFinder = new PathFinder(this);
+    EnvironmentManager environmentManager = new EnvironmentManager(this);
 
     // Entity and object
     public Player player = new Player(this, keyHandler);
@@ -97,6 +99,7 @@ public class GamePanel extends Canvas {
     public void setupGame() {
         startGameLoop();
         basicAssetSetup();
+        environmentManager.setup();
 
         tempScreen = new WritableImage(screenWidth, screenHeight);
         graphicsContext = this.getGraphicsContext2D();
@@ -289,6 +292,8 @@ public class GamePanel extends Canvas {
                 entity.draw(graphicsContext);
             }
             entityList.clear();
+
+            environmentManager.draw(graphicsContext);
 
             ui.draw(graphicsContext);
         }
