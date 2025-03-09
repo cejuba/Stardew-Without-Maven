@@ -3,7 +3,8 @@ package fr.cejuba.stardew.main;
 import fr.cejuba.stardew.entity.npc.Merchant;
 import fr.cejuba.stardew.entity.npc.OldMan;
 import fr.cejuba.stardew.entity.monster.GreenJunimo;
-import fr.cejuba.stardew.object.BronzeCoin;
+import fr.cejuba.stardew.object.money.BronzeCoin;
+import fr.cejuba.stardew.object.Door;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
 import fr.cejuba.stardew.object.stats.Heart;
@@ -53,6 +54,14 @@ public class AssetSetter {
         gamePanel.object[mapNumber][i] = new ManaCrystal(gamePanel);
         gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 22;
         gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 31;
+        i++;
+        gamePanel.object[mapNumber][i] = new Door(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 14;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 28;
+        i++;
+        gamePanel.object[mapNumber][i] = new Door(gamePanel);
+        gamePanel.object[mapNumber][i].worldX = gamePanel.tileSize * 12;
+        gamePanel.object[mapNumber][i].worldY = gamePanel.tileSize * 12;
     }
 
     public void setNPC() {

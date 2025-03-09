@@ -92,6 +92,7 @@ public class Entity {
     public final int type_boots = 6;
     public final int type_consumable = 7;
     public final int type_pickUpOnly = 8;
+    public final int type_obstacle = 9;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -275,7 +276,12 @@ public class Entity {
         graphicsContext.setGlobalAlpha(alphaValue);
     }
 
-    public void use(Entity entity) {}
+    public void interact(){
+
+    }
+    public boolean use(Entity entity) {
+        return false;
+    }
 
     public void checkDrop(){}
 
@@ -352,10 +358,10 @@ public class Entity {
             int nextY = gamePanel.pathFinder.pathList.get(0).row * gamePanel.tileSize;
 
             // Entity's solidArea position
-            int entityLeftX = (int) (worldX + solidArea.getX());
-            int entityRightX = (int) (worldX + solidArea.getX() + solidArea.getWidth());
-            int entityTopY = (int) (worldY + solidArea.getY());
-            int entityBottomY = (int) (worldY + solidArea.getY() + solidArea.getHeight());
+            int entityLeftX = getLeftX();
+            int entityRightX = getRightX();
+            int entityTopY = getTopY();
+            int entityBottomY = getBottomY();
 
             if(entityTopY > nextY && entityLeftX >= nextX && entityRightX < nextX + gamePanel.tileSize){
                 direction = "up";
@@ -407,5 +413,54 @@ public class Entity {
                 onPath = false;
             }
         }
+    }
+
+    public int getDetected(Entity user, Entity[][] target, String targetName){
+        int index = 999;
+
+        // Get surrounding objects
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch (user.direction) {
+            case "up" -> nextWorldY =  user.getTopY() - 1;
+            case "down" -> nextWorldY = user.getBottomY() + 1;
+            case "left" -> nextWorldX = user.getLeftX() - 1;
+            case "right" -> nextWorldX = user.getRightX() + 1;
+        }
+
+        int col = (int) (nextWorldX / gamePanel.tileSize);
+        int row = (int) (nextWorldY / gamePanel.tileSize);
+
+        for(int i = 0; i < target[1].length; i++){
+            Entity targeted = target[gamePanel.currentMap][i];
+            if(targeted != null){
+                if(targeted.getColumn() == col && targeted.getRow() == row && targeted.name.equals(targetName)){
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
+
+    public int getLeftX(){
+        return (int) (worldX + solidArea.getX());
+    }
+
+    public int getRightX(){
+        return (int) (worldX + solidArea.getX() + solidArea.getWidth());
+    }
+    public int getTopY(){
+        return (int) (worldY + solidArea.getY());
+    }
+    public int getBottomY(){
+        return (int) (worldY + solidArea.getY() + solidArea.getHeight());
+    }
+    public int getColumn(){
+        return (int) ((worldX + solidArea.getX())/gamePanel.tileSize);
+    }
+    public int getRow(){
+        return (int) ((worldY + solidArea.getY())/gamePanel.tileSize);
     }
 }

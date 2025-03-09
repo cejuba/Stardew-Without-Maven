@@ -2,7 +2,7 @@ package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.KeyHandler;
-import fr.cejuba.stardew.object.Boots;
+import fr.cejuba.stardew.object.boots.Boots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.RustyShield;
@@ -322,6 +322,12 @@ public class Player extends Entity {
                 gamePanel.object[gamePanel.currentMap][index].use(this);
                 gamePanel.object[gamePanel.currentMap][index] = null;
             }
+            // Obstacle
+            else if(gamePanel.object[gamePanel.currentMap][index].type == type_obstacle){
+                if(keyHandler.enterPressed){
+                    gamePanel.object[gamePanel.currentMap][index].interact();
+                }
+            }
             // Inventory
             else{
                 String text;
@@ -462,9 +468,10 @@ public class Player extends Entity {
                 speed = getSpeed();
             }
             if(selectedItem.type == type_consumable){
-                System.out.println("Potion used");
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+                System.out.println(selectedItem.name + " used");
+                if(selectedItem.use(this)){
+                    inventory.remove(itemIndex);
+                }
             }
         }
     }

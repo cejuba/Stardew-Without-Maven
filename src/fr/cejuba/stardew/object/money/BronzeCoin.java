@@ -1,4 +1,4 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.money;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
@@ -16,10 +16,11 @@ public class BronzeCoin extends Entity {
         down2 = setup("object/coin_bronze", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
 
         gamePanel.playSoundEffect(1);
         gamePanel.ui.addMessage("Gold + " + value);
         gamePanel.player.gold += value;
+        return true;
     }
 }

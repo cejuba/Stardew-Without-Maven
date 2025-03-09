@@ -2,7 +2,7 @@ package fr.cejuba.stardew.entity.monster;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
-import fr.cejuba.stardew.object.BronzeCoin;
+import fr.cejuba.stardew.object.money.BronzeCoin;
 import fr.cejuba.stardew.object.projectile.Rock;
 import fr.cejuba.stardew.object.stats.Heart;
 import fr.cejuba.stardew.object.stats.ManaCrystal;

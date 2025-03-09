@@ -1,4 +1,4 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.boots;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
