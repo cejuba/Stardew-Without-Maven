@@ -12,7 +12,7 @@ import javafx.scene.paint.Stop;
 public class Lighting {
 
     GamePanel gamePanel;
-    int dayCounter;
+    public int dayCounter;
     public float filterAlpha = 0f;
 
     // Day states

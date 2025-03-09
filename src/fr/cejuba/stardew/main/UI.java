@@ -641,8 +641,9 @@ public class UI {
                 gamePanel.environmentManager.lighting.filterAlpha = 0f;
                 counter = 0;
                 gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
+                gamePanel.environmentManager.lighting.dayCounter = 0;
                 gamePanel.gameState = gamePanel.playState;
-
+                gamePanel.player.getPlayerImage();
             }
         }
     }

@@ -24,6 +24,7 @@ public class Tent extends Entity{
         gamePanel.playSoundEffect(14);
         gamePanel.player.life = gamePanel.player.maxLife;
         gamePanel.player.mana = gamePanel.player.maxMana;
+        gamePanel.player.getSleepingImage(down2);
         return true; // TODO : Need to discuss if you need to have it every time but it means that this item as no value
     }
 }
