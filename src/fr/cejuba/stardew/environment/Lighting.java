@@ -99,6 +99,12 @@ public class Lighting {
             case dawn -> situation = "Dawn";
         }
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillText(situation, gamePanel.screenWidth - gamePanel.tileSize, gamePanel.screenHeight - gamePanel.tileSize);
+        int textX;
+        int textY = gamePanel.screenHeight - gamePanel.tileSize;
+
+        // Values
+        int tailX = gamePanel.screenWidth - gamePanel.tileSize;
+        textX = gamePanel.ui.getXAlignedToRightText(situation, tailX);
+        graphicsContext.fillText(situation, textX, textY);
     }
 }
