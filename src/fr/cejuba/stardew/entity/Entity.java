@@ -67,6 +67,7 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Entity currentBoots;
+    public Entity currentLight;
     public Projectile projectile;
 
     // Item attributes
@@ -82,6 +83,7 @@ public class Entity {
     public int knockBackPower = 0;
     public boolean stackable = false;
     public int amount = 1;
+    public int lightRadius;
 
     // Type
     public int type; // 0 = Player, 1 = NPC, 2 = Monster TODO : Do it in a cleaner way
@@ -95,6 +97,7 @@ public class Entity {
     public final int type_consumable = 7;
     public final int type_pickUpOnly = 8;
     public final int type_obstacle = 9;
+    public final int type_light = 10;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
