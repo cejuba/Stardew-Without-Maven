@@ -79,6 +79,7 @@ public class Entity {
     public String description = "";
     public int useCost;
     public int price;
+    public int knockBackPower = 0;
 
     // Type
     public int type; // 0 = Player, 1 = NPC, 2 = Monster TODO : Do it in a cleaner way

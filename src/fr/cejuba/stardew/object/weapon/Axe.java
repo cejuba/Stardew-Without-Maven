@@ -18,5 +18,7 @@ public class Axe extends Entity {
         description = "[" + name + "]\nCan cut some trees.";
 
         price = 75;
+
+        knockBackPower = 10;
     }
 }

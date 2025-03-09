@@ -18,5 +18,7 @@ public class Sword extends Entity {
 
         description = "[" + name + "]\n" + "An old sword.";
         price = 50;
+
+        knockBackPower = 2;
     }
 }
