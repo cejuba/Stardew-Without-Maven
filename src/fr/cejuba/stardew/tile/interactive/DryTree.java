@@ -8,11 +8,11 @@ import javafx.scene.paint.Color;
 public class DryTree extends InteractiveTile {
     GamePanel gamePanel;
     public DryTree(GamePanel gamePanel, int column, int row) {
-        super(gamePanel, column, row);
+        super(gamePanel);
         this.gamePanel = gamePanel;
 
         down2 = setup("tile/interactive/drytree", gamePanel.tileSize, gamePanel.tileSize);
-        destructible = true;
+        setDestructible(true);
         life = 3;
 
         this.worldX = column;

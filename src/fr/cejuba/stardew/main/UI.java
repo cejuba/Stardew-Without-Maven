@@ -1,6 +1,7 @@
 package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
+import fr.cejuba.stardew.environment.DayStates;
 import fr.cejuba.stardew.object.money.BronzeCoin;
 import fr.cejuba.stardew.object.stats.Heart;
 import fr.cejuba.stardew.object.stats.ManaCrystal;
@@ -642,7 +643,7 @@ public class UI {
             if(gamePanel.environmentManager.lighting.filterAlpha <= 0.02f){
                 gamePanel.environmentManager.lighting.filterAlpha = 0f;
                 counter = 0;
-                gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
+                gamePanel.environmentManager.lighting.setDayStates(DayStates.DAY);
                 gamePanel.environmentManager.lighting.dayCounter = 0;
                 gamePanel.setGameState(GameState.PLAY);
                 gamePanel.player.getPlayerImage();

@@ -5,7 +5,7 @@ import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.object.Lantern;
-import fr.cejuba.stardew.object.boots.Boots;
+import fr.cejuba.stardew.object.boots.LeatherBoots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.projectile.Fireball;
@@ -19,8 +19,8 @@ public class Player extends Entity {
 
     KeyHandler keyHandler;
 
-    public final int screenX;
-    public final int screenY;
+    private final int screenX;
+    private final int screenY;
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
 
@@ -69,7 +69,7 @@ public class Player extends Entity {
         gold = 500;
         currentWeapon = new Axe(gamePanel);
         currentShield = new RustyShield(gamePanel);
-        currentBoots = new Boots(gamePanel);
+        currentBoots = new LeatherBoots(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel); TODO : Change to have a system with ammo
         attack = getAttack();
@@ -426,7 +426,7 @@ public class Player extends Entity {
 
     public void damageInteractiveTile(int i){
 
-        if(i != 999 && gamePanel.interactiveTile[gamePanel.currentMap][i].destructible && gamePanel.interactiveTile[gamePanel.currentMap][i].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][i].invincible){
+        if(i != 999 && gamePanel.interactiveTile[gamePanel.currentMap][i].isDestructible() && gamePanel.interactiveTile[gamePanel.currentMap][i].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][i].invincible){
             gamePanel.interactiveTile[gamePanel.currentMap][i].playSoundEnvironment();
             gamePanel.interactiveTile[gamePanel.currentMap][i].life --;
             gamePanel.interactiveTile[gamePanel.currentMap][i].invincible = true;
@@ -606,4 +606,13 @@ public class Player extends Entity {
         graphicsContext.fillText("Invincible:" + invincibleCounter, 10, 400);
          */
     }
+
+    // Getters and Setters
+    public int getScreenX() {
+        return screenX;
+    }
+    public int getScreenY() {
+        return screenY;
+    }
+
 }

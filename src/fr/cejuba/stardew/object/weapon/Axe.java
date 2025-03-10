@@ -1,10 +1,9 @@
 package fr.cejuba.stardew.object.weapon;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class Axe extends Entity {
+public class Axe extends Weapon {
     public Axe(GamePanel gamePanel) {
         super(gamePanel);
 

@@ -41,8 +41,8 @@ public class Particle extends Entity {
     }
 
     public void draw(GraphicsContext graphicsContext) {
-        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
+        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
         graphicsContext.setFill(color);
         graphicsContext.fillRect(screenX, screenY, size, size);

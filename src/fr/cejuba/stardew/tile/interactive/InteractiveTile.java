@@ -6,9 +6,9 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class InteractiveTile extends Entity {
     GamePanel gamePanel;
-    public boolean destructible = false;
+    private boolean destructible = false;
 
-    public InteractiveTile(GamePanel gamePanel, int column, int row) {
+    public InteractiveTile(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
     }
@@ -36,15 +36,25 @@ public class InteractiveTile extends Entity {
 
     public void draw(GraphicsContext graphicsContext) {
 
-        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
+        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-        if(worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
-           worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-           worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-           worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY ){
+        if(worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
+           worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
+           worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
+           worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.getScreenY()){
 
             graphicsContext.drawImage(down2, screenX, screenY);
         }
+    }
+
+
+    // Getters and Setters
+    public void setDestructible(boolean destructible) {
+        this.destructible = destructible;
+    }
+
+    public boolean isDestructible() {
+        return destructible;
     }
 }

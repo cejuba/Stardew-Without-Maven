@@ -16,11 +16,7 @@ public class Lighting {
     public float filterAlpha = 0f;
 
     // Day states
-    public final int day = 0;
-    public final int dusk = 1;
-    public final int night = 2;
-    public final int dawn = 3;
-    public int dayState = day;
+    private DayStates dayStates = DayStates.DAY;
 
 
     public Lighting(GamePanel gamePanel) {
@@ -28,29 +24,34 @@ public class Lighting {
     }
 
     public void update(){
-        if(dayState == day){
-            dayCounter++;
-            if(dayCounter > 600) {
-                dayState = dusk;
-                dayCounter = 0;
+        switch(dayStates){
+            case DayStates.DAY -> {
+                dayCounter++;
+                if(dayCounter > 600) {
+                    dayStates = DayStates.DUSK;
+                    dayCounter = 0;
+                }
             }
-        } else if(dayState == dusk){
-            filterAlpha += 0.001f;
-            if(filterAlpha >= 0.98f){
-                filterAlpha = 1f;
-                dayState = night;
+            case DayStates.DUSK -> {
+                filterAlpha += 0.001f;
+                if(filterAlpha >= 0.98f){
+                    filterAlpha = 1f;
+                    dayStates = DayStates.NIGHT;
+                }
             }
-        } else if(dayState == night){
-            dayCounter++;
-            if(dayCounter > 600) {
-                dayState = dawn;
-                dayCounter = 0;
+            case DayStates.NIGHT -> {
+                dayCounter++;
+                if(dayCounter > 600) {
+                    dayStates = DayStates.DAWN;
+                    dayCounter = 0;
+                }
             }
-        } else if(dayState == dawn){
-            filterAlpha -= 0.001f;
-            if(filterAlpha <= 0.02f){
-                filterAlpha = 0f;
-                dayState = day;
+            case DayStates.DAWN -> {
+                filterAlpha -= 0.001f;
+                if(filterAlpha <= 0.02f){
+                    filterAlpha = 0f;
+                    dayStates = DayStates.DAY;
+                }
             }
         }
     }
@@ -58,8 +59,8 @@ public class Lighting {
 
         int circleRadius = 100;
 
-        int centerX = gamePanel.player.screenX + gamePanel.tileSize / 2;
-        int centerY = gamePanel.player.screenY + gamePanel.tileSize / 2;
+        int centerX = gamePanel.player.getScreenX() + gamePanel.tileSize / 2;
+        int centerY = gamePanel.player.getScreenY() + gamePanel.tileSize / 2;
 
         Stop[] stops = new Stop[]{};
         if(gamePanel.player.currentLight == null){
@@ -92,11 +93,11 @@ public class Lighting {
 
         String situation = "";
 
-        switch(dayState){
-            case day -> situation = "Day";
-            case dusk -> situation = "Dusk";
-            case night -> situation = "Night";
-            case dawn -> situation = "Dawn";
+        switch(dayStates){
+            case DayStates.DAY -> situation = "Day";
+            case DayStates.DUSK -> situation = "Dusk";
+            case DayStates.NIGHT -> situation = "Night";
+            case DayStates.DAWN -> situation = "Dawn";
         }
         graphicsContext.setFill(Color.WHITE);
         int textX;
@@ -106,5 +107,13 @@ public class Lighting {
         int tailX = gamePanel.screenWidth - gamePanel.tileSize;
         textX = gamePanel.ui.getXAlignedToRightText(situation, tailX);
         graphicsContext.fillText(situation, textX, textY);
+    }
+
+    // Getter and setter
+    public DayStates getDayStates() {
+        return dayStates;
+    }
+    public void setDayStates(DayStates dayStates) {
+        this.dayStates = dayStates;
     }
 }

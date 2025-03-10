@@ -80,7 +80,7 @@ public class PathFinder {
             }
             // Check Interactive tiles
             for(int i = 0; i < gamePanel.interactiveTile[1].length; i++){
-                if(gamePanel.interactiveTile[gamePanel.currentMap][i] != null && gamePanel.interactiveTile[gamePanel.currentMap][i].destructible){
+                if(gamePanel.interactiveTile[gamePanel.currentMap][i] != null && gamePanel.interactiveTile[gamePanel.currentMap][i].isDestructible()){
                     int interactiveTileCol = gamePanel.interactiveTile[gamePanel.currentMap][i].worldX/gamePanel.tileSize;
                     int interactiveTileRow = gamePanel.interactiveTile[gamePanel.currentMap][i].worldY/gamePanel.tileSize;
                     node[interactiveTileCol][interactiveTileRow].solid = true;

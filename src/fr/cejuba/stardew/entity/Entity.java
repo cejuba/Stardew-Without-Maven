@@ -201,13 +201,13 @@ public class Entity {
 
     public void draw(GraphicsContext graphicsContext) {
         Image image = null;
-        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+        int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
+        int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-        if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
-                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
+        if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
+                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
+                worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
+                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.getScreenY()) {
 
             switch (direction) {
                 case "up" -> image = (spriteNumber == 0) ? up1 : up2;
@@ -445,15 +445,12 @@ public class Entity {
     public Type getType() {
         return type;
     }
-
     public void setType(Type type) {
         this.type = type;
     }
-
     public int getLeftX(){
         return (int) (worldX + solidArea.getX());
     }
-
     public int getRightX(){
         return (int) (worldX + solidArea.getX() + solidArea.getWidth());
     }

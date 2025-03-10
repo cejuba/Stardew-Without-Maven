@@ -6,7 +6,7 @@ import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.object.Lantern;
 import fr.cejuba.stardew.object.Tent;
-import fr.cejuba.stardew.object.boots.Boots;
+import fr.cejuba.stardew.object.boots.LeatherBoots;
 import fr.cejuba.stardew.object.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
@@ -63,7 +63,7 @@ public class Merchant extends Entity {
         inventory.add(new Axe(gamePanel));
         inventory.add(new RustyShield(gamePanel));
         inventory.add(new BlueShield(gamePanel));
-        inventory.add(new Boots(gamePanel));
+        inventory.add(new LeatherBoots(gamePanel));
         inventory.add(new Lantern(gamePanel));
         inventory.add(new Tent(gamePanel));
     }
