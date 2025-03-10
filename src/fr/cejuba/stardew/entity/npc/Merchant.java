@@ -2,6 +2,8 @@ package fr.cejuba.stardew.entity.npc;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.object.Lantern;
 import fr.cejuba.stardew.object.Tent;
 import fr.cejuba.stardew.object.boots.Boots;
@@ -19,7 +21,7 @@ public class Merchant extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = 1;
+        type = Type.NPC;
         direction = "down";
         speed = 1;
 
@@ -69,7 +71,7 @@ public class Merchant extends Entity {
     @Override
     public void speak(){
         super.speak();
-        gamePanel.gameState = gamePanel.tradeState;
+        gamePanel.gameState = GameState.TRADE;
         gamePanel.ui.npc = this;
     }
 }

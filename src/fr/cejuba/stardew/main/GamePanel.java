@@ -76,23 +76,11 @@ public class GamePanel extends Canvas {
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][50];
     public Entity projectile[][] = new Entity[maxMap][20];
-    // public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     public ArrayList<Entity> entityList = new ArrayList<>();
 
     // States
-    public int gameState;
-    public final int titleState = 0;
-    public final int playState = 1;
-    public final int pauseState = 2;
-    public final int dialogueState = 3;
-    public final int characterState = 4;
-    public final int optionState = 5;
-    public final int gameOverState = 6;
-    public final int transitionState = 7;
-    public final int tradeState = 8;
-    public final int sleepState = 9;
-    public final int mapState = 10;
+    public GameState gameState = GameState.TITLE;
 
     public GamePanel(Stage stage) {
         this.stage = stage;
@@ -143,22 +131,6 @@ public class GamePanel extends Canvas {
     }
 
     private void startGameLoop() {
-        /*
-                if (counter <= 1) {
-
-                    lastTime = now;
-                    return;
-                }
-
-                long elapsedTime = now - lastTime;
-                if (elapsedTime >= 1_000_000_000 / FPS) {
-                    if (gameState == playState) {
-                        update();
-                    }
-                    draw();
-                    lastTime = now;
-                }
-                */
         AnimationTimer animationTimer = new AnimationTimer() {
             private final double drawInterval = (double) 1_000_000_000 / FPS;
             private double delta = 0;
@@ -172,7 +144,7 @@ public class GamePanel extends Canvas {
                 lastTime = currentTime;
 
                 if (delta >= 1) {
-                    if (gameState == playState) {
+                    if (gameState == GameState.PLAY) {
                         update();
                     }
                     drawTempScreen();
@@ -245,11 +217,11 @@ public class GamePanel extends Canvas {
         }
 
         // Title Screen
-        if(gameState==titleState){
+        if(gameState==GameState.TITLE){
             ui.draw(graphicsContext);
         }
         // Map Screen
-        else if(gameState==mapState){
+        else if(gameState==GameState.MAP){
             map.drawFullMapScreen(graphicsContext);
         }
         // Others

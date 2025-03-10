@@ -83,7 +83,7 @@ public class EventHandler {
 
     public void teleport(int map, int col, int row) {
 
-        gamePanel.gameState = gamePanel.transitionState;
+        gamePanel.gameState = GameState.TRANSITION;
         tempMap = map;
         tempCol = col;
         tempRow = row;
@@ -119,7 +119,7 @@ public class EventHandler {
 
     public void speak(Entity entity){
         if(gamePanel.keyHandler.enterPressed){
-            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.gameState = GameState.DIALOGUE;
             gamePanel.player.attackCanceled = true;
             entity.speak();
         }

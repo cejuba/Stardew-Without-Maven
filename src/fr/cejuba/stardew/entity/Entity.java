@@ -1,6 +1,7 @@
 package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.main.UtilityTool;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -86,18 +87,7 @@ public class Entity {
     public int lightRadius;
 
     // Type
-    public int type; // 0 = Player, 1 = NPC, 2 = Monster TODO : Do it in a cleaner way
-    public final int type_player = 0;
-    public final int type_npc = 1;
-    public final int type_monster = 2;
-    public final int type_sword = 3;
-    public final int type_axe = 4;
-    public final int type_shield = 5;
-    public final int type_boots = 6;
-    public final int type_consumable = 7;
-    public final int type_pickUpOnly = 8;
-    public final int type_obstacle = 9;
-    public final int type_light = 10;
+    public Type type;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -132,7 +122,7 @@ public class Entity {
 
         boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
 
-        if (this.type == type_monster && contactPlayer) {
+        if (this.type == Type.MONSTER && contactPlayer) {
             damagePlayer(attack);
         }
     }
@@ -227,7 +217,7 @@ public class Entity {
             }
 
             // Monster HP bar
-            if(type == 2 && hpBarOn){
+            if(type == Type.MONSTER && hpBarOn){
 
                 double oneScale = (double)gamePanel.tileSize / maxLife;
                 double hpBarValue = oneScale * life;

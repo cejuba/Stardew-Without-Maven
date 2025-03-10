@@ -1,7 +1,9 @@
 package fr.cejuba.stardew.entity;
 
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.KeyHandler;
+import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.object.Lantern;
 import fr.cejuba.stardew.object.boots.Boots;
 import fr.cejuba.stardew.object.Key;
@@ -148,7 +150,7 @@ public class Player extends Entity {
     public void getPlayerAttackImage() {
         try {
             System.out.println("Loading player attack images");
-            if(currentWeapon.type == type_sword){
+            if(currentWeapon.type == Type.SWORD){
                 attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
                 attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
                 attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
@@ -158,7 +160,7 @@ public class Player extends Entity {
                 attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
                 attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
             }
-            if(currentWeapon.type == type_axe){
+            if(currentWeapon.type == Type.AXE){
                 attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
                 attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
                 attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
@@ -276,7 +278,7 @@ public class Player extends Entity {
             mana = maxMana;
         }
         if(life <= 0){
-            gamePanel.gameState = gamePanel.gameOverState;
+            gamePanel.gameState = GameState.GAMEOVER;
             gamePanel.ui.commandNumber = -1; // Prevent retry by accident when smashing ENTER key
             gamePanel.stopMusic();
             gamePanel.playSoundEffect(12);
@@ -334,12 +336,12 @@ public class Player extends Entity {
         if (index != 999) {
 
             // PickUpOnly Objects
-            if(gamePanel.object[gamePanel.currentMap][index].type == type_pickUpOnly){
+            if(gamePanel.object[gamePanel.currentMap][index].type == Type.PICKUPONLY){
                 gamePanel.object[gamePanel.currentMap][index].use(this);
                 gamePanel.object[gamePanel.currentMap][index] = null;
             }
             // Obstacle
-            else if(gamePanel.object[gamePanel.currentMap][index].type == type_obstacle){
+            else if(gamePanel.object[gamePanel.currentMap][index].type == Type.OBSTACLE){
                 if(keyHandler.enterPressed){
                     gamePanel.object[gamePanel.currentMap][index].interact();
                 }
@@ -365,7 +367,7 @@ public class Player extends Entity {
         if(gamePanel.keyHandler.enterPressed){
             if (index != 999) {
                 attackCanceled = true;
-                gamePanel.gameState = gamePanel.dialogueState;
+                gamePanel.gameState = GameState.DIALOGUE;
                 gamePanel.npc[gamePanel.currentMap][index].speak();
             }
         }
@@ -458,7 +460,7 @@ public class Player extends Entity {
             defense = getDefense();
 
             gamePanel.playSoundEffect(8);
-            gamePanel.gameState = gamePanel.dialogueState;
+            gamePanel.gameState = GameState.DIALOGUE;
             gamePanel.ui.currentDialogue = "You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1";
 
         }
@@ -470,17 +472,17 @@ public class Player extends Entity {
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);
 
-            if(selectedItem.type == type_sword || selectedItem.type == type_axe){
+            if(selectedItem.type == Type.SWORD || selectedItem.type == Type.AXE){
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage();
-            } else if(selectedItem.type == type_shield){
+            } else if(selectedItem.type == Type.SHIELD){
                 currentShield = selectedItem;
                 defense = getDefense();
-            } else if(selectedItem.type == type_boots){
+            } else if(selectedItem.type == Type.BOOTS){
                 currentBoots = selectedItem;
                 speed = getSpeed();
-            } else if(selectedItem.type == type_light){
+            } else if(selectedItem.type == Type.LIGHT){
                 if(currentLight == selectedItem) {
                     currentLight = null;
                 }
@@ -488,7 +490,7 @@ public class Player extends Entity {
                     currentLight = selectedItem;
                 }
                 lightUpdated = true;
-            } else if(selectedItem.type == type_consumable){
+            } else if(selectedItem.type == Type.CONSUMABLE){
                 System.out.println(selectedItem.name + " used");
                 if(selectedItem.use(this)){
                     if(selectedItem.amount > 1){

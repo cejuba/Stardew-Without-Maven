@@ -2,6 +2,7 @@ package fr.cejuba.stardew.object.stats;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.Type;
 
 public class Heart extends Entity {
 
@@ -10,7 +11,7 @@ public class Heart extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = type_pickUpOnly;
+        type = Type.CONSUMABLE;
         name = "Heart";
         value = 2;
         down2 = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);

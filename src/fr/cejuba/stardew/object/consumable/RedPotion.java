@@ -2,6 +2,8 @@ package fr.cejuba.stardew.object.consumable;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 
 public class RedPotion extends Entity {
     GamePanel gamePanel;
@@ -12,7 +14,7 @@ public class RedPotion extends Entity {
         value = 5;
         this.gamePanel = gamePanel;
 
-        type = type_consumable;
+        type = Type.CONSUMABLE;
         name = "RedPotion";
         down2 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your life by " + value + ".";
@@ -22,7 +24,7 @@ public class RedPotion extends Entity {
 
     public boolean use(Entity entity) {
         System.out.println("Potion used2");
-        gamePanel.gameState = gamePanel.dialogueState;
+        gamePanel.gameState = GameState.DIALOGUE;
         gamePanel.ui.currentDialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
         entity.life += value;
         if(entity.life > entity.maxLife){

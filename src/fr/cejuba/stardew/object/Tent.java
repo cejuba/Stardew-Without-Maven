@@ -2,6 +2,8 @@ package fr.cejuba.stardew.object;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.entity.Entity;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 
 public class Tent extends Entity{
 
@@ -11,7 +13,7 @@ public class Tent extends Entity{
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = type_consumable;
+        type = Type.CONSUMABLE;
         name = "Tent";
         down2 = setup("object/tent", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nYou can sleep until next morning";
@@ -20,7 +22,7 @@ public class Tent extends Entity{
     }
 
     public boolean use(Entity entity){
-        gamePanel.gameState = gamePanel.sleepState;
+        gamePanel.gameState = GameState.SLEEP;
         gamePanel.playSoundEffect(14);
         gamePanel.player.life = gamePanel.player.maxLife;
         gamePanel.player.mana = gamePanel.player.maxMana;

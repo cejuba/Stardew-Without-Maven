@@ -2,6 +2,8 @@ package fr.cejuba.stardew.object;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 
 public class Door extends Entity {
 
@@ -11,7 +13,7 @@ public class Door extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = type_obstacle;
+        type = Type.OBSTACLE;
         name = "Door";
         down2 = setup("object/door", gamePanel.tileSize, gamePanel.tileSize);
         collision = true;
@@ -24,7 +26,7 @@ public class Door extends Entity {
         solidAreaDefaultY = (int) solidArea.getY();
     }
     public void interact(){
-        gamePanel.gameState = gamePanel.dialogueState;
+        gamePanel.gameState = GameState.DIALOGUE;
         gamePanel.ui.currentDialogue = "You need a key to open this.";
     }
 }

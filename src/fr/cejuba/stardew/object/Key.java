@@ -2,6 +2,8 @@ package fr.cejuba.stardew.object;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 
 public class Key extends Entity {
 
@@ -11,7 +13,7 @@ public class Key extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = type_consumable;
+        type = Type.CONSUMABLE;
         name = "Key";
         down2 = setup("/object/key", gamePanel.tileSize, gamePanel.tileSize);
 
@@ -23,7 +25,7 @@ public class Key extends Entity {
 
     public boolean use(Entity entity) {
 
-        gamePanel.gameState = gamePanel.dialogueState;
+        gamePanel.gameState = GameState.DIALOGUE;
         int objIndex = getDetected(entity, gamePanel.object, "Door");
 
         if(objIndex != 999) {

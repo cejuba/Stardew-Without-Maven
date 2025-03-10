@@ -2,6 +2,7 @@ package fr.cejuba.stardew.entity.npc;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.Type;
 
 import java.util.Random;
 
@@ -12,7 +13,7 @@ public class OldMan extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = type_npc;
+        type = Type.NPC;
         direction = "down";
         speed = 2;
 

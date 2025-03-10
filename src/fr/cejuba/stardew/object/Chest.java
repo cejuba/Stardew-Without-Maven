@@ -2,6 +2,8 @@ package fr.cejuba.stardew.object;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.GameState;
+import fr.cejuba.stardew.main.Type;
 
 public class Chest extends Entity {
 
@@ -14,7 +16,7 @@ public class Chest extends Entity {
         this.gamePanel = gamePanel;
         this.loot = loot;
 
-        type = type_obstacle;
+        type = Type.OBSTACLE;
         name = "Chest";
         image = setup("object/chest", gamePanel.tileSize, gamePanel.tileSize);
         image2 = setup("object/chest_opened", gamePanel.tileSize, gamePanel.tileSize);
@@ -30,7 +32,7 @@ public class Chest extends Entity {
     }
 
     public void interact(){
-        gamePanel.gameState = gamePanel.dialogueState;
+        gamePanel.gameState = GameState.DIALOGUE;
 
         if(!opened){
             gamePanel.playSoundEffect(3);

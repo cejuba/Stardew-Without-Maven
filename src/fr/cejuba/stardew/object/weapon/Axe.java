@@ -2,12 +2,13 @@ package fr.cejuba.stardew.object.weapon;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.main.Type;
 
 public class Axe extends Entity {
     public Axe(GamePanel gamePanel) {
         super(gamePanel);
 
-        type = type_axe;
+        type = Type.AXE;
         name = "Woodcutter's Axe";
         down2 = setup("/object/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
