@@ -16,7 +16,7 @@ import fr.cejuba.stardew.tile.interactive.DryTree;
 
 public class AssetSetter {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public AssetSetter(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

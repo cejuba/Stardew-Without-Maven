@@ -4,7 +4,7 @@ import fr.cejuba.stardew.entity.Entity;
 
 public class CollisionChecker {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public CollisionChecker(GamePanel gamePanel) {
         this.gamePanel = gamePanel;

@@ -8,8 +8,8 @@ import java.net.URL;
 public class Sound {
     private MediaPlayer mediaPlayer;
     private final URL[] soundURL = new URL[30];
-    int volumeScale = 0;
-    float volume;
+    private int volumeScale = 0;
+    private float volume;
 
     public Sound() {
         soundURL[0] = getClass().getResource("/fr/cejuba/stardew/sounds/BlueBoyAdventure.wav");
@@ -75,6 +75,29 @@ public class Sound {
             case 5 -> volume = 1;
         }
         mediaPlayer.setVolume(volume);
-
     }
+
+    // Getters and Setters
+    public int getVolumeScale() {
+        return volumeScale;
+    }
+    public void setVolumeScale(int volumeScale) {
+        this.volumeScale = volumeScale;
+    }
+    public float getVolume() {
+        return volume;
+    }
+    public void setVolume(float volume) {
+        this.volume = volume;
+    }
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
+    }
+    public URL[] getSoundURL() {
+        return soundURL;
+    }
+
 }

@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 
 public class KeyHandler {
 
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
     private boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
 
     // Debug
@@ -156,7 +156,6 @@ public class KeyHandler {
         }
         switch (event.getCode()) {
 
-
             case ESCAPE -> {
                 gamePanel.setGameState(GameState.PLAY);
                 gamePanel.ui.setSubState(0);
@@ -178,13 +177,13 @@ public class KeyHandler {
             }
             case Q, LEFT -> {
                 if (gamePanel.ui.getSubState() == 0) {
-                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.volumeScale > 0) {
-                        gamePanel.music.volumeScale--;
+                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.getVolumeScale() > 0) {
+                        gamePanel.music.setVolumeScale(gamePanel.music.getVolumeScale() - 1);
                         gamePanel.music.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
-                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.volumeScale > 0) {
-                        gamePanel.soundEffect.volumeScale--;
+                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.getVolumeScale() > 0) {
+                        gamePanel.soundEffect.setVolumeScale(gamePanel.soundEffect.getVolumeScale() - 1);
                         gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
@@ -193,13 +192,13 @@ public class KeyHandler {
             }
             case D, RIGHT -> {
                 if (gamePanel.ui.getSubState() == 0) {
-                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.volumeScale < 5) {
-                        gamePanel.music.volumeScale++;
+                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.getVolumeScale() < 5) {
+                        gamePanel.music.setVolumeScale(gamePanel.music.getVolumeScale() + 1);
                         gamePanel.music.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
-                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.volumeScale < 5) {
-                        gamePanel.soundEffect.volumeScale++;
+                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.getVolumeScale() < 5) {
+                        gamePanel.soundEffect.setVolumeScale(gamePanel.soundEffect.getVolumeScale() + 1);
                         gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
@@ -378,29 +377,8 @@ public class KeyHandler {
     public boolean isShowDebugText() {
         return showDebugText;
     }
-    public void setShowDebugText(boolean showDebugText) {
-        this.showDebugText = showDebugText;
-    }
     public void setEnterPressed(boolean enterPressed) {
         this.enterPressed = enterPressed;
-    }
-    public void setShotKeyPressed(boolean shotKeyPressed) {
-        this.shotKeyPressed = shotKeyPressed;
-    }
-    public void setUpPressed(boolean upPressed) {
-        this.upPressed = upPressed;
-    }
-    public void setDownPressed(boolean downPressed) {
-        this.downPressed = downPressed;
-    }
-    public void setLeftPressed(boolean leftPressed) {
-        this.leftPressed = leftPressed;
-    }
-    public void setRightPressed(boolean rightPressed) {
-        this.rightPressed = rightPressed;
-    }
-    public void setGamePanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
     }
     public GamePanel getGamePanel() {
         return gamePanel;

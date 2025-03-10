@@ -3,7 +3,7 @@ package fr.cejuba.stardew.main;
 import java.io.*;
 
 public class Config {
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Config(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -23,11 +23,11 @@ public class Config {
             bufferedWriter.newLine();
 
             // Music Volume
-            bufferedWriter.write(Integer.toString(gamePanel.music.volumeScale));
+            bufferedWriter.write(Integer.toString(gamePanel.music.getVolumeScale()));
             bufferedWriter.newLine();
 
             // SoundEffect Volume
-            bufferedWriter.write(Integer.toString(gamePanel.soundEffect.volumeScale));
+            bufferedWriter.write(Integer.toString(gamePanel.soundEffect.getVolumeScale()));
             bufferedWriter.newLine();
 
             bufferedWriter.close();
@@ -48,11 +48,11 @@ public class Config {
 
             // Music Volume
             s = bufferedReader.readLine();
-            gamePanel.music.volumeScale = Integer.parseInt(s);
+            gamePanel.music.setVolumeScale(Integer.parseInt(s));
 
             // SoundEffect Volume
             s = bufferedReader.readLine();
-            gamePanel.soundEffect.volumeScale = Integer.parseInt(s);
+            gamePanel.soundEffect.setVolumeScale(Integer.parseInt(s));
 
             bufferedReader.close();
         } catch (Exception e) {

@@ -3,13 +3,13 @@ package fr.cejuba.stardew.main;
 import fr.cejuba.stardew.entity.Entity;
 
 public class EventHandler {
-    GamePanel gamePanel;
-    EventRectangle[][][] eventRectangle;
+    private final GamePanel gamePanel;
+    private final EventRectangle[][][] eventRectangle;
 
-    int previousEventX, previousEventY;
-    boolean canTouchEvent = true;
+    private int previousEventX, previousEventY;
+    private boolean canTouchEvent = true;
 
-    int tempMap, tempCol, tempRow;
+    private int tempMap, tempCol, tempRow;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -61,10 +61,10 @@ public class EventHandler {
             gamePanel.player.solidArea.setX(gamePanel.player.worldX + gamePanel.player.solidArea.getX());
             gamePanel.player.solidArea.setY(gamePanel.player.worldY + gamePanel.player.solidArea.getY());
             EventRectangle eventRect = eventRectangle[map][col][row];
-            eventRect.setX(col * gamePanel.tileSize + eventRect.eventRectangleDefaultX);
-            eventRect.setY(row * gamePanel.tileSize + eventRect.eventRectangleDefaultY);
+            eventRect.setX(col * gamePanel.tileSize + eventRect.getEventRectangleDefaultX());
+            eventRect.setY(row * gamePanel.tileSize + eventRect.getEventRectangleDefaultY());
 
-            if (gamePanel.player.solidArea.getBoundsInParent().intersects(eventRect.getBoundsInParent()) && !eventRect.eventDone) {
+            if (gamePanel.player.solidArea.getBoundsInParent().intersects(eventRect.getBoundsInParent()) && !eventRect.isEventDone()) {
                 if (gamePanel.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                     hit = true;
 
@@ -75,8 +75,8 @@ public class EventHandler {
 
             gamePanel.player.solidArea.setX(gamePanel.player.solidAreaDefaultX);
             gamePanel.player.solidArea.setY(gamePanel.player.solidAreaDefaultY);
-            eventRect.setX(eventRect.eventRectangleDefaultX);
-            eventRect.setY(eventRect.eventRectangleDefaultY);
+            eventRect.setX(eventRect.getEventRectangleDefaultX());
+            eventRect.setY(eventRect.getEventRectangleDefaultY());
         }
         return hit;
     }
@@ -123,5 +123,22 @@ public class EventHandler {
             gamePanel.player.attackCanceled = true;
             entity.speak();
         }
+    }
+
+    // Getters and Setters
+    public int getTempMap() {
+        return tempMap;
+    }
+    public int getTempCol() {
+        return tempCol;
+    }
+    public int getTempRow() {
+        return tempRow;
+    }
+    public void setPreviousEventX(int previousEventX) {
+        this.previousEventX = previousEventX;
+    }
+    public void setPreviousEventY(int previousEventY) {
+        this.previousEventY = previousEventY;
     }
 }

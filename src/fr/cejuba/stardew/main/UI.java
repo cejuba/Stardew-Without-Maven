@@ -18,12 +18,12 @@ import java.util.ArrayList;
 
 public class UI {
 
-    GamePanel gamePanel;
-    GraphicsContext graphicsContext;
+    private final GamePanel gamePanel;
+    private GraphicsContext graphicsContext;
     private final Font arial_40, arial_80B, arial_32F, arial_96B;
     private boolean messageOn = false;
-    ArrayList<String> message = new ArrayList<>();
-    ArrayList<Integer> messageCounter = new ArrayList<>();
+    private final ArrayList<String> message = new ArrayList<>();
+    private final ArrayList<Integer> messageCounter = new ArrayList<>();
     private boolean gameFinished = false;
     private String currentDialogue = "";
     private int commandNumber = 0;
@@ -607,11 +607,11 @@ public class UI {
         if(counter >= 0.9){
             counter = 0;
             gamePanel.setGameState(GameState.PLAY);
-            gamePanel.currentMap = gamePanel.eventHandler.tempMap;
-            gamePanel.player.worldX = gamePanel.eventHandler.tempCol * gamePanel.tileSize;
-            gamePanel.player.worldY = gamePanel.eventHandler.tempRow * gamePanel.tileSize;
-            gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
-            gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+            gamePanel.currentMap = gamePanel.eventHandler.getTempMap();
+            gamePanel.player.worldX = gamePanel.eventHandler.getTempCol() * gamePanel.tileSize;
+            gamePanel.player.worldY = gamePanel.eventHandler.getTempRow() * gamePanel.tileSize;
+            gamePanel.eventHandler.setPreviousEventX(gamePanel.player.worldX);
+            gamePanel.eventHandler.setPreviousEventY(gamePanel.player.worldY);
         }
     }
 
@@ -742,13 +742,13 @@ public class UI {
         // Music Volume
         textY += gamePanel.tileSize;
         graphicsContext.strokeRect(textX, textY, 120, 24);
-        int volumeWidth = 24 * gamePanel.music.volumeScale;
+        int volumeWidth = 24 * gamePanel.music.getVolumeScale();
         graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
         // Sound Effect Volume
         textY += gamePanel.tileSize;
         graphicsContext.strokeRect(textX, textY, 120, 24);
-        volumeWidth = 24 * gamePanel.soundEffect.volumeScale;
+        volumeWidth = 24 * gamePanel.soundEffect.getVolumeScale();
         graphicsContext.fillRect(textX, textY, volumeWidth, 24);
 
         gamePanel.config.saveConfig();
