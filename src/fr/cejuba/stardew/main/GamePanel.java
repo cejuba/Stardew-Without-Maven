@@ -4,8 +4,7 @@ package fr.cejuba.stardew.main;
 // TODO : Check if player retry(); : is the items deleted or not (possible bug bcs can appear multiple times)
 // TODO : Bug when a junimo is not killed and the player restart the game, the junimo is still with it's previous life
 // TODO : Map are darker at night / impossible ?
-// TODO : Add control in the control pannel (M for Map and X for miniMap (and others if I forgot)
-
+// TODO : Heart can be taken in the inventory
 
 import fr.cejuba.stardew.AI.PathFinder;
 import fr.cejuba.stardew.entity.Entity;
@@ -27,8 +26,8 @@ import java.util.Comparator;
 
 public class GamePanel extends Canvas {
 
-    final int originalTileSize = 16;
-    final int scale = 3;
+    private final int originalTileSize = 16;
+    private final int scale = 3;
 
     // Screen settings
     public final int tileSize = originalTileSize * scale;
@@ -40,8 +39,8 @@ public class GamePanel extends Canvas {
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
     // Fullscreen settings
-    int screenWidth2 = screenWidth;
-    int screenHeight2 = screenHeight;
+    private int screenWidth2 = screenWidth;
+    private int screenHeight2 = screenHeight;
 
     WritableImage tempScreen;
     GraphicsContext graphicsContext;
@@ -53,7 +52,7 @@ public class GamePanel extends Canvas {
     public final int maxWorldRow = 50;
 
 
-    int FPS = 60;
+    private final int FPS = 60;
 
     // System
     public TileManager tileManager = new TileManager(this);

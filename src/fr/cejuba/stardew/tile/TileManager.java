@@ -93,7 +93,7 @@ public class TileManager {
             }
             tiles[index].image = new Image(is);
             tiles[index].image = utilityTool.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
-            tiles[index].collision = collision;
+            tiles[index].setCollision(collision);
         } catch (Exception e) {
             System.out.println("Error setting up tile: " + e.getMessage());
             e.printStackTrace();

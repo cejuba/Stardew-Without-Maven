@@ -75,7 +75,7 @@ public class PathFinder {
             // Set solid nodes
             // Check tiles
             int tileNumber = gamePanel.tileManager.mapTileNumber[gamePanel.currentMap][col][row];
-            if(gamePanel.tileManager.tiles[tileNumber].collision){
+            if(gamePanel.tileManager.tiles[tileNumber].isCollision()){
                 node[col][row].solid = true;
             }
             // Check Interactive tiles
