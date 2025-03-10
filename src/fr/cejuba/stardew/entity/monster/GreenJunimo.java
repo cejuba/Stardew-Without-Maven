@@ -18,7 +18,7 @@ public class GreenJunimo extends Entity {
 
         this.gamePanel = gamePanel;
 
-        type = Type.MONSTER;
+        setType(Type.MONSTER);
         name = "Green Junimo";
         defaultSpeed = 1;
         speed = defaultSpeed;

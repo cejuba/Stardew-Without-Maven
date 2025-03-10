@@ -13,7 +13,7 @@ public class Tent extends Entity{
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.CONSUMABLE;
+        setType(Type.CONSUMABLE);
         name = "Tent";
         down2 = setup("object/tent", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nYou can sleep until next morning";

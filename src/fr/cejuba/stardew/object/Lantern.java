@@ -9,7 +9,7 @@ public class Lantern extends Entity {
     public Lantern(GamePanel gamePanel) {
         super(gamePanel);
 
-        type = Type.LIGHT;
+        setType(Type.LIGHT);
         name = "Lantern";
         down2 = setup("object/lantern", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nLight your way.";

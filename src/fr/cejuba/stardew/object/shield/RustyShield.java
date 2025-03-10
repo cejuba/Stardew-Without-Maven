@@ -8,7 +8,7 @@ public class RustyShield extends Entity {
     public RustyShield(GamePanel gamePanel) {
         super(gamePanel);
 
-        type = Type.SHIELD;
+        setType(Type.SHIELD);
         name = "Rusty Shield";
         down2 = setup("/object/rustyShield", gamePanel.tileSize, gamePanel.tileSize);
         defenseValue = 1;

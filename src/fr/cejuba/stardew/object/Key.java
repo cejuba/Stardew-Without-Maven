@@ -13,7 +13,7 @@ public class Key extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.CONSUMABLE;
+        setType(Type.CONSUMABLE);
         name = "Key";
         down2 = setup("/object/key", gamePanel.tileSize, gamePanel.tileSize);
 

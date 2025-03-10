@@ -8,7 +8,8 @@ public class Boots extends Entity {
 
     public Boots(GamePanel gamePanel) {
         super(gamePanel);
-        type = Type.BOOTS;
+
+        setType(Type.BOOTS);
         name = "Boots";
         down2 = setup("/object/boots", gamePanel.tileSize, gamePanel.tileSize);
         speedValue = 2;

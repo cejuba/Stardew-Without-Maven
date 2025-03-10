@@ -14,7 +14,7 @@ public class RedPotion extends Entity {
         value = 5;
         this.gamePanel = gamePanel;
 
-        type = Type.CONSUMABLE;
+        setType(Type.CONSUMABLE);
         name = "RedPotion";
         down2 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[" + name + "]\nHeals your life by " + value + ".";

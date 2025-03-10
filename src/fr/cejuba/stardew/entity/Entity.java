@@ -87,7 +87,7 @@ public class Entity {
     public int lightRadius;
 
     // Type
-    public Type type;
+    private Type type;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -437,6 +437,17 @@ public class Entity {
             }
         }
         return index;
+    }
+
+
+    // Getter Setter
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public int getLeftX(){

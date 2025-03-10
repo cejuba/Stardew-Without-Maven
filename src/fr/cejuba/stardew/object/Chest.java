@@ -16,7 +16,7 @@ public class Chest extends Entity {
         this.gamePanel = gamePanel;
         this.loot = loot;
 
-        type = Type.OBSTACLE;
+        setType(Type.OBSTACLE);
         name = "Chest";
         image = setup("object/chest", gamePanel.tileSize, gamePanel.tileSize);
         image2 = setup("object/chest_opened", gamePanel.tileSize, gamePanel.tileSize);

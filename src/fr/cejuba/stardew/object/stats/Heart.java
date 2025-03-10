@@ -11,7 +11,7 @@ public class Heart extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.CONSUMABLE;
+        setType(Type.CONSUMABLE);
         name = "Heart";
         value = 2;
         down2 = setup("object/heart_full", gamePanel.tileSize, gamePanel.tileSize);

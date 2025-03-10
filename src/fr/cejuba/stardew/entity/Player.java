@@ -150,29 +150,29 @@ public class Player extends Entity {
     public void getPlayerAttackImage() {
         try {
             System.out.println("Loading player attack images");
-            if(currentWeapon.type == Type.SWORD){
-                attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
+            switch(currentWeapon.getType()) {
+                case Type.SWORD -> {
+                    attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                }
+                case Type.AXE -> {
+                    attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackDown1 = setup("player/attacking/boy_axe_down_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+                    attackRight0 = setup("player/attacking/boy_axe_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackRight1 = setup("player/attacking/boy_axe_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackLeft0 = setup("player/attacking/boy_axe_left_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackLeft1 = setup("player/attacking/boy_axe_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                }
             }
-            if(currentWeapon.type == Type.AXE){
-                attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackDown1 = setup("player/attacking/boy_axe_down_2", gamePanel.tileSize, gamePanel.tileSize*2);
-                attackRight0 = setup("player/attacking/boy_axe_right_1", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackRight1 = setup("player/attacking/boy_axe_right_2", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackLeft0 = setup("player/attacking/boy_axe_left_1", gamePanel.tileSize*2, gamePanel.tileSize);
-                attackLeft1 = setup("player/attacking/boy_axe_left_2", gamePanel.tileSize*2, gamePanel.tileSize);
-            }
-
             System.out.println("Player attack images loaded successfully");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -336,12 +336,12 @@ public class Player extends Entity {
         if (index != 999) {
 
             // PickUpOnly Objects
-            if(gamePanel.object[gamePanel.currentMap][index].type == Type.PICKUPONLY){
+            if(gamePanel.object[gamePanel.currentMap][index].getType() == Type.PICKUPONLY){
                 gamePanel.object[gamePanel.currentMap][index].use(this);
                 gamePanel.object[gamePanel.currentMap][index] = null;
             }
             // Obstacle
-            else if(gamePanel.object[gamePanel.currentMap][index].type == Type.OBSTACLE){
+            else if(gamePanel.object[gamePanel.currentMap][index].getType() == Type.OBSTACLE){
                 if(keyHandler.enterPressed){
                     gamePanel.object[gamePanel.currentMap][index].interact();
                 }
@@ -472,32 +472,38 @@ public class Player extends Entity {
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);
 
-            if(selectedItem.type == Type.SWORD || selectedItem.type == Type.AXE){
-                currentWeapon = selectedItem;
-                attack = getAttack();
-                getPlayerAttackImage();
-            } else if(selectedItem.type == Type.SHIELD){
-                currentShield = selectedItem;
-                defense = getDefense();
-            } else if(selectedItem.type == Type.BOOTS){
-                currentBoots = selectedItem;
-                speed = getSpeed();
-            } else if(selectedItem.type == Type.LIGHT){
-                if(currentLight == selectedItem) {
-                    currentLight = null;
+            switch(selectedItem.getType()){
+                case Type.SWORD, Type.AXE -> {
+                    currentWeapon = selectedItem;
+                    attack = getAttack();
+                    getPlayerAttackImage();
                 }
-                else{
-                    currentLight = selectedItem;
+                case Type.SHIELD -> {
+                    currentShield = selectedItem;
+                    defense = getDefense();
                 }
-                lightUpdated = true;
-            } else if(selectedItem.type == Type.CONSUMABLE){
-                System.out.println(selectedItem.name + " used");
-                if(selectedItem.use(this)){
-                    if(selectedItem.amount > 1){
-                        selectedItem.amount--;
+                case Type.BOOTS -> {
+                    currentBoots = selectedItem;
+                    speed = getSpeed();
+                }
+                case Type.LIGHT -> {
+                    if(currentLight == selectedItem) {
+                        currentLight = null;
                     }
                     else{
-                        inventory.remove(itemIndex);
+                        currentLight = selectedItem;
+                    }
+                    lightUpdated = true;
+                }
+                case Type.CONSUMABLE -> {
+                    System.out.println(selectedItem.name + " used");
+                    if(selectedItem.use(this)){
+                        if(selectedItem.amount > 1){
+                            selectedItem.amount--;
+                        }
+                        else{
+                            inventory.remove(itemIndex);
+                        }
                     }
                 }
             }

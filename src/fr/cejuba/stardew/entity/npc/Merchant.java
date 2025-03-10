@@ -21,7 +21,7 @@ public class Merchant extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.NPC;
+        setType(Type.NPC);
         direction = "down";
         speed = 1;
 

@@ -12,7 +12,7 @@ public class ManaCrystal extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.PICKUPONLY;
+        setType(Type.PICKUPONLY);
         name = "Mana Crystal";
         value = 1;
         down2 = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);

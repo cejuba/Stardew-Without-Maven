@@ -11,7 +11,7 @@ public class BronzeCoin extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = Type.PICKUPONLY;
+        setType(Type.PICKUPONLY);
         name = "Bronze Coin";
         value = 1;
         down2 = setup("object/coin_bronze", gamePanel.tileSize, gamePanel.tileSize);

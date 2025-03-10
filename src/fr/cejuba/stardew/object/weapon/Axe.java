@@ -8,7 +8,7 @@ public class Axe extends Entity {
     public Axe(GamePanel gamePanel) {
         super(gamePanel);
 
-        type = Type.AXE;
+        setType(Type.AXE);
         name = "Woodcutter's Axe";
         down2 = setup("/object/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
