@@ -6,7 +6,7 @@ import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
 
 public class RedPotion extends Entity {
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public RedPotion(GamePanel gamePanel) {
         super(gamePanel);
@@ -16,7 +16,7 @@ public class RedPotion extends Entity {
 
         setType(Type.CONSUMABLE);
         name = "RedPotion";
-        down2 = setup("/object/potion_red", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/potion_red", gamePanel.getTileSize(), gamePanel.getTileSize());
         description = "[" + name + "]\nHeals your life by " + value + ".";
         price = 25;
         stackable = true;

@@ -7,7 +7,7 @@ import fr.cejuba.stardew.main.Type;
 
 public class Key extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Key(GamePanel gamePanel) {
         super(gamePanel);
@@ -15,7 +15,7 @@ public class Key extends Entity {
 
         setType(Type.CONSUMABLE);
         name = "Key";
-        down2 = setup("/object/key", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/key", gamePanel.getTileSize(), gamePanel.getTileSize());
 
         description = "[" + name + "]\n" + "It opens a door.";
 

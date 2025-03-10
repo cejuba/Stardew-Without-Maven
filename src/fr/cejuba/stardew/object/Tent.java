@@ -7,7 +7,7 @@ import fr.cejuba.stardew.main.Type;
 
 public class Tent extends Entity{
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Tent(GamePanel gamePanel) {
         super(gamePanel);
@@ -15,7 +15,7 @@ public class Tent extends Entity{
 
         setType(Type.CONSUMABLE);
         name = "Tent";
-        down2 = setup("object/tent", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/tent", gamePanel.getTileSize(), gamePanel.getTileSize());
         description = "[" + name + "]\nYou can sleep until next morning";
         price = 300;
         stackable = true;

@@ -6,7 +6,7 @@ import fr.cejuba.stardew.main.Type;
 
 public class ManaCrystal extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public ManaCrystal(GamePanel gamePanel) {
         super(gamePanel);
@@ -15,9 +15,9 @@ public class ManaCrystal extends Entity {
         setType(Type.PICKUPONLY);
         name = "Mana Crystal";
         value = 1;
-        down2 = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);
-        image = setup("object/manacrystal_full", gamePanel.tileSize, gamePanel.tileSize);
-        image2 = setup("object/manacrystal_blank", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/manacrystal_full", gamePanel.getTileSize(), gamePanel.getTileSize());
+        image = setup("object/manacrystal_full", gamePanel.getTileSize(), gamePanel.getTileSize());
+        image2 = setup("object/manacrystal_blank", gamePanel.getTileSize(), gamePanel.getTileSize());
     }
 
     public boolean use(Entity entity) {

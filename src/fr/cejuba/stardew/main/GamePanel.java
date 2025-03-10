@@ -30,7 +30,7 @@ public class GamePanel extends Canvas {
     private final int scale = 3;
 
     // Screen settings
-    public final int tileSize = originalTileSize * scale;
+    private final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 27;
     public final int maxScreenRow = 15;
     public final int maxMap = 10;
@@ -341,5 +341,9 @@ public class GamePanel extends Canvas {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public int getTileSize() {
+        return tileSize;
     }
 }

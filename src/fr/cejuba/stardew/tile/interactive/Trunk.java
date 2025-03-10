@@ -5,15 +5,13 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.object.weapon.Axe;
 
 public class Trunk extends InteractiveTile {
-    GamePanel gamePanel;
     public Trunk(GamePanel gamePanel, int column, int row) {
         super(gamePanel);
-        this.gamePanel = gamePanel;
 
-        down2 = setup("tile/interactive/trunk", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("tile/interactive/trunk", gamePanel.getTileSize(), gamePanel.getTileSize());
 
-        this.worldX = column * gamePanel.tileSize;
-        this.worldY = row * gamePanel.tileSize;
+        this.worldX = column * gamePanel.getTileSize();
+        this.worldY = row * gamePanel.getTileSize();
 
         solidArea.setX(0);
         solidArea.setY(0);

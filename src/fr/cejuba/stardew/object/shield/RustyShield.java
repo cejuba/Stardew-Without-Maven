@@ -10,7 +10,7 @@ public class RustyShield extends Entity {
 
         setType(Type.SHIELD);
         name = "Rusty Shield";
-        down2 = setup("/object/rustyShield", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/rustyShield", gamePanel.getTileSize(), gamePanel.getTileSize());
         defenseValue = 1;
 
         description = "[" + name + "]\n" + "A rusty shield.";

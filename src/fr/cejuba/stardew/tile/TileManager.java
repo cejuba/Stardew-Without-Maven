@@ -91,8 +91,8 @@ public class TileManager {
                 System.out.println("Resource not found: /fr/cejuba/stardew/tile/" + imageName + ".png");
                 throw new RuntimeException("Resource not found: " + imageName);
             }
-            tiles[index].image = new Image(is);
-            tiles[index].image = utilityTool.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
+            tiles[index].setImage(new Image(is));
+            tiles[index].setImage(utilityTool.scaleImage(tiles[index].getImage(), gamePanel.getTileSize(), gamePanel.getTileSize()));
             tiles[index].setCollision(collision);
         } catch (Exception e) {
             System.out.println("Error setting up tile: " + e.getMessage());
@@ -147,16 +147,16 @@ public class TileManager {
                 continue;
             }
 
-            int worldX = worldCol * gamePanel.tileSize;
-            int worldY = worldRow * gamePanel.tileSize;
+            int worldX = worldCol * gamePanel.getTileSize();
+            int worldY = worldRow * gamePanel.getTileSize();
             int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
             int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-            if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
-                    worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
-                    worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
-                    worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.getScreenY()) {
-                graphicsContext.drawImage(tiles[tileNumber].image, screenX, screenY);
+            if (worldX + gamePanel.getTileSize() > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
+                    worldX - gamePanel.getTileSize() < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
+                    worldY + gamePanel.getTileSize() > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
+                    worldY - gamePanel.getTileSize() < gamePanel.player.worldY + gamePanel.player.getScreenY()) {
+                graphicsContext.drawImage(tiles[tileNumber].getImage(), screenX, screenY);
             }
             worldCol++;
             if (worldCol == gamePanel.maxWorldCol) {

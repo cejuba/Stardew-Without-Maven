@@ -204,10 +204,10 @@ public class Entity {
         int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
         int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-        if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
-                worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
-                worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
-                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.getScreenY()) {
+        if (worldX + gamePanel.getTileSize() > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
+                worldX - gamePanel.getTileSize() < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
+                worldY + gamePanel.getTileSize() > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
+                worldY - gamePanel.getTileSize() < gamePanel.player.worldY + gamePanel.player.getScreenY()) {
 
             switch (direction) {
                 case "up" -> image = (spriteNumber == 0) ? up1 : up2;
@@ -219,11 +219,11 @@ public class Entity {
             // Monster HP bar
             if(type == Type.MONSTER && hpBarOn){
 
-                double oneScale = (double)gamePanel.tileSize / maxLife;
+                double oneScale = (double)gamePanel.getTileSize() / maxLife;
                 double hpBarValue = oneScale * life;
 
                 graphicsContext.setFill(Color.BLACK);
-                graphicsContext.fillRect(screenX-1, screenY - 16, gamePanel.tileSize+2, 12);
+                graphicsContext.fillRect(screenX-1, screenY - 16, gamePanel.getTileSize()+2, 12);
                 graphicsContext.setFill(Color.RED);
                 graphicsContext.fillRect(screenX, screenY - 15, (int)hpBarValue, 10);
 
@@ -342,15 +342,15 @@ public class Entity {
     }
 
     public void searchPath(int goalCol, int goalRow){
-        int startCol = (int) ((worldX + solidArea.getX())/gamePanel.tileSize);
-        int startRow = (int) ((worldY + solidArea.getY())/gamePanel.tileSize);
+        int startCol = (int) ((worldX + solidArea.getX())/gamePanel.getTileSize());
+        int startRow = (int) ((worldY + solidArea.getY())/gamePanel.getTileSize());
 
         gamePanel.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
         if(gamePanel.pathFinder.search()){
             // Next World Coordinates
-            int nextX = gamePanel.pathFinder.pathList.get(0).getCol() * gamePanel.tileSize;
-            int nextY = gamePanel.pathFinder.pathList.get(0).getRow() * gamePanel.tileSize;
+            int nextX = gamePanel.pathFinder.pathList.get(0).getCol() * gamePanel.getTileSize();
+            int nextY = gamePanel.pathFinder.pathList.get(0).getRow() * gamePanel.getTileSize();
 
             // Entity's solidArea position
             int entityLeftX = getLeftX();
@@ -358,11 +358,11 @@ public class Entity {
             int entityTopY = getTopY();
             int entityBottomY = getBottomY();
 
-            if(entityTopY > nextY && entityLeftX >= nextX && entityRightX < nextX + gamePanel.tileSize){
+            if(entityTopY > nextY && entityLeftX >= nextX && entityRightX < nextX + gamePanel.getTileSize()){
                 direction = "up";
-            } else if (entityTopY < nextY && entityLeftX >= nextX && entityRightX < nextX + gamePanel.tileSize){
+            } else if (entityTopY < nextY && entityLeftX >= nextX && entityRightX < nextX + gamePanel.getTileSize()){
                 direction = "down";
-            } else if (entityTopY >= nextY && entityBottomY < nextY + gamePanel.tileSize) {
+            } else if (entityTopY >= nextY && entityBottomY < nextY + gamePanel.getTileSize()) {
                 // Left or Right
                 if (entityLeftX > nextX) {
                     direction = "left";
@@ -424,8 +424,8 @@ public class Entity {
             case "right" -> nextWorldX = user.getRightX() + 1;
         }
 
-        int col = (int) (nextWorldX / gamePanel.tileSize);
-        int row = (int) (nextWorldY / gamePanel.tileSize);
+        int col = (int) (nextWorldX / gamePanel.getTileSize());
+        int row = (int) (nextWorldY / gamePanel.getTileSize());
 
         for(int i = 0; i < target[1].length; i++){
             Entity targeted = target[gamePanel.currentMap][i];
@@ -460,9 +460,9 @@ public class Entity {
         return (int) (worldY + solidArea.getY() + solidArea.getHeight());
     }
     public int getColumn(){
-        return (int) ((worldX + solidArea.getX())/gamePanel.tileSize);
+        return (int) ((worldX + solidArea.getX())/gamePanel.getTileSize());
     }
     public int getRow(){
-        return (int) ((worldY + solidArea.getY())/gamePanel.tileSize);
+        return (int) ((worldY + solidArea.getY())/gamePanel.getTileSize());
     }
 }

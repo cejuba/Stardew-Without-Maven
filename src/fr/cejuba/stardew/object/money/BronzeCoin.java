@@ -6,7 +6,7 @@ import fr.cejuba.stardew.main.Type;
 
 public class BronzeCoin extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public BronzeCoin(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
@@ -14,7 +14,7 @@ public class BronzeCoin extends Entity {
         setType(Type.PICKUPONLY);
         name = "Bronze Coin";
         value = 1;
-        down2 = setup("object/coin_bronze", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/coin_bronze", gamePanel.getTileSize(), gamePanel.getTileSize());
     }
 
     public boolean use(Entity entity) {

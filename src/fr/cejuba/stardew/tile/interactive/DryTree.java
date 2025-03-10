@@ -6,12 +6,12 @@ import fr.cejuba.stardew.object.weapon.Axe;
 import javafx.scene.paint.Color;
 
 public class DryTree extends InteractiveTile {
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public DryTree(GamePanel gamePanel, int column, int row) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        down2 = setup("tile/interactive/drytree", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("tile/interactive/drytree", gamePanel.getTileSize(), gamePanel.getTileSize());
         setDestructible(true);
         life = 3;
 
@@ -28,7 +28,7 @@ public class DryTree extends InteractiveTile {
     }
 
     public InteractiveTile getDestroyedForm(){
-        return new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
+        return new Trunk(gamePanel, worldX / gamePanel.getTileSize(), worldY / gamePanel.getTileSize());
     }
 
     public Color getParticleColor() {

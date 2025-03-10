@@ -84,20 +84,4 @@ public class Sound {
     public void setVolumeScale(int volumeScale) {
         this.volumeScale = volumeScale;
     }
-    public float getVolume() {
-        return volume;
-    }
-    public void setVolume(float volume) {
-        this.volume = volume;
-    }
-    public MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
-    }
-    public void setMediaPlayer(MediaPlayer mediaPlayer) {
-        this.mediaPlayer = mediaPlayer;
-    }
-    public URL[] getSoundURL() {
-        return soundURL;
-    }
-
 }

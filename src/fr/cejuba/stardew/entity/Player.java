@@ -30,8 +30,8 @@ public class Player extends Entity {
 
         this.keyHandler = keyHandler;
 
-        screenX = gamePanel.screenWidth / 2 - (gamePanel.tileSize / 2);
-        screenY = gamePanel.screenHeight / 2 - (gamePanel.tileSize / 2);
+        screenX = gamePanel.screenWidth / 2 - (gamePanel.getTileSize() / 2);
+        screenY = gamePanel.screenHeight / 2 - (gamePanel.getTileSize() / 2);
 
         solidArea = new Rectangle(8, 16, 32, 32);
         solidAreaDefaultX = (int) solidArea.getX();
@@ -79,8 +79,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultPosition() {
-        worldX = gamePanel.tileSize * 23;
-        worldY = gamePanel.tileSize * 21;
+        worldX = gamePanel.getTileSize() * 23;
+        worldY = gamePanel.getTileSize() * 21;
         //worldX = gamePanel.tileSize * 12;
         //worldY = gamePanel.tileSize * 11;
         direction = "down";
@@ -120,14 +120,14 @@ public class Player extends Entity {
         try {
             System.out.println("Loading player images");
 
-            up1 = setup("player/walking/player_up_1", gamePanel.tileSize, gamePanel.tileSize);
-            up2 = setup("player/walking/player_up_2", gamePanel.tileSize, gamePanel.tileSize);
-            down1 = setup("player/walking/player_down_1", gamePanel.tileSize, gamePanel.tileSize);
-            down2 = setup("player/walking/player_down_2", gamePanel.tileSize, gamePanel.tileSize);
-            right1 = setup("player/walking/player_right_1", gamePanel.tileSize, gamePanel.tileSize);
-            right2 = setup("player/walking/player_right_2", gamePanel.tileSize, gamePanel.tileSize);
-            left1 = setup("player/walking/player_right_1", gamePanel.tileSize, gamePanel.tileSize);
-            left2 = setup("player/walking/player_right_2", gamePanel.tileSize, gamePanel.tileSize);
+            up1 = setup("player/walking/player_up_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+            up2 = setup("player/walking/player_up_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+            down1 = setup("player/walking/player_down_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+            down2 = setup("player/walking/player_down_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+            right1 = setup("player/walking/player_right_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+            right2 = setup("player/walking/player_right_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+            left1 = setup("player/walking/player_right_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+            left2 = setup("player/walking/player_right_2", gamePanel.getTileSize(), gamePanel.getTileSize());
 
             System.out.println("Player images loaded successfully");
 
@@ -152,24 +152,24 @@ public class Player extends Entity {
             System.out.println("Loading player attack images");
             switch(currentWeapon.getType()) {
                 case Type.SWORD -> {
-                    attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackUp0 = setup("player/attacking/boy_attack_up_1", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackUp1 = setup("player/attacking/boy_attack_up_2", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackDown0 = setup("player/attacking/boy_attack_down_1", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackDown1 = setup("player/attacking/boy_attack_down_2", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackRight0 = setup("player/attacking/boy_attack_right_1", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackRight1 = setup("player/attacking/boy_attack_right_2", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackLeft0 = setup("player/attacking/boy_attack_left_1", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackLeft1 = setup("player/attacking/boy_attack_left_2", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
                 }
                 case Type.AXE -> {
-                    attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackDown1 = setup("player/attacking/boy_axe_down_2", gamePanel.tileSize, gamePanel.tileSize * 2);
-                    attackRight0 = setup("player/attacking/boy_axe_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackRight1 = setup("player/attacking/boy_axe_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackLeft0 = setup("player/attacking/boy_axe_left_1", gamePanel.tileSize * 2, gamePanel.tileSize);
-                    attackLeft1 = setup("player/attacking/boy_axe_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+                    attackUp0 = setup("player/attacking/boy_axe_up_1", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackUp1 = setup("player/attacking/boy_axe_up_2", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackDown0 = setup("player/attacking/boy_axe_down_1", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackDown1 = setup("player/attacking/boy_axe_down_2", gamePanel.getTileSize(), gamePanel.getTileSize() * 2);
+                    attackRight0 = setup("player/attacking/boy_axe_right_1", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackRight1 = setup("player/attacking/boy_axe_right_2", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackLeft0 = setup("player/attacking/boy_axe_left_1", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
+                    attackLeft1 = setup("player/attacking/boy_axe_left_2", gamePanel.getTileSize() * 2, gamePanel.getTileSize());
                 }
             }
             System.out.println("Player attack images loaded successfully");
@@ -559,7 +559,7 @@ public class Player extends Entity {
                     image = (spriteNumber == 0) ? up1 : up2;
                 }
                 else{
-                    tempScreenY -= gamePanel.tileSize;
+                    tempScreenY -= gamePanel.getTileSize();
                     image = (spriteNumber == 0) ? attackUp0 : attackUp1;
                 }
                 break;
@@ -576,7 +576,7 @@ public class Player extends Entity {
                     image = (spriteNumber == 0) ? left1 : left2;
                 }
                 else{
-                    tempScreenX -= gamePanel.tileSize;
+                    tempScreenX -= gamePanel.getTileSize();
                     image = (spriteNumber == 0) ? attackLeft0 : attackLeft1;
                 }
                 break;

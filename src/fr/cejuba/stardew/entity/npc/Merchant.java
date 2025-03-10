@@ -34,14 +34,14 @@ public class Merchant extends Entity {
         try {
             System.out.println("Loading player images...");
 
-            up1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            up2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            down1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            down2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            right1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            right2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            left1 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
-            left2 = setup("npc/merchant", gamePanel.tileSize, gamePanel.tileSize);
+            up1 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            up2 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            down1 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            down2 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            right1 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            right2 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            left1 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
+            left2 = setup("npc/merchant", gamePanel.getTileSize(), gamePanel.getTileSize());
 
             System.out.println("Player images loaded successfully");
 

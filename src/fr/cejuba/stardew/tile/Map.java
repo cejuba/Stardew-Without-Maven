@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class Map extends TileManager {
 
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
     private Image[] worldMap;
     private boolean miniMapActivated = false;
 
@@ -22,8 +22,8 @@ public class Map extends TileManager {
 
     public void createWorldMap(){
         worldMap = new Image[gamePanel.maxMap];
-        int worldMapWidth = gamePanel.tileSize * gamePanel.maxWorldCol;
-        int worldMapHeight = gamePanel.tileSize * gamePanel.maxWorldRow;
+        int worldMapWidth = gamePanel.getTileSize() * gamePanel.maxWorldCol;
+        int worldMapHeight = gamePanel.getTileSize() * gamePanel.maxWorldRow;
 
         for(int i = 0; i < gamePanel.maxMap; i++){
             Canvas canvas = new Canvas(worldMapWidth, worldMapHeight);
@@ -34,9 +34,9 @@ public class Map extends TileManager {
 
             while(col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow){
                 int tileNumber = mapTileNumber[i][col][row];
-                int x = gamePanel.tileSize * col;
-                int y = gamePanel.tileSize * row;
-                graphicsContext.drawImage(tiles[tileNumber].image, x, y);
+                int x = gamePanel.getTileSize() * col;
+                int y = gamePanel.getTileSize() * row;
+                graphicsContext.drawImage(tiles[tileNumber].getImage(), x, y);
 
                 col++;
                 if(col == gamePanel.maxWorldCol){
@@ -65,12 +65,12 @@ public class Map extends TileManager {
         graphicsContext.drawImage(worldMap[gamePanel.currentMap], x, y, width, height);
 
         // Calculate Scale
-        double scale = (double)(gamePanel.tileSize * gamePanel.maxWorldCol) / width;
+        double scale = (double)(gamePanel.getTileSize() * gamePanel.maxWorldCol) / width;
 
         // Draw player
         int playerX = (int)(x + gamePanel.player.worldX / scale);
         int playerY = (int)(y + gamePanel.player.worldY / scale);
-        int playerSize = (int)(gamePanel.tileSize / scale);
+        int playerSize = (int)(gamePanel.getTileSize() / scale);
         graphicsContext.drawImage(gamePanel.player.down1, playerX, playerY, playerSize, playerSize);
 
         // Objects
@@ -78,7 +78,7 @@ public class Map extends TileManager {
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
-                int entitySize = (int)(gamePanel.tileSize / scale);
+                int entitySize = (int)(gamePanel.getTileSize() / scale);
                 graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);
@@ -89,7 +89,7 @@ public class Map extends TileManager {
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
-                int entitySize = (int)(gamePanel.tileSize / scale);
+                int entitySize = (int)(gamePanel.getTileSize() / scale);
                 graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);
@@ -101,7 +101,7 @@ public class Map extends TileManager {
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
-                int entitySize = (int)(gamePanel.tileSize / scale);
+                int entitySize = (int)(gamePanel.getTileSize() / scale);
                 graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                 graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);
@@ -114,10 +114,10 @@ public class Map extends TileManager {
         graphicsContext.setFill(Color.WHITE);
         String text = "Press 'M' to close";
         int textX;
-        int textY = gamePanel.screenHeight - gamePanel.tileSize;
+        int textY = gamePanel.screenHeight - gamePanel.getTileSize();
 
         // Values
-        int tailX = gamePanel.screenWidth - gamePanel.tileSize;
+        int tailX = gamePanel.screenWidth - gamePanel.getTileSize();
         textX = gamePanel.ui.getXAlignedToRightText(text, tailX);
         graphicsContext.fillText(text, textX, textY);
     }
@@ -127,19 +127,19 @@ public class Map extends TileManager {
             // Draw map
             int width = 200;
             int height = 200;
-            int x = gamePanel.screenWidth - width - gamePanel.tileSize;
-            int y = gamePanel.tileSize;
+            int x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+            int y = gamePanel.getTileSize();
 
             graphicsContext.setGlobalAlpha(0.8);
             graphicsContext.drawImage(worldMap[gamePanel.currentMap], x, y, width, height);
 
             // Calculate Scale
-            double scale = (double) (gamePanel.tileSize * gamePanel.maxWorldCol) / width;
+            double scale = (double) (gamePanel.getTileSize() * gamePanel.maxWorldCol) / width;
 
             // Draw player
             int playerX = (int) (x + gamePanel.player.worldX / scale);
             int playerY = (int) (y + gamePanel.player.worldY / scale);
-            int playerSize = (int) (gamePanel.tileSize / scale);
+            int playerSize = (int) (gamePanel.getTileSize() / scale);
             graphicsContext.drawImage(gamePanel.player.down1, playerX, playerY, playerSize, playerSize);
 
             // Objects
@@ -147,7 +147,7 @@ public class Map extends TileManager {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);
-                    int entitySize = (int) (gamePanel.tileSize / scale);
+                    int entitySize = (int) (gamePanel.getTileSize() / scale);
                     graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);
@@ -158,7 +158,7 @@ public class Map extends TileManager {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);
-                    int entitySize = (int) (gamePanel.tileSize / scale);
+                    int entitySize = (int) (gamePanel.getTileSize() / scale);
                     graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);
@@ -170,7 +170,7 @@ public class Map extends TileManager {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);
-                    int entitySize = (int) (gamePanel.tileSize / scale);
+                    int entitySize = (int) (gamePanel.getTileSize() / scale);
                     graphicsContext.drawImage(entity.image, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down1, entityX, entityY, entitySize, entitySize);
                     graphicsContext.drawImage(entity.down2, entityX, entityY, entitySize, entitySize);

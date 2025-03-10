@@ -5,7 +5,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import javafx.scene.canvas.GraphicsContext;
 
 public class InteractiveTile extends Entity {
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     private boolean destructible = false;
 
     public InteractiveTile(GamePanel gamePanel) {
@@ -39,10 +39,10 @@ public class InteractiveTile extends Entity {
         int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
         int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-        if(worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
-           worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
-           worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
-           worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.getScreenY()){
+        if(worldX + gamePanel.getTileSize() > gamePanel.player.worldX - gamePanel.player.getScreenX() &&
+           worldX - gamePanel.getTileSize() < gamePanel.player.worldX + gamePanel.player.getScreenX() &&
+           worldY + gamePanel.getTileSize() > gamePanel.player.worldY - gamePanel.player.getScreenY() &&
+           worldY - gamePanel.getTileSize() < gamePanel.player.worldY + gamePanel.player.getScreenY()){
 
             graphicsContext.drawImage(down2, screenX, screenY);
         }

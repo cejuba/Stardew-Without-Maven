@@ -38,7 +38,7 @@ public class EventHandler {
         int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
         int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
-        if (distance > gamePanel.tileSize) {
+        if (distance > gamePanel.getTileSize()) {
             canTouchEvent = true;
         }
 
@@ -61,8 +61,8 @@ public class EventHandler {
             gamePanel.player.solidArea.setX(gamePanel.player.worldX + gamePanel.player.solidArea.getX());
             gamePanel.player.solidArea.setY(gamePanel.player.worldY + gamePanel.player.solidArea.getY());
             EventRectangle eventRect = eventRectangle[map][col][row];
-            eventRect.setX(col * gamePanel.tileSize + eventRect.getEventRectangleDefaultX());
-            eventRect.setY(row * gamePanel.tileSize + eventRect.getEventRectangleDefaultY());
+            eventRect.setX(col * gamePanel.getTileSize() + eventRect.getEventRectangleDefaultX());
+            eventRect.setY(row * gamePanel.getTileSize() + eventRect.getEventRectangleDefaultY());
 
             if (gamePanel.player.solidArea.getBoundsInParent().intersects(eventRect.getBoundsInParent()) && !eventRect.isEventDone()) {
                 if (gamePanel.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {

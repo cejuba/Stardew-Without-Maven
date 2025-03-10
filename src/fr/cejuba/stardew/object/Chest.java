@@ -7,9 +7,9 @@ import fr.cejuba.stardew.main.Type;
 
 public class Chest extends Entity {
 
-    GamePanel gamePanel;
-    Entity loot;
-    boolean opened = false;
+    private final GamePanel gamePanel;
+    private final Entity loot;
+    private boolean opened = false;
 
     public Chest(GamePanel gamePanel, Entity loot) {
         super(gamePanel);
@@ -18,8 +18,8 @@ public class Chest extends Entity {
 
         setType(Type.OBSTACLE);
         name = "Chest";
-        image = setup("object/chest", gamePanel.tileSize, gamePanel.tileSize);
-        image2 = setup("object/chest_opened", gamePanel.tileSize, gamePanel.tileSize);
+        image = setup("object/chest", gamePanel.getTileSize(), gamePanel.getTileSize());
+        image2 = setup("object/chest_opened", gamePanel.getTileSize(), gamePanel.getTileSize());
         down2 = image;
         collision = true;
 

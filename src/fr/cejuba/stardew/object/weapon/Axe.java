@@ -9,7 +9,7 @@ public class Axe extends Weapon {
 
         setType(Type.AXE);
         name = "Woodcutter's Axe";
-        down2 = setup("/object/axe", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/axe", gamePanel.getTileSize(), gamePanel.getTileSize()   );
         attackValue = 2;
 
         attackArea.setWidth(30);

@@ -10,7 +10,7 @@ public class Sword extends Weapon {
 
         setType(Type.SWORD);
         name = "Sword";
-        down2 = setup("/object/sword", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/sword", gamePanel.getTileSize(), gamePanel.getTileSize());
         attackValue = 1;
 
         attackArea.setWidth(36);

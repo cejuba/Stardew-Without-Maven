@@ -59,8 +59,8 @@ public class Lighting {
 
         int circleRadius = 100;
 
-        int centerX = gamePanel.player.getScreenX() + gamePanel.tileSize / 2;
-        int centerY = gamePanel.player.getScreenY() + gamePanel.tileSize / 2;
+        int centerX = gamePanel.player.getScreenX() + gamePanel.getTileSize() / 2;
+        int centerY = gamePanel.player.getScreenY() + gamePanel.getTileSize() / 2;
 
         Stop[] stops = new Stop[]{};
         if(gamePanel.player.currentLight == null){
@@ -101,10 +101,10 @@ public class Lighting {
         }
         graphicsContext.setFill(Color.WHITE);
         int textX;
-        int textY = gamePanel.screenHeight - gamePanel.tileSize;
+        int textY = gamePanel.screenHeight - gamePanel.getTileSize();
 
         // Values
-        int tailX = gamePanel.screenWidth - gamePanel.tileSize;
+        int tailX = gamePanel.screenWidth - gamePanel.getTileSize();
         textX = gamePanel.ui.getXAlignedToRightText(situation, tailX);
         graphicsContext.fillText(situation, textX, textY);
     }

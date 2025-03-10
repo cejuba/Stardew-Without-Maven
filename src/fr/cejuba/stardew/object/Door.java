@@ -7,7 +7,7 @@ import fr.cejuba.stardew.main.Type;
 
 public class Door extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Door(GamePanel gamePanel) {
         super(gamePanel);
@@ -15,7 +15,7 @@ public class Door extends Entity {
 
         setType(Type.OBSTACLE);
         name = "Door";
-        down2 = setup("object/door", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("object/door", gamePanel.getTileSize(), gamePanel.getTileSize());
         collision = true;
 
         solidArea.setX(0);

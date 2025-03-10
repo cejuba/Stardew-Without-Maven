@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class Fireball extends Projectile {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
 
     public Fireball(GamePanel gamePanel) {
         super(gamePanel);
@@ -24,14 +24,14 @@ public class Fireball extends Projectile {
     }
 
     public void getImage(){
-        up1 = setup("projectile/fireball_up_1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("projectile/fireball_up_2", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("projectile/fireball_down_1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("projectile/fireball_down_2", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("projectile/fireball_left_1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("projectile/fireball_left_2", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("projectile/fireball_right_1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("projectile/fireball_right_2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("projectile/fireball_up_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+        up2 = setup("projectile/fireball_up_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+        down1 = setup("projectile/fireball_down_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+        down2 = setup("projectile/fireball_down_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+        left1 = setup("projectile/fireball_left_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+        left2 = setup("projectile/fireball_left_2", gamePanel.getTileSize(), gamePanel.getTileSize());
+        right1 = setup("projectile/fireball_right_1", gamePanel.getTileSize(), gamePanel.getTileSize());
+        right2 = setup("projectile/fireball_right_2", gamePanel.getTileSize(), gamePanel.getTileSize());
     }
 
     public boolean haveRessource(Entity user){

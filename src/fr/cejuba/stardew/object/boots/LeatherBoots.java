@@ -8,7 +8,7 @@ public class LeatherBoots extends Boots {
         super(gamePanel);
 
         name = "Leather Boots";
-        down2 = setup("/object/boots", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/object/boots", gamePanel.getTileSize(), gamePanel.getTileSize());
         speedValue = 2;
 
         description = "[" + name + "]\n" + "It's a pair of boots.";
