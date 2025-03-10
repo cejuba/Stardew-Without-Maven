@@ -19,24 +19,16 @@ public class KeyHandler {
     public void addKeyHandlers(Scene scene) {
         scene.setOnKeyPressed(event -> {
 
-            if(gamePanel.gameState == GameState.TITLE) {
-                titleState(event);
-            } else if (gamePanel.gameState == GameState.PLAY) {
-                playState(event);
-            } else if (gamePanel.gameState == GameState.PAUSE) {
-                pauseState(event);
-            } else if (gamePanel.gameState == GameState.DIALOGUE) {
-                dialogueState(event);
-            } else if (gamePanel.gameState == GameState.INVENTORY) {
-                characterState(event);
-            } else if (gamePanel.gameState == GameState.OPTION) {
-                optionState(event);
-            } else if (gamePanel.gameState == GameState.GAMEOVER) {
-                gameOverState(event);
-            } else if (gamePanel.gameState == GameState.TRADE) {
-                tradeState(event);
-            } else if (gamePanel.gameState == GameState.MAP) {
-                mapState(event);
+            switch(gamePanel.getGameState()){
+                case GameState.TITLE -> titleState(event);
+                case GameState.PLAY -> playState(event);
+                case GameState.PAUSE -> pauseState(event);
+                case GameState.DIALOGUE -> dialogueState(event);
+                case GameState.INVENTORY -> characterState(event);
+                case GameState.OPTION -> optionState(event);
+                case GameState.GAMEOVER -> gameOverState(event);
+                case GameState.TRADE -> tradeState(event);
+                case GameState.MAP -> mapState(event);
             }
         });
 
@@ -70,7 +62,7 @@ public class KeyHandler {
                 case ENTER -> {
                     switch (gamePanel.ui.commandNumber) {
                         case 0 -> gamePanel.ui.titleScreenState = 1;
-                        case 1 -> gamePanel.gameState = GameState.PLAY; //TBD
+                        case 1 -> gamePanel.setGameState(GameState.PLAY); //TBD
                         case 2 -> System.exit(0);
                     }
                 }
@@ -93,17 +85,17 @@ public class KeyHandler {
                     switch (gamePanel.ui.commandNumber) {
                         case 0 -> {
                             System.out.println("Need to do fighter stuff");
-                            gamePanel.gameState = GameState.PLAY;
+                            gamePanel.setGameState(GameState.PLAY);
                             gamePanel.playMusic(0);
                         }
                         case 1 -> {
                             System.out.println("Need to do thief stuff");
-                            gamePanel.gameState = GameState.PLAY;
+                            gamePanel.setGameState(GameState.PLAY);
                             gamePanel.playMusic(0);
                         }
                         case 2 -> {
                             System.out.println("Need to do sorcerer stuff");
-                            gamePanel.gameState = GameState.PLAY;
+                            gamePanel.setGameState(GameState.PLAY);
                             gamePanel.playMusic(0);
                         }
                         case 3 -> gamePanel.ui.titleScreenState = 0;
@@ -127,30 +119,30 @@ public class KeyHandler {
                     case 1 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/interior01.txt", 1);
                 }
             }
-            case M -> gamePanel.gameState = GameState.MAP;
+            case M -> gamePanel.setGameState(GameState.MAP);
             case X -> gamePanel.map.miniMapActivated = !gamePanel.map.miniMapActivated;
-            case P -> gamePanel.gameState = GameState.PAUSE;
-            case C -> gamePanel.gameState = GameState.INVENTORY;
-            case ESCAPE -> gamePanel.gameState = GameState.OPTION;
+            case P -> gamePanel.setGameState(GameState.PAUSE);
+            case C -> gamePanel.setGameState(GameState.INVENTORY);
+            case ESCAPE -> gamePanel.setGameState(GameState.OPTION);
             case ENTER -> enterPressed = true;
         }
     }
 
     private void pauseState(KeyEvent event) {
         switch (event.getCode()) {
-            case ESCAPE, P -> gamePanel.gameState = GameState.PLAY;
+            case ESCAPE, P -> gamePanel.setGameState(GameState.PLAY);
         }
     }
 
     private void dialogueState(KeyEvent event) {
         switch (event.getCode()) {
-            case ESCAPE, ENTER -> gamePanel.gameState = GameState.PLAY;
+            case ESCAPE, ENTER -> gamePanel.setGameState(GameState.PLAY);
         }
     }
 
     private void characterState(KeyEvent event) {
         switch (event.getCode()) {
-            case ESCAPE, C -> gamePanel.gameState = GameState.PLAY;
+            case ESCAPE, C -> gamePanel.setGameState(GameState.PLAY);
             case ENTER -> gamePanel.player.selectItem();
         }
         playerInventory(event.getCode());
@@ -166,7 +158,7 @@ public class KeyHandler {
 
 
             case ESCAPE -> {
-                gamePanel.gameState = GameState.PLAY;
+                gamePanel.setGameState(GameState.PLAY);
                 gamePanel.ui.subState = 0;
             }
             case ENTER -> enterPressed = true;
@@ -236,12 +228,12 @@ public class KeyHandler {
             case ENTER -> {
                 switch (gamePanel.ui.commandNumber) {
                     case 0 -> {
-                        gamePanel.gameState = GameState.PLAY;
+                        gamePanel.setGameState(GameState.PLAY);
                         gamePanel.retry();
                         gamePanel.playMusic(0);
                     }
                     case 1 -> {
-                        gamePanel.gameState = GameState.TITLE;
+                        gamePanel.setGameState(GameState.TITLE);
                         gamePanel.stopMusic();
                         gamePanel.ui.titleScreenState = 0;
                         gamePanel.ui.commandNumber = 0;
@@ -276,7 +268,7 @@ public class KeyHandler {
                         }
                     }
                     case ESCAPE -> {
-                        gamePanel.gameState = GameState.PLAY;
+                        gamePanel.setGameState(GameState.PLAY);
                         gamePanel.ui.npc = null;
                      }
                 }
@@ -298,7 +290,7 @@ public class KeyHandler {
 
     private void mapState(KeyEvent event) {
         switch (event.getCode()) {
-            case ESCAPE, M -> gamePanel.gameState = GameState.PLAY;
+            case ESCAPE, M -> gamePanel.setGameState(GameState.PLAY);
         }
     }
 

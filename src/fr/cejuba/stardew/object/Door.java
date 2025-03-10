@@ -26,7 +26,7 @@ public class Door extends Entity {
         solidAreaDefaultY = (int) solidArea.getY();
     }
     public void interact(){
-        gamePanel.gameState = GameState.DIALOGUE;
+        gamePanel.setGameState(GameState.DIALOGUE);
         gamePanel.ui.currentDialogue = "You need a key to open this.";
     }
 }

@@ -25,7 +25,7 @@ public class Key extends Entity {
 
     public boolean use(Entity entity) {
 
-        gamePanel.gameState = GameState.DIALOGUE;
+        gamePanel.setGameState(GameState.DIALOGUE);
         int objIndex = getDetected(entity, gamePanel.object, "Door");
 
         if(objIndex != 999) {

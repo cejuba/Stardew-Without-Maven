@@ -80,7 +80,7 @@ public class GamePanel extends Canvas {
     public ArrayList<Entity> entityList = new ArrayList<>();
 
     // States
-    public GameState gameState = GameState.TITLE;
+    private GameState gameState = GameState.TITLE;
 
     public GamePanel(Stage stage) {
         this.stage = stage;
@@ -332,5 +332,15 @@ public class GamePanel extends Canvas {
     public void playSoundEffect(int i) {
         soundEffect.setFile(i);
         soundEffect.playSound();
+    }
+
+    // Getter Setter
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }

@@ -278,7 +278,7 @@ public class Player extends Entity {
             mana = maxMana;
         }
         if(life <= 0){
-            gamePanel.gameState = GameState.GAMEOVER;
+            gamePanel.setGameState(GameState.GAMEOVER);
             gamePanel.ui.commandNumber = -1; // Prevent retry by accident when smashing ENTER key
             gamePanel.stopMusic();
             gamePanel.playSoundEffect(12);
@@ -367,7 +367,7 @@ public class Player extends Entity {
         if(gamePanel.keyHandler.enterPressed){
             if (index != 999) {
                 attackCanceled = true;
-                gamePanel.gameState = GameState.DIALOGUE;
+                gamePanel.setGameState(GameState.DIALOGUE);
                 gamePanel.npc[gamePanel.currentMap][index].speak();
             }
         }
@@ -460,7 +460,7 @@ public class Player extends Entity {
             defense = getDefense();
 
             gamePanel.playSoundEffect(8);
-            gamePanel.gameState = GameState.DIALOGUE;
+            gamePanel.setGameState(GameState.DIALOGUE);
             gamePanel.ui.currentDialogue = "You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1";
 
         }

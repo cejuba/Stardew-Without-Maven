@@ -22,7 +22,7 @@ public class Tent extends Entity{
     }
 
     public boolean use(Entity entity){
-        gamePanel.gameState = GameState.SLEEP;
+        gamePanel.setGameState(GameState.SLEEP);
         gamePanel.playSoundEffect(14);
         gamePanel.player.life = gamePanel.player.maxLife;
         gamePanel.player.mana = gamePanel.player.maxMana;

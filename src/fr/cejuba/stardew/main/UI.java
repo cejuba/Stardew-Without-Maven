@@ -70,33 +70,32 @@ public class UI {
         graphicsContext.setFont(arial_40);
         graphicsContext.setFill(Color.WHITE);
 
-        if(gamePanel.gameState == GameState.TITLE){
-            drawTitleScreen();
-        } else if(gamePanel.gameState == GameState.PLAY){
-            drawPlayerLife();
-            drawPlayerMana();
-            drawMessage();
-        } else if(gamePanel.gameState == GameState.PAUSE){
-            drawPlayerLife();
-            drawPlayerMana();
-            drawPauseScreen();
-        } else if(gamePanel.gameState == GameState.DIALOGUE){
-            drawPlayerLife();
-            drawPlayerMana();
-            drawDialogueScreen();
-        } else if(gamePanel.gameState == GameState.INVENTORY){
-            drawCharacterScreen();
-            drawInventory(gamePanel.player, true);
-        } else if(gamePanel.gameState == GameState.OPTION){
-            drawOptionScreen();
-        } else if(gamePanel.gameState == GameState.GAMEOVER){
-            drawGameOverScreen();
-        } else if(gamePanel.gameState == GameState.TRANSITION){
-            drawTransition();
-        } else if(gamePanel.gameState == GameState.TRADE){
-            drawTradeScreen();
-        } else if(gamePanel.gameState == GameState.SLEEP){
-            drawSleepScreen();
+        switch(gamePanel.getGameState()){
+            case GameState.TITLE -> drawTitleScreen();
+            case GameState.PLAY -> {
+                drawPlayerLife();
+                drawPlayerMana();
+                drawMessage();
+            }
+            case GameState.PAUSE -> {
+                drawPlayerLife();
+                drawPlayerMana();
+                drawPauseScreen();
+            }
+            case GameState.DIALOGUE -> {
+                drawPlayerLife();
+                drawPlayerMana();
+                drawDialogueScreen();
+            }
+            case GameState.INVENTORY -> {
+                drawCharacterScreen();
+                drawInventory(gamePanel.player, true);
+            }
+            case GameState.OPTION -> drawOptionScreen();
+            case GameState.GAMEOVER -> drawGameOverScreen();
+            case GameState.TRANSITION -> drawTransition();
+            case GameState.TRADE -> drawTradeScreen();
+            case GameState.SLEEP -> drawSleepScreen();
         }
     }
 
@@ -611,7 +610,7 @@ public class UI {
 
         if(counter >= 0.9){
             counter = 0;
-            gamePanel.gameState = GameState.PLAY;
+            gamePanel.setGameState(GameState.PLAY);
             gamePanel.currentMap = gamePanel.eventHandler.tempMap;
             gamePanel.player.worldX = gamePanel.eventHandler.tempCol * gamePanel.tileSize;
             gamePanel.player.worldY = gamePanel.eventHandler.tempRow * gamePanel.tileSize;
@@ -645,7 +644,7 @@ public class UI {
                 counter = 0;
                 gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
                 gamePanel.environmentManager.lighting.dayCounter = 0;
-                gamePanel.gameState = GameState.PLAY;
+                gamePanel.setGameState(GameState.PLAY);
                 gamePanel.player.getPlayerImage();
             }
         }
@@ -729,7 +728,7 @@ public class UI {
         if(commandNumber == 5){
             graphicsContext.fillText(">", textX - 25, textY);
             if(gamePanel.keyHandler.enterPressed){
-                gamePanel.gameState = GameState.PLAY;
+                gamePanel.setGameState(GameState.PLAY);
                 commandNumber = 0;
             }
         }
@@ -866,7 +865,7 @@ public class UI {
             if(gamePanel.keyHandler.enterPressed){
                 subState = 0;
                 gamePanel.ui.titleScreenState = 0;
-                gamePanel.gameState = GameState.TITLE;
+                gamePanel.setGameState(GameState.TITLE);
                 gamePanel.stopMusic();
             }
         }
@@ -922,7 +921,7 @@ public class UI {
             graphicsContext.fillText(">", x - 24, y);
             if(gamePanel.keyHandler.enterPressed){
                 commandNumber = 0;
-                gamePanel.gameState = GameState.DIALOGUE;
+                gamePanel.setGameState(GameState.DIALOGUE);
                 currentDialogue = "Come again !";
             }
         }
@@ -971,7 +970,7 @@ public class UI {
             if(gamePanel.keyHandler.enterPressed){
                 if(npc.inventory.get(itemIndex).price > gamePanel.player.gold){
                     subState = 0;
-                    gamePanel.gameState = GameState.DIALOGUE;
+                    gamePanel.setGameState(GameState.DIALOGUE);
                     currentDialogue = "You need more coin to buy that!";
                 }
                 else {
@@ -980,7 +979,7 @@ public class UI {
                     }
                     else{
                         subState = 0;
-                        gamePanel.gameState = GameState.DIALOGUE;
+                        gamePanel.setGameState(GameState.DIALOGUE);
                         currentDialogue = "Your inventory is full!";
                     }
                 }
@@ -1041,7 +1040,7 @@ public class UI {
                 if(gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentBoots){
                     commandNumber = 0;
                     subState = 0;
-                    gamePanel.gameState = GameState.DIALOGUE;
+                    gamePanel.setGameState(GameState.DIALOGUE);
                     currentDialogue = "You can't sell equipped items!";
                     drawDialogueScreen();
                 }

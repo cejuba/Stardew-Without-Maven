@@ -32,7 +32,7 @@ public class Chest extends Entity {
     }
 
     public void interact(){
-        gamePanel.gameState = GameState.DIALOGUE;
+        gamePanel.setGameState(GameState.DIALOGUE);
 
         if(!opened){
             gamePanel.playSoundEffect(3);
