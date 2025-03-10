@@ -21,11 +21,11 @@ public class Map extends TileManager {
     }
 
     public void createWorldMap(){
-        worldMap = new Image[gamePanel.maxMap];
+        worldMap = new Image[gamePanel.getMaxMap()];
         int worldMapWidth = gamePanel.getTileSize() * gamePanel.maxWorldCol;
         int worldMapHeight = gamePanel.getTileSize() * gamePanel.maxWorldRow;
 
-        for(int i = 0; i < gamePanel.maxMap; i++){
+        for(int i = 0; i < gamePanel.getMaxMap(); i++){
             Canvas canvas = new Canvas(worldMapWidth, worldMapHeight);
             GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
@@ -62,7 +62,7 @@ public class Map extends TileManager {
         int height = 500;
         int x = gamePanel.screenWidth / 2 - width / 2;
         int y = gamePanel.screenHeight / 2 - height / 2;
-        graphicsContext.drawImage(worldMap[gamePanel.currentMap], x, y, width, height);
+        graphicsContext.drawImage(worldMap[gamePanel.getCurrentMap()], x, y, width, height);
 
         // Calculate Scale
         double scale = (double)(gamePanel.getTileSize() * gamePanel.maxWorldCol) / width;
@@ -74,7 +74,7 @@ public class Map extends TileManager {
         graphicsContext.drawImage(gamePanel.player.down1, playerX, playerY, playerSize, playerSize);
 
         // Objects
-        for(Entity entity : gamePanel.object[gamePanel.currentMap]){
+        for(Entity entity : gamePanel.object[gamePanel.getCurrentMap()]){
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
@@ -85,7 +85,7 @@ public class Map extends TileManager {
             }
         }
         // NPC
-        for(Entity entity : gamePanel.npc[gamePanel.currentMap]){
+        for(Entity entity : gamePanel.npc[gamePanel.getCurrentMap()]){
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
@@ -97,7 +97,7 @@ public class Map extends TileManager {
         }
 
         // Monster
-        for(Entity entity : gamePanel.monster[gamePanel.currentMap]){
+        for(Entity entity : gamePanel.monster[gamePanel.getCurrentMap()]){
             if(entity != null){
                 int entityX = (int)(x + entity.worldX / scale);
                 int entityY = (int)(y + entity.worldY / scale);
@@ -131,7 +131,7 @@ public class Map extends TileManager {
             int y = gamePanel.getTileSize();
 
             graphicsContext.setGlobalAlpha(0.8);
-            graphicsContext.drawImage(worldMap[gamePanel.currentMap], x, y, width, height);
+            graphicsContext.drawImage(worldMap[gamePanel.getCurrentMap()], x, y, width, height);
 
             // Calculate Scale
             double scale = (double) (gamePanel.getTileSize() * gamePanel.maxWorldCol) / width;
@@ -143,7 +143,7 @@ public class Map extends TileManager {
             graphicsContext.drawImage(gamePanel.player.down1, playerX, playerY, playerSize, playerSize);
 
             // Objects
-            for (Entity entity : gamePanel.object[gamePanel.currentMap]) {
+            for (Entity entity : gamePanel.object[gamePanel.getCurrentMap()]) {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);
@@ -154,7 +154,7 @@ public class Map extends TileManager {
                 }
             }
             // NPC
-            for (Entity entity : gamePanel.npc[gamePanel.currentMap]) {
+            for (Entity entity : gamePanel.npc[gamePanel.getCurrentMap()]) {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);
@@ -166,7 +166,7 @@ public class Map extends TileManager {
             }
 
             // Monster
-            for (Entity entity : gamePanel.monster[gamePanel.currentMap]) {
+            for (Entity entity : gamePanel.monster[gamePanel.getCurrentMap()]) {
                 if (entity != null) {
                     int entityX = (int) (x + entity.worldX / scale);
                     int entityY = (int) (y + entity.worldY / scale);

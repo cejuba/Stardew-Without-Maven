@@ -90,8 +90,8 @@ public class GreenJunimo extends Entity {
 
                 // Check vacancy
                 for (int j = 0; j < gamePanel.projectile[1].length; j++) {
-                    if (gamePanel.projectile[gamePanel.currentMap][j] == null) {
-                        gamePanel.projectile[gamePanel.currentMap][j] = projectile;
+                    if (gamePanel.projectile[gamePanel.getCurrentMap()][j] == null) {
+                        gamePanel.projectile[gamePanel.getCurrentMap()][j] = projectile;
                         break;
                     }
                 }
@@ -123,8 +123,8 @@ public class GreenJunimo extends Entity {
 
                 // Check vacancy
                 for (int k = 0; k < gamePanel.projectile[1].length; k++) {
-                    if (gamePanel.projectile[gamePanel.currentMap][k] == null) {
-                        gamePanel.projectile[gamePanel.currentMap][k] = projectile;
+                    if (gamePanel.projectile[gamePanel.getCurrentMap()][k] == null) {
+                        gamePanel.projectile[gamePanel.getCurrentMap()][k] = projectile;
                         break;
                     }
                 }

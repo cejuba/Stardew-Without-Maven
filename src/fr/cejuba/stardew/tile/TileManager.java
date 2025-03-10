@@ -20,7 +20,7 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tiles = new Tile[50]; // number of tiles present in the game
-        mapTileNumber = new int[gamePanel.maxMap][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        mapTileNumber = new int[gamePanel.getMaxMap()][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
         getTileImage();
         loadMap("fr/cejuba/stardew/maps/worldV2.txt", 0);
@@ -135,7 +135,7 @@ public class TileManager {
         int worldRow = 0;
 
         while (worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow) {
-            int tileNumber = mapTileNumber[gamePanel.currentMap][worldCol][worldRow];
+            int tileNumber = mapTileNumber[gamePanel.getCurrentMap()][worldCol][worldRow];
 
             if (tileNumber >= tiles.length || tiles[tileNumber] == null) {
                 System.out.println("Invalid tile number or uninitialized tile: " + tileNumber);

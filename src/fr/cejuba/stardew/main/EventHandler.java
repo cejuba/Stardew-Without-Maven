@@ -13,13 +13,13 @@ public class EventHandler {
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.eventRectangle = new EventRectangle[gamePanel.maxMap][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        this.eventRectangle = new EventRectangle[gamePanel.getMaxMap()][gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
         int map = 0;
         int col = 0;
         int row = 0;
 
-        while(map < gamePanel.maxMap && col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow){
+        while(map < gamePanel.getMaxMap() && col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow){
                     eventRectangle[map][col][row] = new EventRectangle();
                     eventRectangle[map][col][row].initialize(23, 23, 2, 2);
             col++;
@@ -57,7 +57,7 @@ public class EventHandler {
 
     public boolean hit(int map, int col, int row, String reqDirection) {
         boolean hit = false;
-        if(map == gamePanel.currentMap){
+        if(map == gamePanel.getCurrentMap()){
             gamePanel.player.solidArea.setX(gamePanel.player.worldX + gamePanel.player.solidArea.getX());
             gamePanel.player.solidArea.setY(gamePanel.player.worldY + gamePanel.player.solidArea.getY());
             EventRectangle eventRect = eventRectangle[map][col][row];

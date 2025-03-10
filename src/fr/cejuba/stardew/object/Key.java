@@ -31,7 +31,7 @@ public class Key extends Entity {
         if(objIndex != 999) {
             gamePanel.ui.setCurrentDialogue("You used the " + name + " to open the door.");
             gamePanel.playSoundEffect(3);
-            gamePanel.object[gamePanel.currentMap][objIndex] = null;
+            gamePanel.object[gamePanel.getCurrentMap()][objIndex] = null;
             return true;
         } else {
             gamePanel.ui.setCurrentDialogue("There is no door to open.");

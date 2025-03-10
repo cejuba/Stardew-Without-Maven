@@ -282,10 +282,10 @@ public class Entity {
 
     public void dropItem(Entity droppedItem){
         for(int i = 0; i < gamePanel.object[1].length; i++){
-            if(gamePanel.object[gamePanel.currentMap][i] == null){
-                gamePanel.object[gamePanel.currentMap][i] = droppedItem;
-                gamePanel.object[gamePanel.currentMap][i].worldX = worldX;
-                gamePanel.object[gamePanel.currentMap][i].worldY = worldY;
+            if(gamePanel.object[gamePanel.getCurrentMap()][i] == null){
+                gamePanel.object[gamePanel.getCurrentMap()][i] = droppedItem;
+                gamePanel.object[gamePanel.getCurrentMap()][i].worldX = worldX;
+                gamePanel.object[gamePanel.getCurrentMap()][i].worldY = worldY;
                 break;
             }
         }
@@ -428,7 +428,7 @@ public class Entity {
         int row = (int) (nextWorldY / gamePanel.getTileSize());
 
         for(int i = 0; i < target[1].length; i++){
-            Entity targeted = target[gamePanel.currentMap][i];
+            Entity targeted = target[gamePanel.getCurrentMap()][i];
             if(targeted != null){
                 if(targeted.getColumn() == col && targeted.getRow() == row && targeted.name.equals(targetName)){
                     index = i;

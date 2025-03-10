@@ -74,15 +74,15 @@ public class PathFinder {
 
             // Set solid nodes
             // Check tiles
-            int tileNumber = gamePanel.tileManager.mapTileNumber[gamePanel.currentMap][col][row];
+            int tileNumber = gamePanel.tileManager.mapTileNumber[gamePanel.getCurrentMap()][col][row];
             if(gamePanel.tileManager.tiles[tileNumber].isCollision()){
                 node[col][row].setSolid(true);
             }
             // Check Interactive tiles
             for(int i = 0; i < gamePanel.interactiveTile[1].length; i++){
-                if(gamePanel.interactiveTile[gamePanel.currentMap][i] != null && gamePanel.interactiveTile[gamePanel.currentMap][i].isDestructible()){
-                    int interactiveTileCol = gamePanel.interactiveTile[gamePanel.currentMap][i].worldX/gamePanel.getTileSize();
-                    int interactiveTileRow = gamePanel.interactiveTile[gamePanel.currentMap][i].worldY/gamePanel.getTileSize();
+                if(gamePanel.interactiveTile[gamePanel.getCurrentMap()][i] != null && gamePanel.interactiveTile[gamePanel.getCurrentMap()][i].isDestructible()){
+                    int interactiveTileCol = gamePanel.interactiveTile[gamePanel.getCurrentMap()][i].worldX/gamePanel.getTileSize();
+                    int interactiveTileRow = gamePanel.interactiveTile[gamePanel.getCurrentMap()][i].worldY/gamePanel.getTileSize();
                     node[interactiveTileCol][interactiveTileRow].setSolid(true);
                 }
             }

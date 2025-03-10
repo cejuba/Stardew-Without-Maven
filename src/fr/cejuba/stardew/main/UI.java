@@ -607,7 +607,7 @@ public class UI {
         if(counter >= 0.9){
             counter = 0;
             gamePanel.setGameState(GameState.PLAY);
-            gamePanel.currentMap = gamePanel.eventHandler.getTempMap();
+            gamePanel.setCurrentMap(gamePanel.eventHandler.getTempMap());
             gamePanel.player.worldX = gamePanel.eventHandler.getTempCol() * gamePanel.getTileSize();
             gamePanel.player.worldY = gamePanel.eventHandler.getTempRow() * gamePanel.getTileSize();
             gamePanel.eventHandler.setPreviousEventX(gamePanel.player.worldX);

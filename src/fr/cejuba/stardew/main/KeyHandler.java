@@ -114,7 +114,7 @@ public class KeyHandler {
             case F -> shotKeyPressed = true;
             case T -> showDebugText = !showDebugText;
             case R -> {
-                switch(gamePanel.currentMap){
+                switch(gamePanel.getCurrentMap()){
                     case 0 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/worldV2.txt", 0);
                     case 1 -> gamePanel.tileManager.loadMap("fr/cejuba/stardew/maps/interior01.txt", 1);
                 }

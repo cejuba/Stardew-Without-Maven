@@ -31,10 +31,10 @@ public class GamePanel extends Canvas {
 
     // Screen settings
     private final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 27;
-    public final int maxScreenRow = 15;
-    public final int maxMap = 10;
-    public int currentMap = 0;
+    private final int maxScreenCol = 27;
+    private final int maxScreenRow = 15;
+    private final int maxMap = 10;
+    private int currentMap = 0;
     public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
     public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
@@ -345,5 +345,16 @@ public class GamePanel extends Canvas {
 
     public int getTileSize() {
         return tileSize;
+    }
+
+    public int getMaxMap() {
+        return maxMap;
+    }
+
+    public int getCurrentMap() {
+        return currentMap;
+    }
+    public void setCurrentMap(int currentMap) {
+        this.currentMap = currentMap;
     }
 }
