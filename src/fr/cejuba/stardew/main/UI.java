@@ -512,6 +512,9 @@ public class UI {
             // Equip cursor
             if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i) == entity.currentBoots || entity.inventory.get(i) == entity.currentLight){
                 graphicsContext.setFill(Color.GOLD);
+                if(entity.inventory.get(i).type == entity.type_light){
+                    graphicsContext.setFill(Color.BLUE);
+                }
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
             graphicsContext.drawImage(entity.inventory.get(i).down2, slotX, slotY);
