@@ -512,6 +512,9 @@ public class UI {
             // Equip cursor
             if(entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield || entity.inventory.get(i) == entity.currentBoots || entity.inventory.get(i) == entity.currentLight){
                 graphicsContext.setFill(Color.GOLD);
+                if(entity.inventory.get(i).type == entity.type_light){
+                    graphicsContext.setFill(Color.BLUE);
+                }
                 graphicsContext.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
             graphicsContext.drawImage(entity.inventory.get(i).down2, slotX, slotY);
@@ -802,6 +805,10 @@ public class UI {
         textY += gamePanel.tileSize;
         graphicsContext.fillText("Pause", textX, textY);
         textY += gamePanel.tileSize;
+        graphicsContext.fillText("Map", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Mini-Map", textX, textY);
+        textY += gamePanel.tileSize;
         graphicsContext.fillText("Options", textX, textY);
 
         textX = frameX + gamePanel.tileSize * 7;
@@ -816,12 +823,16 @@ public class UI {
         textY += gamePanel.tileSize;
         graphicsContext.fillText("P", textX, textY);
         textY += gamePanel.tileSize;
+        graphicsContext.fillText("M", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("X", textX, textY);
+        textY += gamePanel.tileSize;
         graphicsContext.fillText("ESCAPE", textX, textY);
 
         // Back
 
         textX = frameX + gamePanel.tileSize;
-        textY = frameY + gamePanel.tileSize * 9;
+        textY += gamePanel.tileSize * 2;
         graphicsContext.fillText("Back", textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);

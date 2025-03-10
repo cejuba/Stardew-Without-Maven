@@ -165,7 +165,10 @@ public class KeyHandler {
         switch (event.getCode()) {
 
 
-            case ESCAPE -> gamePanel.gameState = gamePanel.playState;
+            case ESCAPE -> {
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.ui.subState = 0;
+            }
             case ENTER -> enterPressed = true;
             case Z, UP -> {
                 gamePanel.ui.commandNumber--;
