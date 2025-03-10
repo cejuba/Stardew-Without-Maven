@@ -101,7 +101,7 @@ public class Entity {
         if (dialogues[dialogueIndex] == null) {
             dialogueIndex = 0;
         }
-        gamePanel.ui.currentDialogue = dialogues[dialogueIndex];
+        gamePanel.ui.setCurrentDialogue(dialogues[dialogueIndex]);
         dialogueIndex++;
 
         switch (gamePanel.player.direction) {
@@ -349,8 +349,8 @@ public class Entity {
 
         if(gamePanel.pathFinder.search()){
             // Next World Coordinates
-            int nextX = gamePanel.pathFinder.pathList.get(0).col * gamePanel.tileSize;
-            int nextY = gamePanel.pathFinder.pathList.get(0).row * gamePanel.tileSize;
+            int nextX = gamePanel.pathFinder.pathList.get(0).getCol() * gamePanel.tileSize;
+            int nextY = gamePanel.pathFinder.pathList.get(0).getRow() * gamePanel.tileSize;
 
             // Entity's solidArea position
             int entityLeftX = getLeftX();
@@ -402,8 +402,8 @@ public class Entity {
 
             // TODO : Comment in following the player
             // If the goal is reached, stop the search
-            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
-            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
+            int nextCol = gamePanel.pathFinder.pathList.get(0).getCol();
+            int nextRow = gamePanel.pathFinder.pathList.get(0).getRow();
             if(nextCol == goalCol && nextRow == goalRow){
                 onPath = false;
             }
@@ -438,7 +438,6 @@ public class Entity {
         }
         return index;
     }
-
 
     // Getter Setter
 

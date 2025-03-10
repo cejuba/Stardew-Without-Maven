@@ -10,9 +10,9 @@ import javafx.scene.paint.Color;
 
 public class Map extends TileManager {
 
-    GamePanel gamePanel;
-    Image[] worldMap;
-    public boolean miniMapActivated = false;
+    private GamePanel gamePanel;
+    private Image[] worldMap;
+    private boolean miniMapActivated = false;
 
     public Map(GamePanel gamePanel) {
         super(gamePanel);
@@ -179,5 +179,13 @@ public class Map extends TileManager {
 
             graphicsContext.setGlobalAlpha(1);
         }
+    }
+
+    // Getters and setters
+    public boolean isMiniMapActivated() {
+        return miniMapActivated;
+    }
+    public void setMiniMapActivated(boolean miniMapActivated) {
+        this.miniMapActivated = miniMapActivated;
     }
 }

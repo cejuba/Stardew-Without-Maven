@@ -6,13 +6,13 @@ import fr.cejuba.stardew.main.GamePanel;
 import java.util.ArrayList;
 
 public class PathFinder {
-    GamePanel gamePanel;
-    Node[][] node;
-    ArrayList<Node> openList = new ArrayList<>();
+    private GamePanel gamePanel;
+    private Node[][] node;
+    private ArrayList<Node> openList = new ArrayList<>();
     public ArrayList<Node> pathList = new ArrayList<>();
-    Node startNode, goalNode, currentNode;
-    boolean goalReached = false;
-    int step = 0;
+    private Node startNode, goalNode, currentNode;
+    private boolean goalReached = false;
+    private int step = 0;
 
     public PathFinder(GamePanel gamePanel){
         this.gamePanel = gamePanel;
@@ -41,9 +41,9 @@ public class PathFinder {
         int row = 0;
 
         while(col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow){
-            node[col][row].open = false;
-            node[col][row].checked = false;
-            node[col][row].solid = false;
+            node[col][row].setOpen(false);
+            node[col][row].setChecked(false);
+            node[col][row].setSolid(false);
 
             col++;
             if(col == gamePanel.maxWorldCol){
@@ -76,14 +76,14 @@ public class PathFinder {
             // Check tiles
             int tileNumber = gamePanel.tileManager.mapTileNumber[gamePanel.currentMap][col][row];
             if(gamePanel.tileManager.tiles[tileNumber].isCollision()){
-                node[col][row].solid = true;
+                node[col][row].setSolid(true);
             }
             // Check Interactive tiles
             for(int i = 0; i < gamePanel.interactiveTile[1].length; i++){
                 if(gamePanel.interactiveTile[gamePanel.currentMap][i] != null && gamePanel.interactiveTile[gamePanel.currentMap][i].isDestructible()){
                     int interactiveTileCol = gamePanel.interactiveTile[gamePanel.currentMap][i].worldX/gamePanel.tileSize;
                     int interactiveTileRow = gamePanel.interactiveTile[gamePanel.currentMap][i].worldY/gamePanel.tileSize;
-                    node[interactiveTileCol][interactiveTileRow].solid = true;
+                    node[interactiveTileCol][interactiveTileRow].setSolid(true);
                 }
             }
 
@@ -101,26 +101,26 @@ public class PathFinder {
     public void getCost(Node node){
 
         // G Cost
-        int xDistance = Math.abs(node.col - startNode.col);
-        int yDistance = Math.abs(node.row - startNode.row);
-        node.gCost = xDistance + yDistance;
+        int xDistance = Math.abs(node.getCol() - startNode.getCol());
+        int yDistance = Math.abs(node.getRow() - startNode.getRow());
+        node.setgCost(xDistance + yDistance);
 
         // H Cost
-        xDistance = Math.abs(node.col - goalNode.col);
-        yDistance = Math.abs(node.row - goalNode.row);
-        node.hCost = xDistance + yDistance;
+        xDistance = Math.abs(node.getCol() - goalNode.getCol());
+        yDistance = Math.abs(node.getRow() - goalNode.getRow());
+        node.sethCost(xDistance + yDistance);
 
         // F Cost
-        node.fCost = node.gCost + node.hCost;
+        node.setfCost(node.getgCost() + node.gethCost());
     }
 
     public boolean search(){
         while(!goalReached && step < 1000){
-            int col = currentNode.col;
-            int row = currentNode.row;
+            int col = currentNode.getCol();
+            int row = currentNode.getRow();
 
             // Check the current node
-            currentNode.checked = true;
+            currentNode.setChecked(true);
             openList.remove(currentNode);
 
             // Open the top node
@@ -146,20 +146,20 @@ public class PathFinder {
 
             for(int i = 0; i < openList.size(); i++){
                 // Check if F cost is better
-                if(openList.get(i).fCost < bestNodeFCost){
+                if(openList.get(i).getfCost() < bestNodeFCost){
                     bestNodeIndex = i;
-                    bestNodeFCost = openList.get(i).fCost;
+                    bestNodeFCost = openList.get(i).getfCost();
                 }
                 // If equals, check G cost
-                else if(openList.get(i).fCost == bestNodeFCost){
-                    if(openList.get(i).gCost < openList.get(bestNodeIndex).gCost){
+                else if(openList.get(i).getfCost() == bestNodeFCost){
+                    if(openList.get(i).getgCost() < openList.get(bestNodeIndex).getgCost()){
                         bestNodeIndex = i;
                     }
                 }
             }
 
             // If there's no node in openList, end the loop
-            if(openList.size() == 0){
+            if(openList.isEmpty()){
                 break;
             }
 
@@ -175,9 +175,9 @@ public class PathFinder {
     }
 
     public void openNode(Node node){
-        if(!node.open && !node.checked && !node.solid ){
-            node.open = true;
-            node.parent = currentNode;
+        if(!node.isOpen() && !node.isChecked() && !node.isSolid() ){
+            node.setOpen(true);
+            node.setParent(currentNode);
             openList.add(node);
         }
     }
@@ -187,8 +187,8 @@ public class PathFinder {
         Node current = goalNode;
 
         while(current != startNode){
-            pathList.add(0, current);
-            current = current.parent;
+            pathList.addFirst(current);
+            current = current.getParent();
         }
     }
 }

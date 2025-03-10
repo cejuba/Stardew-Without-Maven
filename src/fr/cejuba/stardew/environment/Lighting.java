@@ -11,9 +11,9 @@ import javafx.scene.paint.Stop;
 
 public class Lighting {
 
-    GamePanel gamePanel;
-    public int dayCounter;
-    public float filterAlpha = 0f;
+    private final GamePanel gamePanel;
+    private int dayCounter;
+    private float filterAlpha = 0f;
 
     // Day states
     private DayStates dayStates = DayStates.DAY;
@@ -115,5 +115,17 @@ public class Lighting {
     }
     public void setDayStates(DayStates dayStates) {
         this.dayStates = dayStates;
+    }
+    public float getFilterAlpha() {
+        return filterAlpha;
+    }
+    public void setFilterAlpha(float filterAlpha) {
+        this.filterAlpha = filterAlpha;
+    }
+    public int getDayCounter() {
+        return dayCounter;
+    }
+    public void setDayCounter(int dayCounter) {
+        this.dayCounter = dayCounter;
     }
 }

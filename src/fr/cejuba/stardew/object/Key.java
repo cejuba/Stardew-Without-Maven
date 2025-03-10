@@ -29,12 +29,12 @@ public class Key extends Entity {
         int objIndex = getDetected(entity, gamePanel.object, "Door");
 
         if(objIndex != 999) {
-            gamePanel.ui.currentDialogue = "You used the " + name + " to open the door.";
+            gamePanel.ui.setCurrentDialogue("You used the " + name + " to open the door.");
             gamePanel.playSoundEffect(3);
             gamePanel.object[gamePanel.currentMap][objIndex] = null;
             return true;
         } else {
-            gamePanel.ui.currentDialogue = "There is no door to open.";
+            gamePanel.ui.setCurrentDialogue("There is no door to open.");
             return false;
         }
     }

@@ -6,11 +6,11 @@ import javafx.scene.input.KeyEvent;
 
 public class KeyHandler {
 
-    GamePanel gamePanel;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
+    private GamePanel gamePanel;
+    private boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
 
     // Debug
-    boolean showDebugText = false;
+    private boolean showDebugText = false;
 
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -45,44 +45,44 @@ public class KeyHandler {
     }
 
     private void titleState(KeyEvent event) {
-        if (gamePanel.ui.titleScreenState == 0) {
+        if (gamePanel.ui.getTitleScreenState() == 0) {
             switch (event.getCode()) {
                 case Z, UP -> {
-                    gamePanel.ui.commandNumber--;
-                    if (gamePanel.ui.commandNumber < 0) {
-                        gamePanel.ui.commandNumber = 2;
+                    gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() - 1);
+                    if (gamePanel.ui.getCommandNumber() < 0) {
+                        gamePanel.ui.setCommandNumber(2);
                     }
                 }
                 case S, DOWN -> {
-                    gamePanel.ui.commandNumber++;
-                    if (gamePanel.ui.commandNumber > 2) {
-                        gamePanel.ui.commandNumber = 0;
+                    gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() + 1);
+                    if (gamePanel.ui.getCommandNumber() > 2) {
+                        gamePanel.ui.setCommandNumber(0);
                     }
                 }
                 case ENTER -> {
-                    switch (gamePanel.ui.commandNumber) {
-                        case 0 -> gamePanel.ui.titleScreenState = 1;
+                    switch (gamePanel.ui.getCommandNumber()) {
+                        case 0 -> gamePanel.ui.setTitleScreenState(1);
                         case 1 -> gamePanel.setGameState(GameState.PLAY); //TBD
                         case 2 -> System.exit(0);
                     }
                 }
             }
-        } else if (gamePanel.ui.titleScreenState == 1) {
+        } else if (gamePanel.ui.getTitleScreenState() == 1) {
             switch (event.getCode()) {
                 case Z, UP -> {
-                    gamePanel.ui.commandNumber--;
-                    if (gamePanel.ui.commandNumber < 0) {
-                        gamePanel.ui.commandNumber = 3;
+                    gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() - 1);
+                    if (gamePanel.ui.getCommandNumber() < 0) {
+                        gamePanel.ui.setCommandNumber(3);
                     }
                 }
                 case S, DOWN -> {
-                    gamePanel.ui.commandNumber++;
-                    if (gamePanel.ui.commandNumber > 3) {
-                        gamePanel.ui.commandNumber = 0;
+                    gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() + 1);
+                    if (gamePanel.ui.getCommandNumber() > 3) {
+                        gamePanel.ui.setCommandNumber(0);
                     }
                 }
                 case ENTER -> {
-                    switch (gamePanel.ui.commandNumber) {
+                    switch (gamePanel.ui.getCommandNumber()) {
                         case 0 -> {
                             System.out.println("Need to do fighter stuff");
                             gamePanel.setGameState(GameState.PLAY);
@@ -98,7 +98,7 @@ public class KeyHandler {
                             gamePanel.setGameState(GameState.PLAY);
                             gamePanel.playMusic(0);
                         }
-                        case 3 -> gamePanel.ui.titleScreenState = 0;
+                        case 3 -> gamePanel.ui.setTitleScreenState(0);
                     }
                 }
             }
@@ -120,7 +120,7 @@ public class KeyHandler {
                 }
             }
             case M -> gamePanel.setGameState(GameState.MAP);
-            case X -> gamePanel.map.miniMapActivated = !gamePanel.map.miniMapActivated;
+            case X -> gamePanel.map.setMiniMapActivated(gamePanel.map.isMiniMapActivated());
             case P -> gamePanel.setGameState(GameState.PAUSE);
             case C -> gamePanel.setGameState(GameState.INVENTORY);
             case ESCAPE -> gamePanel.setGameState(GameState.OPTION);
@@ -150,7 +150,7 @@ public class KeyHandler {
 
     private void optionState(KeyEvent event) {
         int maxCommandNumber = 0;
-        switch(gamePanel.ui.subState){
+        switch(gamePanel.ui.getSubState()){
             case 0 -> maxCommandNumber = 5;
             case 3 -> maxCommandNumber = 1;
         }
@@ -159,31 +159,31 @@ public class KeyHandler {
 
             case ESCAPE -> {
                 gamePanel.setGameState(GameState.PLAY);
-                gamePanel.ui.subState = 0;
+                gamePanel.ui.setSubState(0);
             }
             case ENTER -> enterPressed = true;
             case Z, UP -> {
-                gamePanel.ui.commandNumber--;
+                gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() - 1);
                 gamePanel.playSoundEffect(9);
-                if (gamePanel.ui.commandNumber < 0) {
-                    gamePanel.ui.commandNumber = maxCommandNumber;
+                if (gamePanel.ui.getCommandNumber() < 0) {
+                    gamePanel.ui.setCommandNumber(maxCommandNumber);
                 }
             }
             case S, DOWN -> {
-                gamePanel.ui.commandNumber++;
+                gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() + 1);
                 gamePanel.playSoundEffect(9);
-                if (gamePanel.ui.commandNumber > maxCommandNumber) {
-                    gamePanel.ui.commandNumber = 0;
+                if (gamePanel.ui.getCommandNumber() > maxCommandNumber) {
+                    gamePanel.ui.setCommandNumber(0);
                 }
             }
             case Q, LEFT -> {
-                if (gamePanel.ui.subState == 0) {
-                    if(gamePanel.ui.commandNumber == 1 && gamePanel.music.volumeScale > 0) {
+                if (gamePanel.ui.getSubState() == 0) {
+                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.volumeScale > 0) {
                         gamePanel.music.volumeScale--;
                         gamePanel.music.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
-                    if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale > 0) {
+                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.volumeScale > 0) {
                         gamePanel.soundEffect.volumeScale--;
                         gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
@@ -192,13 +192,13 @@ public class KeyHandler {
 
             }
             case D, RIGHT -> {
-                if (gamePanel.ui.subState == 0) {
-                    if(gamePanel.ui.commandNumber == 1 && gamePanel.music.volumeScale < 5) {
+                if (gamePanel.ui.getSubState() == 0) {
+                    if(gamePanel.ui.getCommandNumber() == 1 && gamePanel.music.volumeScale < 5) {
                         gamePanel.music.volumeScale++;
                         gamePanel.music.checkVolume();
                         gamePanel.playSoundEffect(9);
                     }
-                    if(gamePanel.ui.commandNumber == 2 && gamePanel.soundEffect.volumeScale < 5) {
+                    if(gamePanel.ui.getCommandNumber() == 2 && gamePanel.soundEffect.volumeScale < 5) {
                         gamePanel.soundEffect.volumeScale++;
                         gamePanel.soundEffect.checkVolume();
                         gamePanel.playSoundEffect(9);
@@ -212,21 +212,21 @@ public class KeyHandler {
     private void gameOverState(KeyEvent event) {
         switch (event.getCode()) {
             case Z, UP -> {
-                gamePanel.ui.commandNumber--;
-                if(gamePanel.ui.commandNumber < 0) {
-                    gamePanel.ui.commandNumber = 1;
+                gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() - 1);
+                if(gamePanel.ui.getCommandNumber() < 0) {
+                    gamePanel.ui.setCommandNumber(1);
                 }
                 gamePanel.playSoundEffect(9);
             }
             case S, DOWN -> {
-                gamePanel.ui.commandNumber++;
-                if(gamePanel.ui.commandNumber > 1) {
-                    gamePanel.ui.commandNumber = 0;
+                gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() + 1);
+                if(gamePanel.ui.getCommandNumber() > 1) {
+                    gamePanel.ui.setCommandNumber(0);
                 }
                 gamePanel.playSoundEffect(9);
             }
             case ENTER -> {
-                switch (gamePanel.ui.commandNumber) {
+                switch (gamePanel.ui.getCommandNumber()) {
                     case 0 -> {
                         gamePanel.setGameState(GameState.PLAY);
                         gamePanel.retry();
@@ -235,8 +235,8 @@ public class KeyHandler {
                     case 1 -> {
                         gamePanel.setGameState(GameState.TITLE);
                         gamePanel.stopMusic();
-                        gamePanel.ui.titleScreenState = 0;
-                        gamePanel.ui.commandNumber = 0;
+                        gamePanel.ui.setTitleScreenState(0);
+                        gamePanel.ui.setCommandNumber(0);
                         gamePanel.restart();
                     }
                 }
@@ -250,39 +250,39 @@ public class KeyHandler {
             enterPressed = true;
         }
 
-        switch(gamePanel.ui.subState){
+        switch(gamePanel.ui.getSubState()){
             case 0 -> {
                 switch (event.getCode()) {
                     case Z, UP -> {
-                        gamePanel.ui.commandNumber--;
+                        gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() - 1);
                         gamePanel.playSoundEffect(9);
-                        if (gamePanel.ui.commandNumber < 0) {
-                            gamePanel.ui.commandNumber = 2;
+                        if (gamePanel.ui.getCommandNumber() < 0) {
+                            gamePanel.ui.setCommandNumber(2);
                         }
                     }
                     case S, DOWN -> {
-                        gamePanel.ui.commandNumber++;
+                        gamePanel.ui.setCommandNumber(gamePanel.ui.getCommandNumber() + 1);
                         gamePanel.playSoundEffect(9);
-                        if (gamePanel.ui.commandNumber > 2) {
-                            gamePanel.ui.commandNumber = 0;
+                        if (gamePanel.ui.getCommandNumber() > 2) {
+                            gamePanel.ui.setCommandNumber(0);
                         }
                     }
                     case ESCAPE -> {
                         gamePanel.setGameState(GameState.PLAY);
-                        gamePanel.ui.npc = null;
+                        gamePanel.ui.setNpc(null);
                      }
                 }
             }
             case 1 -> {
                 npcInventory(event.getCode());
                 if(event.getCode() == KeyCode.ESCAPE){
-                    gamePanel.ui.subState = 0;
+                    gamePanel.ui.setSubState(0);
                 }
             }
             case 2 -> {
                 playerInventory(event.getCode());
                 if(event.getCode() == KeyCode.ESCAPE){
-                    gamePanel.ui.subState = 0;
+                    gamePanel.ui.setSubState(0);
                 }
             }
         }
@@ -295,28 +295,30 @@ public class KeyHandler {
     }
 
     private void playerInventory(KeyCode code){
+        int row = gamePanel.ui.getPlayerSlotRow();
+        int col = gamePanel.ui.getPlayerSlotColumn();
         switch(code){
             case Z, UP -> {
-                if(gamePanel.ui.playerSlotRow !=0) {
-                    gamePanel.ui.playerSlotRow--;
+                if(row !=0) {
+                    gamePanel.ui.setPlayerSlotRow(row - 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case S, DOWN -> {
-                if(gamePanel.ui.playerSlotRow != 3) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.playerSlotRow++;
+                if(row != 3) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.setPlayerSlotRow(row + 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case Q, LEFT -> {
-                if(gamePanel.ui.playerSlotColumn !=0) {
-                    gamePanel.ui.playerSlotColumn--;
+                if(col !=0) {
+                    gamePanel.ui.setPlayerSlotColumn(col - 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case D, RIGHT -> {
-                if (gamePanel.ui.playerSlotColumn != 4) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.playerSlotColumn++;
+                if (col != 4) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.setPlayerSlotColumn(col + 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
@@ -324,31 +326,84 @@ public class KeyHandler {
     }
 
     private void npcInventory(KeyCode code){
+        int row = gamePanel.ui.getNpcSlotRow();
+        int col = gamePanel.ui.getNpcSlotColumn();
         switch(code){
             case Z, UP -> {
-                if(gamePanel.ui.npcSlotRow !=0) {
-                    gamePanel.ui.npcSlotRow--;
+                if(row !=0) {
+                    gamePanel.ui.setNpcSlotRow(row - 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case S, DOWN -> {
-                if(gamePanel.ui.npcSlotRow != 3) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.npcSlotRow++;
+                if(row != 3) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.setNpcSlotRow(row + 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case Q, LEFT -> {
-                if(gamePanel.ui.npcSlotColumn !=0) {
-                    gamePanel.ui.npcSlotColumn--;
+                if(col !=0) {
+                    gamePanel.ui.setNpcSlotColumn(col - 1);
                     gamePanel.playSoundEffect(9);
                 }
             }
             case D, RIGHT -> {
-                if (gamePanel.ui.npcSlotColumn != 4) { // TODO : Variable don't scale with windows size
-                    gamePanel.ui.npcSlotColumn++;
+                if (col != 4) { // TODO : Variable don't scale with windows size
+                    gamePanel.ui.setNpcSlotColumn(col +  1);
                     gamePanel.playSoundEffect(9);
                 }
             }
         }
     }
+
+    // Getters and setters
+    public boolean isUpPressed() {
+        return upPressed;
+    }
+    public boolean isDownPressed() {
+        return downPressed;
+    }
+    public boolean isLeftPressed() {
+        return leftPressed;
+    }
+    public boolean isRightPressed() {
+        return rightPressed;
+    }
+    public boolean isEnterPressed() {
+        return enterPressed;
+    }
+    public boolean isShotKeyPressed() {
+        return shotKeyPressed;
+    }
+    public boolean isShowDebugText() {
+        return showDebugText;
+    }
+    public void setShowDebugText(boolean showDebugText) {
+        this.showDebugText = showDebugText;
+    }
+    public void setEnterPressed(boolean enterPressed) {
+        this.enterPressed = enterPressed;
+    }
+    public void setShotKeyPressed(boolean shotKeyPressed) {
+        this.shotKeyPressed = shotKeyPressed;
+    }
+    public void setUpPressed(boolean upPressed) {
+        this.upPressed = upPressed;
+    }
+    public void setDownPressed(boolean downPressed) {
+        this.downPressed = downPressed;
+    }
+    public void setLeftPressed(boolean leftPressed) {
+        this.leftPressed = leftPressed;
+    }
+    public void setRightPressed(boolean rightPressed) {
+        this.rightPressed = rightPressed;
+    }
+    public void setGamePanel(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
 }

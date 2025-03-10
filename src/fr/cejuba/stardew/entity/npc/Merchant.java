@@ -72,6 +72,6 @@ public class Merchant extends Entity {
     public void speak(){
         super.speak();
         gamePanel.setGameState(GameState.TRADE);
-        gamePanel.ui.npc = this;
+        gamePanel.ui.setNpc(this);
     }
 }

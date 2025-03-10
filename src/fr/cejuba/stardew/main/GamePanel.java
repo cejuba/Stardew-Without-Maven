@@ -211,7 +211,7 @@ public class GamePanel extends Canvas {
 
         // Debug
         long drawStartTime = 0;
-        if(keyHandler.showDebugText){
+        if(keyHandler.isShowDebugText()){
             drawStartTime = System.nanoTime();
         }
 
@@ -288,7 +288,7 @@ public class GamePanel extends Canvas {
         }
         // TODO: Gestion d'affichage l'un au dessus de l'autre
 
-        if(keyHandler.showDebugText) {
+        if(keyHandler.isShowDebugText()) {
 
             // Became Obsolete because of the new draw method in a separate thread TODO: Change the debug text to the new draw method
             long drawEndTime = System.nanoTime();

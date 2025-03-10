@@ -25,7 +25,7 @@ public class RedPotion extends Entity {
     public boolean use(Entity entity) {
         System.out.println("Potion used2");
         gamePanel.setGameState(GameState.DIALOGUE);
-        gamePanel.ui.currentDialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
+        gamePanel.ui.setCurrentDialogue("You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".");
         entity.life += value;
         if(entity.life > entity.maxLife){
             entity.life = entity.maxLife;

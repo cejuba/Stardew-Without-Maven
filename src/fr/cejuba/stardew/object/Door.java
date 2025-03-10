@@ -27,6 +27,6 @@ public class Door extends Entity {
     }
     public void interact(){
         gamePanel.setGameState(GameState.DIALOGUE);
-        gamePanel.ui.currentDialogue = "You need a key to open this.";
+        gamePanel.ui.setCurrentDialogue("You need a key to open this.");
     }
 }

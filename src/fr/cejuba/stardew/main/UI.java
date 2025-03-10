@@ -2,6 +2,7 @@ package fr.cejuba.stardew.main;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.environment.DayStates;
+import fr.cejuba.stardew.environment.Lighting;
 import fr.cejuba.stardew.object.money.BronzeCoin;
 import fr.cejuba.stardew.object.stats.Heart;
 import fr.cejuba.stardew.object.stats.ManaCrystal;
@@ -19,32 +20,31 @@ public class UI {
 
     GamePanel gamePanel;
     GraphicsContext graphicsContext;
-    Font arial_40, arial_30, arial_80B, arial_32F, arial_96B;
-    public boolean messageOn = false;
+    private final Font arial_40, arial_80B, arial_32F, arial_96B;
+    private boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
-    public boolean gameFinished = false;
-    public String currentDialogue = "";
-    public int commandNumber = 0;
-    public int titleScreenState = 0;
-    public int playerSlotColumn = 0;
-    public int playerSlotRow = 0;
-    public int npcSlotColumn = 0;
-    public int npcSlotRow = 0;
-    int subState = 0;
-    double counter = 0;
-    public Entity npc;
+    private boolean gameFinished = false;
+    private String currentDialogue = "";
+    private int commandNumber = 0;
+    private int titleScreenState = 0;
+    private int playerSlotColumn = 0;
+    private int playerSlotRow = 0;
+    private int npcSlotColumn = 0;
+    private int npcSlotRow = 0;
+    private int subState = 0;
+    private double counter = 0;
+    private Entity npc;
 
-    Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank, gold;
+    private final Image heart_full, heart_half, heart_blank, crystal_full, crystal_blank, gold;
 
-    double playTime;
-    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+    private double playTime;
+    private final DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         arial_40 = Font.font("Arial", 40);
-        arial_30 = Font.font("Arial", 30);
         arial_80B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 80);
         arial_32F = Font.font("Arial", javafx.scene.text.FontWeight.NORMAL, 32);
         arial_96B = Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 96);
@@ -473,12 +473,7 @@ public class UI {
 
     public void drawInventory(Entity entity, boolean cursorShown){
 
-        int frameX = 0;
-        int frameY = 0;
-        int frameWidth = 0;
-        int frameHeight = 0;
-        int slotColumn = 0;
-        int slotRow = 0;
+        int frameX, frameY, frameWidth, frameHeight, slotColumn, slotRow;
         if(entity == gamePanel.player){
             frameWidth = gamePanel.tileSize * 6;
             frameHeight = gamePanel.tileSize * 5;
@@ -601,7 +596,7 @@ public class UI {
             case 3 -> options_endGameConfirmation(frameX, frameY);
         }
 
-        gamePanel.keyHandler.enterPressed = false;
+        gamePanel.keyHandler.setEnterPressed(false);
     }
 
     public void drawTransition(){
@@ -626,25 +621,27 @@ public class UI {
             case 1 -> trade_buy();
             case 2 -> trade_sell();
         }
-        gamePanel.keyHandler.enterPressed = false;
+        gamePanel.keyHandler.setEnterPressed(false);
     }
 
     public void drawSleepScreen(){
         counter++;
 
+        Lighting lighting = gamePanel.environmentManager.lighting;
+
         if(counter < 120){
-            gamePanel.environmentManager.lighting.filterAlpha += 0.01f;
-            if(gamePanel.environmentManager.lighting.filterAlpha >= 0.98f){
-                gamePanel.environmentManager.lighting.filterAlpha = 1f;
+            lighting.setFilterAlpha(lighting.getFilterAlpha() + 0.01f);
+            if(lighting.getFilterAlpha() >= 0.98f){
+                lighting.setFilterAlpha(1f);
             }
         }
         else{
-            gamePanel.environmentManager.lighting.filterAlpha -= 0.01f;
-            if(gamePanel.environmentManager.lighting.filterAlpha <= 0.02f){
-                gamePanel.environmentManager.lighting.filterAlpha = 0f;
+            lighting.setFilterAlpha(lighting.getFilterAlpha() - 0.01f);
+            if(lighting.getFilterAlpha() <= 0.02f){
+                lighting.setFilterAlpha(0f);
                 counter = 0;
-                gamePanel.environmentManager.lighting.setDayStates(DayStates.DAY);
-                gamePanel.environmentManager.lighting.dayCounter = 0;
+                lighting.setDayStates(DayStates.DAY);
+                lighting.setDayCounter(0);
                 gamePanel.setGameState(GameState.PLAY);
                 gamePanel.player.getPlayerImage();
             }
@@ -653,8 +650,7 @@ public class UI {
 
     public void options_top(int frameX, int frameY){
 
-        int textX;
-        int textY;
+        int textX, textY;
 
         // Title
         String text = "Options";
@@ -671,7 +667,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
                 subState = 1;
             }
@@ -702,7 +698,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 3){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 2;
                 commandNumber = 0;
             }
@@ -715,7 +711,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 4){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 3;
                 commandNumber = 0;
             }
@@ -728,7 +724,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 5){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 gamePanel.setGameState(GameState.PLAY);
                 commandNumber = 0;
             }
@@ -776,7 +772,7 @@ public class UI {
         graphicsContext.fillText("Back", textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 0;
                 commandNumber = 0;
             }
@@ -836,7 +832,7 @@ public class UI {
         graphicsContext.fillText("Back", textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 0;
                 commandNumber = 3;
             }
@@ -863,7 +859,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 0;
                 gamePanel.ui.titleScreenState = 0;
                 gamePanel.setGameState(GameState.TITLE);
@@ -879,7 +875,7 @@ public class UI {
         graphicsContext.fillText(text, textX, textY);
         if(commandNumber == 1){
             graphicsContext.fillText(">", textX - 25, textY);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 0;
                 commandNumber = 4;
             }
@@ -904,7 +900,7 @@ public class UI {
         graphicsContext.fillText("Buy", x, y);
         if(commandNumber == 0){
             graphicsContext.fillText(">", x - 24, y);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 1;
             }
         }
@@ -912,7 +908,7 @@ public class UI {
         graphicsContext.fillText("Sell", x, y);
         if(commandNumber == 1){
             graphicsContext.fillText(">", x - 24, y);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 subState = 2;
             }
         }
@@ -920,7 +916,7 @@ public class UI {
         graphicsContext.fillText("Leave", x, y);
         if(commandNumber == 2){
             graphicsContext.fillText(">", x - 24, y);
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 commandNumber = 0;
                 gamePanel.setGameState(GameState.DIALOGUE);
                 currentDialogue = "Come again !";
@@ -968,7 +964,7 @@ public class UI {
             graphicsContext.fillText(text, x, y + 32);
 
             // Buy an item
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 if(npc.inventory.get(itemIndex).price > gamePanel.player.gold){
                     subState = 0;
                     gamePanel.setGameState(GameState.DIALOGUE);
@@ -1037,7 +1033,7 @@ public class UI {
             graphicsContext.fillText(text, x, y + 32);
 
             // Sell an item
-            if(gamePanel.keyHandler.enterPressed){
+            if(gamePanel.keyHandler.isEnterPressed()){
                 if(gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield || gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentBoots){
                     commandNumber = 0;
                     subState = 0;
@@ -1086,4 +1082,66 @@ public class UI {
         return (int)(((double) tailX - width));
     }
 
+
+    // Getters and Setters
+    public void setSubState(int subState) {
+        this.subState = subState;
+    }
+    public int getSubState() {
+        return subState;
+    }
+    public void setCommandNumber(int commandNumber) {
+        this.commandNumber = commandNumber;
+    }
+    public int getCommandNumber() {
+        return commandNumber;
+    }
+    public void setNpc(Entity npc) {
+        this.npc = npc;
+    }
+    public Entity getNpc() {
+        return npc;
+    }
+    public void setCurrentDialogue(String currentDialogue) {
+        this.currentDialogue = currentDialogue;
+    }
+    public String getCurrentDialogue() {
+        return currentDialogue;
+    }
+    public void setPlayerSlotColumn(int playerSlotColumn) {
+        this.playerSlotColumn = playerSlotColumn;
+    }
+    public int getPlayerSlotColumn() {
+        return playerSlotColumn;
+    }
+    public void setPlayerSlotRow(int playerSlotRow) {
+        this.playerSlotRow = playerSlotRow;
+    }
+    public int getPlayerSlotRow() {
+        return playerSlotRow;
+    }
+    public void setNpcSlotColumn(int npcSlotColumn) {
+        this.npcSlotColumn = npcSlotColumn;
+    }
+    public int getNpcSlotColumn() {
+        return npcSlotColumn;
+    }
+    public void setNpcSlotRow(int npcSlotRow) {
+        this.npcSlotRow = npcSlotRow;
+    }
+    public int getNpcSlotRow() {
+        return npcSlotRow;
+    }
+    public void setCounter(double counter) {
+        this.counter = counter;
+    }
+    public double getCounter() {
+        return counter;
+    }
+    public void setTitleScreenState(int titleScreenState) {
+        this.titleScreenState = titleScreenState;
+    }
+    public int getTitleScreenState() {
+        return titleScreenState;
+    }
 }

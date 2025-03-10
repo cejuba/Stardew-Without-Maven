@@ -101,16 +101,16 @@ public class EventHandler {
 
     public void damagePit() {
         gamePanel.playSoundEffect(6);
-        gamePanel.ui.currentDialogue = "You fall into a pit";
+        gamePanel.ui.setCurrentDialogue("You fall into a pit");
         gamePanel.player.life -= 1;
         canTouchEvent = false;
     }
 
     public void healingPool() {
-        if (gamePanel.keyHandler.enterPressed) {
+        if (gamePanel.keyHandler.isEnterPressed()) {
             gamePanel.player.attackCanceled = true;
             gamePanel.playSoundEffect(2);
-            gamePanel.ui.currentDialogue = "You heal and regenerate mana";
+            gamePanel.ui.setCurrentDialogue("You heal and regenerate mana");
             gamePanel.player.life = gamePanel.player.maxLife;
             gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();
@@ -118,7 +118,7 @@ public class EventHandler {
     }
 
     public void speak(Entity entity){
-        if(gamePanel.keyHandler.enterPressed){
+        if(gamePanel.keyHandler.isEnterPressed()){
             gamePanel.setGameState(GameState.DIALOGUE);
             gamePanel.player.attackCanceled = true;
             entity.speak();

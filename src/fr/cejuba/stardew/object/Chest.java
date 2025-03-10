@@ -47,10 +47,10 @@ public class Chest extends Entity {
                 down2 = image2;
                 opened = true;
             }
-            gamePanel.ui.currentDialogue = stringBuilder.toString();
+            gamePanel.ui.setCurrentDialogue(stringBuilder.toString());
         }
         else{
-            gamePanel.ui.currentDialogue = "This chest is empty.";
+            gamePanel.ui.setCurrentDialogue("This chest is empty.");
         }
     }
 }

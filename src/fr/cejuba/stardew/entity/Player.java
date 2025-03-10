@@ -183,14 +183,14 @@ public class Player extends Entity {
         if(attacking){
             attacking();
         }
-        else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
-            if (keyHandler.upPressed) {
+        else if (keyHandler.isUpPressed() || keyHandler.isDownPressed() || keyHandler.isLeftPressed() || keyHandler.isRightPressed() || keyHandler.isEnterPressed()) {
+            if (keyHandler.isUpPressed()) {
                 direction = "up";
-            } else if (keyHandler.downPressed) {
+            } else if (keyHandler.isDownPressed()) {
                 direction = "down";
-            } else if (keyHandler.leftPressed) {
+            } else if (keyHandler.isLeftPressed()) {
                 direction = "left";
-            } else if (keyHandler.rightPressed) {
+            } else if (keyHandler.isRightPressed()) {
                 direction = "right";
             }
 
@@ -217,7 +217,7 @@ public class Player extends Entity {
             // Event checker
             gamePanel.eventHandler.checkEvent();
 
-            if (!collisionActivated && !keyHandler.enterPressed) {
+            if (!collisionActivated && !keyHandler.isEnterPressed()) {
                 switch (direction) {
                     case "up" -> worldY -= speed;
                     case "down" -> worldY += speed;
@@ -226,14 +226,14 @@ public class Player extends Entity {
                 }
             }
 
-            if(keyHandler.enterPressed && !attackCanceled){
+            if(keyHandler.isEnterPressed() && !attackCanceled){
                 gamePanel.playSoundEffect(7);
                 attacking = true;
                 spriteCounter = 0;
             }
 
             attackCanceled = false;
-            gamePanel.keyHandler.enterPressed = false;
+            gamePanel.keyHandler.setEnterPressed(false);
 
             spriteCounter++;
             if (spriteCounter > 10) {
@@ -243,7 +243,7 @@ public class Player extends Entity {
         }
 
 
-        if(gamePanel.keyHandler.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30 && projectile.haveRessource(this)){
+        if(gamePanel.keyHandler.isShotKeyPressed() && !projectile.alive && shotAvailableCounter == 30 && projectile.haveRessource(this)){
             // Set Default Coordinates
             projectile.set(worldX, worldY, direction, true, this);
 
@@ -279,7 +279,7 @@ public class Player extends Entity {
         }
         if(life <= 0){
             gamePanel.setGameState(GameState.GAMEOVER);
-            gamePanel.ui.commandNumber = -1; // Prevent retry by accident when smashing ENTER key
+            gamePanel.ui.setCommandNumber(-1); // Prevent retry by accident when smashing ENTER key
             gamePanel.stopMusic();
             gamePanel.playSoundEffect(12);
         }
@@ -342,7 +342,7 @@ public class Player extends Entity {
             }
             // Obstacle
             else if(gamePanel.object[gamePanel.currentMap][index].getType() == Type.OBSTACLE){
-                if(keyHandler.enterPressed){
+                if(keyHandler.isEnterPressed()){
                     gamePanel.object[gamePanel.currentMap][index].interact();
                 }
             }
@@ -364,7 +364,7 @@ public class Player extends Entity {
     }
 
     public void interactNPC(int index) {
-        if(gamePanel.keyHandler.enterPressed){
+        if(gamePanel.keyHandler.isEnterPressed()){
             if (index != 999) {
                 attackCanceled = true;
                 gamePanel.setGameState(GameState.DIALOGUE);
@@ -461,13 +461,13 @@ public class Player extends Entity {
 
             gamePanel.playSoundEffect(8);
             gamePanel.setGameState(GameState.DIALOGUE);
-            gamePanel.ui.currentDialogue = "You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1";
+            gamePanel.ui.setCurrentDialogue("You are level " + level + " now!\n" + "Max life +2, Strength +1, Dexterity +1");
 
         }
     }
 
     public void selectItem(){
-        int itemIndex = gamePanel.ui.getItemIndexInInventory(gamePanel.ui.playerSlotColumn, gamePanel.ui.playerSlotRow);
+        int itemIndex = gamePanel.ui.getItemIndexInInventory(gamePanel.ui.getPlayerSlotColumn(), gamePanel.ui.getPlayerSlotRow());
 
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);
