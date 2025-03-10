@@ -805,6 +805,10 @@ public class UI {
         textY += gamePanel.tileSize;
         graphicsContext.fillText("Pause", textX, textY);
         textY += gamePanel.tileSize;
+        graphicsContext.fillText("Map", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("Mini-Map", textX, textY);
+        textY += gamePanel.tileSize;
         graphicsContext.fillText("Options", textX, textY);
 
         textX = frameX + gamePanel.tileSize * 7;
@@ -819,12 +823,16 @@ public class UI {
         textY += gamePanel.tileSize;
         graphicsContext.fillText("P", textX, textY);
         textY += gamePanel.tileSize;
+        graphicsContext.fillText("M", textX, textY);
+        textY += gamePanel.tileSize;
+        graphicsContext.fillText("X", textX, textY);
+        textY += gamePanel.tileSize;
         graphicsContext.fillText("ESCAPE", textX, textY);
 
         // Back
 
         textX = frameX + gamePanel.tileSize;
-        textY = frameY + gamePanel.tileSize * 9;
+        textY += gamePanel.tileSize * 2;
         graphicsContext.fillText("Back", textX, textY);
         if(commandNumber == 0){
             graphicsContext.fillText(">", textX - 25, textY);
