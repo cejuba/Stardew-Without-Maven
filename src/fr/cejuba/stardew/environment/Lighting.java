@@ -66,8 +66,8 @@ public class Lighting {
         if(gamePanel.player.currentLight == null){
             stops = new Stop[]{
                     new Stop(0, Color.rgb(0, 0, 10, 0.0)),
-                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 10, 0.80)),
-                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 10, 0.95)),
+                    new Stop((double) circleRadius / (2 * gamePanel.getScreenWidth()), Color.rgb(0, 0, 10, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.getScreenWidth(), Color.rgb(0, 0, 10, 0.95)),
                     new Stop(1, Color.rgb(0, 0, 10, 0.98))
             };
         }
@@ -75,18 +75,18 @@ public class Lighting {
             circleRadius = gamePanel.player.currentLight.lightRadius;
             stops = new Stop[]{
                     new Stop(0, Color.rgb(0, 0, 10, 0)),
-                    new Stop((double) circleRadius / (2 * gamePanel.screenWidth), Color.rgb(0, 0, 10, 0.80)),
-                    new Stop((double) circleRadius / gamePanel.screenWidth, Color.rgb(0, 0, 10, 0.95)),
+                    new Stop((double) circleRadius / (2 * gamePanel.getScreenWidth()), Color.rgb(0, 0, 10, 0.80)),
+                    new Stop((double) circleRadius / gamePanel.getScreenWidth(), Color.rgb(0, 0, 10, 0.95)),
                     new Stop(1, Color.rgb(0, 0, 10, 0.98))
             };
         }
 
         // Create a gradation paint settings for the light circle
-        RadialGradient radialGradient = new RadialGradient(0, 0, centerX, centerY, gamePanel.screenWidth, false, CycleMethod.NO_CYCLE, stops);
+        RadialGradient radialGradient = new RadialGradient(0, 0, centerX, centerY, gamePanel.getScreenWidth(), false, CycleMethod.NO_CYCLE, stops);
 
         graphicsContext.setGlobalAlpha(filterAlpha);
         graphicsContext.setFill(radialGradient);
-        graphicsContext.fillRect(0,0, gamePanel.screenWidth, gamePanel.screenWidth);
+        graphicsContext.fillRect(0,0, gamePanel.getScreenWidth(), gamePanel.getScreenWidth());
         graphicsContext.setGlobalAlpha(1f);
 
         // Debug :
@@ -101,18 +101,15 @@ public class Lighting {
         }
         graphicsContext.setFill(Color.WHITE);
         int textX;
-        int textY = gamePanel.screenHeight - gamePanel.getTileSize();
+        int textY = gamePanel.getScreenHeight() - gamePanel.getTileSize();
 
         // Values
-        int tailX = gamePanel.screenWidth - gamePanel.getTileSize();
+        int tailX = gamePanel.getScreenWidth() - gamePanel.getTileSize();
         textX = gamePanel.ui.getXAlignedToRightText(situation, tailX);
         graphicsContext.fillText(situation, textX, textY);
     }
 
     // Getter and setter
-    public DayStates getDayStates() {
-        return dayStates;
-    }
     public void setDayStates(DayStates dayStates) {
         this.dayStates = dayStates;
     }
@@ -121,9 +118,6 @@ public class Lighting {
     }
     public void setFilterAlpha(float filterAlpha) {
         this.filterAlpha = filterAlpha;
-    }
-    public int getDayCounter() {
-        return dayCounter;
     }
     public void setDayCounter(int dayCounter) {
         this.dayCounter = dayCounter;

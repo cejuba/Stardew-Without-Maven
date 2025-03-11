@@ -55,13 +55,13 @@ public class Map extends TileManager {
 
         // Background color
         graphicsContext.setFill(Color.BLACK);
-        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphicsContext.fillRect(0, 0, gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
 
         // Draw map
         int width = 500;
         int height = 500;
-        int x = gamePanel.screenWidth / 2 - width / 2;
-        int y = gamePanel.screenHeight / 2 - height / 2;
+        int x = gamePanel.getScreenWidth() / 2 - width / 2;
+        int y = gamePanel.getScreenHeight() / 2 - height / 2;
         graphicsContext.drawImage(worldMap[gamePanel.getCurrentMap()], x, y, width, height);
 
         // Calculate Scale
@@ -114,10 +114,10 @@ public class Map extends TileManager {
         graphicsContext.setFill(Color.WHITE);
         String text = "Press 'M' to close";
         int textX;
-        int textY = gamePanel.screenHeight - gamePanel.getTileSize();
+        int textY = gamePanel.getScreenHeight() - gamePanel.getTileSize();
 
         // Values
-        int tailX = gamePanel.screenWidth - gamePanel.getTileSize();
+        int tailX = gamePanel.getScreenWidth() - gamePanel.getTileSize();
         textX = gamePanel.ui.getXAlignedToRightText(text, tailX);
         graphicsContext.fillText(text, textX, textY);
     }
@@ -127,7 +127,7 @@ public class Map extends TileManager {
             // Draw map
             int width = 200;
             int height = 200;
-            int x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+            int x = gamePanel.getScreenWidth() - width - gamePanel.getTileSize();
             int y = gamePanel.getTileSize();
 
             graphicsContext.setGlobalAlpha(0.8);

@@ -35,17 +35,17 @@ public class GamePanel extends Canvas {
     private final int maxScreenRow = 15;
     private final int maxMap = 10;
     private int currentMap = 0;
-    public final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
-    public final int screenHeight = maxScreenRow * tileSize; // 720 pixels
+    private final int screenWidth = maxScreenCol * tileSize; // 1296 pixels
+    private final int screenHeight = maxScreenRow * tileSize; // 720 pixels
 
     // Fullscreen settings
     private int screenWidth2 = screenWidth;
     private int screenHeight2 = screenHeight;
 
-    WritableImage tempScreen;
-    GraphicsContext graphicsContext;
+    private WritableImage tempScreen;
+    private GraphicsContext graphicsContext;
     public boolean fullScreenOn = false;
-    private Stage stage;
+    private final Stage stage;
 
     // World settings
     public final int maxWorldCol = 50;
@@ -356,5 +356,11 @@ public class GamePanel extends Canvas {
     }
     public void setCurrentMap(int currentMap) {
         this.currentMap = currentMap;
+    }
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+    public int getScreenHeight() {
+        return screenHeight;
     }
 }

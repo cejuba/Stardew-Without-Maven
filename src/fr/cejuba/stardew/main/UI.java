@@ -176,11 +176,11 @@ public class UI {
 
     private void drawTitleScreen() {
         graphicsContext.setFill(Color.rgb(0, 0, 0));
-        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphicsContext.fillRect(0, 0, gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
 
         if (titleScreenState == 0) {
             graphicsContext.setFill(Color.rgb(0, 0, 0));
-            graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+            graphicsContext.fillRect(0, 0, gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
 
             graphicsContext.setFont(arial_96B);
             String text = "STARDEW VALLEY";
@@ -193,7 +193,7 @@ public class UI {
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.fillText(text, x, y);
 
-            x = gamePanel.screenWidth / 2 - gamePanel.getTileSize();
+            x = gamePanel.getScreenWidth() / 2 - gamePanel.getTileSize();
             y += gamePanel.getTileSize() * 2;
             graphicsContext.drawImage(gamePanel.player.down1, x, y, gamePanel.getTileSize() * 2, gamePanel.getTileSize() * 2);
 
@@ -287,7 +287,7 @@ public class UI {
         graphicsContext.setFont(arial_80B);
         String text = "PAUSED";
         int x = getXCenteredText(text, graphicsContext);
-        int y = gamePanel.screenHeight / 2;
+        int y = gamePanel.getScreenHeight() / 2;
 
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.setFont(arial_40);
@@ -297,7 +297,7 @@ public class UI {
     public void drawDialogueScreen() {
         int x = gamePanel.getTileSize() * 2;
         int y = gamePanel.getTileSize() / 2;
-        int width = gamePanel.screenWidth - (gamePanel.getTileSize() * 4);
+        int width = gamePanel.getScreenWidth() - (gamePanel.getTileSize() * 4);
         int height = gamePanel.getTileSize() * 4;
         drawSubWindows(x, y, width, height);
 
@@ -434,7 +434,7 @@ public class UI {
 
     public void drawGameOverScreen(){
         graphicsContext.setFill(new Color(0,0,0,0.4));
-        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphicsContext.fillRect(0, 0, gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
 
         int x, y;
         String text;
@@ -455,7 +455,7 @@ public class UI {
         graphicsContext.setFont(arial_40);
         text = "Retry";
         x = getXCenteredText(text, graphicsContext);
-        y = gamePanel.screenHeight - gamePanel.getTileSize()*4;
+        y = gamePanel.getScreenHeight() - gamePanel.getTileSize()*4;
         graphicsContext.fillText(text, x, y);
         if(commandNumber == 0){
             graphicsContext.fillText(">", x - gamePanel.getTileSize(), y);
@@ -477,7 +477,7 @@ public class UI {
         if(entity == gamePanel.player){
             frameWidth = gamePanel.getTileSize() * 6;
             frameHeight = gamePanel.getTileSize() * 5;
-            frameX = gamePanel.screenWidth - frameWidth - gamePanel.getTileSize() ;
+            frameX = gamePanel.getScreenWidth() - frameWidth - gamePanel.getTileSize() ;
             frameY = gamePanel.getTileSize();
             slotColumn = playerSlotColumn;
             slotRow = playerSlotRow;
@@ -583,9 +583,9 @@ public class UI {
 
         // Sub Window
 
-        int frameWidth = gamePanel.screenWidth / 2;
-        int frameHeight = gamePanel.screenHeight - gamePanel.getTileSize() * 2;
-        int frameX =  frameWidth - (gamePanel.screenWidth - frameWidth) / 2;
+        int frameWidth = gamePanel.getScreenWidth() / 2;
+        int frameHeight = gamePanel.getScreenHeight() - gamePanel.getTileSize() * 2;
+        int frameX =  frameWidth - (gamePanel.getScreenWidth() - frameWidth) / 2;
         int frameY = gamePanel.getTileSize();
         drawSubWindows(frameX, frameY, frameWidth, frameHeight);
 
@@ -602,7 +602,7 @@ public class UI {
     public void drawTransition(){
         counter += 0.02;
         graphicsContext.setFill(Color.rgb(0,0,0,counter));
-        graphicsContext.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphicsContext.fillRect(0, 0, gamePanel.getScreenWidth(), gamePanel.getScreenHeight());
 
         if(counter >= 0.9){
             counter = 0;
@@ -889,7 +889,7 @@ public class UI {
         // Draw Options
         int width = (int) (gamePanel.getTileSize() * 3.5);
         int height = (int) (gamePanel.getTileSize() * 3.5);
-        int x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+        int x = gamePanel.getScreenWidth() - width - gamePanel.getTileSize();
         int y = gamePanel.getTileSize() * 4;
         drawSubWindows(x, y, width, height);
 
@@ -942,7 +942,7 @@ public class UI {
         graphicsContext.fillText("[ESC] Back", x + 24, y + 60);
 
         // Draw Coin Window
-        x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+        x = gamePanel.getScreenWidth() - width - gamePanel.getTileSize();
         drawSubWindows(x, y, width, height);
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText("Your Gold : " + gamePanel.player.gold, x + 24, y + 60);
@@ -1011,7 +1011,7 @@ public class UI {
         graphicsContext.fillText("[ESC] Back", x + 24, y + 60);
 
         // Draw Coin Window
-        x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+        x = gamePanel.getScreenWidth() - width - gamePanel.getTileSize();
         drawSubWindows(x, y, width, height);
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillText("Your Gold : " + gamePanel.player.gold, x + 24, y + 60);
@@ -1022,7 +1022,7 @@ public class UI {
             y = (int) (gamePanel.getTileSize() * 5.5);
             width = (int) (gamePanel.getTileSize() * 2.5);
             height = gamePanel.getTileSize();
-            x = gamePanel.screenWidth - width - gamePanel.getTileSize();
+            x = gamePanel.getScreenWidth() - width - gamePanel.getTileSize();
             drawSubWindows(x, y, width, height);
             graphicsContext.drawImage(gold, x+10, y+8, 32, 32);
 
@@ -1072,7 +1072,7 @@ public class UI {
         Text tempText = new Text(text);
         tempText.setFont(graphicsContext.getFont());
         double width = tempText.getLayoutBounds().getWidth();
-        return (int)(((double) gamePanel.screenWidth/2) - (width/2));
+        return (int)(((double) gamePanel.getScreenWidth()/2) - (width/2));
     }
 
     public int getXAlignedToRightText(String text, int tailX){
@@ -1099,14 +1099,8 @@ public class UI {
     public void setNpc(Entity npc) {
         this.npc = npc;
     }
-    public Entity getNpc() {
-        return npc;
-    }
     public void setCurrentDialogue(String currentDialogue) {
         this.currentDialogue = currentDialogue;
-    }
-    public String getCurrentDialogue() {
-        return currentDialogue;
     }
     public void setPlayerSlotColumn(int playerSlotColumn) {
         this.playerSlotColumn = playerSlotColumn;
@@ -1131,12 +1125,6 @@ public class UI {
     }
     public int getNpcSlotRow() {
         return npcSlotRow;
-    }
-    public void setCounter(double counter) {
-        this.counter = counter;
-    }
-    public double getCounter() {
-        return counter;
     }
     public void setTitleScreenState(int titleScreenState) {
         this.titleScreenState = titleScreenState;
