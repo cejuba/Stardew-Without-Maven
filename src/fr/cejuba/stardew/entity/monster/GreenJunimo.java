@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class GreenJunimo extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public GreenJunimo(GamePanel gamePanel){
         super(gamePanel);
 

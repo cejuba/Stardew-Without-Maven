@@ -16,7 +16,7 @@ import fr.cejuba.stardew.object.weapon.Sword;
 
 public class Merchant extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public Merchant(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;

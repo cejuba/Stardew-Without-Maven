@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class OldMan extends Entity {
 
-    GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public OldMan(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;

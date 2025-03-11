@@ -6,9 +6,9 @@ import javafx.scene.paint.Color;
 
 public class Particle extends Entity {
 
-    Entity generator;
-    Color color;
-    int speed, size, xd, yd;
+    private final Entity generator;
+    private Color color;
+    private int speed, size, xd, yd;
 
     public Particle(GamePanel gamePanel, Entity generator, Color color, int size, int speed, int maxLife, int xd, int yd) {
         super(gamePanel);
@@ -47,4 +47,5 @@ public class Particle extends Entity {
         graphicsContext.setFill(color);
         graphicsContext.fillRect(screenX, screenY, size, size);
     }
+
 }

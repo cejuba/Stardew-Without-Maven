@@ -17,12 +17,12 @@ import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity {
 
-    KeyHandler keyHandler;
+    private KeyHandler keyHandler;
 
     private final int screenX;
     private final int screenY;
-    public boolean attackCanceled = false;
-    public boolean lightUpdated = false;
+    private boolean attackCanceled = false;
+    private boolean lightUpdated = false;
 
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
@@ -613,6 +613,21 @@ public class Player extends Entity {
     }
     public int getScreenY() {
         return screenY;
+    }
+    public boolean isLightUpdated() {
+        return lightUpdated;
+    }
+    public void setLightUpdated(boolean lightUpdated) {
+        this.lightUpdated = lightUpdated;
+    }
+    public KeyHandler getKeyHandler() {
+        return keyHandler;
+    }
+    public boolean isAttackCanceled() {
+        return attackCanceled;
+    }
+    public void setAttackCanceled(boolean attackCanceled) {
+        this.attackCanceled = attackCanceled;
     }
 
 }

@@ -108,7 +108,7 @@ public class EventHandler {
 
     public void healingPool() {
         if (gamePanel.keyHandler.isEnterPressed()) {
-            gamePanel.player.attackCanceled = true;
+            gamePanel.player.setAttackCanceled(true);
             gamePanel.playSoundEffect(2);
             gamePanel.ui.setCurrentDialogue("You heal and regenerate mana");
             gamePanel.player.life = gamePanel.player.maxLife;
@@ -120,7 +120,7 @@ public class EventHandler {
     public void speak(Entity entity){
         if(gamePanel.keyHandler.isEnterPressed()){
             gamePanel.setGameState(GameState.DIALOGUE);
-            gamePanel.player.attackCanceled = true;
+            gamePanel.player.setAttackCanceled(true);
             entity.speak();
         }
     }
