@@ -1,10 +1,9 @@
 package fr.cejuba.stardew.object.shield;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class BlueShield extends Entity {
+public class BlueShield extends Shield {
     public BlueShield(GamePanel gamePanel) {
         super(gamePanel);
 
@@ -16,7 +15,5 @@ public class BlueShield extends Entity {
         description = "[" + name + "]\n" + "What a strange\nshield .";
 
         price = 250;
-
-
     }
 }

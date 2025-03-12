@@ -1,11 +1,12 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.activable;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
+import fr.cejuba.stardew.object.Object;
 
-public class Key extends Entity {
+public class Key extends Object {
 
     private final GamePanel gamePanel;
 

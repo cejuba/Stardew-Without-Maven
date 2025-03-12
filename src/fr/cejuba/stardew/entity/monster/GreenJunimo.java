@@ -10,7 +10,7 @@ import fr.cejuba.stardew.object.stats.ManaCrystal;
 
 import java.util.Random;
 
-public class GreenJunimo extends Entity {
+public class GreenJunimo extends Monster {
 
     private final GamePanel gamePanel;
     public GreenJunimo(GamePanel gamePanel){

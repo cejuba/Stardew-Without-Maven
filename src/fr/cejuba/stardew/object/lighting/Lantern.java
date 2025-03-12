@@ -1,10 +1,10 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.lighting;
 
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class Lantern extends Entity {
+public class Lantern extends LightingItem {
 
     public Lantern(GamePanel gamePanel) {
         super(gamePanel);

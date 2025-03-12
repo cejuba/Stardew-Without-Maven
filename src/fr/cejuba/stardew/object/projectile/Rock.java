@@ -1,7 +1,6 @@
 package fr.cejuba.stardew.object.projectile;
 
 import fr.cejuba.stardew.entity.Entity;
-import fr.cejuba.stardew.entity.Projectile;
 import fr.cejuba.stardew.main.GamePanel;
 import javafx.scene.paint.Color;
 

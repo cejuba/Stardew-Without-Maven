@@ -3,6 +3,11 @@ package fr.cejuba.stardew.entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 import fr.cejuba.stardew.main.UtilityTool;
+import fr.cejuba.stardew.object.boots.Boots;
+import fr.cejuba.stardew.object.lighting.LightingItem;
+import fr.cejuba.stardew.object.projectile.Projectile;
+import fr.cejuba.stardew.object.shield.Shield;
+import fr.cejuba.stardew.object.weapon.Weapon;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -65,10 +70,10 @@ public class Entity {
     public int experience;
     public int nextLevelExperience;
     public int gold;
-    public Entity currentWeapon;
-    public Entity currentShield;
-    public Entity currentBoots;
-    public Entity currentLight;
+    public Weapon currentWeapon;
+    public Shield currentShield;
+    public Boots currentBoots;
+    public LightingItem currentLight;
     public Projectile projectile;
 
     // Item attributes
@@ -349,8 +354,8 @@ public class Entity {
 
         if(gamePanel.pathFinder.search()){
             // Next World Coordinates
-            int nextX = gamePanel.pathFinder.pathList.get(0).getCol() * gamePanel.getTileSize();
-            int nextY = gamePanel.pathFinder.pathList.get(0).getRow() * gamePanel.getTileSize();
+            int nextX = gamePanel.pathFinder.getPathList().get(0).getCol() * gamePanel.getTileSize();
+            int nextY = gamePanel.pathFinder.getPathList().get(0).getRow() * gamePanel.getTileSize();
 
             // Entity's solidArea position
             int entityLeftX = getLeftX();
@@ -402,8 +407,8 @@ public class Entity {
 
             // TODO : Comment in following the player
             // If the goal is reached, stop the search
-            int nextCol = gamePanel.pathFinder.pathList.get(0).getCol();
-            int nextRow = gamePanel.pathFinder.pathList.get(0).getRow();
+            int nextCol = gamePanel.pathFinder.getPathList().get(0).getCol();
+            int nextRow = gamePanel.pathFinder.getPathList().get(0).getRow();
             if(nextCol == goalCol && nextRow == goalRow){
                 onPath = false;
             }

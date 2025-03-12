@@ -4,7 +4,7 @@ import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class RustyShield extends Entity {
+public class RustyShield extends Shield {
     public RustyShield(GamePanel gamePanel) {
         super(gamePanel);
 

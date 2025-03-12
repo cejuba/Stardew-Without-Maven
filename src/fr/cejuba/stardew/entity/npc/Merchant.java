@@ -1,20 +1,19 @@
 package fr.cejuba.stardew.entity.npc;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
-import fr.cejuba.stardew.object.Lantern;
-import fr.cejuba.stardew.object.Tent;
+import fr.cejuba.stardew.object.lighting.Lantern;
+import fr.cejuba.stardew.object.consumable.Tent;
 import fr.cejuba.stardew.object.boots.LeatherBoots;
-import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.object.activable.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
 import fr.cejuba.stardew.object.shield.BlueShield;
 import fr.cejuba.stardew.object.shield.RustyShield;
 import fr.cejuba.stardew.object.weapon.Axe;
 import fr.cejuba.stardew.object.weapon.Sword;
 
-public class Merchant extends Entity {
+public class Merchant extends NPC {
 
     private final GamePanel gamePanel;
     public Merchant(GamePanel gamePanel) {

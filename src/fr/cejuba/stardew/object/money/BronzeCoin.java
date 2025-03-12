@@ -4,7 +4,7 @@ import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class BronzeCoin extends Entity {
+public class BronzeCoin extends Money {
 
     private final GamePanel gamePanel;
     public BronzeCoin(GamePanel gamePanel) {

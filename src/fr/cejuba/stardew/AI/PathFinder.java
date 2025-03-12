@@ -6,10 +6,10 @@ import fr.cejuba.stardew.main.GamePanel;
 import java.util.ArrayList;
 
 public class PathFinder {
-    private GamePanel gamePanel;
+    private final GamePanel gamePanel;
     private Node[][] node;
     private ArrayList<Node> openList = new ArrayList<>();
-    public ArrayList<Node> pathList = new ArrayList<>();
+    private ArrayList<Node> pathList = new ArrayList<>();
     private Node startNode, goalNode, currentNode;
     private boolean goalReached = false;
     private int step = 0;
@@ -187,8 +187,13 @@ public class PathFinder {
         Node current = goalNode;
 
         while(current != startNode){
-            pathList.addFirst(current);
+            pathList.add(current);
             current = current.getParent();
         }
+    }
+
+    // Getters and setters
+    public ArrayList<Node> getPathList() {
+        return pathList;
     }
 }

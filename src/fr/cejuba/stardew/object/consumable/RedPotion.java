@@ -5,7 +5,7 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
 
-public class RedPotion extends Entity {
+public class RedPotion extends Consumable {
     private final GamePanel gamePanel;
 
     public RedPotion(GamePanel gamePanel) {

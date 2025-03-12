@@ -1,13 +1,17 @@
-package fr.cejuba.stardew.entity;
+package fr.cejuba.stardew.object.projectile;
 
+import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
+import fr.cejuba.stardew.object.Object;
 
-public class Projectile extends Entity {
+public class Projectile extends Object {
 
+    private GamePanel gamePanel;
     private Entity user;
 
     public Projectile(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
     }
 
     public void set(int worldX, int worldY, String direction, boolean alive, Entity user){

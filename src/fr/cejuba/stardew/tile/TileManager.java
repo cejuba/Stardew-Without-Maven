@@ -15,7 +15,7 @@ public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles;
     public int[][][] mapTileNumber; // First dimension is for the layer/map, second is for the column, third is for the row
-    // boolean drawPath = true;
+    boolean drawPath = true;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -164,18 +164,17 @@ public class TileManager {
                 worldRow++;
             }
         }
-        /*
         if(drawPath){
             graphicsContext.setFill(Color.rgb(255, 0, 0, 0.5));
 
-            for(int i = 0; i < gamePanel.pathFinder.pathList.size(); i++){
-                int worldX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
-                int worldY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
-                int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-                int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+            for(int i = 0; i < gamePanel.pathFinder.getPathList().size(); i++) {
+                int worldX = gamePanel.pathFinder.getPathList().get(i).getCol() * gamePanel.getTileSize();
+                int worldY = gamePanel.pathFinder.getPathList().get(i).getRow() * gamePanel.getTileSize();
+                int screenX = worldX - gamePanel.player.worldX + gamePanel.player.getScreenX();
+                int screenY = worldY - gamePanel.player.worldY + gamePanel.player.getScreenY();
 
-                graphicsContext.fillRect(screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
+                graphicsContext.fillRect(screenX, screenY, gamePanel.getTileSize(), gamePanel.getTileSize());
             }
-        }*/
+        }
     }
 }

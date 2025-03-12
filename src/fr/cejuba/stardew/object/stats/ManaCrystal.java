@@ -4,7 +4,7 @@ import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
-public class ManaCrystal extends Entity {
+public class ManaCrystal extends Stats {
 
     private final GamePanel gamePanel;
 

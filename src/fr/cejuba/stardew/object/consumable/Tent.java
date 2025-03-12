@@ -1,11 +1,11 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.consumable;
 
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
 
-public class Tent extends Entity{
+public class Tent extends Consumable{
 
     private final GamePanel gamePanel;
 

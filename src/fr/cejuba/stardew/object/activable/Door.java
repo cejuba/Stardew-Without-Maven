@@ -1,11 +1,10 @@
-package fr.cejuba.stardew.object;
+package fr.cejuba.stardew.object.activable;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.Type;
 
-public class Door extends Entity {
+public class Door extends Activatable {
 
     private final GamePanel gamePanel;
 

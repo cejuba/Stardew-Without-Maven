@@ -4,13 +4,18 @@ import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.GameState;
 import fr.cejuba.stardew.main.KeyHandler;
 import fr.cejuba.stardew.main.Type;
-import fr.cejuba.stardew.object.Lantern;
+import fr.cejuba.stardew.object.boots.Boots;
+import fr.cejuba.stardew.object.consumable.Consumable;
+import fr.cejuba.stardew.object.lighting.Lantern;
 import fr.cejuba.stardew.object.boots.LeatherBoots;
-import fr.cejuba.stardew.object.Key;
+import fr.cejuba.stardew.object.activable.Key;
 import fr.cejuba.stardew.object.consumable.RedPotion;
+import fr.cejuba.stardew.object.lighting.LightingItem;
 import fr.cejuba.stardew.object.projectile.Fireball;
 import fr.cejuba.stardew.object.shield.RustyShield;
+import fr.cejuba.stardew.object.shield.Shield;
 import fr.cejuba.stardew.object.weapon.Axe;
+import fr.cejuba.stardew.object.weapon.Weapon;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -472,38 +477,30 @@ public class Player extends Entity {
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);
 
-            switch(selectedItem.getType()){
-                case Type.SWORD, Type.AXE -> {
-                    currentWeapon = selectedItem;
-                    attack = getAttack();
-                    getPlayerAttackImage();
+            if (selectedItem instanceof Weapon) {
+                currentWeapon = (Weapon) selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            } else if (selectedItem instanceof Shield) {
+                currentShield = (Shield) selectedItem;
+                defense = getDefense();
+            } else if (selectedItem instanceof Boots) {
+                currentBoots = (Boots) selectedItem;
+                speed = getSpeed();
+            } else if (selectedItem instanceof LightingItem) {
+                if(currentLight == selectedItem) {
+                    currentLight = null;
+                } else {
+                    currentLight = (LightingItem) selectedItem;
                 }
-                case Type.SHIELD -> {
-                    currentShield = selectedItem;
-                    defense = getDefense();
-                }
-                case Type.BOOTS -> {
-                    currentBoots = selectedItem;
-                    speed = getSpeed();
-                }
-                case Type.LIGHT -> {
-                    if(currentLight == selectedItem) {
-                        currentLight = null;
-                    }
-                    else{
-                        currentLight = selectedItem;
-                    }
-                    lightUpdated = true;
-                }
-                case Type.CONSUMABLE -> {
-                    System.out.println(selectedItem.name + " used");
-                    if(selectedItem.use(this)){
-                        if(selectedItem.amount > 1){
-                            selectedItem.amount--;
-                        }
-                        else{
-                            inventory.remove(itemIndex);
-                        }
+                lightUpdated = true;
+            } else if (selectedItem instanceof Consumable) {
+                System.out.println(selectedItem.name + " used");
+                if(selectedItem.use(this)){
+                    if(selectedItem.amount > 1){
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
                     }
                 }
             }

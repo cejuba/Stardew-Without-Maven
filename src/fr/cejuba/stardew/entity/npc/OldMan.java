@@ -1,12 +1,11 @@
 package fr.cejuba.stardew.entity.npc;
 
-import fr.cejuba.stardew.entity.Entity;
 import fr.cejuba.stardew.main.GamePanel;
 import fr.cejuba.stardew.main.Type;
 
 import java.util.Random;
 
-public class OldMan extends Entity {
+public class OldMan extends NPC {
 
     private final GamePanel gamePanel;
     public OldMan(GamePanel gamePanel) {
